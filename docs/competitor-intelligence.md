@@ -1,10 +1,10 @@
 # Competitor Intelligence Guide
 
-**Digital Marketing Pro v3.17.0** | Turning publicly available data into strategic advantage
+**OmniGrowth Engine v3.17.0** | Turning publicly available data into strategic advantage
 
 Competitor intelligence is not about copying what others do. It is about understanding the market landscape well enough to make smarter decisions --- identifying gaps your competitors have missed, anticipating their next moves, and positioning your brand where competition is weakest and opportunity is highest.
 
-This guide walks you through every aspect of competitive intelligence in Digital Marketing Pro: setting up competitors in your brand profile, running multi-dimensional analyses, interpreting results, responding to competitor moves, and keeping your intelligence current over time.
+This guide walks you through every aspect of competitive intelligence in OmniGrowth Engine: setting up competitors in your brand profile, running multi-dimensional analyses, interpreting results, responding to competitor moves, and keeping your intelligence current over time.
 
 ---
 
@@ -26,7 +26,7 @@ Competitor data lives in two places. The summary is stored in your main `profile
 
 ### Adding competitors during brand setup
 
-When you run `/digital-marketing-pro:brand-setup --full`, question 17 asks about your competitive landscape. This is where you provide the initial list:
+When you run `/omni-growth-engine:brand-setup --full`, question 17 asks about your competitive landscape. This is where you provide the initial list:
 
 ```
 Question 17: Who are your main competitors? (names and URLs)
@@ -63,7 +63,7 @@ Plugin: Added MountainX to your competitor profile:
         - Relationship: direct (new entrant)
         - Strengths: TikTok-first strategy, aggressive launch
         - Primary channels: TikTok
-        Saved to competitors list. Run /digital-marketing-pro:competitor-analysis to analyze them.
+        Saved to competitors list. Run /omni-growth-engine:competitor-analysis to analyze them.
 ```
 
 Other updates work the same way:
@@ -78,12 +78,12 @@ Every update is persisted to both `profile.json` and `competitors.json`, so the 
 
 ## 2. Running a Competitive Analysis
 
-The `/digital-marketing-pro:competitor-analysis` command activates a multi-dimensional competitive analysis powered by the competitive-intel agent. Here is what a full session looks like.
+The `/omni-growth-engine:competitor-analysis` command activates a multi-dimensional competitive analysis powered by the competitive-intel agent. Here is what a full session looks like.
 
 ### Starting the analysis
 
 ```
-You: /digital-marketing-pro:competitor-analysis
+You: /omni-growth-engine:competitor-analysis
 
 Plugin: I see 3 competitors in your profile:
         1. TrailPeak Gear (direct)
@@ -108,7 +108,7 @@ Once you select competitors and dimensions, several things fire in sequence:
 1. **Brand context loads** --- your voice profile, industry, channels, goals, and compliance rules are pulled from `profile.json` so every comparison is anchored to your brand's strategic position.
 2. **competitive-intel agent activates** --- this specialist agent handles all competitive dimensions, benchmarking, gap analysis, and strategic recommendations.
 3. **competitor-scraper.py runs** --- the script extracts publicly available data from TrailPeak Gear's and REI's websites (page titles, meta descriptions, heading structure, tech stack, social links, schema markup). It respects robots.txt and never accesses restricted pages.
-4. **MCP integrations pull live data** --- if you have SEMrush or Ahrefs configured in your `.mcp.json`, the plugin pulls real-time keyword rankings, backlink profiles, and content gap data. (Ahrefs has a verified MCP server; SEMrush has no verified MCP package --- wire it via `/digital-marketing-pro:add-integration` or an aggregator.) These integrations are optional; the analysis works without them using the scraper data and the agent's reference knowledge.
+4. **MCP integrations pull live data** --- if you have SEMrush or Ahrefs configured in your `.mcp.json`, the plugin pulls real-time keyword rankings, backlink profiles, and content gap data. (Ahrefs has a verified MCP server; SEMrush has no verified MCP package --- wire it via `/omni-growth-engine:add-integration` or an aggregator.) These integrations are optional; the analysis works without them using the scraper data and the agent's reference knowledge.
 5. **Analysis synthesizes all sources** --- the agent combines scraped data, MCP data (if available), reference frameworks from `competitive-intelligence.md`, and your brand context into a structured report.
 
 ### Example output: Full analysis
@@ -480,7 +480,7 @@ Plugin: Running Tier 1 monthly review for TrailPeak Gear...
 
 If you have either (or both) of these integrations configured, the plugin's competitive analysis gains access to real-time SEO and backlink data:
 
-**SEMrush MCP** (requires `SEMRUSH_API_KEY` in `.env`; no verified MCP package exists --- wire it via `/digital-marketing-pro:add-integration` or an aggregator):
+**SEMrush MCP** (requires `SEMRUSH_API_KEY` in `.env`; no verified MCP package exists --- wire it via `/omni-growth-engine:add-integration` or an aggregator):
 - Live keyword ranking positions for you and competitors
 - Keyword gap analysis showing terms they rank for and you do not
 - Domain-level traffic estimates and trends
@@ -498,7 +498,7 @@ If you have either (or both) of these integrations configured, the plugin's comp
 
 ### Automatic insight persistence
 
-Every time you run a competitive analysis or discuss competitors, the competitive-intel agent persists relevant insights via `campaign-tracker.py`, and you can flush session learnings on demand with `/digital-marketing-pro:sync-memory`. (If you re-enable the reference SessionEnd hook — it ships disabled by default — this save runs automatically at session end.) These are stored in your brand's `insights.json` file at `~/.claude-marketing/brands/{slug}/`. In your next session, these insights are loaded as part of your brand context, so the plugin remembers what it learned.
+Every time you run a competitive analysis or discuss competitors, the competitive-intel agent persists relevant insights via `campaign-tracker.py`, and you can flush session learnings on demand with `/omni-growth-engine:sync-memory`. (If you re-enable the reference SessionEnd hook — it ships disabled by default — this save runs automatically at session end.) These are stored in your brand's `insights.json` file at `~/.claude-marketing/brands/{slug}/`. In your next session, these insights are loaded as part of your brand context, so the plugin remembers what it learned.
 
 Examples of automatically saved insights:
 
@@ -555,7 +555,7 @@ Plugin (checking competitor data automatically):
 ### Example: Competitor data informing a campaign plan
 
 ```
-You: /digital-marketing-pro:campaign-plan for our spring hiking boot launch
+You: /omni-growth-engine:campaign-plan for our spring hiking boot launch
 
 Plugin (incorporating competitor intelligence):
         Competitive context applied:
@@ -576,7 +576,7 @@ Plugin (incorporating competitor intelligence):
 ### Example: Competitive gaps feeding into SEO priorities
 
 ```
-You: /digital-marketing-pro:seo-audit
+You: /omni-growth-engine:seo-audit
 
 Plugin (incorporating competitor intelligence):
         Competitor-informed findings:
@@ -591,7 +591,7 @@ Plugin (incorporating competitor intelligence):
 
 ### The intelligence loop
 
-Competitive intelligence in Digital Marketing Pro follows a continuous loop:
+Competitive intelligence in OmniGrowth Engine follows a continuous loop:
 
 ```
 Set up competitors          Run analysis            Identify gaps
@@ -623,4 +623,4 @@ Each cycle makes the system smarter. Insights saved today become context for tom
 
 ---
 
-*Digital Marketing Pro v3.17.0 --- Competitive intelligence that turns market awareness into strategic advantage.*
+*OmniGrowth Engine v3.17.0 --- Competitive intelligence that turns market awareness into strategic advantage.*

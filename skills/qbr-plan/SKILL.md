@@ -1,9 +1,9 @@
 ---
 name: qbr-plan
-description: "Prepare a complete Quarterly Business Review package from the quarter's campaign data: a performance scorecard of goals vs actuals vs benchmarks, top-3 wins with attribution stories, underperformance root-cause analysis, ROI and budget-efficiency breakdowns, 3-5 strategic recommendations, upsell business cases, a next-quarter roadmap, action items with owners, and an account health score. Triggers on \"/digital-marketing-pro:qbr-plan\", \"prepare the QBR\", \"build the quarterly review for this client\", \"quarterly business review deck\", \"summarize the quarter for the client meeting\". Reads the brand profile, guidelines, custom templates, and agency SOPs; works from campaign data the user supplies and structures the presentation content — it does not pull live platform metrics itself."
+description: "Prepare a complete Quarterly Business Review package from the quarter's campaign data: a performance scorecard of goals vs actuals vs benchmarks, top-3 wins with attribution stories, underperformance root-cause analysis, ROI and budget-efficiency breakdowns, 3-5 strategic recommendations, upsell business cases, a next-quarter roadmap, action items with owners, and an account health score. Triggers on \"/omni-growth-engine:qbr-plan\", \"prepare the QBR\", \"build the quarterly review for this client\", \"quarterly business review deck\", \"summarize the quarter for the client meeting\". Reads the brand profile, guidelines, custom templates, and agency SOPs; works from campaign data the user supplies and structures the presentation content — it does not pull live platform metrics itself."
 ---
 
-# /digital-marketing-pro:qbr-plan
+# /omni-growth-engine:qbr-plan
 
 ## Purpose
 
@@ -26,7 +26,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Aggregate campaign performance data**: Organize all campaign metrics by channel and objective — impressions, clicks, conversions, spend, revenue, and derived metrics (CTR, CPC, CPA, ROAS, conversion rate)
 3. **Compare results against goals and benchmarks**: Map actual performance to quarterly targets, prior quarter results, and industry benchmarks to show progress, regression, or breakthrough performance
 4. **Identify top wins with attribution**: Select the 3 most impactful wins from the quarter and build attribution stories — what was done, why it worked, and how it connects to business outcomes

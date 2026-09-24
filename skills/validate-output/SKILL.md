@@ -1,15 +1,15 @@
 ---
 name: validate-output
-description: "Validate marketing content against a structural schema — required sections, word counts, markdown formatting, placeholder text (TBD, lorem ipsum, unfilled variables), CTA-topic consistency, and SEO structure — returning a pass/fail checklist with fix instructions. Eight built-in schemas plus custom JSON schemas; auto-detects the schema when none is named. Triggers on \"/digital-marketing-pro:validate-output\", \"check this post against the blog schema\", \"is this email structurally ready to ship\", \"scan for leftover placeholders\", \"why does this draft feel incomplete\". Runs output-validator.py and reads brand templates and custom schemas; complements /digital-marketing-pro:eval-content, which judges quality rather than structure."
+description: "Validate marketing content against a structural schema — required sections, word counts, markdown formatting, placeholder text (TBD, lorem ipsum, unfilled variables), CTA-topic consistency, and SEO structure — returning a pass/fail checklist with fix instructions. Eight built-in schemas plus custom JSON schemas; auto-detects the schema when none is named. Triggers on \"/omni-growth-engine:validate-output\", \"check this post against the blog schema\", \"is this email structurally ready to ship\", \"scan for leftover placeholders\", \"why does this draft feel incomplete\". Runs output-validator.py and reads brand templates and custom schemas; complements /omni-growth-engine:eval-content, which judges quality rather than structure."
 ---
 
-# /digital-marketing-pro:validate-output
+# /omni-growth-engine:validate-output
 
 ## Purpose
 
 Validate marketing content against expected structural schemas to ensure completeness, formatting consistency, and production-readiness. Checks required sections, word count ranges, markdown formatting compliance, placeholder text detection (unfilled template variables, lorem ipsum, TBD markers), and content-CTA consistency. Supports eight built-in schemas for common marketing content types plus custom schemas for brand-specific templates.
 
-This command catches the structural and formatting issues that quality evaluation misses — the missing H2 that breaks SEO, the placeholder "[INSERT COMPANY NAME]" that slipped through, the blog post that is 300 words short of the brief requirement, or the email that has a CTA promising a demo but the body talks about a whitepaper. It is designed to be run as a final pre-publication check after content quality has been evaluated via /digital-marketing-pro:eval-content.
+This command catches the structural and formatting issues that quality evaluation misses — the missing H2 that breaks SEO, the placeholder "[INSERT COMPANY NAME]" that slipped through, the blog post that is 300 words short of the brief requirement, or the email that has a CTA promising a demo but the body talks about a whitepaper. It is designed to be run as a final pre-publication check after content quality has been evaluated via /omni-growth-engine:eval-content.
 
 ## Input Required
 
@@ -20,7 +20,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand formatting standards and content requirements. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load template definitions from `templates/` that may define brand-specific required sections, word count ranges, and formatting rules. Check for custom schemas at `~/.claude-marketing/brands/{slug}/schemas/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand formatting standards and content requirements. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load template definitions from `templates/` that may define brand-specific required sections, word count ranges, and formatting rules. Check for custom schemas at `~/.claude-marketing/brands/{slug}/schemas/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Determine schema**: If a schema name or file was provided, use it directly. If not, execute `scripts/output-validator.py --action list-schemas` to get all available schemas, then select the most appropriate one based on content characteristics (length, structure, formatting patterns). Report which schema was selected and why, so the user can override if the selection was wrong.
 3. **Run structural validation**: Execute `scripts/output-validator.py --action validate --text "{content}" --schema {builtin_schema_name}` for one of the eight built-in schemas, or `--custom-schema {path/to/schema.json}` for a custom schema file (the two flags are distinct — `--schema` takes a built-in name only, `--custom-schema` takes a file path). The validator checks:
    - **Required sections**: All sections defined in the schema are present with appropriate headings. For each missing section, identify what is expected and where it should appear in the content structure

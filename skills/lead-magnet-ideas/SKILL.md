@@ -1,11 +1,11 @@
 ---
 name: lead-magnet-ideas
-description: "Turn a content topic, campaign, or existing piece into 3-5 named, briefable lead-magnet ideas cut from the brand's real assets and expertise, each graded on lead-gen power × build effort, with funnel-fit and delivery notes plus a not-recommended list that pre-empts the obvious-but-weak options. Triggers on \"/digital-marketing-pro:lead-magnet-ideas\", \"lead magnet for this\", \"what should we give away\", \"opt-in ideas\", \"freebie for this campaign\", \"turn this into a lead magnet\". Reads the brand profile for audience, expertise, and existing IP; routes onward to /digital-marketing-pro:email-sequence for the post-capture nurture or /digital-marketing-pro:funnel-architect when there is nowhere to send the lead yet."
+description: "Turn a content topic, campaign, or existing piece into 3-5 named, briefable lead-magnet ideas cut from the brand's real assets and expertise, each graded on lead-gen power × build effort, with funnel-fit and delivery notes plus a not-recommended list that pre-empts the obvious-but-weak options. Triggers on \"/omni-growth-engine:lead-magnet-ideas\", \"lead magnet for this\", \"what should we give away\", \"opt-in ideas\", \"freebie for this campaign\", \"turn this into a lead magnet\". Reads the brand profile for audience, expertise, and existing IP; routes onward to /omni-growth-engine:email-sequence for the post-capture nurture or /omni-growth-engine:funnel-architect when there is nowhere to send the lead yet."
 argument-hint: "[brand-name] [--topic <topic or piece>] [--max-effort low|medium|high]"
 user-invocable: true
 ---
 
-# /digital-marketing-pro:lead-magnet-ideas
+# /omni-growth-engine:lead-magnet-ideas
 
 The bridge between content that earns attention and a funnel that captures it.
 A good lead magnet is not "an ebook" — it is the specific artifact this
@@ -56,8 +56,8 @@ internally, packaged. Flag any power-C × effort-C idea as not worth building.
 pre-empting the "what about an ebook?" conversation]
 
 ## Next steps
-[Route onward: /digital-marketing-pro:email-sequence for the nurture that
-follows capture; /digital-marketing-pro:funnel-architect if there is nowhere
+[Route onward: /omni-growth-engine:email-sequence for the nurture that
+follows capture; /omni-growth-engine:funnel-architect if there is nowhere
 to send the lead yet]
 ```
 

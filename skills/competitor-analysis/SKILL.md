@@ -1,10 +1,10 @@
 ---
 name: competitor-analysis
-description: "Run a multi-dimensional competitive teardown of 2-5 competitors — content strategy, SEO, paid ads, social, AI answer-engine visibility, and pricing/positioning — producing a competitor overview matrix, per-competitor SWOT, gap analysis, and strategic recommendations prioritized by opportunity size. Triggers on \"/digital-marketing-pro:competitor-analysis\", \"analyze our competitors\", \"how do we stack up against X\", \"competitive landscape report\", \"what are competitors doing that we aren't\". Point-in-time analysis, not ongoing tracking — pair with /digital-marketing-pro:competitor-monitor for that. Reads the brand profile, guidelines, and compliance rules."
+description: "Run a multi-dimensional competitive teardown of 2-5 competitors — content strategy, SEO, paid ads, social, AI answer-engine visibility, and pricing/positioning — producing a competitor overview matrix, per-competitor SWOT, gap analysis, and strategic recommendations prioritized by opportunity size. Triggers on \"/omni-growth-engine:competitor-analysis\", \"analyze our competitors\", \"how do we stack up against X\", \"competitive landscape report\", \"what are competitors doing that we aren't\". Point-in-time analysis, not ongoing tracking — pair with /omni-growth-engine:competitor-monitor for that. Reads the brand profile, guidelines, and compliance rules."
 argument-hint: "[competitor names]"
 ---
 
-# /digital-marketing-pro:competitor-analysis
+# /omni-growth-engine:competitor-analysis
 
 ## Purpose
 
@@ -21,7 +21,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Content analysis**: Content types, publishing frequency, top-performing content, content gaps, topic authority
 3. **SEO analysis**: Domain authority, keyword overlap, ranking gaps, backlink comparison, technical health
 4. **Paid advertising**: Ad copy themes, landing page strategies, estimated spend, platform focus

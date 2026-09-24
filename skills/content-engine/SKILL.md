@@ -1,6 +1,6 @@
 ---
 name: content-engine
-description: "Draft marketing content in brand voice — blog posts, ad copy, email sequences, social posts, landing pages, and brand-voice guides — through a gated pipeline (research, outline, draft, fact-check, humanize, voice check, SEO checklist) with numbered working files and a five-gate quality scorecard before copy is publish-ready. Triggers on \"/digital-marketing-pro:content-engine\", \"write a blog post about X\", \"draft ad copy for this campaign\", \"create an email sequence\", \"landing page copy for our product\". Takes /digital-marketing-pro:content-brief as preferred upstream; hands off to /digital-marketing-pro:publish-blog, /digital-marketing-pro:content-repurpose, and /digital-marketing-pro:check. Reads the brand profile, guidelines, platform specs, and compliance rules."
+description: "Draft marketing content in brand voice — blog posts, ad copy, email sequences, social posts, landing pages, and brand-voice guides — through a gated pipeline (research, outline, draft, fact-check, humanize, voice check, SEO checklist) with numbered working files and a five-gate quality scorecard before copy is publish-ready. Triggers on \"/omni-growth-engine:content-engine\", \"write a blog post about X\", \"draft ad copy for this campaign\", \"create an email sequence\", \"landing page copy for our product\". Takes /omni-growth-engine:content-brief as preferred upstream; hands off to /omni-growth-engine:publish-blog, /omni-growth-engine:content-repurpose, and /omni-growth-engine:check. Reads the brand profile, guidelines, platform specs, and compliance rules."
 argument-hint: "[content-type and topic]"
 ---
 
@@ -36,7 +36,7 @@ Before producing any marketing output from this module:
 5. **Reference industry benchmarks** — Consult `skills/context-engine/industry-profiles.md` for the brand's industry
 6. **Use platform specs** — Reference `skills/context-engine/platform-specs.md` for character limits and format requirements
 7. **Check campaign history** — Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-tracker.py" --brand {slug} --action list-campaigns` before planning new work
-8. **If no brand exists**, say: "No brand profile found. Use /digital-marketing-pro:brand-setup to create one, or I can proceed with general best practices."
+8. **If no brand exists**, say: "No brand profile found. Use /omni-growth-engine:brand-setup to create one, or I can proceed with general best practices."
 9. **Check brand guidelines** — If `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` exists, load and enforce: `restrictions.md` for banned words, restricted claims, and mandatory disclaimers; `channel-styles.md` for channel-specific tone overrides (may differ from base voice); `messaging.md` for approved key messages, taglines, and positioning language; `voice-and-tone.md` for detailed voice rules beyond the 4 numeric scores. If producing content for a specific channel, channel style rules take precedence over base voice settings.
 
 Do not ask the user for information that already exists in their brand profile.
@@ -233,7 +233,7 @@ Run it after writing `08-quality-scorecard.md` and before declaring `status: rea
 Beyond the EU gate above, every publish-ready draft applies the brand's `ai_disclosure` block from profile.json — `{"mode": "claude-surfaces"|"always"|"off", "text": null|custom, "author": null|name}` (missing block = the default: claude-surfaces, no custom text, no author).
 
 1. Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/detect_surface.py" --mode {mode}` — its `disclosure_applies` field IS the decision. The fail-safe is deliberate: an `uncertain` surface applies the disclosure in claude-surfaces mode (skipping requires an AFFIRMATIVE non-Claude fingerprint). Never override the script's answer by guessing.
-2. When it applies, append the block as the final content paragraph of `09-publish-ready.md` — inside the body, so it survives `/digital-marketing-pro:publish-blog` — using: no custom text and no author → `*Created with AI assistance and reviewed by our editorial team.*`; author set → `*Created with AI assistance; researched, fact-checked, and edited by {author}.*`; custom text → verbatim. The default wording is vendor-neutral (no model or vendor names) and claims only the review this pipeline performs. The author field is OPTIONAL — never invent a name, never block on it being blank.
+2. When it applies, append the block as the final content paragraph of `09-publish-ready.md` — inside the body, so it survives `/omni-growth-engine:publish-blog` — using: no custom text and no author → `*Created with AI assistance and reviewed by our editorial team.*`; author set → `*Created with AI assistance; researched, fact-checked, and edited by {author}.*`; custom text → verbatim. The default wording is vendor-neutral (no model or vendor names) and claims only the review this pipeline performs. The author field is OPTIONAL — never invent a name, never block on it being blank.
 3. Record the decision in the handoff metadata either way: `disclosure: {applied, mode, surface}` — an unapplied disclosure is a recorded choice, not an omission.
 
 ## Humanize step (`05-humanize.md`) — what a flag actually is
@@ -291,18 +291,18 @@ After `05-humanize.md`, run `python "${CLAUDE_PLUGIN_ROOT}/scripts/structural-te
 
 ## Chain handoffs
 
-- **Upstream:** `/digital-marketing-pro:content-brief` (preferred — pre-researched) or `/digital-marketing-pro:keyword-cluster` (`06-pillar-pages.md` becomes content briefs)
+- **Upstream:** `/omni-growth-engine:content-brief` (preferred — pre-researched) or `/omni-growth-engine:keyword-cluster` (`06-pillar-pages.md` becomes content briefs)
 - **Downstream:**
-  - `/digital-marketing-pro:publish-blog` — pushes the publish-ready draft to the CMS
-  - `/digital-marketing-pro:content-repurpose` + `/digital-marketing-pro:social-strategy` — repurposes the article across platforms
-  - `/digital-marketing-pro:check` — final pre-publish gate
-  - `/digital-marketing-pro:c2pa-metadata` — if AI-generated images accompany the article and EU markets are targeted
+  - `/omni-growth-engine:publish-blog` — pushes the publish-ready draft to the CMS
+  - `/omni-growth-engine:content-repurpose` + `/omni-growth-engine:social-strategy` — repurposes the article across platforms
+  - `/omni-growth-engine:check` — final pre-publish gate
+  - `/omni-growth-engine:c2pa-metadata` — if AI-generated images accompany the article and EU markets are targeted
 
 ## Tips & caveats
 
 - **Brand voice deviation tolerance is per-axis, not aggregate.** A piece that's 1 point off on every axis is not the same as 4 points off on humor alone — the latter is a fail even if the average looks OK.
-- **Humanize step is not a guarantee** against AI-detection tools — it's a probabilistic improvement, and no scan here detects or removes any statistical watermark. `ai-tell-scan.py` measures visible text only. For pieces that must minimize AI-sounding patterns, run additional humanize passes and re-score with `/digital-marketing-pro:eval-content`, iterating until the flagged patterns clear; a final human edit pass remains the strongest signal — and the strongest signal of all is the author's own sentences, which is what `--source-draft` preserves.
-- **Fact-check is content's most-skipped gate.** Don't ship a piece with "0 unverified" only because no one looked. Run `/digital-marketing-pro:verify-claims` against the draft if you didn't have a fact-checker in the loop.
+- **Humanize step is not a guarantee** against AI-detection tools — it's a probabilistic improvement, and no scan here detects or removes any statistical watermark. `ai-tell-scan.py` measures visible text only. For pieces that must minimize AI-sounding patterns, run additional humanize passes and re-score with `/omni-growth-engine:eval-content`, iterating until the flagged patterns clear; a final human edit pass remains the strongest signal — and the strongest signal of all is the author's own sentences, which is what `--source-draft` preserves.
+- **Fact-check is content's most-skipped gate.** Don't ship a piece with "0 unverified" only because no one looked. Run `/omni-growth-engine:verify-claims` against the draft if you didn't have a fact-checker in the loop.
 - **For pillar content,** target the upper bound of word count (3000+ for SaaS, 5000+ for B2B research) — pillar pages need depth for topical authority. For spoke content, the lower bound is fine.
 - **Don't write the meta description last.** Write it FIRST, before the article — it's the answer to "what's this page's promise?" Writing it last produces post-hoc summaries that don't drive click intent.
 

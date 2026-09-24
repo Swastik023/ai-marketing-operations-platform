@@ -1,11 +1,11 @@
 ---
 name: seo-drift
-description: "Compare two SEO snapshots from the same source — GSC, the GSC AI Performance report, a rank-tracker export, or aeo-audit probes — into a drift report: top gainers and losers per metric, growth/decline/reshuffle/stable/new/lost classification, and a four-gate quality scorecard. Triggers on \"/digital-marketing-pro:seo-drift\", \"compare this month's GSC export to last month's\", \"what moved after the core update\", \"did the content refresh work\", \"which queries lost AI Mode impressions\". Runs scripts/seo_drift.py on two CSVs, reads the brand profile for noise thresholds, and branches findings to /digital-marketing-pro:seo-audit, /digital-marketing-pro:aeo-geo, or /digital-marketing-pro:content-engine."
+description: "Compare two SEO snapshots from the same source — GSC, the GSC AI Performance report, a rank-tracker export, or aeo-audit probes — into a drift report: top gainers and losers per metric, growth/decline/reshuffle/stable/new/lost classification, and a four-gate quality scorecard. Triggers on \"/omni-growth-engine:seo-drift\", \"compare this month's GSC export to last month's\", \"what moved after the core update\", \"did the content refresh work\", \"which queries lost AI Mode impressions\". Runs scripts/seo_drift.py on two CSVs, reads the brand profile for noise thresholds, and branches findings to /omni-growth-engine:seo-audit, /omni-growth-engine:aeo-geo, or /omni-growth-engine:content-engine."
 argument-hint: "[brand-name]"
 user-invocable: true
 ---
 
-# /digital-marketing-pro:seo-drift
+# /omni-growth-engine:seo-drift
 
 ## Purpose
 
@@ -29,7 +29,7 @@ Heavy skill. **Grep before Read** any referenced file, then `Read` only matched 
 ## Brand context (auto-applied)
 
 1. Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`
-2. If no brand exists: ask "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults
+2. If no brand exists: ask "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults
 3. Apply `skills/context-engine/industry-profiles.md` for industry-specific noise thresholds (YMYL industries should use higher `--noise` to filter out routine Quality Rater Guidelines volatility)
 
 ## Inputs
@@ -64,13 +64,13 @@ All outputs go to `${CLAUDE_PLUGIN_DATA}/{brand}/seo/seo-drift/{YYYY-MM-DD}/`.
    - `sample_size: fail` → either input has < 50 rows. Re-export without row limits.
    - `metric_compatibility: fail` → no numeric metrics in BOTH inputs. Column-name mismatch — re-export from the same source.
    - `no_lookup_collisions: fail` → duplicate keys in one input (e.g., same query × page row twice). Re-export with deduplication or use `--join-on` to add a distinguishing column.
-6. **`05-biggest-gainers.md`** — narrative on the top 10 gainers across impressions / clicks / position. For each: hypothesis on cause (new content? backlinks gained? Core Update favoured E-E-A-T? Featured Snippet rotation?). Hand off candidates to `/digital-marketing-pro:content-engine` for amplification.
+6. **`05-biggest-gainers.md`** — narrative on the top 10 gainers across impressions / clicks / position. For each: hypothesis on cause (new content? backlinks gained? Core Update favoured E-E-A-T? Featured Snippet rotation?). Hand off candidates to `/omni-growth-engine:content-engine` for amplification.
 7. **`05-biggest-losers.md`** — narrative on the top 10 losers. For each: triage matrix — `is_yMYL × had_recent_change × Core_Update_window` → action (refresh content / restore reverted change / wait for next algo cycle / accept and reallocate).
-8. **`06-ai-mode-shift.md`** *(only if input source is GSC AI Performance Report)* — queries that LOST AI Mode impressions are a leading indicator. Cross-reference with `/digital-marketing-pro:aeo-audit` to verify citation loss in synthetic probes.
+8. **`06-ai-mode-shift.md`** *(only if input source is GSC AI Performance Report)* — queries that LOST AI Mode impressions are a leading indicator. Cross-reference with `/omni-growth-engine:aeo-audit` to verify citation loss in synthetic probes.
 9. **`07-classification-distribution.md`** — counts table:
    - growth / decline / reshuffle / stable / new / lost
-   - If >40% in decline: likely Core Update or competitor catch-up. Run `/digital-marketing-pro:seo-audit` for diagnosis.
-   - If >20% reshuffle: likely intent shift (AI Mode reweighting). Run `/digital-marketing-pro:aeo-geo` to align with new intent patterns.
+   - If >40% in decline: likely Core Update or competitor catch-up. Run `/omni-growth-engine:seo-audit` for diagnosis.
+   - If >20% reshuffle: likely intent shift (AI Mode reweighting). Run `/omni-growth-engine:aeo-geo` to align with new intent patterns.
 10. **`PLAN.md`** — single-page summary: stats + scorecard + top 5 actions ranked by impact × effort, with owner suggestions (SEO lead / content lead / dev team).
 
 ## Output format
@@ -119,12 +119,12 @@ Each row in the report falls into one bucket:
 
 This skill is typically a consumer + diagnostician:
 
-1. `/digital-marketing-pro:gsc-ai-performance` or `seo-audit` or `aeo-audit` — generates the snapshots
-2. **`/digital-marketing-pro:seo-drift`** — *this skill*
+1. `/omni-growth-engine:gsc-ai-performance` or `seo-audit` or `aeo-audit` — generates the snapshots
+2. **`/omni-growth-engine:seo-drift`** — *this skill*
 3. Branch by finding:
-   - **High decline** → `/digital-marketing-pro:seo-audit` for technical-side check + `/digital-marketing-pro:content-decay-scan` for content-side
-   - **High reshuffle** → `/digital-marketing-pro:aeo-geo` for intent realignment
-   - **High growth** → `/digital-marketing-pro:content-engine` for amplification briefs
+   - **High decline** → `/omni-growth-engine:seo-audit` for technical-side check + `/omni-growth-engine:content-decay-scan` for content-side
+   - **High reshuffle** → `/omni-growth-engine:aeo-geo` for intent realignment
+   - **High growth** → `/omni-growth-engine:content-engine` for amplification briefs
 
 ## Tips & caveats
 
@@ -144,9 +144,9 @@ This skill is typically a consumer + diagnostician:
 
 ## See also
 
-- `/digital-marketing-pro:gsc-ai-performance` — pull the GSC AI Performance Report (input source)
-- `/digital-marketing-pro:seo-audit` — diagnose decline causes
-- `/digital-marketing-pro:aeo-audit` — diagnose AI Mode citation loss
-- `/digital-marketing-pro:content-decay-scan` — for content-side decline triage
-- `/digital-marketing-pro:content-engine` — for amplifying gainers
+- `/omni-growth-engine:gsc-ai-performance` — pull the GSC AI Performance Report (input source)
+- `/omni-growth-engine:seo-audit` — diagnose decline causes
+- `/omni-growth-engine:aeo-audit` — diagnose AI Mode citation loss
+- `/omni-growth-engine:content-decay-scan` — for content-side decline triage
+- `/omni-growth-engine:content-engine` — for amplifying gainers
 - `scripts/seo_drift.py` — the underlying drift engine

@@ -392,7 +392,7 @@ def batch_health(items):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Creative Fatigue Predictor — Predict ad fatigue and track content decay for Digital Marketing Pro"
+        description="Creative Fatigue Predictor — Predict ad fatigue and track content decay for OmniGrowth Engine"
     )
     parser.add_argument("--action", required=True,
                         choices=["score-health", "predict-fatigue",

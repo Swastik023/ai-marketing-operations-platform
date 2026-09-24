@@ -1,6 +1,6 @@
 ---
 name: growth-plan
-description: "Produce the 11-section Growth Plan — the flagship Part 8 client-facing deliverable that synthesises Parts 1-7 of the engagement into a single 20-30 page executable strategy with three-scenario forecasts, an In-Market/Out-Market budget split, and a 30/60/90 timeline, exported to PDF and DOCX. Triggers on \"/digital-marketing-pro:growth-plan\", \"produce the growth plan\", \"write the strategy document for the client\", \"run part 8\", \"synthesise the engagement into one deliverable\". Requires Parts 1-7 complete; reads the Four Core Documents, the Living Project Instruction File, and Part 7 prep docs, and pairs with /digital-marketing-pro:yearly-planner."
+description: "Produce the 11-section Growth Plan — the flagship Part 8 client-facing deliverable that synthesises Parts 1-7 of the engagement into a single 20-30 page executable strategy with three-scenario forecasts, an In-Market/Out-Market budget split, and a 30/60/90 timeline, exported to PDF and DOCX. Triggers on \"/omni-growth-engine:growth-plan\", \"produce the growth plan\", \"write the strategy document for the client\", \"run part 8\", \"synthesise the engagement into one deliverable\". Requires Parts 1-7 complete; reads the Four Core Documents, the Living Project Instruction File, and Part 7 prep docs, and pairs with /omni-growth-engine:yearly-planner."
 user-invocable: true
 triggers:
   - produce the growth plan
@@ -14,13 +14,13 @@ engagement-part: "8"
 view-preference: v2-primary
 ---
 
-# /digital-marketing-pro:growth-plan — Part 8 Flagship Deliverable
+# /omni-growth-engine:growth-plan — Part 8 Flagship Deliverable
 
 The Growth Plan is the flagship client-facing deliverable. It synthesises every internal document produced in Parts 1–7 into a single 11-section narrative answering: *"How will we grow this business digitally, and what will it cost?"*
 
 ## Context efficiency
 
-Heavy skill. **Grep before Read** any referenced file, then `Read` only matched ranges with `offset` + `limit`. List the brand's data dir (`~/.claude-marketing/brands/{slug}/`, or `$CLAUDE_PLUGIN_DATA/digital-marketing-pro/brands/{slug}/` when that env var is set) before opening files. On re-invocation mid-session, skip files already in context.
+Heavy skill. **Grep before Read** any referenced file, then `Read` only matched ranges with `offset` + `limit`. List the brand's data dir (`~/.claude-marketing/brands/{slug}/`, or `$CLAUDE_PLUGIN_DATA/omni-growth-engine/brands/{slug}/` when that env var is set) before opening files. On re-invocation mid-session, skip files already in context.
 
 **Specification:** [growth-plan-template.md](../context-engine/growth-plan-template.md) — the canonical 11-section structure.
 
@@ -198,7 +198,7 @@ Set the stage for why the strategy is what it is.
 3. **Plain language** — the CEO is not a marketing specialist
 4. **Visual evidence where it helps** — charts, scenario tables, timeline diagrams
 5. **20-30 page target** — beyond 30, clients stop reading
-6. **Consistency with Yearly Planner** — the operational calendar from `/digital-marketing-pro:yearly-planner` must align with this Growth Plan
+6. **Consistency with Yearly Planner** — the operational calendar from `/omni-growth-engine:yearly-planner` must align with this Growth Plan
 
 ## After production
 
@@ -206,7 +206,7 @@ Set the stage for why the strategy is what it is.
 2. Generate PDF + DOCX exports
 3. Mark Part 8 sub-complete (Growth Plan); Yearly Planner completion finishes Part 8
 4. Update LIF: Engagement phase = "Strategy approved; Channel Build pending"
-5. Brief: "Growth Plan complete. {N} pages. Run /digital-marketing-pro:yearly-planner to produce the operational companion. After client approval, /digital-marketing-pro:engagement next advances to Part 9 Channel Strategy."
+5. Brief: "Growth Plan complete. {N} pages. Run /omni-growth-engine:yearly-planner to produce the operational companion. After client approval, /omni-growth-engine:engagement next advances to Part 9 Channel Strategy."
 
 ## Examples
 
@@ -225,7 +225,7 @@ Skill response:
 5. Apply 30/60/90 phasing in Section 8
 6. Save markdown + generate PDF + DOCX
 7. Mark Growth Plan complete (Yearly Planner pending)
-8. Brief: "Growth Plan v1.0 produced. 24 pages. Conservative Q1 forecast: INR 1.8 Cr new ARR; Moderate: INR 2.6 Cr; Aggressive: INR 3.4 Cr. Run /digital-marketing-pro:yearly-planner next."
+8. Brief: "Growth Plan v1.0 produced. 24 pages. Conservative Q1 forecast: INR 1.8 Cr new ARR; Moderate: INR 2.6 Cr; Aggressive: INR 3.4 Cr. Run /omni-growth-engine:yearly-planner next."
 ```
 
 ## Related skills

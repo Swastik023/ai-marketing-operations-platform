@@ -1,6 +1,6 @@
 ---
 name: campaign-orchestrator
-description: "Full campaign-lifecycle module — produces campaign briefs, budget allocations via three models (70/20/10, efficiency-ranked, funnel-weighted), channel-mix and media plans, UTM taxonomies with governance rules, launch checklists, ABM plans, and post-mortem reports. Plans and documents; it does not launch or edit live campaigns. Triggers on \"/digital-marketing-pro:campaign-orchestrator\", \"build a media plan\", \"how should we split budget across channels\", \"set up UTM naming conventions\", \"run a post-mortem on the campaign\". Reads the brand profile, guidelines, and campaign history via campaign-tracker.py; its reference docs are consumed by /digital-marketing-pro:campaign-plan rather than duplicated."
+description: "Full campaign-lifecycle module — produces campaign briefs, budget allocations via three models (70/20/10, efficiency-ranked, funnel-weighted), channel-mix and media plans, UTM taxonomies with governance rules, launch checklists, ABM plans, and post-mortem reports. Plans and documents; it does not launch or edit live campaigns. Triggers on \"/omni-growth-engine:campaign-orchestrator\", \"build a media plan\", \"how should we split budget across channels\", \"set up UTM naming conventions\", \"run a post-mortem on the campaign\". Reads the brand profile, guidelines, and campaign history via campaign-tracker.py; its reference docs are consumed by /omni-growth-engine:campaign-plan rather than duplicated."
 ---
 
 # Campaign Orchestrator
@@ -31,7 +31,7 @@ Before producing any marketing output from this module:
 4. **Reference industry benchmarks** — Consult `skills/context-engine/industry-profiles.md` for the brand's industry
 5. **Use platform specs** — Reference `skills/context-engine/platform-specs.md` for character limits and format requirements
 6. **Check campaign history** — Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-tracker.py" --brand {slug} --action list-campaigns` before planning new work
-7. **If no brand exists**, say: "No brand profile found. Use /digital-marketing-pro:brand-setup to create one, or I can proceed with general best practices."
+7. **If no brand exists**, say: "No brand profile found. Use /omni-growth-engine:brand-setup to create one, or I can proceed with general best practices."
 8. **Check brand guidelines** — If `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` exists, load and enforce: `restrictions.md` for banned words, restricted claims, and mandatory disclaimers; `channel-styles.md` for channel-specific tone overrides (may differ from base voice); `messaging.md` for approved key messages, taglines, and positioning language; `voice-and-tone.md` for detailed voice rules beyond the 4 numeric scores. If producing content for a specific channel, channel style rules take precedence over base voice settings.
 
 Do not ask the user for information that already exists in their brand profile.

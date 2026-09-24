@@ -11,7 +11,7 @@ Generate a comprehensive multi-channel marketing campaign plan ready for executi
 
 ## Trigger
 
-User runs `/digital-marketing-pro:campaign-plan` or asks to plan, design, build, or launch a marketing campaign.
+User runs `/omni-growth-engine:campaign-plan` or asks to plan, design, build, or launch a marketing campaign.
 
 ## Inputs
 
@@ -43,7 +43,7 @@ If a brand profile exists at `~/.claude-marketing/brands/`, load it automaticall
 - Load custom templates if available
 - Check agency SOPs for campaign planning standards
 
-If no brand exists, ask: "Set up a brand first (`/digital-marketing-pro:brand-setup`)?" — or proceed with general best practices.
+If no brand exists, ask: "Set up a brand first (`/omni-growth-engine:brand-setup`)?" — or proceed with general best practices.
 
 ## Campaign Brief Structure
 
@@ -126,11 +126,11 @@ List every content asset needed:
 ## After Planning
 
 Ask: "Would you like me to:
-- Draft specific content pieces from the calendar? (`/digital-marketing-pro:content-engine`)
-- Create the email sequences? (`/digital-marketing-pro:email-sequence`)
-- Build the media plan with budget pacing? (`/digital-marketing-pro:media-plan`)
-- Set up competitor monitoring for the campaign period? (`/digital-marketing-pro:competitor-monitor`)
-- Design the landing page copy? (`/digital-marketing-pro:content-engine`)"
+- Draft specific content pieces from the calendar? (`/omni-growth-engine:content-engine`)
+- Create the email sequences? (`/omni-growth-engine:email-sequence`)
+- Build the media plan with budget pacing? (`/omni-growth-engine:media-plan`)
+- Set up competitor monitoring for the campaign period? (`/omni-growth-engine:competitor-monitor`)
+- Design the landing page copy? (`/omni-growth-engine:content-engine`)"
 
 ## Execution discipline — parallel dispatch
 

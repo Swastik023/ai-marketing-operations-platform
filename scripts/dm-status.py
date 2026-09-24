@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-dm-status.py — Unified Digital Marketing Pro status snapshot.
+dm-status.py — Unified OmniGrowth Engine status snapshot.
 
 Reads brand profile, engagement state, recent insights, recent compliance
 violations, and Python dependency mode, then prints a single human-readable
@@ -37,7 +37,7 @@ Exit codes:
     2  Filesystem error reading state files
 
 Author: Indranil Banerjee
-Plugin: Digital Marketing Pro
+Plugin: OmniGrowth Engine
 """
 
 from __future__ import annotations
@@ -60,7 +60,7 @@ import _common  # noqa: E402
 def workspace_root() -> Path:
     """Return the workspace root. Delegates to the shared _common canon so all
     scripts resolve to the SAME place (honours CLAUDE_MARKETING_HOME for tests,
-    CLAUDE_PLUGIN_DATA/digital-marketing-pro when that dir exists, else
+    CLAUDE_PLUGIN_DATA/omni-growth-engine when that dir exists, else
     ~/.claude-marketing)."""
     return _common.workspace_root()
 
@@ -455,7 +455,7 @@ def render_text(snapshot: dict[str, Any], quiet: bool = False) -> str:
             lines.append(f"  ERROR: {brand['error']}")
         elif not brand.get("profile_exists"):
             lines.append("  No brand profile found.")
-            lines.append(f"  Run /digital-marketing-pro:brand-setup to create one.")
+            lines.append(f"  Run /omni-growth-engine:brand-setup to create one.")
         else:
             lines.append(f"  Name:         {brand['brand_name']} ({brand['brand_slug']})")
             if brand.get("tagline"):
@@ -500,7 +500,7 @@ def render_text(snapshot: dict[str, Any], quiet: bool = False) -> str:
         lines.append("-" * 60)
         if eng["count"] == 0:
             lines.append("  No engagements yet.")
-            lines.append("  Run /digital-marketing-pro:engagement start <brand-slug> <engagement-id> to begin one.")
+            lines.append("  Run /omni-growth-engine:engagement start <brand-slug> <engagement-id> to begin one.")
         else:
             for e in eng["engagements"]:
                 if e.get("status") in ("no_state_file", "state_unreadable"):
@@ -576,8 +576,8 @@ def render_text(snapshot: dict[str, Any], quiet: bool = False) -> str:
 
     lines.append("")
     lines.append("=" * 60)
-    lines.append("Tip: /digital-marketing-pro:status --json for machine-readable output")
-    lines.append("Tip: /digital-marketing-pro:status --quiet for one-line summary")
+    lines.append("Tip: /omni-growth-engine:status --json for machine-readable output")
+    lines.append("Tip: /omni-growth-engine:status --quiet for one-line summary")
     lines.append("=" * 60)
     return "\n".join(lines)
 
@@ -593,7 +593,7 @@ def _all_completed(eng: dict[str, Any]) -> bool:
 def main(argv: Optional[list[str]] = None) -> int:
     parser = argparse.ArgumentParser(
         prog="dm-status.py",
-        description="Unified Digital Marketing Pro status snapshot.",
+        description="Unified OmniGrowth Engine status snapshot.",
     )
     parser.add_argument("--brand", help="Brand slug (defaults to active brand)")
     parser.add_argument("--json", action="store_true", help="Emit JSON instead of formatted text")
@@ -611,12 +611,12 @@ def main(argv: Optional[list[str]] = None) -> int:
         if args.json:
             print(json.dumps({
                 "error": "no_active_brand",
-                "message": "No active brand. Pass --brand <slug> or run /digital-marketing-pro:brand-setup.",
+                "message": "No active brand. Pass --brand <slug> or run /omni-growth-engine:brand-setup.",
                 "workspace": str(workspace_root()),
             }, indent=2))
         else:
             print("No active brand found.")
-            print("Pass --brand <slug> explicitly, or run /digital-marketing-pro:brand-setup to create one.")
+            print("Pass --brand <slug> explicitly, or run /omni-growth-engine:brand-setup to create one.")
             print(f"Workspace: {workspace_root()}")
         return 1
 

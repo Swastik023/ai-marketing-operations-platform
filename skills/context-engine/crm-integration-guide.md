@@ -1,6 +1,6 @@
 # CRM Integration Guide — Connection Patterns & Data Sync
 
-How the Digital Marketing Pro plugin connects to CRMs, maps marketing data to CRM objects, and keeps records synchronized across systems.
+How the OmniGrowth Engine plugin connects to CRMs, maps marketing data to CRM objects, and keeps records synchronized across systems.
 
 ---
 
@@ -20,7 +20,7 @@ How the Digital Marketing Pro plugin connects to CRMs, maps marketing data to CR
 | **Close CRM** | `mcp-close-crm` | API Key (Basic Auth) | Yes | Yes | Leads, Contacts, Opportunities, Activities, Sequences |
 | **Keap** | `mcp-keap` | OAuth 2.0 | Yes | Yes | Contacts, Companies, Deals, Tags, Campaigns, Orders |
 
-**Setup:** Set the relevant API key or OAuth credentials in `.env`. The MCP server configuration in `.mcp.json` handles connection routing. Each brand can use a different CRM (see Section 7: Multi-CRM Setup). The MCP server package names above are illustrative — verify the package exists on npm before use (`npx` executes remote code), or use `/digital-marketing-pro:add-integration` to wire a custom connector.
+**Setup:** Set the relevant API key or OAuth credentials in `.env`. The MCP server configuration in `.mcp.json` handles connection routing. Each brand can use a different CRM (see Section 7: Multi-CRM Setup). The MCP server package names above are illustrative — verify the package exists on npm before use (`npx` executes remote code), or use `/omni-growth-engine:add-integration` to wire a custom connector.
 
 > **How the two layers fit together (read this first).** `crm-sync.py` never writes to a CRM. It is the *local* preparation and bookkeeping layer: it validates and field-maps records (`prepare-contact`, `prepare-deal`), checks the local dedup index (`check-dedup`), records what was pushed (`log-synced`), and reports state (`get-sync-history`, `get-crm-status`, `audit-workflows`, `create-campaign`). The actual read/write against the CRM is performed by the **connected CRM MCP server** — the model calls the MCP's create/update tool with the payload `prepare-contact`/`prepare-deal` returns. Every example below follows the same shape: **prepare with `crm-sync.py` → write via the CRM MCP → record with `log-synced`.** `crm-sync.py --action` accepts only: `prepare-contact`, `prepare-deal`, `check-dedup`, `log-synced`, `get-sync-history`, `get-crm-status`, `audit-workflows`, `create-campaign` (plus `--brand`, `--data`, `--platform`, `--type`, `--limit`, `--plan`). There is no `push`, `setup-fields`, `dsr`, or `opt-out` action, and no `--crm`, `--object`, `--email`, or `--phone` flag.
 
@@ -90,7 +90,7 @@ The most common pattern. The plugin is the source of truth for marketing data an
 |---|---|---|---|
 | Lead import from campaign | Campaign execution or form submission | `prepare-contact` | Create Lead/Contact |
 | Deal update from pipeline analysis | Pipeline review or scoring change | `prepare-deal` | Update Opportunity/Deal |
-| Campaign record creation | Campaign launch via `/digital-marketing-pro:launch-campaign` (or `/digital-marketing-pro:launch-ad-campaign` for paid-ads only) | `create-campaign` | Create Campaign object |
+| Campaign record creation | Campaign launch via `/omni-growth-engine:launch-campaign` (or `/omni-growth-engine:launch-ad-campaign` for paid-ads only) | `create-campaign` | Create Campaign object |
 | Activity logging | Email send, ad click, webinar registration | (log after the fact) | Create Activity/Task |
 
 ```bash
@@ -219,7 +219,7 @@ Agencies managing multiple brands can connect each brand to a different CRM.
 **How it works:**
 - Credential profiles (`credential-manager.py`) map each brand to its CRM and credentials
 - The active CRM is determined by the brand's credential profile via the `default_crm` field
-- Switching brands (via `/digital-marketing-pro:switch-brand`) automatically switches CRM context
+- Switching brands (via `/omni-growth-engine:switch-brand`) automatically switches CRM context
 
 **Credential profile structure:**
 ```json

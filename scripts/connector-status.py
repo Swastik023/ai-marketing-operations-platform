@@ -2,7 +2,7 @@
 """
 connector-status.py
 ===================
-Connector discovery and status reporting for Digital Marketing Pro.
+Connector discovery and status reporting for OmniGrowth Engine.
 
 Reports which MCP connectors are configured (HTTP and npx), which are
 available but not yet connected, and which skills gain capabilities
@@ -146,7 +146,7 @@ def check_connector(name):
             elif conn.get("package_status") == "no-known-npm-package":
                 result["package"] = None
                 result["package_status"] = conn["package_status"]
-                result["setup"] = conn.get("note", "No verified MCP package — use /digital-marketing-pro:add-integration.")
+                result["setup"] = conn.get("note", "No verified MCP package — use /omni-growth-engine:add-integration.")
             else:
                 result["package"] = conn.get("package", "")
                 result["env_vars"] = conn.get("env_vars", [])
@@ -158,7 +158,7 @@ def check_connector(name):
                     result["setup"] = (
                         f"Requires npx server. Set environment variables: "
                         f"{', '.join(conn['env_vars'])}. "
-                        f"Then add to .mcp.json or use /digital-marketing-pro:add-integration."
+                        f"Then add to .mcp.json or use /omni-growth-engine:add-integration."
                     )
 
             return result
@@ -211,7 +211,7 @@ def setup_guide(name):
                 guide["package_status"] = conn["package_status"]
                 guide["steps"] = [
                     conn.get("note", "No verified MCP package on npm for this connector."),
-                    f"Use /digital-marketing-pro:add-integration {name} to wire a custom MCP server you trust.",
+                    f"Use /omni-growth-engine:add-integration {name} to wire a custom MCP server you trust.",
                     "npx runs remote code — verify any package on npm before adding it to .mcp.json.",
                 ]
             else:
@@ -221,7 +221,7 @@ def setup_guide(name):
                 guide["steps"] = [
                     f"1. Obtain API credentials from the {name} platform.",
                     f"2. Set these environment variables: {', '.join(conn['env_vars'])}",
-                    f"3. Add the connector to .mcp.json using /digital-marketing-pro:add-integration {name}",
+                    f"3. Add the connector to .mcp.json using /omni-growth-engine:add-integration {name}",
                     f"   Or manually add this to .mcp.json:",
                 ]
                 guide["mcp_json_entry"] = {

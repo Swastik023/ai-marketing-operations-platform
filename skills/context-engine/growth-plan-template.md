@@ -208,7 +208,7 @@ And produces the 11-section deliverable in client-facing language.
 Use:
 
 ```
-/digital-marketing-pro:engagement growth-plan
+/omni-growth-engine:engagement growth-plan
 ```
 
 The output lands at `engagements/{engagement-id}/part-08-growth-plan/growth-plan.md` and is exported to PDF + DOCX for client delivery.

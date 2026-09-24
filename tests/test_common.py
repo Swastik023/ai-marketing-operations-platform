@@ -144,7 +144,7 @@ class TestWorkspaceAndBrandDir(EnvHomeMixin):
         saved = os.environ.get("CLAUDE_PLUGIN_DATA")
         os.environ["CLAUDE_PLUGIN_DATA"] = str(self.home)  # exists
         try:
-            self.assertEqual(_common.workspace_root(), self.home / "digital-marketing-pro")
+            self.assertEqual(_common.workspace_root(), self.home / "omni-growth-engine")
         finally:
             if saved is None:
                 os.environ.pop("CLAUDE_PLUGIN_DATA", None)

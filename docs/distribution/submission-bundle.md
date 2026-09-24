@@ -1,4 +1,4 @@
-# Digital Marketing Pro — Directory Submission Bundle
+# OmniGrowth Engine — Directory Submission Bundle
 
 Prepared 2026-08-16. Items marked **[owner action]** need the account holder.
 
@@ -9,11 +9,11 @@ Prepared 2026-08-16. Items marked **[owner action]** need the account holder.
 | Anthropic official plugin directory | [submission form](https://clau.de/plugin-directory-submission) | bundle ready — **[owner action]** submit |
 | OpenAI universal Plugins Directory (ChatGPT + Codex) | [submission portal](https://developers.openai.com/plugins/deploy/submission) | bundle ready — **[owner action]** verified identity, then submit as **skills-only** |
 
-**Name (immutable once listed):** `digital-marketing-pro`.
+**Name (immutable once listed):** `omni-growth-engine`.
 
 ## Listing metadata
 
-- **Display name:** Digital Marketing Pro
+- **Display name:** OmniGrowth Engine
 - **Category:** Marketing / Business
 - **Short description:** Complete digital marketing operating system — 163
   skills and 24 agents covering strategy, content, SEO/AEO, paid media,
@@ -26,7 +26,7 @@ Prepared 2026-08-16. Items marked **[owner action]** need the account holder.
   compliance. 108 of the 163 execute real scripts; a machine-verified depth
   contract keeps the promises honest, and a run auditor re-derives the content
   engine's gates before "ready" may be declared.
-- **Homepage / repo:** https://github.com/indranilbanerjee/digital-marketing-pro
+- **Homepage / repo:** https://github.com/swastik-agnihotri/omni-growth-engine
 - **License:** MIT
 - **Policy note for reviewers:** vendor-neutral by hard rule — no hardcoded
   model ids, prices, or vendors anywhere (test-guarded); capability kinds are

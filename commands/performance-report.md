@@ -11,7 +11,7 @@ Generate a structured marketing performance report that transforms raw data into
 
 ## Trigger
 
-User runs `/digital-marketing-pro:performance-report` or asks for a marketing report, performance review, channel analysis, or campaign results summary.
+User runs `/omni-growth-engine:performance-report` or asks for a marketing report, performance review, channel analysis, or campaign results summary.
 
 ## Inputs
 
@@ -105,9 +105,9 @@ Flag any metric that moved more than 2 standard deviations from its trend.
 ## After the Report
 
 Ask: "Would you like me to:
-- Dive deeper into any specific channel? (`/digital-marketing-pro:analytics-insights`)
-- Investigate an anomaly in detail? (`/digital-marketing-pro:anomaly-scan`)
-- Adjust budget allocation based on these results? (`/digital-marketing-pro:budget-optimizer`)
-- Generate a client-ready version of this report? (`/digital-marketing-pro:client-report`)
-- Create a live dashboard to track these KPIs? (`/digital-marketing-pro:live-dashboard`)
-- Export this data to a spreadsheet? (`/digital-marketing-pro:data-export`)"
+- Dive deeper into any specific channel? (`/omni-growth-engine:analytics-insights`)
+- Investigate an anomaly in detail? (`/omni-growth-engine:anomaly-scan`)
+- Adjust budget allocation based on these results? (`/omni-growth-engine:budget-optimizer`)
+- Generate a client-ready version of this report? (`/omni-growth-engine:client-report`)
+- Create a live dashboard to track these KPIs? (`/omni-growth-engine:live-dashboard`)
+- Export this data to a spreadsheet? (`/omni-growth-engine:data-export`)"

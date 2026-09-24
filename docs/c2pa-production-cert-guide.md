@@ -1,7 +1,7 @@
 # How to Get a Production C2PA Signing Certificate
 
 **Audience:** Brand operators preparing to sign AI-generated marketing assets for EU markets ahead of EU AI Act Article 50 enforcement on **2 August 2026**.
-**Applies to:** `/digital-marketing-pro:c2pa-metadata` + `scripts/embed-c2pa.py`.
+**Applies to:** `/omni-growth-engine:c2pa-metadata` + `scripts/embed-c2pa.py`.
 
 ## Why this matters
 
@@ -54,7 +54,7 @@ The certificate is what verifiers check against the CAI trust list. The private 
 Once you have `cert.pem` and `key.pem` from any of the four authorities above:
 
 ```
-/digital-marketing-pro:c2pa-metadata \
+/omni-growth-engine:c2pa-metadata \
     --input asset.png --output signed.png \
     --brand "Acme Corp" --generator "Vertex AI Nano Banana Pro" \
     --ai-claim ai-generated-content \

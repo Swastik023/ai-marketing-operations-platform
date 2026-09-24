@@ -1,9 +1,9 @@
 ---
 name: client-proposal
-description: "Draft a professional agency proposal or pitch document for a prospective client — executive summary, situation analysis, scope of services with a deliverables matrix, KPI targets with baselines and stretch goals, 2-3 pricing options, team bio structure, case-study placeholders, terms outline, and next steps, written from the agency's perspective. Triggers on \"/digital-marketing-pro:client-proposal\", \"write a proposal for this prospect\", \"scope of work for a 6-month retainer\", \"respond to this RFP\", \"pitch deck outline with pricing tiers\". Loads the agency's own brand profile (not the client's), plus custom templates and agency SOPs; industry benchmarks inform the KPI and pricing sections."
+description: "Draft a professional agency proposal or pitch document for a prospective client — executive summary, situation analysis, scope of services with a deliverables matrix, KPI targets with baselines and stretch goals, 2-3 pricing options, team bio structure, case-study placeholders, terms outline, and next steps, written from the agency's perspective. Triggers on \"/omni-growth-engine:client-proposal\", \"write a proposal for this prospect\", \"scope of work for a 6-month retainer\", \"respond to this RFP\", \"pitch deck outline with pricing tiers\". Loads the agency's own brand profile (not the client's), plus custom templates and agency SOPs; industry benchmarks inform the KPI and pricing sections."
 ---
 
-# /digital-marketing-pro:client-proposal
+# /omni-growth-engine:client-proposal
 
 ## Purpose
 
@@ -26,7 +26,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. The loaded brand should be the **agency brand** — the proposal will be written from the agency's perspective. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. The loaded brand should be the **agency brand** — the proposal will be written from the agency's perspective. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Research client industry benchmarks**: Pull relevant industry performance data, typical marketing spend ratios, competitive landscape patterns, and common pain points for the client's vertical
 3. **Define proposed scope of services**: Map requested services to specific deliverables, ownership (agency vs. client), frequency, and dependencies between service lines
 4. **Build deliverables matrix with timelines**: Create a detailed breakdown of every deliverable, its cadence (weekly, monthly, quarterly), responsible party, and approval workflow

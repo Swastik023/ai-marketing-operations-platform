@@ -1,10 +1,10 @@
 ---
 name: funnel-audit
-description: "Audit an existing funnel's stage-to-stage conversion data to find where prospects drop off and why — benchmarked against industry averages, with the top 3 bottlenecks ranked by revenue impact, root causes, improvement scenarios, and a prioritized action plan. Triggers on \"/digital-marketing-pro:funnel-audit\", \"why is our funnel leaking\", \"find our biggest drop-off point\", \"audit conversion by stage\", \"our demo-to-close rate collapsed\". Sizes the validating experiment with sample-size-calculator.py and confirms lifts with significance-tester.py; reads the brand profile and pairs with /digital-marketing-pro:funnel-architect for redesign."
+description: "Audit an existing funnel's stage-to-stage conversion data to find where prospects drop off and why — benchmarked against industry averages, with the top 3 bottlenecks ranked by revenue impact, root causes, improvement scenarios, and a prioritized action plan. Triggers on \"/omni-growth-engine:funnel-audit\", \"why is our funnel leaking\", \"find our biggest drop-off point\", \"audit conversion by stage\", \"our demo-to-close rate collapsed\". Sizes the validating experiment with sample-size-calculator.py and confirms lifts with significance-tester.py; reads the brand profile and pairs with /omni-growth-engine:funnel-architect for redesign."
 argument-hint: "[funnel-stage or URL]"
 ---
 
-# /digital-marketing-pro:funnel-audit
+# /omni-growth-engine:funnel-audit
 
 ## Purpose
 
@@ -23,7 +23,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. Map the current funnel with conversion rates between each stage
 3. Benchmark stage-to-stage conversion rates against industry averages
 4. Identify the biggest drop-off points and calculate revenue impact of each gap

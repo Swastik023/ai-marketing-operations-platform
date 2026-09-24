@@ -1,6 +1,6 @@
 ---
 name: check
-description: "Run the unified pre-publish quality gate on marketing content — wraps scripts/eval-runner.py to score hallucination risk, claim substantiation (with --evidence), brand-voice fit (with --brand), structure (with --schema), content quality, and readability, plus a C2PA provenance check for AI assets in EU-targeted campaigns; returns a composite score with a PASS / WARN / BLOCKED decision and per-issue fix suggestions. Reports only — it never edits the content. Triggers on \"/digital-marketing-pro:check\", \"is this safe to publish\", \"run a hallucination check on this draft\", \"validate this copy against the brand voice\", \"pre-publish quality gate\". Resolves the active brand profile automatically; pairs with /digital-marketing-pro:c2pa-metadata to fix missing manifests."
+description: "Run the unified pre-publish quality gate on marketing content — wraps scripts/eval-runner.py to score hallucination risk, claim substantiation (with --evidence), brand-voice fit (with --brand), structure (with --schema), content quality, and readability, plus a C2PA provenance check for AI assets in EU-targeted campaigns; returns a composite score with a PASS / WARN / BLOCKED decision and per-issue fix suggestions. Reports only — it never edits the content. Triggers on \"/omni-growth-engine:check\", \"is this safe to publish\", \"run a hallucination check on this draft\", \"validate this copy against the brand voice\", \"pre-publish quality gate\". Resolves the active brand profile automatically; pairs with /omni-growth-engine:c2pa-metadata to fix missing manifests."
 user-invocable: true
 triggers:
   - check this content before publishing
@@ -14,13 +14,13 @@ triggers:
 allowed-tools: Read Bash Glob Grep
 ---
 
-# /digital-marketing-pro:check — Unified Pre-Publish Quality Gate
+# /omni-growth-engine:check — Unified Pre-Publish Quality Gate
 
 This skill is the canonical pre-publish gate for marketing content. It wraps the evaluation suite (`scripts/eval-runner.py`) and produces a single pass/fail decision with actionable issues.
 
 ## Context efficiency
 
-Heavy skill. **Grep before Read** any referenced file, then `Read` only matched ranges with `offset` + `limit`. List the brand's workspace at `~/.claude-marketing/brands/{slug}/` (or `$CLAUDE_PLUGIN_DATA/digital-marketing-pro/brands/{slug}/` when that env var is set) before opening files. On re-invocation mid-session, skip files already in context.
+Heavy skill. **Grep before Read** any referenced file, then `Read` only matched ranges with `offset` + `limit`. List the brand's workspace at `~/.claude-marketing/brands/{slug}/` (or `$CLAUDE_PLUGIN_DATA/omni-growth-engine/brands/{slug}/` when that env var is set) before opening files. On re-invocation mid-session, skip files already in context.
 
 Use this skill **before publishing any marketing content** — blog posts, ad copy, emails, social posts, landing pages, press releases, or any branded copy.
 
@@ -28,7 +28,7 @@ Use this skill **before publishing any marketing content** — blog posts, ad co
 
 An earlier version shipped a global PreToolUse hook that auto-ran a hallucination + brand-compliance check on every Write/Edit operation in every project. That hook was removed because it fired globally across all plugins and projects (Slack writes, GitHub PRs, code edits — all of it), causing friction in non-marketing work.
 
-`/digital-marketing-pro:check` replaces that automatic gate with an **explicit user-invoked gate**. The work is the same; the trigger is intentional.
+`/omni-growth-engine:check` replaces that automatic gate with an **explicit user-invoked gate**. The work is the same; the trigger is intentional.
 
 ## What the check evaluates
 
@@ -49,7 +49,7 @@ Plus content quality and readability scoring (always run).
 ### Default (run-quick)
 
 ```
-/digital-marketing-pro:check <file-path-or-content>
+/omni-growth-engine:check <file-path-or-content>
 ```
 
 Runs the **quick eval**: hallucination detection + content quality + readability. Fast (~2 seconds), zero external dependencies. Use this for routine checks.
@@ -57,7 +57,7 @@ Runs the **quick eval**: hallucination detection + content quality + readability
 ### Full eval (run-full)
 
 ```
-/digital-marketing-pro:check <file-path-or-content> --full
+/omni-growth-engine:check <file-path-or-content> --full
 ```
 
 Runs all 6 dimensions: hallucination + claims (if evidence provided) + brand voice (if brand provided) + structure (if schema provided) + content quality + readability. Use before publishing anything client-facing or external.
@@ -65,7 +65,7 @@ Runs all 6 dimensions: hallucination + claims (if evidence provided) + brand voi
 ### Compliance-focused (run-compliance)
 
 ```
-/digital-marketing-pro:check <file-path-or-content> --compliance --brand <slug> [--evidence <path>] [--schema <name>]
+/omni-growth-engine:check <file-path-or-content> --compliance --brand <slug> [--evidence <path>] [--schema <name>]
 ```
 
 Runs hallucination + claims + brand voice + structure. Best for regulated industries (healthcare, financial services, alcohol, cannabis, gambling) where claim substantiation and brand-voice fidelity matter most.
@@ -73,7 +73,7 @@ Runs hallucination + claims + brand voice + structure. Best for regulated indust
 ### With evidence file
 
 ```
-/digital-marketing-pro:check <file-path> --evidence <evidence-file.json>
+/omni-growth-engine:check <file-path> --evidence <evidence-file.json>
 ```
 
 When the content makes specific claims you want to substantiate, provide a JSON evidence file:
@@ -102,7 +102,7 @@ The check will extract every claim from the content and flag any that don't matc
 ### With schema validation
 
 ```
-/digital-marketing-pro:check <file-path> --schema blog_post
+/omni-growth-engine:check <file-path> --schema blog_post
 ```
 
 Validates the content matches the structural requirements of the named schema. Available schemas: `blog_post`, `email`, `ad_copy`, `social_post`, `landing_page`, `press_release`, `content_brief`, `campaign_plan`. Use `--schema list` to see all schemas with their requirements.
@@ -110,7 +110,7 @@ Validates the content matches the structural requirements of the named schema. A
 ### With brand voice check
 
 ```
-/digital-marketing-pro:check <file-path> --brand acme
+/omni-growth-engine:check <file-path> --brand acme
 ```
 
 Scores the content against the brand voice profile at `~/.claude-marketing/brands/acme/profile.json`. Reports per-dimension breakdown (formality, energy, humor, authority) plus deviation from prefer/avoid word lists.
@@ -165,7 +165,7 @@ The check gains a compliance dimension for AI-generated assets in EU-targeted ca
 1. The active (or `--brand`) profile's `target_markets` include any EU/EEA jurisdiction, **and**
 2. An accompanying asset is declared AI-generated — either the file metadata says so, or the `--evidence` JSON declares `ai_generated: true` for it.
 
-When both hold, the gate runs a C2PA manifest presence check on the asset via `embed-c2pa.py` (presence/verify mode — it does not modify the asset). A **missing or invalid C2PA provenance manifest is a CRITICAL issue → decision = BLOCKED.** Article 50 applies from **2 Aug 2026** (penalty up to EUR 15M or 3% of global turnover). To embed a compliant manifest, run `/digital-marketing-pro:c2pa-metadata`.
+When both hold, the gate runs a C2PA manifest presence check on the asset via `embed-c2pa.py` (presence/verify mode — it does not modify the asset). A **missing or invalid C2PA provenance manifest is a CRITICAL issue → decision = BLOCKED.** Article 50 applies from **2 Aug 2026** (penalty up to EUR 15M or 3% of global turnover). To embed a compliant manifest, run `/omni-growth-engine:c2pa-metadata`.
 
 If `embed-c2pa.py` is not present in the script inventory or the asset cannot be resolved, surface the dimension as SKIPPED with a warning (never silently PASS an EU AI-asset check).
 
@@ -202,7 +202,7 @@ All scripts use stdlib only (except brand-voice-scorer which optionally uses nlt
 ### Example 1: Quick check on a draft
 
 ```
-User: /digital-marketing-pro:check drafts/q2-launch-blog.md
+User: /omni-growth-engine:check drafts/q2-launch-blog.md
 
 Skill:
 1. Read drafts/q2-launch-blog.md
@@ -234,7 +234,7 @@ Decision: PASS — safe to publish; recommend addressing the WARNING first.
 ### Example 2: Full eval with brand + evidence + schema
 
 ```
-User: /digital-marketing-pro:check drafts/healthcare-ad.md --full --brand healthfirst --evidence facts/q2-claims.json --schema ad_copy
+User: /omni-growth-engine:check drafts/healthcare-ad.md --full --brand healthfirst --evidence facts/q2-claims.json --schema ad_copy
 
 Skill:
 1. Read drafts/healthcare-ad.md
@@ -247,7 +247,7 @@ Skill:
 ### Example 3: Compliance check on regulated content
 
 ```
-User: /digital-marketing-pro:check drafts/financial-services-landing.md --compliance --brand finadvisor --evidence facts/finra-disclosures.json
+User: /omni-growth-engine:check drafts/financial-services-landing.md --compliance --brand finadvisor --evidence facts/finra-disclosures.json
 
 Skill:
 1. Read content
@@ -259,7 +259,7 @@ Skill:
 ### Example 4: Quick check on inline content
 
 ```
-User: /digital-marketing-pro:check "Our amazing product boosts conversion by 347% — visit example.com today!"
+User: /omni-growth-engine:check "Our amazing product boosts conversion by 347% — visit example.com today!"
 
 Skill:
 1. Detect inline content (not a file path)
@@ -276,13 +276,13 @@ Skill:
 
 | Scenario | Recommended mode |
 |---|---|
-| Routine content check during drafting | `/digital-marketing-pro:check <file>` (quick) |
-| Before publishing any external content | `/digital-marketing-pro:check <file> --full --brand <slug>` |
-| Regulated industry content (healthcare / financial / alcohol / cannabis / gambling) | `/digital-marketing-pro:check <file> --compliance --brand <slug> --evidence <facts>` |
-| Client-facing deliverable (Growth Plan, Yearly Planner, monthly report) | `/digital-marketing-pro:check <file> --full --brand <slug>` |
-| Ad copy specifically | `/digital-marketing-pro:check <file> --schema ad_copy --brand <slug>` |
-| Email specifically | `/digital-marketing-pro:check <file> --schema email --brand <slug>` |
-| Blog post specifically | `/digital-marketing-pro:check <file> --schema blog_post --brand <slug>` |
+| Routine content check during drafting | `/omni-growth-engine:check <file>` (quick) |
+| Before publishing any external content | `/omni-growth-engine:check <file> --full --brand <slug>` |
+| Regulated industry content (healthcare / financial / alcohol / cannabis / gambling) | `/omni-growth-engine:check <file> --compliance --brand <slug> --evidence <facts>` |
+| Client-facing deliverable (Growth Plan, Yearly Planner, monthly report) | `/omni-growth-engine:check <file> --full --brand <slug>` |
+| Ad copy specifically | `/omni-growth-engine:check <file> --schema ad_copy --brand <slug>` |
+| Email specifically | `/omni-growth-engine:check <file> --schema email --brand <slug>` |
+| Blog post specifically | `/omni-growth-engine:check <file> --schema blog_post --brand <slug>` |
 
 ## Behaviour rules
 
@@ -295,9 +295,9 @@ Skill:
 
 ## Related skills + commands
 
-- `/digital-marketing-pro:engagement growth-plan` — produces Part 8 deliverable; should be checked with `/digital-marketing-pro:check --full --schema content_brief` before client delivery
-- `/digital-marketing-pro:content-engine` — produces marketing content; recommended workflow is `/digital-marketing-pro:content-engine` → review → `/digital-marketing-pro:check` → publish
-- `/digital-marketing-pro:eval-content` — legacy alias that routes to this skill
+- `/omni-growth-engine:engagement growth-plan` — produces Part 8 deliverable; should be checked with `/omni-growth-engine:check --full --schema content_brief` before client delivery
+- `/omni-growth-engine:content-engine` — produces marketing content; recommended workflow is `/omni-growth-engine:content-engine` → review → `/omni-growth-engine:check` → publish
+- `/omni-growth-engine:eval-content` — legacy alias that routes to this skill
 
 ## Related references
 

@@ -48,7 +48,7 @@ INDEX_PATH = REPO / "skills-index.json"
 # A reference to any of these routes the skill's output through the quality
 # machinery — the M tier. Order matters only for reporting.
 GATE_MARKERS = (
-    "digital-marketing-pro:check",
+    "omni-growth-engine:check",
     "eval-runner",
     "output-validator",
     "quality-assurance",
@@ -58,7 +58,7 @@ GATE_MARKERS = (
 )
 
 SCRIPT_REF = re.compile(r"scripts[/\\]([A-Za-z0-9_.-]+\.(?:py|sh))")
-CROSS_REF = re.compile(r"digital-marketing-pro:([a-z0-9][a-z0-9-]*)")
+CROSS_REF = re.compile(r"omni-growth-engine:([a-z0-9][a-z0-9-]*)")
 FRONT_FIELD = re.compile(r"^(name|description):\s*(.*)$")
 
 

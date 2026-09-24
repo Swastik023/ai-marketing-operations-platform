@@ -1,9 +1,9 @@
 ---
 name: integrations
-description: "Show the MCP integration status dashboard — which connectors are connected, which are available but not yet configured, the skills each one unlocks, per-category coverage, and the top three quick-win connectors to add next. Read-only status check via connector-status.py; it changes nothing. Triggers on \"/digital-marketing-pro:integrations\", \"what integrations are connected\", \"which connectors do I have\", \"what would connecting a CRM unlock\", \"show my integration coverage\". Pairs with /digital-marketing-pro:connect for connector setup instructions and /digital-marketing-pro:add-integration for custom MCP servers."
+description: "Show the MCP integration status dashboard — which connectors are connected, which are available but not yet configured, the skills each one unlocks, per-category coverage, and the top three quick-win connectors to add next. Read-only status check via connector-status.py; it changes nothing. Triggers on \"/omni-growth-engine:integrations\", \"what integrations are connected\", \"which connectors do I have\", \"what would connecting a CRM unlock\", \"show my integration coverage\". Pairs with /omni-growth-engine:connect for connector setup instructions and /omni-growth-engine:add-integration for custom MCP servers."
 ---
 
-# /digital-marketing-pro:integrations
+# /omni-growth-engine:integrations
 
 ## Purpose
 
@@ -33,7 +33,7 @@ The user may optionally provide:
 
 5. **Provide next steps**: For each available connector, briefly explain how to connect it:
    - HTTP connectors: "Just use any skill that needs it — you'll be prompted to authorize via OAuth"
-   - npx connectors: "Run `/digital-marketing-pro:connect <name>` for setup instructions, or `/digital-marketing-pro:add-integration <name>` for guided configuration"
+   - npx connectors: "Run `/omni-growth-engine:connect <name>` for setup instructions, or `/omni-growth-engine:add-integration <name>` for guided configuration"
 
 ## Output
 
@@ -44,7 +44,7 @@ A structured integration dashboard containing:
 - **Available integrations**: List of all not-yet-connected connectors grouped by category, with what skills they would unlock, transport type, and setup complexity (HTTP = easy/OAuth, npx = requires API keys)
 - **Quick wins**: Top 3 recommended connectors to add next, based on skill coverage impact and setup ease
 - **Category gaps**: Categories with zero connected connectors highlighted, with the most impactful connector to add in each gap category
-- **Next steps**: Clear guidance — "Run `/digital-marketing-pro:connect <name>` to set up any connector" and "Run `/digital-marketing-pro:add-integration` for custom MCP servers not in the registry"
+- **Next steps**: Clear guidance — "Run `/omni-growth-engine:connect <name>` to set up any connector" and "Run `/omni-growth-engine:add-integration` for custom MCP servers not in the registry"
 
 ## Agents Used
 

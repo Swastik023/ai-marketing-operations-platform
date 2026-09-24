@@ -1,6 +1,6 @@
 ---
 name: emerging-channels
-description: "Evaluate and plan emerging marketing channels — voice and visual search, conversational and social commerce, communities, podcasts, and video — producing channel evaluation reports with 90-day pilot plans, setup checklists, and go/no-go recommendations. Advises and plans; it does not set platforms up for you. Triggers on \"/digital-marketing-pro:emerging-channels\", \"should we open a TikTok Shop\", \"is voice search worth optimizing for\", \"plan a community launch on Discord\", \"evaluate podcast advertising for us\". Reads the brand profile and industry benchmarks, and stamps any dollar figures through the benchmark book before they enter a plan."
+description: "Evaluate and plan emerging marketing channels — voice and visual search, conversational and social commerce, communities, podcasts, and video — producing channel evaluation reports with 90-day pilot plans, setup checklists, and go/no-go recommendations. Advises and plans; it does not set platforms up for you. Triggers on \"/omni-growth-engine:emerging-channels\", \"should we open a TikTok Shop\", \"is voice search worth optimizing for\", \"plan a community launch on Discord\", \"evaluate podcast advertising for us\". Reads the brand profile and industry benchmarks, and stamps any dollar figures through the benchmark book before they enter a plan."
 ---
 
 # Emerging Channels
@@ -36,7 +36,7 @@ Before producing any marketing output from this module:
 5. **Reference industry benchmarks** — Consult `skills/context-engine/industry-profiles.md` for the brand's industry
 6. **Use platform specs** — Reference `skills/context-engine/platform-specs.md` for character limits and format requirements
 7. **Check campaign history** — Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-tracker.py" --brand {slug} --action list-campaigns` before planning new work
-8. **If no brand exists**, say: "No brand profile found. Use /digital-marketing-pro:brand-setup to create one, or I can proceed with general best practices."
+8. **If no brand exists**, say: "No brand profile found. Use /omni-growth-engine:brand-setup to create one, or I can proceed with general best practices."
 9. **Check brand guidelines** — If `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` exists, load and enforce: `restrictions.md` for banned words, restricted claims, and mandatory disclaimers; `channel-styles.md` for channel-specific tone overrides (may differ from base voice); `messaging.md` for approved key messages, taglines, and positioning language; `voice-and-tone.md` for detailed voice rules beyond the 4 numeric scores. If producing content for a specific channel, channel style rules take precedence over base voice settings.
 
 Do not ask the user for information that already exists in their brand profile.

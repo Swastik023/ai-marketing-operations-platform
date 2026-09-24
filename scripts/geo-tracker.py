@@ -420,7 +420,7 @@ def geo_summary(slug):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="GEO (Generative Engine Optimization) tracking for Digital Marketing Pro"
+        description="GEO (Generative Engine Optimization) tracking for OmniGrowth Engine"
     )
     parser.add_argument("--brand", required=True, help="Brand slug")
     parser.add_argument(

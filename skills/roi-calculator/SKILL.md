@@ -1,10 +1,10 @@
 ---
 name: roi-calculator
-description: "Compute campaign ROI from spend, conversion, and revenue inputs — channel-level ROI/ROAS/CPA/CPL, blended totals, five-model attribution comparison (last-touch, first-touch, linear, time-decay, position-based), LTV payback periods, industry benchmark ratings, and 2-3 modeled budget-reallocation scenarios, packaged as an executive-ready report. Triggers on \"/digital-marketing-pro:roi-calculator\", \"what's the ROI on this campaign\", \"compare ROAS across channels\", \"is our CAC sustainable against LTV\", \"where should we shift budget\". Runs roi-calculator.py, reads industry benchmarks for the brand's vertical, and logs results to the campaign tracker for period-over-period trend comparison."
+description: "Compute campaign ROI from spend, conversion, and revenue inputs — channel-level ROI/ROAS/CPA/CPL, blended totals, five-model attribution comparison (last-touch, first-touch, linear, time-decay, position-based), LTV payback periods, industry benchmark ratings, and 2-3 modeled budget-reallocation scenarios, packaged as an executive-ready report. Triggers on \"/omni-growth-engine:roi-calculator\", \"what's the ROI on this campaign\", \"compare ROAS across channels\", \"is our CAC sustainable against LTV\", \"where should we shift budget\". Runs roi-calculator.py, reads industry benchmarks for the brand's vertical, and logs results to the campaign tracker for period-over-period trend comparison."
 argument-hint: "[campaign-name]"
 ---
 
-# /digital-marketing-pro:roi-calculator
+# /omni-growth-engine:roi-calculator
 
 ## Purpose
 
@@ -25,7 +25,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply voice, compliance, industry context. Check `guidelines/_manifest.json` for restrictions, messaging, channel styles, voice-and-tone rules, and templates. If a template matching this command exists in `~/.claude-marketing/brands/{slug}/templates/`, apply its format. If no brand exists, prompt for `/digital-marketing-pro:brand-setup` or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply voice, compliance, industry context. Check `guidelines/_manifest.json` for restrictions, messaging, channel styles, voice-and-tone rules, and templates. If a template matching this command exists in `~/.claude-marketing/brands/{slug}/templates/`, apply its format. If no brand exists, prompt for `/omni-growth-engine:brand-setup` or proceed with defaults.
 2. **Check campaign history**: Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-tracker.py" --brand {slug} --action list-campaigns` to pull historical campaign data for trend comparison and period-over-period analysis.
 3. **Run ROI calculator**: Execute `python "${CLAUDE_PLUGIN_ROOT}/scripts/roi-calculator.py"` with spend, revenue, and conversion data to compute channel-level and blended metrics.
 4. **Calculate channel-level ROI and ROAS**: For each channel, compute ROI ((revenue - cost) / cost), ROAS (revenue / cost), CPA (cost / conversions), CPL (cost / leads), and contribution margin percentage.

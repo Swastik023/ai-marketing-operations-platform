@@ -1,14 +1,14 @@
 ---
 name: verify-claims
-description: "Extract every verifiable claim in marketing copy — statistics, rankings, awards, citations, performance and time-bound assertions — and check each against a user-supplied evidence JSON, classifying it verified, partially verified, unverified, or contradicted, with corrected-text and hedged-language suggestions. Without an evidence file it runs extraction-only and generates a template to fill in. Triggers on \"/digital-marketing-pro:verify-claims\", \"fact-check this case study\", \"can we back up these numbers\", \"is this statistic real\", \"check our award claims before the press release\". Runs claim-verifier.py and applies brand compliance rules for regulated industries; the claim-integrity deep-dive alongside /digital-marketing-pro:eval-content."
+description: "Extract every verifiable claim in marketing copy — statistics, rankings, awards, citations, performance and time-bound assertions — and check each against a user-supplied evidence JSON, classifying it verified, partially verified, unverified, or contradicted, with corrected-text and hedged-language suggestions. Without an evidence file it runs extraction-only and generates a template to fill in. Triggers on \"/omni-growth-engine:verify-claims\", \"fact-check this case study\", \"can we back up these numbers\", \"is this statistic real\", \"check our award claims before the press release\". Runs claim-verifier.py and applies brand compliance rules for regulated industries; the claim-integrity deep-dive alongside /omni-growth-engine:eval-content."
 argument-hint: "[content-path]"
 ---
 
-# /digital-marketing-pro:verify-claims
+# /omni-growth-engine:verify-claims
 
 ## Purpose
 
-Cross-check marketing claims against user-provided evidence data. Extracts all verifiable claims from content — statistics, percentages, rankings, awards, certifications, named citations, performance metrics, customer counts, and time-bound assertions — then matches each against an evidence file and classifies it as verified, partially verified, unverified, or contradicted. This command is the dedicated deep-dive for claim integrity, while /digital-marketing-pro:eval-content includes claim verification as one dimension of its broader quality assessment.
+Cross-check marketing claims against user-provided evidence data. Extracts all verifiable claims from content — statistics, percentages, rankings, awards, certifications, named citations, performance metrics, customer counts, and time-bound assertions — then matches each against an evidence file and classifies it as verified, partially verified, unverified, or contradicted. This command is the dedicated deep-dive for claim integrity, while /omni-growth-engine:eval-content includes claim verification as one dimension of its broader quality assessment.
 
 Marketing content that cites specific numbers, awards, or results without verified backing is a brand risk. Contradicted claims erode trust if caught by customers, journalists, or regulators. This command ensures every factual assertion in your content is backed by real data, clearly sourced, and defensible under scrutiny.
 
@@ -22,7 +22,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply compliance rules for target markets (`skills/context-engine/compliance-rules.md`) — some industries and regions have stricter requirements for substantiating claims (financial services, healthcare, EU consumer protection). Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load messaging restrictions that may define approved claims and prohibited assertions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply compliance rules for target markets (`skills/context-engine/compliance-rules.md`) — some industries and regions have stricter requirements for substantiating claims (financial services, healthcare, EU consumer protection). Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load messaging restrictions that may define approved claims and prohibited assertions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Extract claims from content**: Execute `python "${CLAUDE_PLUGIN_ROOT}/scripts/claim-verifier.py" --action extract-claims --text "{content}"` to identify all verifiable assertions. The extractor categorizes claims by type:
    - **Statistical claims**: Percentages, ratios, growth numbers, market size figures ("73% increase in conversions," "4.8x ROAS")
    - **Ranking claims**: Position assertions, comparative statements ("market leader," "#1 rated," "fastest-growing")

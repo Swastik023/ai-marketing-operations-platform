@@ -1,10 +1,10 @@
 ---
 name: landing-page-audit
-description: "Audit a landing page across six conversion dimensions — above-fold clarity, trust signals, form friction, message match against the upstream ad or email, page speed, and mobile experience — each scored 1-10, rolled into an overall score benchmarked against industry averages, with the top 5 fixes ranked by expected conversion impact. Assessment and recommendations only; it does not edit the page. Triggers on \"/digital-marketing-pro:landing-page-audit\", \"audit this landing page\", \"why isn't this page converting\", \"score our signup page\", \"does the page match the ad copy\". Reads the brand profile, guidelines, custom templates, and agency SOPs before scoring."
+description: "Audit a landing page across six conversion dimensions — above-fold clarity, trust signals, form friction, message match against the upstream ad or email, page speed, and mobile experience — each scored 1-10, rolled into an overall score benchmarked against industry averages, with the top 5 fixes ranked by expected conversion impact. Assessment and recommendations only; it does not edit the page. Triggers on \"/omni-growth-engine:landing-page-audit\", \"audit this landing page\", \"why isn't this page converting\", \"score our signup page\", \"does the page match the ad copy\". Reads the brand profile, guidelines, custom templates, and agency SOPs before scoring."
 argument-hint: "[URL]"
 ---
 
-# /digital-marketing-pro:landing-page-audit
+# /omni-growth-engine:landing-page-audit
 
 ## Purpose
 
@@ -22,7 +22,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Above-fold clarity** (score 1-10): Headline clarity, value proposition, visual hierarchy, CTA visibility within first viewport
 3. **Trust signals** (score 1-10): Social proof, testimonials, logos, security badges, guarantees, reviews
 4. **Form friction** (score 1-10): Number of fields, field labels, error handling, progressive disclosure, mobile form UX

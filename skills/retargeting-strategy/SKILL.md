@@ -1,9 +1,9 @@
 ---
 name: retargeting-strategy
-description: "Design a cross-platform retargeting playbook — funnel-stage audience segments with recency windows, creative sequencing per segment, frequency caps, exclusion lists, budget allocation, dynamic product-feed setup, KPI-based optimization triggers, and a 30/60/90-day roadmap. Triggers on \"/digital-marketing-pro:retargeting-strategy\", \"plan our remarketing campaigns\", \"cart abandoners aren't converting\", \"how should we sequence retargeting ads\", \"set frequency caps across Meta and Google\". Reads the brand profile and past campaign performance via campaign-tracker.py; it produces the strategy document and tracking checklist — it does not launch or modify live campaigns."
+description: "Design a cross-platform retargeting playbook — funnel-stage audience segments with recency windows, creative sequencing per segment, frequency caps, exclusion lists, budget allocation, dynamic product-feed setup, KPI-based optimization triggers, and a 30/60/90-day roadmap. Triggers on \"/omni-growth-engine:retargeting-strategy\", \"plan our remarketing campaigns\", \"cart abandoners aren't converting\", \"how should we sequence retargeting ads\", \"set frequency caps across Meta and Google\". Reads the brand profile and past campaign performance via campaign-tracker.py; it produces the strategy document and tracking checklist — it does not launch or modify live campaigns."
 ---
 
-# /digital-marketing-pro:retargeting-strategy
+# /omni-growth-engine:retargeting-strategy
 
 ## Purpose
 
@@ -24,7 +24,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply voice, compliance, industry context. Check `guidelines/_manifest.json` for restrictions, messaging, channel styles, voice-and-tone rules, and templates. If a template matching this command exists in `~/.claude-marketing/brands/{slug}/templates/`, apply its format. If no brand exists, prompt for `/digital-marketing-pro:brand-setup` or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply voice, compliance, industry context. Check `guidelines/_manifest.json` for restrictions, messaging, channel styles, voice-and-tone rules, and templates. If a template matching this command exists in `~/.claude-marketing/brands/{slug}/templates/`, apply its format. If no brand exists, prompt for `/omni-growth-engine:brand-setup` or proceed with defaults.
 2. **Check campaign history**: Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-tracker.py" --brand {slug} --action list-campaigns` to review existing retargeting campaign performance and identify what has already been tested.
 3. **Audit tracking infrastructure**: Verify pixel and tag installation status across platforms. Identify gaps in tracking that would prevent audience building or conversion attribution before designing the strategy.
 4. **Define retargeting audience segments**: Create segments based on funnel stage (awareness visitors, product viewers, cart abandoners, past purchasers, lapsed customers), behavior signals (pages visited, time on site, visit frequency, content consumed), and recency windows (1-3 days, 4-7 days, 8-14 days, 15-30 days, 31-90 days). Size each segment based on traffic volume.

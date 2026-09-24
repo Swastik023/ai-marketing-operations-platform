@@ -1,8 +1,8 @@
 # Historical Data & Campaign Memory
 
-**Version 3.17.0** | A guide to how Digital Marketing Pro remembers, learns, and applies past marketing work
+**Version 3.17.0** | A guide to how OmniGrowth Engine remembers, learns, and applies past marketing work
 
-Digital Marketing Pro does not start from scratch every session. It builds a persistent memory of your campaigns, performance metrics, and strategic learnings --- then uses that history to make every future recommendation sharper. v3.0 extends this with a per-engagement version history (every source document carries its v1.0 → v2.0 → v2.1 lineage) and the Living Project Instruction File. This guide explains what gets saved, how it informs new work, and how to query and manage your marketing data over time.
+OmniGrowth Engine does not start from scratch every session. It builds a persistent memory of your campaigns, performance metrics, and strategic learnings --- then uses that history to make every future recommendation sharper. v3.0 extends this with a per-engagement version history (every source document carries its v1.0 → v2.0 → v2.1 lineage) and the Living Project Instruction File. This guide explains what gets saved, how it informs new work, and how to query and manage your marketing data over time.
 
 > **For v3.0 engagement-level history (Two-Views Model, Decision Matrix re-runs, Update-Back versioning, Living Project Instruction File), see [docs/engagement-methodology.md](engagement-methodology.md) and section 8 of [docs/data-and-insights.md](data-and-insights.md). This guide focuses on brand-level historical data — campaigns, performance snapshots, accumulated insights — that v2.x established and that continues to operate alongside the v3.0 engagement layer.**
 
@@ -25,7 +25,7 @@ Every marketing session generates persistent data. You do not need to remember t
 
 ### Campaign Plans
 
-When you create a campaign through `/digital-marketing-pro:campaign-plan`, the Campaign Orchestrator agent, or any workflow that produces a structured campaign, the full plan is saved automatically.
+When you create a campaign through `/omni-growth-engine:campaign-plan`, the Campaign Orchestrator agent, or any workflow that produces a structured campaign, the full plan is saved automatically.
 
 What gets stored:
 
@@ -42,7 +42,7 @@ Campaign plans never expire. Every campaign you create is preserved indefinitely
 
 ### Performance Snapshots
 
-When you run `/digital-marketing-pro:performance-report` or any analysis that produces campaign metrics, a timestamped performance snapshot is saved.
+When you run `/omni-growth-engine:performance-report` or any analysis that produces campaign metrics, a timestamped performance snapshot is saved.
 
 What gets stored:
 
@@ -58,7 +58,7 @@ Performance snapshots also never expire. The full history is preserved.
 
 ### Session Insights
 
-Marketing agents distil 1 to 3 key learnings from the work you do and save them to `insights.json`. As of v3.1+ this is opt-in: enable `auto_save_insights: true` in the brand profile so agents save as they go, run `/digital-marketing-pro:sync-memory` to flush learnings on demand, or re-enable the reference SessionEnd hook (ships disabled — see [docs/v3.2-opt-ins.md](v3.2-opt-ins.md)) to capture automatically at session end.
+Marketing agents distil 1 to 3 key learnings from the work you do and save them to `insights.json`. As of v3.1+ this is opt-in: enable `auto_save_insights: true` in the brand profile so agents save as they go, run `/omni-growth-engine:sync-memory` to flush learnings on demand, or re-enable the reference SessionEnd hook (ships disabled — see [docs/v3.2-opt-ins.md](v3.2-opt-ins.md)) to capture automatically at session end.
 
 What gets stored:
 
@@ -380,13 +380,13 @@ The underscore prefix is a convention that keeps archived brands out of the acti
 Sometimes you want a clean slate for part of a brand's data without losing everything.
 
 **Reset insights only** (start fresh with learnings):
-Delete `insights.json`. The file will be recreated automatically the next time an insight is saved (via ambient capture, `/digital-marketing-pro:sync-memory`, or the re-enabled SessionEnd hook).
+Delete `insights.json`. The file will be recreated automatically the next time an insight is saved (via ambient capture, `/omni-growth-engine:sync-memory`, or the re-enabled SessionEnd hook).
 
 **Reset campaign history** (remove all campaign records):
 Delete `campaigns/_index.json` and all campaign JSON files in the `campaigns/` directory. Performance snapshots in `performance/` can be deleted separately or kept.
 
 **Reset everything for a brand** (complete fresh start):
-Delete the entire brand slug directory. Run `/digital-marketing-pro:brand-setup` to create a new profile from scratch.
+Delete the entire brand slug directory. Run `/omni-growth-engine:brand-setup` to create a new profile from scratch.
 
 ### Preserving Insights Beyond the 200-Entry Buffer
 
@@ -433,12 +433,12 @@ These formats are stable across plugin versions. Your data will remain readable 
 
 ## Summary
 
-Digital Marketing Pro builds marketing intelligence over time through three persistent data types: campaign plans that capture your strategic decisions, performance snapshots that track results, and session insights that distill learnings. The intelligence layer reads this history before every recommendation and writes new learnings after every session, creating a continuous improvement loop that makes the plugin more valuable the longer you use it.
+OmniGrowth Engine builds marketing intelligence over time through three persistent data types: campaign plans that capture your strategic decisions, performance snapshots that track results, and session insights that distill learnings. The intelligence layer reads this history before every recommendation and writes new learnings after every session, creating a continuous improvement loop that makes the plugin more valuable the longer you use it.
 
-You do not need to manage most of this manually. Campaigns save when you create them. Performance saves when you analyze it. Insights save via ambient capture (`auto_save_insights: true`) or when you run `/digital-marketing-pro:sync-memory`. The data lives at `~/.claude-marketing/brands/{slug}/`, survives plugin updates, and is yours to back up, archive, or reset as needed.
+You do not need to manage most of this manually. Campaigns save when you create them. Performance saves when you analyze it. Insights save via ambient capture (`auto_save_insights: true`) or when you run `/omni-growth-engine:sync-memory`. The data lives at `~/.claude-marketing/brands/{slug}/`, survives plugin updates, and is yours to back up, archive, or reset as needed.
 
 The best marketing teams learn from their own data. This system makes sure nothing gets lost.
 
 ---
 
-*Digital Marketing Pro v3.17.0 --- Built for marketing professionals who want strategy and execution that stays on-brand, every time.*
+*OmniGrowth Engine v3.17.0 --- Built for marketing professionals who want strategy and execution that stays on-brand, every time.*

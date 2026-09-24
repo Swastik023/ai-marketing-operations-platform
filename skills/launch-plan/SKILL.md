@@ -1,11 +1,11 @@
 ---
 name: launch-plan
-description: "Build a three-phase launch playbook — pre-launch (T-30), an hour-by-hour launch-day runbook, and post-launch optimization (T+30) — with per-task owners and deadlines, channel activation plans, a risk register, and KPIs per phase. Triggers on \"/digital-marketing-pro:launch-plan\", \"plan our product launch\", \"launch playbook for the new feature\", \"what should launch week look like\", \"coordinate the rebrand rollout\". Planning only: it performs no external action itself; any playbook step handed to an execution skill such as /digital-marketing-pro:launch-campaign or /digital-marketing-pro:send-email-campaign must pass that skill's own typed-yes approval gate first. Reads the brand profile, guidelines, templates, and agency SOPs."
+description: "Build a three-phase launch playbook — pre-launch (T-30), an hour-by-hour launch-day runbook, and post-launch optimization (T+30) — with per-task owners and deadlines, channel activation plans, a risk register, and KPIs per phase. Triggers on \"/omni-growth-engine:launch-plan\", \"plan our product launch\", \"launch playbook for the new feature\", \"what should launch week look like\", \"coordinate the rebrand rollout\". Planning only: it performs no external action itself; any playbook step handed to an execution skill such as /omni-growth-engine:launch-campaign or /omni-growth-engine:send-email-campaign must pass that skill's own typed-yes approval gate first. Reads the brand profile, guidelines, templates, and agency SOPs."
 argument-hint: "[product-name]"
 disable-model-invocation: false
 ---
 
-# /digital-marketing-pro:launch-plan
+# /omni-growth-engine:launch-plan
 
 ## Purpose
 
@@ -13,7 +13,7 @@ Build a comprehensive launch playbook that coordinates all marketing activities 
 
 ## Execution gate (MANDATORY — cannot be skipped)
 
-This skill produces a launch **playbook** — it performs no external action itself, so it runs freely. The gate governs the *handoff*: before ANY step of this playbook is executed by a downstream execution skill (`/digital-marketing-pro:launch-campaign`, `/digital-marketing-pro:launch-ad-campaign`, `/digital-marketing-pro:send-email-campaign`, etc.), that skill presents its own Execution Summary and the user must type `yes`. Never proceed on ambiguous input, never auto-execute a playbook step, and never auto-retry a failed one.
+This skill produces a launch **playbook** — it performs no external action itself, so it runs freely. The gate governs the *handoff*: before ANY step of this playbook is executed by a downstream execution skill (`/omni-growth-engine:launch-campaign`, `/omni-growth-engine:launch-ad-campaign`, `/omni-growth-engine:send-email-campaign`, etc.), that skill presents its own Execution Summary and the user must type `yes`. Never proceed on ambiguous input, never auto-execute a playbook step, and never auto-retry a failed one.
 
 ## Input Required
 
@@ -30,7 +30,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. Define launch tier (Tier 1 major, Tier 2 moderate, Tier 3 minor) to calibrate effort
 3. **Pre-launch phase** (T-30 to T-1): Teaser content, audience building, press seeding, influencer outreach, email list warming, landing page, waitlist
 4. **Launch phase** (T-0 to T+3): Coordinated announcement across all channels, press release, email blast, social blitz, paid media activation, community engagement

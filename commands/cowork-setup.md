@@ -4,7 +4,7 @@ argument-hint: "[--brand <name>] [--drive-root <folder-name>]"
 disable-model-invocation: false
 ---
 
-# /digital-marketing-pro:cowork-setup
+# /omni-growth-engine:cowork-setup
 
 Routes to `skills/cowork-setup/SKILL.md`. This is the one-time setup that makes DMP usable by a team inside Cowork by routing brand state through a Drive MCP instead of the ephemeral Cowork sandbox.
 
@@ -17,9 +17,9 @@ Routes to `skills/cowork-setup/SKILL.md`. This is the one-time setup that makes 
 ## Quick examples
 
 ```
-/digital-marketing-pro:cowork-setup
-/digital-marketing-pro:cowork-setup --brand acme
-/digital-marketing-pro:cowork-setup --drive-root "ACME DigitalMarketingPro"
+/omni-growth-engine:cowork-setup
+/omni-growth-engine:cowork-setup --brand acme
+/omni-growth-engine:cowork-setup --drive-root "ACME DigitalMarketingPro"
 ```
 
 For the full setup spec, see [skills/cowork-setup/SKILL.md](../skills/cowork-setup/SKILL.md).

@@ -1,10 +1,10 @@
 ---
 name: media-plan
-description: "Build a ready-to-implement paid media plan — efficiency-weighted budget allocation across channels, a week-by-week flight schedule, an audience-by-channel targeting matrix, a creative rotation calendar with fatigue thresholds, reach and frequency projections, a measurement framework, platform setup checklists, and a 10-15% contingency reserve with reallocation triggers. Triggers on \"/digital-marketing-pro:media-plan\", \"plan our Q4 ad budget\", \"how should we split spend between Google and Meta\", \"build the media buy schedule\", \"we have 50K for paid — where does it go\". Planning only — it launches no campaigns and spends nothing. Reads the brand profile, guidelines, and compliance rules for the target markets."
+description: "Build a ready-to-implement paid media plan — efficiency-weighted budget allocation across channels, a week-by-week flight schedule, an audience-by-channel targeting matrix, a creative rotation calendar with fatigue thresholds, reach and frequency projections, a measurement framework, platform setup checklists, and a 10-15% contingency reserve with reallocation triggers. Triggers on \"/omni-growth-engine:media-plan\", \"plan our Q4 ad budget\", \"how should we split spend between Google and Meta\", \"build the media buy schedule\", \"we have 50K for paid — where does it go\". Planning only — it launches no campaigns and spends nothing. Reads the brand profile, guidelines, and compliance rules for the target markets."
 argument-hint: "[--budget=amount --channels=list]"
 ---
 
-# /digital-marketing-pro:media-plan
+# /omni-growth-engine:media-plan
 
 ## Purpose
 
@@ -27,7 +27,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Assess channel-objective fit**: Evaluate each available channel against campaign objectives using reach capability, targeting precision, cost benchmarks, creative format support, and measurement reliability
 3. **Allocate budget across channels**: Distribute budget using efficiency-weighted allocation — factor in historical performance, diminishing returns curves, minimum effective spend thresholds, and strategic importance per channel
 4. **Design flight schedule**: Structure campaign timing as continuous, pulsing, or flighting based on objectives, seasonality, and budget — define weekly spend levels and heavy-up periods

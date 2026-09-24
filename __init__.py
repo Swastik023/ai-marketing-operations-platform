@@ -1,5 +1,5 @@
 ﻿"""
-Hermes Agent native plugin adapter for Digital Marketing Pro.
+Hermes Agent native plugin adapter for OmniGrowth Engine.
 
 This file is read ONLY by Hermes Agent (Nous Research). Every other platform
 ignores it: Claude Code / Cowork / Codex / Cursor / Copilot CLI / Antigravity
@@ -9,8 +9,8 @@ openclaw.plugin.json (and falls back to the .claude-plugin/ bundle).
 
 What this does
 --------------
-When Hermes Agent loads us via `hermes plugins install indranilbanerjee/digital-marketing-pro`,
-it clones the repo into ~/.hermes/plugins/digital-marketing-pro/, reads plugin.yaml
+When Hermes Agent loads us via `hermes plugins install swastik-agnihotri/omni-growth-engine`,
+it clones the repo into ~/.hermes/plugins/omni-growth-engine/, reads plugin.yaml
 at the root, then calls register(ctx) below. The register() walks the skills/
 directory, discovers every SKILL.md, and exposes each one to Hermes via
 ctx.register_skill(name, path_to_SKILL_md). All 158 marketing skills become
@@ -41,7 +41,7 @@ import logging
 import re
 from pathlib import Path
 
-logger = logging.getLogger("digital-marketing-pro")
+logger = logging.getLogger("omni-growth-engine")
 
 PLUGIN_ROOT = Path(__file__).resolve().parent
 SKILLS_DIR = PLUGIN_ROOT / "skills"
@@ -114,12 +114,12 @@ def register(ctx) -> None:
     Args:
         ctx: Hermes plugin context with register_skill(name, path) etc.
     """
-    logger.info("digital-marketing-pro v%s registering with Hermes", PLUGIN_VERSION)
+    logger.info("omni-growth-engine v%s registering with Hermes", PLUGIN_VERSION)
 
     skills = _walk_skills()
     if not skills:
         logger.warning(
-            "digital-marketing-pro found 0 skills in %s — plugin will be inert. "
+            "omni-growth-engine found 0 skills in %s — plugin will be inert. "
             "Confirm the plugin was cloned with its full skills/ tree.",
             SKILLS_DIR,
         )
@@ -127,7 +127,7 @@ def register(ctx) -> None:
 
     if not hasattr(ctx, "register_skill"):
         logger.error(
-            "digital-marketing-pro: Hermes ctx is missing register_skill(). "
+            "omni-growth-engine: Hermes ctx is missing register_skill(). "
             "Check Hermes version (this plugin targets v0.15.2+). "
             "Plugin will be inert. Found %d skills that could not be registered.",
             len(skills),
@@ -143,13 +143,13 @@ def register(ctx) -> None:
         except Exception as exc:  # pragma: no cover  (defensive only)
             failed += 1
             logger.warning(
-                "digital-marketing-pro: failed to register skill %r: %s",
+                "omni-growth-engine: failed to register skill %r: %s",
                 skill["name"], exc,
             )
 
     logger.info(
-        "digital-marketing-pro v%s: registered %d skills (failed: %d) under namespace "
-        "'digital-marketing-pro:'. Use `skill_view(\"digital-marketing-pro:<skill>\")` to load one.",
+        "omni-growth-engine v%s: registered %d skills (failed: %d) under namespace "
+        "'omni-growth-engine:'. Use `skill_view(\"omni-growth-engine:<skill>\")` to load one.",
         PLUGIN_VERSION, registered, failed,
     )
 

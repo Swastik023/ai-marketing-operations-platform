@@ -1,11 +1,11 @@
 ---
 name: send-email-campaign
-description: "Send a targeted email campaign through a connected SendGrid, Klaviyo, Customer.io, Brevo, or Mailchimp MCP — subject-line and spam scoring, personalization with fallbacks, A/B variants, CAN-SPAM/GDPR/CASL compliance checks, a test send you confirm, then the full send with deliverability monitoring and early engagement snapshots. No email leaves without the mandatory execution gate: a campaign summary with recipient count and risk tier (medium/high/critical by list size) that you must explicitly approve. Triggers on \"/digital-marketing-pro:send-email-campaign\", \"send this newsletter to the active list\", \"deploy the Q1 announcement email\", \"launch the promo email with two subject lines\", \"email this segment tomorrow at 9am\". Reads the brand profile, guidelines, and platform publishing specs."
+description: "Send a targeted email campaign through a connected SendGrid, Klaviyo, Customer.io, Brevo, or Mailchimp MCP — subject-line and spam scoring, personalization with fallbacks, A/B variants, CAN-SPAM/GDPR/CASL compliance checks, a test send you confirm, then the full send with deliverability monitoring and early engagement snapshots. No email leaves without the mandatory execution gate: a campaign summary with recipient count and risk tier (medium/high/critical by list size) that you must explicitly approve. Triggers on \"/omni-growth-engine:send-email-campaign\", \"send this newsletter to the active list\", \"deploy the Q1 announcement email\", \"launch the promo email with two subject lines\", \"email this segment tomorrow at 9am\". Reads the brand profile, guidelines, and platform publishing specs."
 disable-model-invocation: false
 argument-hint: "[campaign-name]"
 ---
 
-# /digital-marketing-pro:send-email-campaign
+# /omni-growth-engine:send-email-campaign
 
 ## Purpose
 
@@ -39,7 +39,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Verify email platform connection**: Check which email MCP server is connected and confirm it matches the user's target platform. Verify the sending domain is authenticated (SPF, DKIM, DMARC records). If not connected or not authenticated, instruct the user on setup steps.
 3. **Score email subject lines**: Run `email-subject-tester.py` on all subject line variants to evaluate length (optimal 30-50 chars), power words, personalization token effectiveness, emoji usage, and predicted open rate. Recommend improvements if any variant scores below threshold.
 4. **Check spam score**: Run `spam-score-checker.py` to analyze subject lines and body content for spam trigger words, excessive capitalization, exclamation marks, link-to-text ratio, image-to-text ratio, and authentication alignment. Flag any deliverability risks with specific remediation steps.

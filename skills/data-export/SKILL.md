@@ -1,17 +1,17 @@
 ---
 name: data-export
-description: "Export marketing data — metrics, contacts, campaigns, performance snapshots — to BigQuery, Google Sheets, or Supabase as clean tabular data with schema documentation, PII redaction, and post-export integrity verification, gated behind an explicit approval step. Triggers on \"/digital-marketing-pro:data-export\", \"send this month's metrics to BigQuery\", \"export contacts to a Google Sheet\", \"get campaign data into our warehouse\", \"set up a recurring weekly export\". Reads local campaign, execution, and performance stores plus connected analytics and CRM MCPs, and pairs with /digital-marketing-pro:segment-audience to build a segment before exporting its members."
+description: "Export marketing data — metrics, contacts, campaigns, performance snapshots — to BigQuery, Google Sheets, or Supabase as clean tabular data with schema documentation, PII redaction, and post-export integrity verification, gated behind an explicit approval step. Triggers on \"/omni-growth-engine:data-export\", \"send this month's metrics to BigQuery\", \"export contacts to a Google Sheet\", \"get campaign data into our warehouse\", \"set up a recurring weekly export\". Reads local campaign, execution, and performance stores plus connected analytics and CRM MCPs, and pairs with /omni-growth-engine:segment-audience to build a segment before exporting its members."
 disable-model-invocation: false
 argument-hint: "[destination]"
 ---
 
-# /digital-marketing-pro:data-export
+# /omni-growth-engine:data-export
 
 ## Purpose
 
 Export marketing data — metrics, contacts, campaign results, and performance snapshots — to an external data store for analysis, reporting, or integration with other tools. Supports BigQuery for data warehousing and advanced analytics, Google Sheets for sharing and collaboration with stakeholders, and Supabase for custom database use and application integration. Transforms raw marketing data into clean, structured, tabular formats ready for downstream consumption with full schema documentation. Handles PII redaction when exporting contact data to shared destinations, ensuring compliance with privacy regulations.
 
-Use this command to move data out of the marketing system for external analysis, client reporting, or data warehouse integration. For exporting audience segments specifically, use `/digital-marketing-pro:segment-audience` to create the segment first, then this command to export the member data.
+Use this command to move data out of the marketing system for external analysis, client reporting, or data warehouse integration. For exporting audience segments specifically, use `/omni-growth-engine:segment-audience` to create the segment first, then this command to export the member data.
 
 ## Execution gate (MANDATORY — cannot be skipped)
 
@@ -40,7 +40,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Gather data from available sources**: Collect data from local storage — `~/.claude-marketing/brands/{slug}/campaigns/` (via `campaign-tracker.py --action list-campaigns`), `~/.claude-marketing/brands/{slug}/executions/` (via `execution-tracker.py --action get-history`), `~/.claude-marketing/brands/{slug}/performance/` snapshots, insights files, and segment exports — and from connected MCPs (Google Analytics, ad platforms, CRM, email platform) based on the requested data type and date range. Merge data from multiple sources where needed, resolving conflicts by source priority.
 3. **Transform data to tabular format**: Normalize all collected data into a flat, tabular structure — resolve nested JSON objects into columns, standardize date formats and timezones, normalize currency values to the requested denomination, apply column naming conventions, calculate derived fields (CTR, ROAS, CPA, conversion rate, period-over-period change), and handle null values consistently (empty string, "N/A", or 0 depending on field type).
 4. **Apply filters and sorting**: Filter records based on user-specified criteria — date range, channels, campaigns, segments, or custom conditions. Sort by the most relevant dimension (date descending by default, or as specified). Remove duplicate rows and validate referential integrity across joined datasets.

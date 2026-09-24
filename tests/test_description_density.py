@@ -22,7 +22,7 @@ SKILLS = Path(__file__).resolve().parent.parent / "skills"
 MIN_LENGTH = 300
 MAX_LENGTH = 900
 MIN_TRIGGER_PHRASES = 4
-SLASH_PREFIX = "/digital-marketing-pro:"
+SLASH_PREFIX = "/omni-growth-engine:"
 
 DESC_RE = re.compile(r'^description:\s*"(.*)"\s*$', re.M)
 PHRASE_RE = re.compile(r'\\"([^"]+?)\\"')
@@ -92,9 +92,9 @@ class TestDescriptionDensity(unittest.TestCase):
 
     def test_analyzer_accepts_the_house_pattern(self):
         good = ('Does a real thing and produces a real artifact for the brand. '
-                'Triggers on \\"/digital-marketing-pro:example\\", \\"do the thing\\", '
+                'Triggers on \\"/omni-growth-engine:example\\", \\"do the thing\\", '
                 '\\"why is the thing broken\\", \\"make me a thing plan\\". '
-                'Reads the brand profile; pairs with /digital-marketing-pro:check.')
+                'Reads the brand profile; pairs with /omni-growth-engine:check.')
         a = analyze(good)
         self.assertTrue(a["has_triggers"] and a["has_slash"])
         self.assertGreaterEqual(len(a["phrases"]), 4)

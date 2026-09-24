@@ -1,12 +1,12 @@
 ---
 name: help
-description: "Show the Digital Marketing Pro guide with live plugin state — version, agent, skill, command, and connector counts read from plugin-metadata.py, never hardcoded — plus getting-started steps, examples, and troubleshooting. Includes the --intent goal-routing mode, which turns a stated goal into up to 3 ordered skill chains ending at a quality gate, and renders depth-tier badges — [E] executes scripts, [M] measured output, [G] structured guidance — read from skills-index.json. Triggers on \"/digital-marketing-pro:help\", \"what can this plugin do\", \"which skill should I use for more leads\", \"list all the commands\", \"how do I get started\". Pairs with /digital-marketing-pro:status and /digital-marketing-pro:integrations for brand and connector state."
+description: "Show the OmniGrowth Engine guide with live plugin state — version, agent, skill, command, and connector counts read from plugin-metadata.py, never hardcoded — plus getting-started steps, examples, and troubleshooting. Includes the --intent goal-routing mode, which turns a stated goal into up to 3 ordered skill chains ending at a quality gate, and renders depth-tier badges — [E] executes scripts, [M] measured output, [G] structured guidance — read from skills-index.json. Triggers on \"/omni-growth-engine:help\", \"what can this plugin do\", \"which skill should I use for more leads\", \"list all the commands\", \"how do I get started\". Pairs with /omni-growth-engine:status and /omni-growth-engine:integrations for brand and connector state."
 argument-hint: "[--commands | --skills | --examples | --connectors | --troubleshoot | --brand | --intent \"<goal>\"]"
 ---
 
-# /digital-marketing-pro:help
+# /omni-growth-engine:help
 
-Show the Digital Marketing Pro user guide with **live plugin state** (version, agent/skill/command/script counts, connector counts, runtime environment) pulled from disk — not hardcoded — plus getting-started steps, usage examples, and troubleshooting.
+Show the OmniGrowth Engine user guide with **live plugin state** (version, agent/skill/command/script counts, connector counts, runtime environment) pulled from disk — not hardcoded — plus getting-started steps, usage examples, and troubleshooting.
 
 ## CRITICAL: never hardcode version, counts, or connector numbers
 
@@ -50,16 +50,16 @@ Environment: <environment.environment>
 <if environment.cowork_warning is non-null, show it as a WARNING block>
 
 Getting Started:
-  1. /digital-marketing-pro:brand-setup       — Create your brand profile (start here)
-  2. /digital-marketing-pro:import-guidelines  — Import voice guides, restrictions, templates
-  3. /digital-marketing-pro:integrations       — See which connectors are active
-  4. /digital-marketing-pro:connect <name>     — Set up a new connector
+  1. /omni-growth-engine:brand-setup       — Create your brand profile (start here)
+  2. /omni-growth-engine:import-guidelines  — Import voice guides, restrictions, templates
+  3. /omni-growth-engine:integrations       — See which connectors are active
+  4. /omni-growth-engine:connect <name>     — Set up a new connector
   5. Just ask!                                 — Describe what you need in natural language
 ```
 
 ### Step 3 — Cowork warning (when applicable)
 
-If `environment.cowork_warning` is non-null, surface it prominently after the orientation block, explaining that brand-state writes to `~/.claude-marketing/` land inside the sandbox and won't persist to the user's host; recommend `/digital-marketing-pro:cowork-setup` to route state through a Drive MCP.
+If `environment.cowork_warning` is non-null, surface it prominently after the orientation block, explaining that brand-state writes to `~/.claude-marketing/` land inside the sandbox and won't persist to the user's host; recommend `/omni-growth-engine:cowork-setup` to route state through a Drive MCP.
 
 ### Step 4 — Argument routing
 
@@ -68,10 +68,10 @@ If `environment.cowork_warning` is non-null, surface it prominently after the or
 | (none) | Steps 2 + 3 + a short "just ask" prompt |
 | `--commands` | Steps 2 + 3 + list every command from JSON `commands` array (its `slash_command` + `description`), grouped by category if helpful |
 | `--skills` | Steps 2 + 3 + list every skill from JSON `skills` array (its `slash_command` + `description`) |
-| `--connectors` | Steps 2 + 3 + redirect: "For active/available connector status, run `/digital-marketing-pro:integrations`" |
+| `--connectors` | Steps 2 + 3 + redirect: "For active/available connector status, run `/omni-growth-engine:integrations`" |
 | `--examples` | Steps 2 + 3 + the worked-example prompts (see below) |
 | `--troubleshoot` | Steps 2 + 3 + troubleshooting matrix (see below) |
-| `--brand` | Steps 2 + 3 + current brand summary (run `/digital-marketing-pro:status --section brand`) |
+| `--brand` | Steps 2 + 3 + current brand summary (run `/omni-growth-engine:status --section brand`) |
 | `--intent "<goal>"` | Intent routing (see Step 4.5) — a skill CHAIN for the goal, not a list |
 
 When rendering the skills/commands list, **iterate over the JSON arrays** — do not paste a hand-maintained list, and do not state a total count from memory. Each row shows the `slash_command` field as the user-facing label and the `description` field as the explanation.
@@ -84,7 +84,7 @@ An alphabetical list of 150+ skills answers nothing. When the user states a GOAL
 
 1. Read `${CLAUDE_PLUGIN_ROOT}/skills-index.json`. Match the goal against each entry's `description` and follow `cross_refs` to find the skills that hand off to each other.
 2. Render at most **3 candidate chains**, best first. A chain is an ordered sequence: entry skill → the skills its work feeds (from `cross_refs`) → the gate that checks the output. Annotate every step with its tier badge and ONE line on why it is in the chain.
-3. Every chain that produces publishable output must end at a gate (`/digital-marketing-pro:check` or the relevant reviewer) — never leave a chain dangling at an ungated step.
+3. Every chain that produces publishable output must end at a gate (`/omni-growth-engine:check` or the relevant reviewer) — never leave a chain dangling at an ungated step.
 4. If the goal is ambiguous, ask ONE clarifying question instead of rendering three wrong chains.
 5. If no skill matches, say so plainly and point at `--skills` — never invent a skill name.
 
@@ -94,10 +94,10 @@ Example rendering shape (values must come from the index, not from this file):
 Goal: "more leads from organic"
 
 Chain 1 (recommended):
-  1. [E] /digital-marketing-pro:seo-audit        — find what blocks organic visibility
-  2. [G] /digital-marketing-pro:content-strategy — turn gaps into a content plan
-  3. [E] /digital-marketing-pro:lead-magnet-ideas — capture the traffic you win
-  4. [M] /digital-marketing-pro:check            — gate before anything ships
+  1. [E] /omni-growth-engine:seo-audit        — find what blocks organic visibility
+  2. [G] /omni-growth-engine:content-strategy — turn gaps into a content plan
+  3. [E] /omni-growth-engine:lead-magnet-ideas — capture the traffic you win
+  4. [M] /omni-growth-engine:check            — gate before anything ships
 ```
 
 ### Step 5 — Example prompts (`--examples`)
@@ -106,7 +106,7 @@ Show real-world example prompts across marketing tasks:
 
 ```
 Getting Started:
-  /digital-marketing-pro:brand-setup
+  /omni-growth-engine:brand-setup
   → Create your brand profile interactively (5 quick questions or 17 detailed)
 
 Strategy:
@@ -118,23 +118,23 @@ Content:
   → Creates emails in your brand voice with compliance rules applied
 
 SEO:
-  /digital-marketing-pro:seo-audit https://example.com
+  /omni-growth-engine:seo-audit https://example.com
   → Full technical + content + E-E-A-T audit with action items
 
 Competitive:
-  /digital-marketing-pro:competitor-analysis "Blue Bottle, Counter Culture, Stumptown"
+  /omni-growth-engine:competitor-analysis "Blue Bottle, Counter Culture, Stumptown"
   → Multi-dimensional analysis: content, SEO, ads, social, positioning
 
 Analytics:
-  /digital-marketing-pro:performance-report
+  /omni-growth-engine:performance-report
   → KPI tracking, trend analysis, anomaly detection, recommendations
 
 AI Visibility:
-  /digital-marketing-pro:aeo-audit
+  /omni-growth-engine:aeo-audit
   → Check how your brand appears in ChatGPT, Perplexity, Google AI Overviews
 
 Full engagement:
-  /digital-marketing-pro:engagement start acme-corp 2026-q2
+  /omni-growth-engine:engagement start acme-corp 2026-q2
   → Run the full 12-Part strategy methodology end to end
 ```
 
@@ -142,13 +142,13 @@ Full engagement:
 
 | Issue | Solution |
 |-------|----------|
-| "No active brand" message | Run `/digital-marketing-pro:brand-setup` to create your first brand profile |
+| "No active brand" message | Run `/omni-growth-engine:brand-setup` to create your first brand profile |
 | Python features unavailable | Install: `pip install nltk textstat` (lite mode) or the full requirements.txt |
-| MCP connector not working | Run `/digital-marketing-pro:integrations` to check status, `/digital-marketing-pro:connect <name>` for setup |
-| Brand voice seems off | Run `/digital-marketing-pro:brand-setup --full` for detailed 17-question profiling |
+| MCP connector not working | Run `/omni-growth-engine:integrations` to check status, `/omni-growth-engine:connect <name>` for setup |
+| Brand voice seems off | Run `/omni-growth-engine:brand-setup --full` for detailed 17-question profiling |
 | Commands not recognized | Ensure the plugin is installed: check "Manage Plugin" in Cowork or `claude plugin list` |
-| Files don't persist in Cowork | Run `/digital-marketing-pro:cowork-setup` to route brand state through a Drive MCP |
-| Long workflow interrupted | Run `/digital-marketing-pro:resume` to pick up from the last checkpoint |
+| Files don't persist in Cowork | Run `/omni-growth-engine:cowork-setup` to route brand state through a Drive MCP |
+| Long workflow interrupted | Run `/omni-growth-engine:resume` to pick up from the last checkpoint |
 
 ### Step 7 — Documentation references
 

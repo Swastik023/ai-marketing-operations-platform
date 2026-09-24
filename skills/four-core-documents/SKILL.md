@@ -1,6 +1,6 @@
 ---
 name: four-core-documents
-description: "Produce Part 3 of the 12-Part engagement: the four strategic-spine documents across 61 steps — 3.1 Business & SBU Analysis, 3.2 Segmentation Framework, 3.3 Brand Positioning & Communications, 3.4 DMFlow — with --doc single-document runs, --view v2 re-runs, and a --combined executive stitch. Triggers on \"/digital-marketing-pro:four-core-documents\", \"produce the four core documents\", \"run part 3 of the engagement\", \"generate the strategic spine\", \"re-run positioning as v2\". Requires an initialised engagement with Part 1 complete; reads Stone facts, Part 2 research, and the brand profile, and feeds /digital-marketing-pro:growth-plan."
+description: "Produce Part 3 of the 12-Part engagement: the four strategic-spine documents across 61 steps — 3.1 Business & SBU Analysis, 3.2 Segmentation Framework, 3.3 Brand Positioning & Communications, 3.4 DMFlow — with --doc single-document runs, --view v2 re-runs, and a --combined executive stitch. Triggers on \"/omni-growth-engine:four-core-documents\", \"produce the four core documents\", \"run part 3 of the engagement\", \"generate the strategic spine\", \"re-run positioning as v2\". Requires an initialised engagement with Part 1 complete; reads Stone facts, Part 2 research, and the brand profile, and feeds /omni-growth-engine:growth-plan."
 user-invocable: true
 triggers:
   - produce the four core documents
@@ -16,13 +16,13 @@ engagement-part: "3"
 view-preference: v2-primary
 ---
 
-# /digital-marketing-pro:four-core-documents — The Strategic Spine (61 Steps)
+# /omni-growth-engine:four-core-documents — The Strategic Spine (61 Steps)
 
 This skill produces Part 3 of the engagement methodology: the four documents that together define the brand at strategic depth. Every channel strategy, every creative brief, every piece of copy reads back to these.
 
 ## Context efficiency
 
-Heavy skill. **Grep before Read** any referenced file, then `Read` only matched ranges with `offset` + `limit`. List the brand's workspace at `~/.claude-marketing/brands/{slug}/` (or `$CLAUDE_PLUGIN_DATA/digital-marketing-pro/brands/{slug}/` when that env var is set) before opening files. On re-invocation mid-session, skip files already in context.
+Heavy skill. **Grep before Read** any referenced file, then `Read` only matched ranges with `offset` + `limit`. List the brand's workspace at `~/.claude-marketing/brands/{slug}/` (or `$CLAUDE_PLUGIN_DATA/omni-growth-engine/brands/{slug}/` when that env var is set) before opening files. On re-invocation mid-session, skip files already in context.
 
 **Specification:** [four-core-documents-spec.md](../context-engine/four-core-documents-spec.md) — the exact 61 steps across the four documents.
 
@@ -32,8 +32,8 @@ Heavy skill. **Grep before Read** any referenced file, then `Read` only matched 
 
 Before running this skill, verify:
 
-1. **Brand profile exists** at `~/.claude-marketing/brands/{brand-slug}/profile.json`. If not, run `/digital-marketing-pro:brand-setup` first.
-2. **Engagement is initialised** with state file `_engagement.json` present. If not, run `/digital-marketing-pro:engagement start` first.
+1. **Brand profile exists** at `~/.claude-marketing/brands/{brand-slug}/profile.json`. If not, run `/omni-growth-engine:brand-setup` first.
+2. **Engagement is initialised** with state file `_engagement.json` present. If not, run `/omni-growth-engine:engagement start` first.
 3. **Part 1 (Client Inputs) is completed**. Stone facts and Opinion hypotheses must be captured before Part 3 can begin.
 4. **Part 2 (External Research) is at least started**. Some Part 2 research may continue in parallel with Part 3, but the kickoff must have happened.
 
@@ -44,7 +44,7 @@ If any pre-condition fails, do NOT produce output. Instead, instruct the user on
 ### Produce all four documents
 
 ```
-/digital-marketing-pro:four-core-documents <brand-slug> <engagement-id>
+/omni-growth-engine:four-core-documents <brand-slug> <engagement-id>
 ```
 
 Produces 3.1, 3.2, 3.3, 3.4 in sequence. Actual time varies with engagement complexity.
@@ -52,7 +52,7 @@ Produces 3.1, 3.2, 3.3, 3.4 in sequence. Actual time varies with engagement comp
 ### Produce a single document
 
 ```
-/digital-marketing-pro:four-core-documents <brand-slug> <engagement-id> --doc 3.1
+/omni-growth-engine:four-core-documents <brand-slug> <engagement-id> --doc 3.1
 ```
 
 Produces just the specified document. Useful for re-runs (Part 6) or when one doc needs to be redone independently.
@@ -60,7 +60,7 @@ Produces just the specified document. Useful for re-runs (Part 6) or when one do
 ### Produce v2 re-runs
 
 ```
-/digital-marketing-pro:four-core-documents <brand-slug> <engagement-id> --view v2 --doc "3.1,3.3"
+/omni-growth-engine:four-core-documents <brand-slug> <engagement-id> --view v2 --doc "3.1,3.3"
 ```
 
 Produces v2 versions of the specified documents. `--doc` takes a single id (`3.1`) or a comma-separated list (`"3.1,3.3"`). Used during Part 6 after the Decision Matrix has triggered re-runs. (The canonical flags are `--doc`, `--view v2`, and `--combined` — there is no `--docs`.)
@@ -68,7 +68,7 @@ Produces v2 versions of the specified documents. `--doc` takes a single id (`3.1
 ### Produce the Combined Core Document (3.C)
 
 ```
-/digital-marketing-pro:four-core-documents <brand-slug> <engagement-id> --combined
+/omni-growth-engine:four-core-documents <brand-slug> <engagement-id> --combined
 ```
 
 Stitches all four canonical core documents (latest version of each) into a single executive-reference file with master TOC, master assumptions table, and master source index. Produced only when an executive audience needs a single-file read.
@@ -269,7 +269,7 @@ Each document is produced as a single file containing all its steps. If a docume
 2. Continue the same file from where it left off in the next turn (NEVER start a new file)
 3. The file is considered complete only when all steps are present
 
-There is **no hidden continuation state** — the skill does not persist a cut-off pointer. The partial file already saved to disk is the only record. If output is interrupted mid-document, re-run the document: read the saved partial as context and continue appending the remaining steps to the **same** file. For a run interrupted at the engagement level, resume from the part's last checkpoint artifact via `/digital-marketing-pro:resume`. The saved file is always the source of truth.
+There is **no hidden continuation state** — the skill does not persist a cut-off pointer. The partial file already saved to disk is the only record. If output is interrupted mid-document, re-run the document: read the saved partial as context and continue appending the remaining steps to the **same** file. For a run interrupted at the engagement level, resume from the part's last checkpoint artifact via `/omni-growth-engine:resume`. The saved file is always the source of truth.
 
 ## After Production
 

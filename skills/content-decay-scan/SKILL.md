@@ -1,6 +1,6 @@
 ---
 name: content-decay-scan
-description: "Scan the content library for decay — declining traffic, falling keyword positions, stale content, broken links, lost AI citations — scoring each URL 0-100 via creative-fatigue-predictor.py and ranking refreshes by recoverable revenue, with actionable refresh briefs and traffic-recovery estimates for top-priority tiers. Triggers on \"/digital-marketing-pro:content-decay-scan\", \"which content is losing traffic\", \"find stale content to refresh\", \"our blog traffic keeps dropping\", \"prioritize content refreshes\". Pulls performance data from Google Analytics/Search Console MCPs or exported CSVs; cross-reference causes with /digital-marketing-pro:seo-drift. Reads the brand profile for content strategy context."
+description: "Scan the content library for decay — declining traffic, falling keyword positions, stale content, broken links, lost AI citations — scoring each URL 0-100 via creative-fatigue-predictor.py and ranking refreshes by recoverable revenue, with actionable refresh briefs and traffic-recovery estimates for top-priority tiers. Triggers on \"/omni-growth-engine:content-decay-scan\", \"which content is losing traffic\", \"find stale content to refresh\", \"our blog traffic keeps dropping\", \"prioritize content refreshes\". Pulls performance data from Google Analytics/Search Console MCPs or exported CSVs; cross-reference causes with /omni-growth-engine:seo-drift. Reads the brand profile for content strategy context."
 user-invocable: true
 triggers:
   - scan for content decay
@@ -13,7 +13,7 @@ triggers:
   - prioritize content refreshes
 ---
 
-# /digital-marketing-pro:content-decay-scan
+# /omni-growth-engine:content-decay-scan
 
 ## Purpose
 
@@ -31,7 +31,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply content strategy priorities, target keyword clusters, historical content performance baselines, and industry context for freshness expectations (fast-moving industries like tech need more frequent updates than evergreen niches). Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with industry defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply content strategy priorities, target keyword clusters, historical content performance baselines, and industry context for freshness expectations (fast-moving industries like tech need more frequent updates than evergreen niches). Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with industry defaults.
 2. **Gather content performance data**: Connect to analytics MCPs (Google Analytics, Google Search Console) and pull performance data for the content library — monthly traffic for the past 6 months per URL, keyword position data for primary and secondary keywords, click-through rates from search results, and conversion data if available. For content not covered by MCPs, use any exported data the user provided. Build a performance timeline for each content piece showing the trajectory over the past 6 months.
 3. **Score each content piece for decay**: Run the decay scorer with the performance data:
    ```bash
@@ -58,11 +58,11 @@ A content decay assessment containing:
 
 ## Tips & caveats
 
-- **Decay isn't always content quality** — seasonal swings, Core Updates, and SERP-feature changes all look like decay in raw GSC data. Always cross-reference with `/digital-marketing-pro:seo-drift` to separate causes.
+- **Decay isn't always content quality** — seasonal swings, Core Updates, and SERP-feature changes all look like decay in raw GSC data. Always cross-reference with `/omni-growth-engine:seo-drift` to separate causes.
 - **Don't refresh everything that's decaying.** Some content is supposed to decay (one-time event coverage, dated news). Refresh only what has lasting search intent.
 - **Refresh > delete in most cases.** A decayed page with backlinks is more valuable than a 404 + redirect. Refresh, restructure, and re-link rather than removing.
 - **Refresh recovery takes 2-4 months** typically. Don't measure success at 30 days. Record the next measurement window alongside each item in the priority refresh list.
-- **AI Mode citations decay differently.** A piece that's lost AI Mode citations (per `/digital-marketing-pro:gsc-ai-performance`) needs *entity consistency* refresh (re-align schema, author bios) — different fix than traditional decay.
+- **AI Mode citations decay differently.** A piece that's lost AI Mode citations (per `/omni-growth-engine:gsc-ai-performance`) needs *entity consistency* refresh (re-align schema, author bios) — different fix than traditional decay.
 - **Don't refresh during a Core Update window.** Wait until rollout-complete + 7-14 days settling so you can attribute the lift to the refresh, not to the algorithm reshuffle.
 
 ## Agents Used

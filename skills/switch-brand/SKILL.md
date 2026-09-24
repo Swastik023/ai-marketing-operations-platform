@@ -1,6 +1,6 @@
 ---
 name: switch-brand
-description: "Switch the active brand profile for multi-client and agency work by running setup.py --switch-brand, after listing configured brands with the active one starred; confirms the new brand's industry, business model, and primary channel so subsequent outputs use its voice and compliance rules. Triggers on \"/digital-marketing-pro:switch-brand\", \"switch to the other client\", \"change brand to Acme\", \"list available brands\", \"what brands do I have set up\". Can present a side-by-side comparison of two brand profiles on request; offers /digital-marketing-pro:brand-setup when the brand isn't found; pairs with /digital-marketing-pro:status to verify the active context."
+description: "Switch the active brand profile for multi-client and agency work by running setup.py --switch-brand, after listing configured brands with the active one starred; confirms the new brand's industry, business model, and primary channel so subsequent outputs use its voice and compliance rules. Triggers on \"/omni-growth-engine:switch-brand\", \"switch to the other client\", \"change brand to Acme\", \"list available brands\", \"what brands do I have set up\". Can present a side-by-side comparison of two brand profiles on request; offers /omni-growth-engine:brand-setup when the brand isn't found; pairs with /omni-growth-engine:status to verify the active context."
 argument-hint: "[brand-slug]"
 ---
 
@@ -35,7 +35,7 @@ After switching, confirm:
 
 ## If Brand Not Found
 - Show the list of available brands
-- Offer to create a new brand: "Brand not found. Would you like to create a new profile? Use /digital-marketing-pro:brand-setup"
+- Offer to create a new brand: "Brand not found. Would you like to create a new profile? Use /omni-growth-engine:brand-setup"
 
 ## Multi-Brand Comparison
 If the user asks to compare brands, load both profiles and present a side-by-side comparison of key attributes (voice settings, channels, goals).

@@ -441,7 +441,7 @@ def get_assignments(slug, member_filter=None, status_filter=None, limit=50):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Team role and capacity management for Digital Marketing Pro"
+        description="Team role and capacity management for OmniGrowth Engine"
     )
     parser.add_argument("--brand", required=True, help="Brand slug")
     parser.add_argument(

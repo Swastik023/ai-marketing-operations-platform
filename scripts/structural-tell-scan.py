@@ -24,7 +24,7 @@ editor knows exactly where to work:
 ADVISORY ONLY, never a scored gate: bands (OK/NOTE/ATTENTION) and thresholds
 live in THIS script, deliberately outside every eval/scoring config. The scan
 measures visible structure; it cannot see and has no relationship to any
-statistical watermark. Consumed by /digital-marketing-pro:check (advisory
+statistical watermark. Consumed by /omni-growth-engine:check (advisory
 section) and the content-engine's revision guidance.
 
 Usage: python structural-tell-scan.py --file draft.md

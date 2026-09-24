@@ -69,7 +69,7 @@ def _panels_dir(slug):
 def _brand_check(slug):
     brand_dir = BRANDS_DIR / slug
     if not brand_dir.exists():
-        return {"error": f"Brand '{slug}' not found. Run /digital-marketing-pro:brand-setup first."}
+        return {"error": f"Brand '{slug}' not found. Run /omni-growth-engine:brand-setup first."}
     return None
 
 
@@ -727,7 +727,7 @@ def panel_stats(slug, panel_id):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Audience Simulator — Synthetic audience for message and pricing testing for Digital Marketing Pro"
+        description="Audience Simulator — Synthetic audience for message and pricing testing for OmniGrowth Engine"
     )
     parser.add_argument("--brand", required=True, help="Brand slug")
     parser.add_argument(

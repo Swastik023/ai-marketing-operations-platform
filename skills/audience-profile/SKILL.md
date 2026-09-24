@@ -1,10 +1,10 @@
 ---
 name: audience-profile
-description: "Build a named, narrative buyer persona document — demographic snapshot, psychographic drivers, jobs-to-be-done, day-in-the-life scenario, buyer journey map, objections with counter-messaging, and content/channel preferences — for the 2-4 personas a brand actually needs. Triggers on \"/digital-marketing-pro:audience-profile\", \"create a buyer persona\", \"profile our target customer\", \"who is our ideal customer\", \"map the buyer journey for this segment\". Reads the brand profile, guidelines, and any customer data supplied (surveys, CRM exports, analytics demographics); run by the marketing-strategist agent. For the deeper research module — segmentation, anti-personas, buying committees — see /digital-marketing-pro:audience-intelligence."
+description: "Build a named, narrative buyer persona document — demographic snapshot, psychographic drivers, jobs-to-be-done, day-in-the-life scenario, buyer journey map, objections with counter-messaging, and content/channel preferences — for the 2-4 personas a brand actually needs. Triggers on \"/omni-growth-engine:audience-profile\", \"create a buyer persona\", \"profile our target customer\", \"who is our ideal customer\", \"map the buyer journey for this segment\". Reads the brand profile, guidelines, and any customer data supplied (surveys, CRM exports, analytics demographics); run by the marketing-strategist agent. For the deeper research module — segmentation, anti-personas, buying committees — see /omni-growth-engine:audience-intelligence."
 argument-hint: "[audience-segment]"
 ---
 
-# /digital-marketing-pro:audience-profile
+# /omni-growth-engine:audience-profile
 
 ## Purpose
 
@@ -22,7 +22,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. Gather inputs through structured questions if data is limited
 3. Build demographic profile: age range, role/title, company size (B2B), income range, geography, education
 4. Develop psychographic profile: values, motivations, fears, aspirations, identity markers

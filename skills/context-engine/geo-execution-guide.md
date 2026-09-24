@@ -43,7 +43,7 @@ Reference knowledge for AI visibility monitoring, optimization execution, entity
 
 ## 2. Scoring Rubric
 
-> **This is the plugin's single AI-visibility scoring standard.** The per-query-per-platform score below is the same rubric `/digital-marketing-pro:aeo-audit` and `/digital-marketing-pro:geo-monitor` apply, persisted by `scripts/geo-tracker.py`. The 6 canonical surfaces are the `PLATFORMS` constant in that script. The aggregate 0-100 GEO score is the **trend view** of this same per-platform data — a longitudinal roll-up, not a second scoring model. Score each platform separately; never average across platforms.
+> **This is the plugin's single AI-visibility scoring standard.** The per-query-per-platform score below is the same rubric `/omni-growth-engine:aeo-audit` and `/omni-growth-engine:geo-monitor` apply, persisted by `scripts/geo-tracker.py`. The 6 canonical surfaces are the `PLATFORMS` constant in that script. The aggregate 0-100 GEO score is the **trend view** of this same per-platform data — a longitudinal roll-up, not a second scoring model. Score each platform separately; never average across platforms.
 
 ### Visibility Score Per Query Per Platform
 
@@ -106,7 +106,7 @@ Reference knowledge for AI visibility monitoring, optimization execution, entity
   1. Everything that wins AI Overviews (organic ranking, direct-answer formatting, structured data) is the floor — AI Mode is not a separate eligibility gate
   2. Structure content to survive follow-ups: clear entity definitions, comparison tables, and "why/how" depth beneath the headline answer
   3. Keep entity signals complete and consistent (NAP, services, hours) — Personal Intelligence in AI Mode personalizes answers against the user's own context, so entity completeness matters more
-  4. Audit AI Mode **independently** from AI Overviews; reconcile against actual impressions via `/digital-marketing-pro:gsc-ai-performance`
+  4. Audit AI Mode **independently** from AI Overviews; reconcile against actual impressions via `/omni-growth-engine:gsc-ai-performance`
 
 ### Google AI Overviews Optimization
 

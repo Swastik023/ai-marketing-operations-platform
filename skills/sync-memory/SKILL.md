@@ -1,13 +1,13 @@
 ---
 name: sync-memory
-description: "Batch-sync this session's learnings, insights.json entries, and campaign history into the persistent memory layer — incremental from the last checkpoint so repeat runs are fast and idempotent — and report exactly what was synced, skipped, or failed. Triggers on \"/digital-marketing-pro:sync-memory\", \"save what we learned this session\", \"sync insights to memory\", \"persist campaign learnings before I close\", \"did my session learnings get saved\". Stores via a connected vector-DB MCP when one exists, otherwise the local index; reads the active brand profile and complements /digital-marketing-pro:save-knowledge, which saves single items."
+description: "Batch-sync this session's learnings, insights.json entries, and campaign history into the persistent memory layer — incremental from the last checkpoint so repeat runs are fast and idempotent — and report exactly what was synced, skipped, or failed. Triggers on \"/omni-growth-engine:sync-memory\", \"save what we learned this session\", \"sync insights to memory\", \"persist campaign learnings before I close\", \"did my session learnings get saved\". Stores via a connected vector-DB MCP when one exists, otherwise the local index; reads the active brand profile and complements /omni-growth-engine:save-knowledge, which saves single items."
 ---
 
-# /digital-marketing-pro:sync-memory
+# /omni-growth-engine:sync-memory
 
 ## Purpose
 
-Batch sync current session learnings, insights.json entries, and campaign history to the persistent memory layer. Ensures valuable knowledge from this session is preserved for future sessions without requiring the user to manually save each item via `/digital-marketing-pro:save-knowledge`. Syncs incrementally — only new items since the last sync checkpoint — so repeated syncs are fast, idempotent, and safe. Handles the full pipeline from diff detection through storage to checkpoint update, with detailed reporting on what was synced, skipped, or failed. Run this before ending a productive session to capture everything worth remembering.
+Batch sync current session learnings, insights.json entries, and campaign history to the persistent memory layer. Ensures valuable knowledge from this session is preserved for future sessions without requiring the user to manually save each item via `/omni-growth-engine:save-knowledge`. Syncs incrementally — only new items since the last sync checkpoint — so repeated syncs are fast, idempotent, and safe. Handles the full pipeline from diff detection through storage to checkpoint update, with detailed reporting on what was synced, skipped, or failed. Run this before ending a productive session to capture everything worth remembering.
 
 ## Input Required
 
@@ -22,7 +22,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Load sync state**: Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/memory-manager.py" --brand {slug} --action sync-insights` to load the last sync checkpoint from `~/.claude-marketing/brands/{slug}/memory/_last_sync.json`. Identify the last sync timestamp, items previously synced (by content hash), and any partial sync that needs resuming from its failure point. If force sync is requested, reset the checkpoint to epoch zero.
 3. **Gather syncable items**: Load insights.json entries, campaign data from `campaigns/`, and session learnings accumulated in the current working context. Apply sync scope filter (all, insights-only, campaigns-only) and exclude patterns to build the candidate set.
 4. **Identify new and modified items**: Diff the candidate set against the sync checkpoint. Generate content hashes (SHA-256) for each candidate and compare against the local content hash registry. Separate items into: new (not previously synced), modified (content changed since last sync — hash mismatch), and unchanged (already synced — skip). Report the diff summary before proceeding.
@@ -43,7 +43,7 @@ A structured sync report containing:
 - **Sync state update**: New checkpoint timestamp, cumulative items in persistent memory (total across all syncs), delta since last sync (net new items), and estimated next sync size based on current session activity rate
 - **Per-layer status**: Which memory layers received data — vector DB items stored (with namespace), knowledge-graph entities created (if a graph server is connected), cross-session entries updated (if a cross-session store is connected), and local index entries registered
 - **Local index size**: Total items synced from the local index this run and cumulative local count. (DMP cannot read a remote vector DB's plan usage — check remaining capacity in your provider's own dashboard.)
-- **Next sync recommendation**: Suggested timing for next sync based on session activity volume and storage capacity — with a reminder that running `/digital-marketing-pro:sync-memory` before ending a session ensures no learnings are lost
+- **Next sync recommendation**: Suggested timing for next sync based on session activity volume and storage capacity — with a reminder that running `/omni-growth-engine:sync-memory` before ending a session ensures no learnings are lost
 
 ## Agents Used
 

@@ -12,7 +12,7 @@ Inputs two CSV exports (baseline + current) from any of:
 Computes per-row deltas (impressions / clicks / position / AI-citations
 when present), surfaces top N gainers + top N losers per dimension,
 classifies decay vs growth patterns, and produces a structured JSON
-suitable for /digital-marketing-pro:seo-drift skill consumption.
+suitable for /omni-growth-engine:seo-drift skill consumption.
 
 Stdlib only.
 

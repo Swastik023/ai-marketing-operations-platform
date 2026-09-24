@@ -99,7 +99,7 @@ Google recommends JSON-LD for all structured data. Microdata and RDFa are suppor
 ## AI Search Optimization (GEO/AEO)
 
 ### Canonical surfaces (6, mid-2026)
-The plugin scores AI visibility across six surfaces (the `PLATFORMS` constant in `scripts/geo-tracker.py`; scored with the rubric in `/digital-marketing-pro:aeo-audit`):
+The plugin scores AI visibility across six surfaces (the `PLATFORMS` constant in `scripts/geo-tracker.py`; scored with the rubric in `/omni-growth-engine:aeo-audit`):
 - **Google AI Mode** — conversational search tab; became the default experience for opted-in users at Google I/O (19 May 2026), ~1B MAUs, Gemini 3.5 Flash backbone. **Distinct from AI Overviews** — different citation pattern for the same query; audit it separately.
 - **Google AI Overviews** — summary block above classic SERP results
 - ChatGPT (web search mode)
@@ -108,7 +108,7 @@ The plugin scores AI visibility across six surfaces (the `PLATFORMS` constant in
 - Microsoft Copilot
 
 ### What's new since March 2026
-- **GSC AI Performance Report (3 Jun 2026, UK-first then global):** actual impressions in AI Overviews + AI Mode for verified properties, plus a property-level **AI opt-out toggle** (no AI-specific robots directive needed). Excludes click data. See `/digital-marketing-pro:gsc-ai-performance`.
+- **GSC AI Performance Report (3 Jun 2026, UK-first then global):** actual impressions in AI Overviews + AI Mode for verified properties, plus a property-level **AI opt-out toggle** (no AI-specific robots directive needed). Excludes click data. See `/omni-growth-engine:gsc-ai-performance`.
 - **GA4 `AI Assistant` channel group (13 May 2026):** captures `Medium=ai-assistant` referrals from ChatGPT / Gemini / Claude — the click-side complement to the GSC report.
 - **Official Google position (AI Optimization Guide, 15 May 2026):** no `llms.txt`, no AI-specific schema, no separate AI eligibility gate — pages eligible for snippets in classic Search are eligible for AI features.
 - **`Google-Extended`** (robots.txt) still controls Google's *other* AI systems (Gemini training, Vertex grounding), distinct from the in-Search-Console AI Overviews/AI Mode toggle.

@@ -1,11 +1,11 @@
 ---
 name: sitemap-manager
-description: "Audit an existing XML sitemap — URL counts vs protocol limits, lastmod validity, sampled URL status codes, robots.txt and noindex conflicts, missing pages, compression — or generate a new sitemap (plan or valid XML with index splitting) from industry templates for SaaS, ecommerce, local, publisher, or agency sites. Triggers on \"/digital-marketing-pro:sitemap-manager\", \"audit our sitemap\", \"why are there 404s in the sitemap\", \"generate a sitemap for the new site\", \"is our sitemap declared in robots.txt\". Outputs a severity-ranked issue report or ready-to-submit XML with the robots.txt line and GSC submission instructions; uses tech-seo-auditor.py for URL health checks."
+description: "Audit an existing XML sitemap — URL counts vs protocol limits, lastmod validity, sampled URL status codes, robots.txt and noindex conflicts, missing pages, compression — or generate a new sitemap (plan or valid XML with index splitting) from industry templates for SaaS, ecommerce, local, publisher, or agency sites. Triggers on \"/omni-growth-engine:sitemap-manager\", \"audit our sitemap\", \"why are there 404s in the sitemap\", \"generate a sitemap for the new site\", \"is our sitemap declared in robots.txt\". Outputs a severity-ranked issue report or ready-to-submit XML with the robots.txt line and GSC submission instructions; uses tech-seo-auditor.py for URL health checks."
 argument-hint: "[URL or generate]"
 user-invocable: true
 ---
 
-# /digital-marketing-pro:sitemap-manager
+# /omni-growth-engine:sitemap-manager
 
 ## Purpose
 
@@ -13,7 +13,7 @@ Analyze existing XML sitemaps for issues and opportunities, or generate new site
 
 ## Modes
 
-### Mode 1: Analyze Existing Sitemap (`/digital-marketing-pro:sitemap-manager [URL]`)
+### Mode 1: Analyze Existing Sitemap (`/omni-growth-engine:sitemap-manager [URL]`)
 
 Provide a sitemap URL (e.g., `https://example.com/sitemap.xml`) to audit:
 
@@ -28,7 +28,7 @@ Provide a sitemap URL (e.g., `https://example.com/sitemap.xml`) to audit:
 9. **Compression**: Check if sitemap is gzip compressed (recommended for large sitemaps)
 10. **robots.txt registration**: Verify sitemap is declared in robots.txt
 
-### Mode 2: Generate New Sitemap (`/digital-marketing-pro:sitemap-manager generate`)
+### Mode 2: Generate New Sitemap (`/omni-growth-engine:sitemap-manager generate`)
 
 Generate a sitemap plan or actual XML:
 

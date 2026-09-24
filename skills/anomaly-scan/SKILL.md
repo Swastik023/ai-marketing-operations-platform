@@ -1,9 +1,9 @@
 ---
 name: anomaly-scan
-description: "Scan all connected marketing platforms for statistically significant deviations from stored baselines — traffic drops, CPA spikes, deliverability collapse, budget overruns, or unexpected wins — classified critical/warning/info with probable causes, correlation to recent changes, and recommended actions. Triggers on \"/digital-marketing-pro:anomaly-scan\", \"why did our CPA spike\", \"did anything weird happen this week\", \"check for anomalies\", \"our conversions suddenly dropped\". Runs performance-monitor.py for baselines and detection, correlates flags against execution-tracker.py history and the diagnostic framework in skills/analytics-insights/anomaly-diagnosis.md, and persists critical findings as insights via campaign-tracker.py. Reads the brand profile."
+description: "Scan all connected marketing platforms for statistically significant deviations from stored baselines — traffic drops, CPA spikes, deliverability collapse, budget overruns, or unexpected wins — classified critical/warning/info with probable causes, correlation to recent changes, and recommended actions. Triggers on \"/omni-growth-engine:anomaly-scan\", \"why did our CPA spike\", \"did anything weird happen this week\", \"check for anomalies\", \"our conversions suddenly dropped\". Runs performance-monitor.py for baselines and detection, correlates flags against execution-tracker.py history and the diagnostic framework in skills/analytics-insights/anomaly-diagnosis.md, and persists critical findings as insights via campaign-tracker.py. Reads the brand profile."
 ---
 
-# /digital-marketing-pro:anomaly-scan
+# /omni-growth-engine:anomaly-scan
 
 ## Purpose
 
@@ -28,7 +28,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Pull current metrics from all connected MCPs**: Query each connected analytics platform
    (google-analytics, google-ads, meta-marketing, linkedin-marketing, tiktok-ads, mailchimp, stripe, mixpanel,
    amplitude, shopify, etc.) for all available metrics across the specified scan period. Include traffic, spend,

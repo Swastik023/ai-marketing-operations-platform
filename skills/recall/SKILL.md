@@ -1,9 +1,9 @@
 ---
 name: recall
-description: "Retrieve validated marketing learnings from the brand's compound intelligence graph for a channel, audience, objective, or freeform situation — returned as a themed, decision-ready playbook ranked by confidence and recency, with conflicting insights flagged and quick wins called out. Triggers on \"/digital-marketing-pro:recall\", \"what do we know about email for this audience\", \"what worked last time we ran a launch campaign\", \"pull past learnings before I plan this\", \"recall insights about paid social\". Reads the brand profile for context boosting and queries the graph via intelligence-graph.py; it retrieves and synthesizes existing learnings — it does not record new ones."
+description: "Retrieve validated marketing learnings from the brand's compound intelligence graph for a channel, audience, objective, or freeform situation — returned as a themed, decision-ready playbook ranked by confidence and recency, with conflicting insights flagged and quick wins called out. Triggers on \"/omni-growth-engine:recall\", \"what do we know about email for this audience\", \"what worked last time we ran a launch campaign\", \"pull past learnings before I plan this\", \"recall insights about paid social\". Reads the brand profile for context boosting and queries the graph via intelligence-graph.py; it retrieves and synthesizes existing learnings — it does not record new ones."
 ---
 
-# /digital-marketing-pro:recall
+# /omni-growth-engine:recall
 
 ## Purpose
 
@@ -20,7 +20,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand industry, audience segments, and active channels to contextualize the query and boost relevance of matching learnings. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand industry, audience segments, and active channels to contextualize the query and boost relevance of matching learnings. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Query the intelligence graph**: Execute `python "${CLAUDE_PLUGIN_ROOT}/scripts/intelligence-graph.py" --brand {slug} --action query-relevant --context '{context_json}' --min-confidence {threshold}`. The query matches against all indexed conditions — channel, audience, objective, campaign type — and also performs semantic matching for freeform situation descriptions. `--min-confidence` applies the confidence-threshold filter; apply the time-range preference during ranking (step 3), not as a query flag.
 3. **Rank results**: Score each returned learning by a composite of relevance (how closely the learning's conditions match the query context), confidence (how validated the insight is based on accumulated evidence), and recency (how recently the learning was recorded or last updated, with a decay curve that weights recent learnings higher for volatile channels). Return the top results by composite score.
 4. **Group into actionable themes**: Cluster the ranked learnings into coherent themes — e.g., "Content & Messaging" (what to say), "Timing & Frequency" (when to say it), "Audience Behavior" (how they respond), "Channel Tactics" (platform-specific techniques), and "Things to Avoid" (validated anti-patterns). Each theme gets a summary sentence synthesizing the grouped insights.

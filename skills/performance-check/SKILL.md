@@ -1,6 +1,6 @@
 ---
 name: performance-check
-description: "Pull live metrics from every connected analytics MCP into one cross-channel snapshot: KPI scoreboard with RAG status vs profile targets, period-over-period trends, industry benchmarks, top wins and concerns, and 3-5 recommended actions — then persist the snapshot via performance-monitor.py for trend history. Triggers on \"/digital-marketing-pro:performance-check\", \"how are our marketing metrics\", \"pull current KPIs\", \"quick performance snapshot\", \"are we hitting our targets\". Reads the brand profile for KPI targets and industry benchmarks; reports data gaps for unconnected platforms. Pairs with /digital-marketing-pro:performance-report, which turns these snapshots into the stakeholder narrative."
+description: "Pull live metrics from every connected analytics MCP into one cross-channel snapshot: KPI scoreboard with RAG status vs profile targets, period-over-period trends, industry benchmarks, top wins and concerns, and 3-5 recommended actions — then persist the snapshot via performance-monitor.py for trend history. Triggers on \"/omni-growth-engine:performance-check\", \"how are our marketing metrics\", \"pull current KPIs\", \"quick performance snapshot\", \"are we hitting our targets\". Reads the brand profile for KPI targets and industry benchmarks; reports data gaps for unconnected platforms. Pairs with /omni-growth-engine:performance-report, which turns these snapshots into the stakeholder narrative."
 user-invocable: true
 triggers:
   - check marketing performance
@@ -13,13 +13,13 @@ triggers:
   - check campaign performance
 ---
 
-# /digital-marketing-pro:performance-check
+# /omni-growth-engine:performance-check
 
 ## Purpose
 
 Pull live metrics from all connected analytics MCPs and produce a comprehensive performance snapshot. Compares current performance to KPI targets defined in the brand profile, previous-period benchmarks, and industry averages. Designed for quick health checks — run it daily, weekly, or on-demand to stay on top of marketing performance without switching between platforms.
 
-**Scope (vs `/digital-marketing-pro:performance-report`):** this skill is the **live-pull + snapshot-persistence** layer — it fetches current metrics from the platforms and saves a snapshot for trend history. When you need a formatted, narrative deliverable for stakeholders (executive summary, channel commentary, prioritized recommendations, branded formatting), run `/digital-marketing-pro:performance-report`, which consumes the snapshots this skill persists rather than re-pulling. Use `performance-check` to *see the numbers now*; use `performance-report` to *tell the story*.
+**Scope (vs `/omni-growth-engine:performance-report`):** this skill is the **live-pull + snapshot-persistence** layer — it fetches current metrics from the platforms and saves a snapshot for trend history. When you need a formatted, narrative deliverable for stakeholders (executive summary, channel commentary, prioritized recommendations, branded formatting), run `/omni-growth-engine:performance-report`, which consumes the snapshots this skill persists rather than re-pulling. Use `performance-check` to *see the numbers now*; use `performance-report` to *tell the story*.
 
 ## Input Required
 
@@ -36,7 +36,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Detect connected analytics MCPs**: Check `.mcp.json` and active MCP connections to identify which platforms are available
    (google-analytics, google-ads, meta-marketing, linkedin-marketing, tiktok-ads, mailchimp, stripe, mixpanel, amplitude, shopify, etc.).
    Log any expected platforms that are not connected so the user knows about gaps in coverage.
@@ -60,7 +60,7 @@ The user must provide (or will be prompted for):
    conversion-rate change "statistically significant," confirm it with `python "${CLAUDE_PLUGIN_ROOT}/scripts/significance-tester.py" --control-visitors {n} --control-conversions {n} --variant-visitors {n} --variant-conversions {n} --confidence 0.95` — do not call a movement significant off a raw percentage delta.
 9. **Generate recommended actions**: Based on the data, produce 3-5 specific, actionable next steps — e.g., "Pause
    underperforming ad set X", "Increase budget on high-ROAS channel Y", "Investigate traffic drop on Z",
-   "Scale winning creative variant", "Run /digital-marketing-pro:anomaly-scan for deeper diagnosis".
+   "Scale winning creative variant", "Run /omni-growth-engine:anomaly-scan for deeper diagnosis".
 10. **Save performance snapshot**: Execute `python "${CLAUDE_PLUGIN_ROOT}/scripts/performance-monitor.py" --brand {slug} --action save-snapshot --data '{...current metrics...}'`
     to persist the snapshot for historical comparison and trend tracking across future runs.
 11. **Log significant insights**: For any metric with a notable deviation, save via

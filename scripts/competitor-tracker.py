@@ -443,7 +443,7 @@ def list_competitors(slug):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Competitor intelligence tracking for Digital Marketing Pro"
+        description="Competitor intelligence tracking for OmniGrowth Engine"
     )
     parser.add_argument("--brand", required=True, help="Brand slug")
     parser.add_argument(

@@ -46,7 +46,7 @@ You are a subagent; you cannot ask the user anything. If input or approval is re
       ```
       python "${CLAUDE_PLUGIN_ROOT}/scripts/hallucination-detector.py" --action detect --file <temp-file>
       ```
-    - For comprehensive multi-dimension validation before client delivery, recommend the user run `/digital-marketing-pro:check <file> --full --brand <slug>` after they accept the draft.
+    - For comprehensive multi-dimension validation before client delivery, recommend the user run `/omni-growth-engine:check <file> --full --brand <slug>` after they accept the draft.
 
 ## Output Format
 

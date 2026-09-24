@@ -1,11 +1,11 @@
 ---
 name: story-mine
-description: "Turn a real experience — a client win, failed launch, support ticket, founder moment — into 3-5 distinct content angles from a five-type taxonomy (lesson, contrarian take, framework, proof, relatable moment), each with format, pillar, and a draft opening in brand voice, plus an honest list of angles the story does not support. Triggers on \"/digital-marketing-pro:story-mine\", \"mine this story\", \"we just had a client win\", \"is there a post in this\", \"turn this experience into content\". Client stories anonymise by default (--client-safe); reads the brand profile for voice, pillars, and compliance; angles route to /digital-marketing-pro:content-engine for drafting and strong proof angles to /digital-marketing-pro:case-study-plan."
+description: "Turn a real experience — a client win, failed launch, support ticket, founder moment — into 3-5 distinct content angles from a five-type taxonomy (lesson, contrarian take, framework, proof, relatable moment), each with format, pillar, and a draft opening in brand voice, plus an honest list of angles the story does not support. Triggers on \"/omni-growth-engine:story-mine\", \"mine this story\", \"we just had a client win\", \"is there a post in this\", \"turn this experience into content\". Client stories anonymise by default (--client-safe); reads the brand profile for voice, pillars, and compliance; angles route to /omni-growth-engine:content-engine for drafting and strong proof angles to /omni-growth-engine:case-study-plan."
 argument-hint: "[brand-name] [--story <what happened>] [--client-safe]"
 user-invocable: true
 ---
 
-# /digital-marketing-pro:story-mine
+# /omni-growth-engine:story-mine
 
 Lived experience is the one content source competitors cannot copy, and most of
 it evaporates in Slack. This skill takes "here's what happened" and returns the
@@ -53,7 +53,7 @@ interesting part — not "We recently worked with a client..."]
 final yet". Naming the missing angle stops it being invented later.]
 
 ## Case-study check
-[If the proof angle is strong: flag it for /digital-marketing-pro:case-study-plan
+[If the proof angle is strong: flag it for /omni-growth-engine:case-study-plan
 — this story may be a full case study, and these angles become its promotion.]
 ```
 
@@ -70,6 +70,6 @@ final yet". Naming the missing angle stops it being invented later.]
 - **Respect compliance.** A regulated brand's story angles pass the same
   guardrails as any other content; a HIPAA-adjacent client anecdote may have
   no publishable angle at all, and saying that is the correct output.
-- **Route onward, don't duplicate.** Angles feed /digital-marketing-pro:content-engine
+- **Route onward, don't duplicate.** Angles feed /omni-growth-engine:content-engine
   for drafting; a strong proof angle feeds case-study-plan. This skill finds
   the angles; it does not write the pieces.

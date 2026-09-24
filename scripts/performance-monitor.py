@@ -2,7 +2,7 @@
 """
 performance-monitor.py
 ======================
-Aggregate metrics, detect anomalies, and manage baselines for Digital Marketing Pro.
+Aggregate metrics, detect anomalies, and manage baselines for OmniGrowth Engine.
 
 Stores timestamped performance snapshots and uses statistical analysis to flag
 metrics that deviate significantly from historical norms.
@@ -296,7 +296,7 @@ from connector_resolver import resolve_action  # noqa: E402
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Performance monitoring for Digital Marketing Pro")
+    parser = argparse.ArgumentParser(description="Performance monitoring for OmniGrowth Engine")
     parser.add_argument("--brand", required=True, help="Brand slug")
     parser.add_argument("--action", required=True,
                         choices=["pull-metrics", "save-snapshot", "detect-anomalies",

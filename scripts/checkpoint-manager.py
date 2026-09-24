@@ -2,7 +2,7 @@
 """
 checkpoint-manager.py
 =====================
-Per-step checkpoint storage for Digital Marketing Pro long-running workflows.
+Per-step checkpoint storage for OmniGrowth Engine long-running workflows.
 Adapted for DMP's 12-Part Strategy Flow: a single interruption used to mean
 restarting the entire multi-part run from Part 1; with checkpoints, a fresh
 session reloads completed parts and continues from the next one.

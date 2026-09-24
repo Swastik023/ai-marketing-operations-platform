@@ -1,10 +1,10 @@
 ---
 name: campaign-plan
-description: "Generate a complete multi-channel campaign plan document — SMART objectives, audience segments with targeting criteria, channel mix with rationale, a budget allocation table with reach/cost estimates, a phased timeline from pre-launch to wrap-up, a KPI framework, and a risk register. Plans only; it does not launch or modify campaigns. Triggers on \"/digital-marketing-pro:campaign-plan\", \"plan a campaign for our product launch\", \"build the Q3 campaign plan\", \"what channels and budget for lead gen\", \"draft a campaign timeline with KPIs\". Reads the brand profile, guidelines, and agency SOPs, and reuses the /digital-marketing-pro:campaign-orchestrator reference docs for planning frameworks instead of re-deriving them."
+description: "Generate a complete multi-channel campaign plan document — SMART objectives, audience segments with targeting criteria, channel mix with rationale, a budget allocation table with reach/cost estimates, a phased timeline from pre-launch to wrap-up, a KPI framework, and a risk register. Plans only; it does not launch or modify campaigns. Triggers on \"/omni-growth-engine:campaign-plan\", \"plan a campaign for our product launch\", \"build the Q3 campaign plan\", \"what channels and budget for lead gen\", \"draft a campaign timeline with KPIs\". Reads the brand profile, guidelines, and agency SOPs, and reuses the /omni-growth-engine:campaign-orchestrator reference docs for planning frameworks instead of re-deriving them."
 argument-hint: "[campaign-objective]"
 ---
 
-# /digital-marketing-pro:campaign-plan
+# /omni-growth-engine:campaign-plan
 
 ## Purpose
 
@@ -23,8 +23,8 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
-2. **Load shared planning references (don't re-derive them)**: Consume the campaign-orchestrator reference docs rather than duplicating their frameworks — `skills/campaign-orchestrator/campaign-planning.md` (planning framework), `skills/campaign-orchestrator/channel-strategy.md` (channel selection), `skills/campaign-orchestrator/budget-allocation.md` (budget-split heuristics), `skills/campaign-orchestrator/utm-tracking.md` (UTM naming conventions), and `skills/campaign-orchestrator/abm-strategy.md` (ABM). This skill produces the plan document; `/digital-marketing-pro:campaign-orchestrator` runs the broader multi-agent orchestration on top of the same references.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
+2. **Load shared planning references (don't re-derive them)**: Consume the campaign-orchestrator reference docs rather than duplicating their frameworks — `skills/campaign-orchestrator/campaign-planning.md` (planning framework), `skills/campaign-orchestrator/channel-strategy.md` (channel selection), `skills/campaign-orchestrator/budget-allocation.md` (budget-split heuristics), `skills/campaign-orchestrator/utm-tracking.md` (UTM naming conventions), and `skills/campaign-orchestrator/abm-strategy.md` (ABM). This skill produces the plan document; `/omni-growth-engine:campaign-orchestrator` runs the broader multi-agent orchestration on top of the same references.
 3. Clarify campaign objective and classify as awareness, consideration, or conversion
 4. Define primary and secondary audience segments with targeting parameters
 5. Recommend channel mix based on audience behavior, budget, and objective

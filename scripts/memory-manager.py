@@ -2,7 +2,7 @@
 """
 memory-manager.py
 =================
-Local memory management interface for Digital Marketing Pro.
+Local memory management interface for OmniGrowth Engine.
 
 Manages the local side of memory/RAG workflows: preparing data for vector DB
 storage via MCP, indexing metadata, tracking sync state, and searching the
@@ -369,7 +369,7 @@ def get_memory_status(slug):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Memory management for Digital Marketing Pro")
+    parser = argparse.ArgumentParser(description="Memory management for OmniGrowth Engine")
     parser.add_argument("--brand", required=True, help="Brand slug")
     parser.add_argument("--action", required=True,
                         choices=["prepare-store", "log-stored", "search-local",

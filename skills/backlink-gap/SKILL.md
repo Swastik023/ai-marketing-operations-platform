@@ -1,11 +1,11 @@
 ---
 name: backlink-gap
-description: "Find referring domains that link to your competitors but not to you, ranked by an outreach-priority score (0.40 DR + 0.25 link-overlap + 0.20 traffic + 0.15 topical relevance) — outputs a four-gate quality scorecard, a 30-prospect outreach shortlist, broken-link candidates, and pre-filled outreach templates. Triggers on \"/digital-marketing-pro:backlink-gap\", \"where are competitors getting links we aren't\", \"plan a link-building campaign\", \"quarterly backlink audit\", \"first 50 link targets for a new client\". Consumes backlink CSV exports from the brand's connected backlink MCP, runs scripts/backlink_gap.py, reads the brand profile for DR thresholds and voice, and hands off to /digital-marketing-pro:digital-pr and /digital-marketing-pro:pr-pitch."
+description: "Find referring domains that link to your competitors but not to you, ranked by an outreach-priority score (0.40 DR + 0.25 link-overlap + 0.20 traffic + 0.15 topical relevance) — outputs a four-gate quality scorecard, a 30-prospect outreach shortlist, broken-link candidates, and pre-filled outreach templates. Triggers on \"/omni-growth-engine:backlink-gap\", \"where are competitors getting links we aren't\", \"plan a link-building campaign\", \"quarterly backlink audit\", \"first 50 link targets for a new client\". Consumes backlink CSV exports from the brand's connected backlink MCP, runs scripts/backlink_gap.py, reads the brand profile for DR thresholds and voice, and hands off to /omni-growth-engine:digital-pr and /omni-growth-engine:pr-pitch."
 argument-hint: "[brand-name]"
 user-invocable: true
 ---
 
-# /digital-marketing-pro:backlink-gap
+# /omni-growth-engine:backlink-gap
 
 ## Purpose
 
@@ -28,7 +28,7 @@ Heavy skill. **Grep before Read** any referenced file, then `Read` only matched 
 ## Brand context (auto-applied)
 
 1. Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`
-2. If no brand exists: ask "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults
+2. If no brand exists: ask "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults
 3. Apply `skills/context-engine/industry-profiles.md` for industry-specific link-quality thresholds (YMYL industries should set higher `--min-dr`)
 4. Apply `skills/context-engine/compliance-rules.md` to filter out blocked publishers (e.g., PBN-style or paid-link networks the brand has explicitly banned)
 
@@ -117,11 +117,11 @@ priority = 0.40 × DR_normalised
 
 This skill is a producer in a longer chain:
 
-1. `/digital-marketing-pro:competitor-analysis` — picks the right competitors
-2. **`/digital-marketing-pro:backlink-gap`** — *this skill*
-3. `/digital-marketing-pro:digital-pr` — consumes `06-prospect-shortlist.md` + `08-outreach-templates.md`
-4. `/digital-marketing-pro:pr-pitch` — drafts individual pitches per prospect
-5. `/digital-marketing-pro:performance-report` — quarterly re-runs of this skill feed the "links gained" KPI
+1. `/omni-growth-engine:competitor-analysis` — picks the right competitors
+2. **`/omni-growth-engine:backlink-gap`** — *this skill*
+3. `/omni-growth-engine:digital-pr` — consumes `06-prospect-shortlist.md` + `08-outreach-templates.md`
+4. `/omni-growth-engine:pr-pitch` — drafts individual pitches per prospect
+5. `/omni-growth-engine:performance-report` — quarterly re-runs of this skill feed the "links gained" KPI
 
 ## Tips & caveats
 
@@ -142,8 +142,8 @@ This skill is a producer in a longer chain:
 
 ## See also
 
-- `/digital-marketing-pro:competitor-analysis` — pick the competitors for this audit
-- `/digital-marketing-pro:digital-pr` — runs the actual outreach
-- `/digital-marketing-pro:seo-drift` — re-run quarterly to track delta
-- `/digital-marketing-pro:seo-audit` — broader site-level audit including own-profile health
+- `/omni-growth-engine:competitor-analysis` — pick the competitors for this audit
+- `/omni-growth-engine:digital-pr` — runs the actual outreach
+- `/omni-growth-engine:seo-drift` — re-run quarterly to track delta
+- `/omni-growth-engine:seo-audit` — broader site-level audit including own-profile health
 - `scripts/backlink_gap.py` — the underlying gap engine

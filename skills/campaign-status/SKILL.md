@@ -1,9 +1,9 @@
 ---
 name: campaign-status
-description: "Unified status dashboard for every tracked campaign across connected platforms — produces a summary table with health indicators, live spend and performance metrics, a 7-day execution history, pending approvals with age, KPI variance classification (on track / at risk / behind), flagged issues, and next scheduled actions. Reports only; it changes nothing on any platform. Triggers on \"/digital-marketing-pro:campaign-status\", \"what campaigns are running right now\", \"any failed executions or stuck approvals\", \"status of the Q1-Launch campaign\", \"which campaigns are behind target\". Reads the brand's campaign registry, execution log, and approval queue via campaign-tracker.py, execution-tracker.py, and approval-manager.py, plus live metrics from connected platform MCPs."
+description: "Unified status dashboard for every tracked campaign across connected platforms — produces a summary table with health indicators, live spend and performance metrics, a 7-day execution history, pending approvals with age, KPI variance classification (on track / at risk / behind), flagged issues, and next scheduled actions. Reports only; it changes nothing on any platform. Triggers on \"/omni-growth-engine:campaign-status\", \"what campaigns are running right now\", \"any failed executions or stuck approvals\", \"status of the Q1-Launch campaign\", \"which campaigns are behind target\". Reads the brand's campaign registry, execution log, and approval queue via campaign-tracker.py, execution-tracker.py, and approval-manager.py, plus live metrics from connected platform MCPs."
 ---
 
-# /digital-marketing-pro:campaign-status
+# /omni-growth-engine:campaign-status
 
 ## Purpose
 
@@ -25,7 +25,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **List all tracked campaigns**: Execute `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-tracker.py" --brand {slug} --action list-campaigns`
    to get the campaign registry with names, platforms, statuses, creation dates, and assigned KPI targets.
 3. **Pull execution history**: Execute `python "${CLAUDE_PLUGIN_ROOT}/scripts/execution-tracker.py" --brand {slug} --action get-history --limit {N}`

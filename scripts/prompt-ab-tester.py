@@ -2,7 +2,7 @@
 """
 prompt-ab-tester.py
 ===================
-Prompt/output A/B testing tracker for Digital Marketing Pro.
+Prompt/output A/B testing tracker for OmniGrowth Engine.
 
 Creates named tests, logs quality scores for each variant, compares averages,
 determines a winner, and provides a statistical-significance hint.
@@ -77,7 +77,7 @@ def get_tests_dir(slug):
     """Return the A/B tests directory for a brand, creating if needed."""
     brand_dir = BRANDS_DIR / slug
     if not brand_dir.exists():
-        return None, f"Brand '{slug}' not found. Run /digital-marketing-pro:brand-setup first."
+        return None, f"Brand '{slug}' not found. Run /omni-growth-engine:brand-setup first."
 
     tests_dir = brand_dir / "quality" / "ab-tests"
     tests_dir.mkdir(parents=True, exist_ok=True)
@@ -351,7 +351,7 @@ def action_list_tests(slug, limit):
 
 def build_parser():
     parser = argparse.ArgumentParser(
-        description="Prompt/output A/B testing tracker for Digital Marketing Pro.",
+        description="Prompt/output A/B testing tracker for OmniGrowth Engine.",
         epilog=(
             "Actions:\n"
             "  create-test   Create a new A/B test\n"
@@ -410,7 +410,7 @@ def main():
     if not slug:
         print(json.dumps({
             "error": "No brand specified and no active brand set. "
-                     "Use --brand <slug> or run /digital-marketing-pro:brand-setup first."
+                     "Use --brand <slug> or run /omni-growth-engine:brand-setup first."
         }))
         sys.exit(1)
 

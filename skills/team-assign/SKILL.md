@@ -1,9 +1,9 @@
 ---
 name: team-assign
-description: "Assign marketing tasks to team members by scoring role fit, channel expertise, current utilization, and region alignment; also lists active assignments and builds workload dashboards with capacity warnings and rebalancing suggestions. Triggers on \"/digital-marketing-pro:team-assign\", \"who should write the Q2 email sequence\", \"assign this task to someone on the team\", \"show current assignments\", \"is anyone on the team overloaded\". Reads the team roster and capacity via team-manager.py, notifies assignees through a connected Slack or email MCP when available, and logs every assignment for audit."
+description: "Assign marketing tasks to team members by scoring role fit, channel expertise, current utilization, and region alignment; also lists active assignments and builds workload dashboards with capacity warnings and rebalancing suggestions. Triggers on \"/omni-growth-engine:team-assign\", \"who should write the Q2 email sequence\", \"assign this task to someone on the team\", \"show current assignments\", \"is anyone on the team overloaded\". Reads the team roster and capacity via team-manager.py, notifies assignees through a connected Slack or email MCP when available, and logs every assignment for audit."
 ---
 
-# /digital-marketing-pro:team-assign
+# /omni-growth-engine:team-assign
 
 ## Purpose
 
@@ -30,7 +30,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Load team roster**: Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/team-manager.py" --action list-team --brand {slug}` to retrieve all team members with their roles, channel specializations, regional assignments, seniority level, and current active/inactive status. If no team roster exists, prompt the user to set one up first.
 3. **Route by action type**: Branch based on the requested action — assign (steps 4-10), get-assignments (step 11), or check-workload (steps 12-13).
 4. **Check team capacity**: Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/team-manager.py" --action check-capacity --brand {slug}` to pull current utilization for each team member. Flag anyone above 85% utilization as at-risk for new assignments. Flag anyone above 95% as unavailable unless priority is urgent. Include hours allocated this week and next two weeks for forward-looking availability.

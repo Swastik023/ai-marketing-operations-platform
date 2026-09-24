@@ -1,6 +1,6 @@
 ---
 name: marketing-automation
-description: "Design marketing automation programs — end-to-end workflow architecture, lead scoring models with MQL/SQL thresholds, nurture and drip sequences, behavioral triggers, lifecycle stage frameworks, deliverability and compliance automation, and MAP platform selection or migration plans — delivered as workflow maps, scoring rubrics, sequence plans, and audits. Triggers on \"/digital-marketing-pro:marketing-automation\", \"build a lead scoring model\", \"design a welcome nurture sequence\", \"our contacts get too many automated emails\", \"should we migrate from Mailchimp to HubSpot\". Produces designs and audit findings, not live platform changes. Reads the brand profile and compliance rules; its lead-scoring framework is the one /digital-marketing-pro:lead-import applies when importing leads."
+description: "Design marketing automation programs — end-to-end workflow architecture, lead scoring models with MQL/SQL thresholds, nurture and drip sequences, behavioral triggers, lifecycle stage frameworks, deliverability and compliance automation, and MAP platform selection or migration plans — delivered as workflow maps, scoring rubrics, sequence plans, and audits. Triggers on \"/omni-growth-engine:marketing-automation\", \"build a lead scoring model\", \"design a welcome nurture sequence\", \"our contacts get too many automated emails\", \"should we migrate from Mailchimp to HubSpot\". Produces designs and audit findings, not live platform changes. Reads the brand profile and compliance rules; its lead-scoring framework is the one /omni-growth-engine:lead-import applies when importing leads."
 ---
 
 # Marketing Automation
@@ -34,7 +34,7 @@ Before producing any marketing output from this module:
 5. **Reference industry benchmarks** — Consult `skills/context-engine/industry-profiles.md` for the brand's industry
 6. **Use platform specs** — Reference `skills/context-engine/platform-specs.md` for character limits and format requirements
 7. **Check campaign history** — Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-tracker.py" --brand {slug} --action list-campaigns` before planning new work
-8. **If no brand exists**, say: "No brand profile found. Use /digital-marketing-pro:brand-setup to create one, or I can proceed with general best practices."
+8. **If no brand exists**, say: "No brand profile found. Use /omni-growth-engine:brand-setup to create one, or I can proceed with general best practices."
 9. **Check brand guidelines** — If `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` exists, load and enforce: `restrictions.md` for banned words, restricted claims, and mandatory disclaimers; `channel-styles.md` for channel-specific tone overrides (may differ from base voice); `messaging.md` for approved key messages, taglines, and positioning language; `voice-and-tone.md` for detailed voice rules beyond the 4 numeric scores. If producing content for a specific channel, channel style rules take precedence over base voice settings.
 
 Do not ask the user for information that already exists in their brand profile.

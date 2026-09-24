@@ -5,7 +5,7 @@ What sponsorship pays for is the unglamorous half: platform-API updates when Met
 Google Ads ships a breaking version, model-registry refreshes when a model is retired,
 compliance passes when the EU AI Act guidance moves, and issue triage.
 
-If they save your team time, you can [sponsor the work](https://github.com/sponsors/indranilbanerjee).
+If they save your team time, you can [sponsor the work](https://github.com/sponsors/swastik-agnihotri).
 
 ## Current sponsors
 

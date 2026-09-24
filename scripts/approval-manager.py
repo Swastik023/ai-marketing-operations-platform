@@ -2,7 +2,7 @@
 """
 approval-manager.py
 ===================
-Manages the approval lifecycle for execution actions in Digital Marketing Pro.
+Manages the approval lifecycle for execution actions in OmniGrowth Engine.
 
 Tracks drafts through pending -> approved -> executed (or rejected/failed) so
 the plugin never publishes, sends, or launches without explicit user sign-off.
@@ -317,7 +317,7 @@ def get_execution_log(slug):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Approval lifecycle manager for Digital Marketing Pro")
+    parser = argparse.ArgumentParser(description="Approval lifecycle manager for OmniGrowth Engine")
     parser.add_argument("--brand", required=True, help="Brand slug")
     parser.add_argument("--action", required=True,
                         choices=["create-approval", "list-pending", "approve", "reject",

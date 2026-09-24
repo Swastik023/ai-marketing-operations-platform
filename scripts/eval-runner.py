@@ -2,7 +2,7 @@
 """
 eval-runner.py
 ==============
-Master orchestrator for the Digital Marketing Pro evaluation suite.
+Master orchestrator for the OmniGrowth Engine evaluation suite.
 
 Runs the full eval pipeline via subprocess, calling sibling scripts for each
 scoring dimension, then produces a unified composite report with weighted
@@ -794,7 +794,7 @@ def build_parser():
     """Build the argument parser with comprehensive --help output."""
     parser = argparse.ArgumentParser(
         description=(
-            "Master orchestrator for the Digital Marketing Pro evaluation suite.\n"
+            "Master orchestrator for the OmniGrowth Engine evaluation suite.\n"
             "Runs sibling eval scripts via subprocess and produces a unified\n"
             "composite quality report with weighted scores, letter grades,\n"
             "and pass/fail gate checks."

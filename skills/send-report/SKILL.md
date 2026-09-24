@@ -1,11 +1,11 @@
 ---
 name: send-report
-description: "Generate a performance report from connected analytics MCPs (Google Analytics, Google/Meta/LinkedIn Ads, email platforms) and deliver it via Slack, email, or Google Sheets — weekly pulse, monthly review, QBR, or custom, with KPIs scored against targets, trend and anomaly analysis, event annotations, and 3-5 prioritized recommendations. Delivery waits at a mandatory approval gate: you review the full report preview and recipient list (risk tiered low for internal, medium for client-facing) before anything is sent. Triggers on \"/digital-marketing-pro:send-report\", \"send the weekly report to Slack\", \"email the monthly performance review to the client\", \"push our KPIs into the tracking sheet\", \"prep the QBR and deliver it\". Reads the brand profile's targets and archives each report snapshot for period-over-period comparison."
+description: "Generate a performance report from connected analytics MCPs (Google Analytics, Google/Meta/LinkedIn Ads, email platforms) and deliver it via Slack, email, or Google Sheets — weekly pulse, monthly review, QBR, or custom, with KPIs scored against targets, trend and anomaly analysis, event annotations, and 3-5 prioritized recommendations. Delivery waits at a mandatory approval gate: you review the full report preview and recipient list (risk tiered low for internal, medium for client-facing) before anything is sent. Triggers on \"/omni-growth-engine:send-report\", \"send the weekly report to Slack\", \"email the monthly performance review to the client\", \"push our KPIs into the tracking sheet\", \"prep the QBR and deliver it\". Reads the brand profile's targets and archives each report snapshot for period-over-period comparison."
 disable-model-invocation: false
 argument-hint: "[destination]"
 ---
 
-# /digital-marketing-pro:send-report
+# /omni-growth-engine:send-report
 
 ## Purpose
 
@@ -38,7 +38,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Pull metrics from connected analytics**: Run `performance-monitor.py` to gather data from connected analytics MCP servers — Google Analytics (traffic, conversions), Google Ads (spend, CPC, ROAS), Meta Ads (spend, reach, frequency), LinkedIn Ads (spend, leads), email platforms (opens, clicks, deliverability), and any other configured sources. Aggregate metrics for the specified date range and comparison period.
 3. **Calculate KPIs against targets**: Compare actual performance against targets defined in `profile.json` and against the comparison period. Calculate period-over-period deltas, percentage changes, trend direction, and statistical significance for key movements. Flag metrics that are more than 10% above or below target with severity indicators (warning, critical).
 4. **Identify trends and anomalies**: Analyze metric trajectories across the reporting window — identify sustained upward or downward trends (3+ consecutive periods), sudden spikes or drops (single-period movements exceeding 2 standard deviations), seasonal patterns, and correlations between channels that suggest attribution shifts or budget reallocation opportunities.

@@ -2,7 +2,7 @@
 """
 _connector_registry.py
 ======================
-Single source of truth for the Digital Marketing Pro connector registry.
+Single source of truth for the OmniGrowth Engine connector registry.
 
 Both `connector-status.py` (user-facing CLI) and `connector_resolver.py`
 (the action-resolution layer used by performance-monitor / crm-sync /
@@ -45,7 +45,7 @@ CONNECTOR_REGISTRY = {
                 "transport": "npx",
                 "package": None,
                 "package_status": "no-known-npm-package",
-                "note": "No verified MCP package on npm — use /digital-marketing-pro:add-integration to wire a custom server. npx runs remote code; verify any package before use.",
+                "note": "No verified MCP package on npm — use /omni-growth-engine:add-integration to wire a custom server. npx runs remote code; verify any package before use.",
                 "description": "Intercom — customer messaging, churn detection",
                 "env_vars": ["INTERCOM_ACCESS_TOKEN"],
                 "skills_unlocked": ["send-notification"],
@@ -88,7 +88,7 @@ CONNECTOR_REGISTRY = {
                 "transport": "npx",
                 "package": None,
                 "package_status": "no-known-npm-package",
-                "note": "No verified MCP package on npm — use /digital-marketing-pro:add-integration to wire a custom server. npx runs remote code; verify any package before use.",
+                "note": "No verified MCP package on npm — use /omni-growth-engine:add-integration to wire a custom server. npx runs remote code; verify any package before use.",
                 "description": "Salesforce — CRM pipeline, leads, accounts",
                 "env_vars": ["SALESFORCE_INSTANCE_URL", "SALESFORCE_ACCESS_TOKEN"],
                 "skills_unlocked": [
@@ -140,7 +140,7 @@ CONNECTOR_REGISTRY = {
                 "transport": "npx",
                 "package": None,
                 "package_status": "no-known-npm-package",
-                "note": "No verified MCP package on npm — use /digital-marketing-pro:add-integration to wire a custom server. npx runs remote code; verify any package before use.",
+                "note": "No verified MCP package on npm — use /omni-growth-engine:add-integration to wire a custom server. npx runs remote code; verify any package before use.",
                 "description": "SEMrush — keyword research, site audit, backlinks",
                 "env_vars": ["SEMRUSH_API_KEY"],
                 "skills_unlocked": ["seo-audit", "keyword-research", "competitor-analysis"],
@@ -217,7 +217,7 @@ CONNECTOR_REGISTRY = {
                 "transport": "npx",
                 "package": None,
                 "package_status": "no-known-npm-package",
-                "note": "No verified MCP package on npm — use /digital-marketing-pro:add-integration to wire a custom server. npx runs remote code; verify any package before use.",
+                "note": "No verified MCP package on npm — use /omni-growth-engine:add-integration to wire a custom server. npx runs remote code; verify any package before use.",
                 "description": "Meta — Facebook/Instagram ads, audiences",
                 "env_vars": ["META_ACCESS_TOKEN", "META_AD_ACCOUNT_ID"],
                 "skills_unlocked": [
@@ -262,7 +262,7 @@ CONNECTOR_REGISTRY = {
                 "transport": "npx",
                 "package": None,
                 "package_status": "no-known-npm-package",
-                "note": "No verified MCP package on npm — use /digital-marketing-pro:add-integration to wire a custom server. npx runs remote code; verify any package before use.",
+                "note": "No verified MCP package on npm — use /omni-growth-engine:add-integration to wire a custom server. npx runs remote code; verify any package before use.",
                 "description": "Google Analytics 4 — traffic, conversions, audiences",
                 "env_vars": ["GA_PROPERTY_ID", "GOOGLE_APPLICATION_CREDENTIALS"],
                 "skills_unlocked": [
@@ -353,7 +353,7 @@ CONNECTOR_REGISTRY = {
                 "transport": "npx",
                 "package": None,
                 "package_status": "no-known-npm-package",
-                "note": "No verified MCP package on npm — use /digital-marketing-pro:add-integration to wire a custom server. npx runs remote code; verify any package before use.",
+                "note": "No verified MCP package on npm — use /omni-growth-engine:add-integration to wire a custom server. npx runs remote code; verify any package before use.",
                 "description": "Cision — press release distribution, journalist database",
                 "env_vars": ["CISION_API_KEY"],
                 "skills_unlocked": ["pr-pitch", "digital-pr"],

@@ -1,17 +1,17 @@
 ---
 name: crm-sync
-description: "Sync marketing data to and from Salesforce, HubSpot, Zoho, or Pipedrive — contacts, deals, and campaign links with field mapping, deduplication, consent checks, batched execution behind a mandatory approval gate, and a rollback manifest. Produces a full sync report with per-record outcomes. Triggers on \"/digital-marketing-pro:crm-sync\", \"push these contacts into HubSpot\", \"sync deals to Salesforce\", \"our CRM and marketing lists don't match\", \"set up a recurring CRM sync\". Reads the brand profile and compliance rules; for scored lead imports use /digital-marketing-pro:lead-import instead."
+description: "Sync marketing data to and from Salesforce, HubSpot, Zoho, or Pipedrive — contacts, deals, and campaign links with field mapping, deduplication, consent checks, batched execution behind a mandatory approval gate, and a rollback manifest. Produces a full sync report with per-record outcomes. Triggers on \"/omni-growth-engine:crm-sync\", \"push these contacts into HubSpot\", \"sync deals to Salesforce\", \"our CRM and marketing lists don't match\", \"set up a recurring CRM sync\". Reads the brand profile and compliance rules; for scored lead imports use /omni-growth-engine:lead-import instead."
 disable-model-invocation: false
 argument-hint: "[crm-platform]"
 ---
 
-# /digital-marketing-pro:crm-sync
+# /omni-growth-engine:crm-sync
 
 ## Purpose
 
 Sync marketing data to and from the brand's connected CRM platform. Handles contact creation, deal updates, and campaign linking with automatic field mapping, deduplication, and compliance checks. Supports Salesforce, HubSpot, Zoho, and Pipedrive with bi-directional sync capabilities, ensuring marketing and sales teams operate from a single source of truth without manual data entry or import/export cycles. Designed for both one-time bulk syncs and recurring automated transfers, with full audit trails and rollback capabilities for enterprise-grade data governance.
 
-Use this command instead of manual CSV imports when you need deduplication, compliance validation, or audit logging. For lead-specific imports with scoring, use `/digital-marketing-pro:lead-import` instead.
+Use this command instead of manual CSV imports when you need deduplication, compliance validation, or audit logging. For lead-specific imports with scoring, use `/omni-growth-engine:lead-import` instead.
 
 ## Execution gate (MANDATORY — cannot be skipped)
 
@@ -41,7 +41,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Check connected CRM status**: Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/crm-sync.py" --brand {slug} --action get-crm-status` to verify platform connection, API credentials, rate limit headroom, and available objects. If no CRM is connected, guide the user to configure their CRM MCP integration and provide platform-specific setup instructions.
 3. **Validate input data**: Parse the source data and validate required fields — check email format (RFC 5322), phone number normalization (E.164), required field presence, data type consistency, and character encoding. Flag invalid records with specific error reasons and separate them from the valid set.
 4. **Map fields to CRM schema**: Consult `skills/context-engine/crm-integration-guide.md` for standard field mappings per platform. Auto-map matching field names, apply user overrides, identify unmapped source fields, and flag required CRM fields with no source mapping. Present the complete field mapping table for confirmation before proceeding.

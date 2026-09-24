@@ -2,7 +2,7 @@
 
 ## How the Plugin Learns and Adapts
 
-Digital Marketing Pro isn't static — it builds intelligence over time through:
+OmniGrowth Engine isn't static — it builds intelligence over time through:
 
 ### 1. Brand Context Awareness
 Every marketing output is filtered through the active brand's:

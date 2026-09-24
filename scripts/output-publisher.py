@@ -7,7 +7,7 @@ Dual-copy publisher for DMP workflow outputs.
 Any file produced by a DMP workflow gets copied to TWO locations:
 
 1. **Internal tracking copy** at ``~/.claude-marketing/brands/{brand}/output/{workflow}/{run_id}/``
-   — system-of-record for ``/digital-marketing-pro:status``, audit history,
+   — system-of-record for ``/omni-growth-engine:status``, audit history,
    the checkpoint manager.
 2. **User-visible published copy** at
    ``~/Documents/DigitalMarketingPro/{brand}/{workflow}/{YYYY-MM}/{filename}``
@@ -38,7 +38,7 @@ Usage
     python3 output-publisher.py publish-run --brand acme \\
         --run-id engagement-20260525-093015-fashion-q3
 
-    # Just print the visible folder (for /digital-marketing-pro:output-folder)
+    # Just print the visible folder (for /omni-growth-engine:output-folder)
     python3 output-publisher.py where --brand acme
 
     # Print + open
@@ -179,7 +179,7 @@ def where(args) -> dict:
         "internal_tracking_dir_exists": tracking.exists(),
         "env_override_active": bool(os.environ.get("DIGITAL_MARKETING_PRO_PUBLISH_DIR")),
         "note": "The visible_publish_dir is the path to open in Explorer / Finder. "
-                "The internal_tracking_dir is the dotfolder used by /digital-marketing-pro:status, "
+                "The internal_tracking_dir is the dotfolder used by /omni-growth-engine:status, "
                 "checkpoint-manager.py, and other internal tools.",
     }
 

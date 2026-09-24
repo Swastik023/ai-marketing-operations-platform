@@ -10,11 +10,11 @@ Pick up a long-running DMP workflow that stopped before the final step — inste
 
 ## Trigger
 
-User runs `/digital-marketing-pro:resume` (with optional `workflow` and/or `run-id` arguments). Also surface this command in any error message when a workflow terminates abnormally.
+User runs `/omni-growth-engine:resume` (with optional `workflow` and/or `run-id` arguments). Also surface this command in any error message when a workflow terminates abnormally.
 
 ## What this fixes
 
-DMP's headline workflow `/digital-marketing-pro:engagement` runs the 12-Part Strategy Flow, producing 50-60 canonical files (actual time varies by engagement depth and model). If the session terminated partway through (context-window exhaustion, network blip, the user cancels, machine sleeps), the in-memory part outputs used to be lost and the user had to restart from Part 1. The same applied to `/digital-marketing-pro:campaign-plan`, `/digital-marketing-pro:content-engine`, `/digital-marketing-pro:seo-audit`, `/digital-marketing-pro:competitor-analysis`, `/digital-marketing-pro:campaign-audit`, `/digital-marketing-pro:launch-campaign`.
+DMP's headline workflow `/omni-growth-engine:engagement` runs the 12-Part Strategy Flow, producing 50-60 canonical files (actual time varies by engagement depth and model). If the session terminated partway through (context-window exhaustion, network blip, the user cancels, machine sleeps), the in-memory part outputs used to be lost and the user had to restart from Part 1. The same applied to `/omni-growth-engine:campaign-plan`, `/omni-growth-engine:content-engine`, `/omni-growth-engine:seo-audit`, `/omni-growth-engine:competitor-analysis`, `/omni-growth-engine:campaign-audit`, `/omni-growth-engine:launch-campaign`.
 
 Now every part of every long workflow writes its output via `checkpoint-manager.py`, so a fresh session can reload those artifacts and skip the parts that already completed. This is the direct fix for the user-team feedback that "dm pro also taking too long to process" — the workflow itself is not made faster, but a single interruption no longer means losing completed work.
 

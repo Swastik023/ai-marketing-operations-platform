@@ -1,6 +1,6 @@
 ---
 name: launch-campaign
-description: "Orchestrate the full multi-channel launch of an approved campaign plan — pre-launch BLOCKER gates (approved plan, assets present, connectors probed, conversion tracking verified, C2PA-signed AI assets for EU markets), then dependency-ordered activation across CRM, landing page, email, paid ads, organic social, influencer, and PR, with a checkpoint after every step and a dual-copy launch record. Nothing executes until the dry-run preview is shown and the user types an explicit yes. Triggers on \"/digital-marketing-pro:launch-campaign\", \"go live with the campaign\", \"kick off the launch\", \"activate every channel for this campaign\", \"flip the switch on the launch\". Consumes the plan from /digital-marketing-pro:campaign-plan, delegates paid ads to /digital-marketing-pro:launch-ad-campaign, and resumes interrupted launches via /digital-marketing-pro:resume."
+description: "Orchestrate the full multi-channel launch of an approved campaign plan — pre-launch BLOCKER gates (approved plan, assets present, connectors probed, conversion tracking verified, C2PA-signed AI assets for EU markets), then dependency-ordered activation across CRM, landing page, email, paid ads, organic social, influencer, and PR, with a checkpoint after every step and a dual-copy launch record. Nothing executes until the dry-run preview is shown and the user types an explicit yes. Triggers on \"/omni-growth-engine:launch-campaign\", \"go live with the campaign\", \"kick off the launch\", \"activate every channel for this campaign\", \"flip the switch on the launch\". Consumes the plan from /omni-growth-engine:campaign-plan, delegates paid ads to /omni-growth-engine:launch-ad-campaign, and resumes interrupted launches via /omni-growth-engine:resume."
 user-invocable: true
 triggers:
   - launch this campaign
@@ -12,9 +12,9 @@ triggers:
 allowed-tools: Read Bash Glob Grep
 ---
 
-# /digital-marketing-pro:launch-campaign — Multi-Channel Campaign Launch Orchestrator
+# /omni-growth-engine:launch-campaign — Multi-Channel Campaign Launch Orchestrator
 
-This skill takes an **approved** campaign plan (from `/digital-marketing-pro:campaign-plan`) and walks it through every step required to go live: pre-launch gates, channel-by-channel activation, CRM record creation, kickoff comms to the team, and day-1 monitoring setup. It complements — and is broader than — `/digital-marketing-pro:launch-ad-campaign`, which handles only paid-ads activation on Google / Meta / LinkedIn / TikTok.
+This skill takes an **approved** campaign plan (from `/omni-growth-engine:campaign-plan`) and walks it through every step required to go live: pre-launch gates, channel-by-channel activation, CRM record creation, kickoff comms to the team, and day-1 monitoring setup. It complements — and is broader than — `/omni-growth-engine:launch-ad-campaign`, which handles only paid-ads activation on Google / Meta / LinkedIn / TikTok.
 
 Use this skill **once** per campaign, after the campaign plan is approved and all creative + landing pages + email sequences are signed off. Not for paid-ads alone — for the full multi-channel launch (paid + organic + email + content + CRM + PR).
 
@@ -26,9 +26,9 @@ This skill is the difference between "we launched" and "we launched cleanly." It
 
 ## What this skill does NOT do
 
-- It does NOT create the campaign plan — that's `/digital-marketing-pro:campaign-plan`.
-- It does NOT generate the creative — that's `/digital-marketing-pro:ad-creative`, `/digital-marketing-pro:content-engine`, `/digital-marketing-pro:email-sequence`, etc.
-- It does NOT bid or optimise day 2+ — that's `/digital-marketing-pro:performance-report`, `/digital-marketing-pro:budget-optimizer`, etc.
+- It does NOT create the campaign plan — that's `/omni-growth-engine:campaign-plan`.
+- It does NOT generate the creative — that's `/omni-growth-engine:ad-creative`, `/omni-growth-engine:content-engine`, `/omni-growth-engine:email-sequence`, etc.
+- It does NOT bid or optimise day 2+ — that's `/omni-growth-engine:performance-report`, `/omni-growth-engine:budget-optimizer`, etc.
 
 It is the **single-shot launch event**, not the planning or the optimisation.
 
@@ -38,13 +38,13 @@ It is the **single-shot launch event**, not the planning or the optimisation.
 
 This skill REFUSES to proceed unless ALL of these pass. Print the failing items, do not start the launch.
 
-1. `/digital-marketing-pro:validate-profile --brand {brand}` returns `passed` or `passed_with_warnings`.
+1. `/omni-growth-engine:validate-profile --brand {brand}` returns `passed` or `passed_with_warnings`.
 2. A campaign plan exists at `~/.claude-marketing/brands/{slug}/campaigns/{campaign_id}/plan.json` (or the user provides `--plan-path`).
 3. The plan's `status` field is `approved` (not `draft` / `in_review` / `rejected`).
 4. Every asset referenced in the plan exists at the path the plan claims it does (creative files, landing-page URLs respond 200, email templates exist in the email platform).
 5. Every connector required by the channels in scope is reachable — re-run a fast probe: `python "${CLAUDE_PLUGIN_ROOT}/scripts/connector-status.py" --brand {slug} --action status --probe-only --connectors {comma-separated channel connectors}`.
 6. Conversion tracking is verified for every channel in scope — GA4 events configured AND test-fired in the last 7 days: `python "${CLAUDE_PLUGIN_ROOT}/scripts/performance-monitor.py" --brand {slug} --action diagnostic --channel ga4_health`.
-7. If any AI-generated visual / video / audio is in the asset list AND the campaign targets EU markets, every such asset has been signed via C2PA (`/digital-marketing-pro:c2pa-metadata` workflow — `embed-c2pa.py --ai-disclosure` under the hood). Article 50 compliance is non-negotiable for EU launches as of 2 Aug 2026.
+7. If any AI-generated visual / video / audio is in the asset list AND the campaign targets EU markets, every such asset has been signed via C2PA (`/omni-growth-engine:c2pa-metadata` workflow — `embed-c2pa.py --ai-disclosure` under the hood). Article 50 compliance is non-negotiable for EU launches as of 2 Aug 2026.
 
 If any of these fail, print the punch list with the literal next command for each item, and exit.
 
@@ -78,7 +78,7 @@ Before touching any live system, print a dry-run preview of every action that's 
    10. Internal kickoff — Slack message to {channel}, email to {distribution_list}
    11. Tracking — Wire UTM parameters across every link (cross-check against plan)
    12. Attribution — Confirm {attribution_model} active in GA4 + CRM
-   13. Monitoring — Activate day-1 watchdog on {KPIs} via /digital-marketing-pro:performance-check
+   13. Monitoring — Activate day-1 watchdog on {KPIs} via /omni-growth-engine:performance-check
    14. Documentation — Write launch record to ~/.claude-marketing/brands/{slug}/campaigns/{campaign_id}/launch-record.json
        and publish a user-visible copy to ~/Documents/DigitalMarketingPro/{brand}/campaigns/
 
@@ -91,7 +91,7 @@ Before touching any live system, print a dry-run preview of every action that's 
 
 ### Step 3 — Execute in dependency order
 
-Run the actions sequentially. **After every action, write a state checkpoint** to `~/.claude-marketing/brands/{slug}/campaigns/{campaign_id}/launch-state.json` so an interruption can be resumed via `/digital-marketing-pro:resume`.
+Run the actions sequentially. **After every action, write a state checkpoint** to `~/.claude-marketing/brands/{slug}/campaigns/{campaign_id}/launch-state.json` so an interruption can be resumed via `/omni-growth-engine:resume`.
 
 Key dependency rules:
 
@@ -176,12 +176,12 @@ Print the launch summary in the conversation:
    CRM record:      {hubspot|salesforce|...} Campaign #{id}
    Window:          {start_date} → {end_date}
    Channels live:   {list with daily totals}
-   Day-1 watchdog:  /digital-marketing-pro:performance-check --watchdog {watchdog_id}
+   Day-1 watchdog:  /omni-growth-engine:performance-check --watchdog {watchdog_id}
 
    📂 Launch record:
       {published_path}
 
-   First check-in: tomorrow morning. Run /digital-marketing-pro:performance-check
+   First check-in: tomorrow morning. Run /omni-growth-engine:performance-check
    to see the day-1 numbers.
 ```
 
@@ -197,7 +197,7 @@ Print the launch summary in the conversation:
 ## Arguments
 
 ```
-/digital-marketing-pro:launch-campaign [--brand <slug>] [--campaign-id <id>]
+/omni-growth-engine:launch-campaign [--brand <slug>] [--campaign-id <id>]
     [--plan-path <path>] [--dry-run] [--resume-from-step <N>] [--skip-internal-kickoff]
 ```
 

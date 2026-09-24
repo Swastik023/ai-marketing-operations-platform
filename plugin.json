@@ -1,14 +1,14 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-  "name": "digital-marketing-pro",
+  "name": "omni-growth-engine",
   "version": "3.31.1",
   "description": "Complete digital marketing operating system \u2014 163 skills and 24 agents covering strategy, content, SEO/AEO, paid media, analytics, and compliance.",
   "author": {
     "name": "Indranil Banerjee",
-    "url": "https://github.com/indranilbanerjee"
+    "url": "https://github.com/swastik-agnihotri"
   },
-  "homepage": "https://github.com/indranilbanerjee/digital-marketing-pro",
-  "repository": "https://github.com/indranilbanerjee/digital-marketing-pro",
+  "homepage": "https://github.com/swastik-agnihotri/omni-growth-engine",
+  "repository": "https://github.com/swastik-agnihotri/omni-growth-engine",
   "license": "MIT",
   "keywords": [
     "marketing",

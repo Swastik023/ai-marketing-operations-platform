@@ -1,6 +1,6 @@
 ---
 name: creative-testing-framework
-description: "Design a structured ad creative testing playbook — prioritized variable matrix, isolated test grid, script-computed sample sizes and minimum budgets per variant, holdout control design, iteration cadence, and winner selection criteria. Plans the testing program; it does not launch or edit live ads. Triggers on \"/digital-marketing-pro:creative-testing-framework\", \"design an A/B test for our ads\", \"our ad creatives fatigue too fast\", \"build a creative testing roadmap\", \"how many conversions per variant do we need\". Reads the brand profile and guidelines, and pairs with /digital-marketing-pro:c2pa-metadata for AI-generated variants headed to EU placements."
+description: "Design a structured ad creative testing playbook — prioritized variable matrix, isolated test grid, script-computed sample sizes and minimum budgets per variant, holdout control design, iteration cadence, and winner selection criteria. Plans the testing program; it does not launch or edit live ads. Triggers on \"/omni-growth-engine:creative-testing-framework\", \"design an A/B test for our ads\", \"our ad creatives fatigue too fast\", \"build a creative testing roadmap\", \"how many conversions per variant do we need\". Reads the brand profile and guidelines, and pairs with /omni-growth-engine:c2pa-metadata for AI-generated variants headed to EU placements."
 user-invocable: true
 triggers:
   - design an A/B test for ads
@@ -13,7 +13,7 @@ triggers:
   - creative optimization testing
 ---
 
-# /digital-marketing-pro:creative-testing-framework
+# /omni-growth-engine:creative-testing-framework
 
 ## Purpose
 
@@ -36,7 +36,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Define testing variables**: Catalog all testable creative elements — headline copy, body copy length, CTA text and color, hero image subject, image style (photo vs. illustration vs. UGC), video hook (first 3 seconds), video length, ad format (static vs. carousel vs. video), color palette, offer framing (discount vs. value vs. urgency), social proof type (testimonial vs. stat vs. badge), and layout composition.
 3. **Prioritize variables by expected impact and ease**: Score each variable on a 2x2 matrix of expected performance impact (high/low) and production effort (high/low). Rank variables so the team tests high-impact, low-effort elements first. Use historical data and platform benchmarks to inform impact estimates where available.
 4. **Design testing matrix**: Build the variable-by-variant grid — for each priority variable, define 2-4 variants to test against the current control. Ensure tests are isolated (one variable per test) unless running deliberate multivariate experiments. Map each test to the appropriate audience segment and platform.
@@ -64,7 +64,7 @@ A structured creative testing framework containing:
 - **Documentation template for results and learnings** — test card format for recording hypothesis, results, significance, learnings, and next steps in a searchable knowledge base
 - **Creative fatigue indicators and refresh triggers** — metrics that signal when a winning creative is losing effectiveness (CTR decline, frequency threshold, engagement drop) with recommended refresh actions
 - **Platform-specific testing best practices** — Meta Advantage+ creative considerations (including Advantage+ Leads, globally available May 2026), Google responsive ad testing nuances, LinkedIn creative specs, TikTok native content requirements, Threads image-only placement (global rollout completing May 2026), and platform-specific budget minimums
-- **AI creative variant production** — When testing variants at scale, use `Nano Banana Pro` for high-fidelity static variants with brand-character consistency (best-in-class on-image text rendering), `Veo 3.1` or `Gemini Omni` for short-form video variants, and `Veo 3.1` specifically when synchronized native audio matters. All AI-generated test variants destined for EU placements must be C2PA-signed via `/digital-marketing-pro:c2pa-metadata` before launch — the pre-publish gate (`/digital-marketing-pro:check`) blocks unsigned AI assets on EU-targeted ad sets. Treat AI-generation cost-per-variant as the new floor for "creative production cost" in your minimum-budget math
+- **AI creative variant production** — When testing variants at scale, use `Nano Banana Pro` for high-fidelity static variants with brand-character consistency (best-in-class on-image text rendering), `Veo 3.1` or `Gemini Omni` for short-form video variants, and `Veo 3.1` specifically when synchronized native audio matters. All AI-generated test variants destined for EU placements must be C2PA-signed via `/omni-growth-engine:c2pa-metadata` before launch — the pre-publish gate (`/omni-growth-engine:check`) blocks unsigned AI assets on EU-targeted ad sets. Treat AI-generation cost-per-variant as the new floor for "creative production cost" in your minimum-budget math
 - **Quarterly testing roadmap** — 12-week plan showing which variables to test in which order, with budget phasing, milestone reviews, and strategic learning goals per quarter
 
 ## Agents Used

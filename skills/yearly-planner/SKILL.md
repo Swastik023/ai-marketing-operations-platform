@@ -1,6 +1,6 @@
 ---
 name: yearly-planner
-description: "Produce the 12-month operational Yearly Planner — the Part 8 calendar companion to the Growth Plan — with quarterly themes, 12 monthly sections (initiatives with owners, key dates, budget, KPI targets), seasonal strategy, campaign and content-pillar calendars, and channel cadence, delivered as markdown, PDF, and XLSX. Triggers on \"/digital-marketing-pro:yearly-planner\", \"produce the yearly planner\", \"month-by-month execution plan\", \"operational calendar for the year\", \"quarterly themes and monthly initiatives\". Requires a completed Growth Plan and Part 7 preparation docs; reads the brand profile for geography-driven seasonality and marks Part 8 complete in the engagement workflow."
+description: "Produce the 12-month operational Yearly Planner — the Part 8 calendar companion to the Growth Plan — with quarterly themes, 12 monthly sections (initiatives with owners, key dates, budget, KPI targets), seasonal strategy, campaign and content-pillar calendars, and channel cadence, delivered as markdown, PDF, and XLSX. Triggers on \"/omni-growth-engine:yearly-planner\", \"produce the yearly planner\", \"month-by-month execution plan\", \"operational calendar for the year\", \"quarterly themes and monthly initiatives\". Requires a completed Growth Plan and Part 7 preparation docs; reads the brand profile for geography-driven seasonality and marks Part 8 complete in the engagement workflow."
 user-invocable: true
 triggers:
   - produce the yearly planner
@@ -14,7 +14,7 @@ engagement-part: "8"
 view-preference: v2-primary
 ---
 
-# /digital-marketing-pro:yearly-planner — Part 8 Operational Companion
+# /omni-growth-engine:yearly-planner — Part 8 Operational Companion
 
 The Yearly Planner complements the Growth Plan with a 12-month operational calendar that ties strategy to date-by-date execution. If the Growth Plan answers *"How will we grow this business?"*, the Yearly Planner answers *"What will we do, week by week, month by month?"*
 
@@ -140,7 +140,7 @@ Save all to `engagements/{id}/part-08-growth-plan/`.
 1. Save all formats to `part-08-growth-plan/`
 2. Mark Part 8 fully completed via `engagement-state.py mark-part-completed --part 8`
 3. Update LIF: Engagement phase = "Strategy approved; Channel Build (Part 9) ready to begin"
-4. Brief: "Yearly Planner complete. Operational calendar covers 12 months with quarterly themes, monthly initiatives, and channel-specific cadence. Recommend reviewing with the client before kicking off Part 9 channel build. /digital-marketing-pro:engagement next to advance."
+4. Brief: "Yearly Planner complete. Operational calendar covers 12 months with quarterly themes, monthly initiatives, and channel-specific cadence. Recommend reviewing with the client before kicking off Part 9 channel build. /omni-growth-engine:engagement next to advance."
 
 ## Examples
 
@@ -159,7 +159,7 @@ Skill response:
 7. Map content pillars: Pillar A 40%, B 25%, C 20%, D 15% of annual production
 8. Generate markdown + PDF + XLSX
 9. Mark Part 8 complete
-10. Brief: "Yearly Planner complete. 12 months, 6 major campaigns, 48 content pieces planned, 4 quarterly review checkpoints. Festive season Q3 has 2x normal budget pacing per Diwali surge. /digital-marketing-pro:engagement next moves to Part 9."
+10. Brief: "Yearly Planner complete. 12 months, 6 major campaigns, 48 content pieces planned, 4 quarterly review checkpoints. Festive season Q3 has 2x normal budget pacing per Diwali surge. /omni-growth-engine:engagement next moves to Part 9."
 ```
 
 ## Related skills

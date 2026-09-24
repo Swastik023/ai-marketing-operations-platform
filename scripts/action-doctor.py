@@ -2,7 +2,7 @@
 """
 action-doctor.py
 ================
-Per-action readiness diagnostic for Digital Marketing Pro.
+Per-action readiness diagnostic for OmniGrowth Engine.
 
 For every action in the connector_resolver ACTION_SPECS table, report:
   - Which connector(s) would unlock it
@@ -169,7 +169,7 @@ def _cowork_routing_status(env_name):
             "configured": False,
             "severity": "urgent",
             "message": "drive-sync-state.py not importable; Cowork brand state will not persist across sessions.",
-            "action": "/digital-marketing-pro:cowork-setup",
+            "action": "/omni-growth-engine:cowork-setup",
         }
     cfg = read_cowork_config()
     if cfg.get("configured"):
@@ -188,7 +188,7 @@ def _cowork_routing_status(env_name):
         "configured": False,
         "severity": "urgent",
         "message": "Cowork sandbox detected but Drive routing is not configured. Brand state will vanish at session end.",
-        "action": "/digital-marketing-pro:cowork-setup",
+        "action": "/omni-growth-engine:cowork-setup",
     }
 
 
@@ -267,7 +267,7 @@ def _format_text_report(brand, rows, counts):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Per-action readiness diagnostic for Digital Marketing Pro."
+        description="Per-action readiness diagnostic for OmniGrowth Engine."
     )
     parser.add_argument("--brand", default="default",
                         help="Brand slug (used for write-side actions; readiness is brand-agnostic)")

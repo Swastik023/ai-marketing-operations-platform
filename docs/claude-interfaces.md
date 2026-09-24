@@ -1,6 +1,6 @@
 # Claude Interface Compatibility Guide
 
-**Digital Marketing Pro v3.17.0**
+**OmniGrowth Engine v3.17.0**
 
 This plugin works in both **Claude Code** and **Claude Cowork** with full feature support. Some components also work in Claude Desktop (without Cowork) and Claude.ai Web, but with significant limitations. This guide is honest about what works where, what degrades, and what you lose entirely.
 
@@ -8,7 +8,7 @@ This plugin works in both **Claude Code** and **Claude Cowork** with full featur
 
 ## Overview
 
-Digital Marketing Pro comprises **163 skills**, **24 specialist agents**, **18 top-level slash commands**, **93 Python scripts**, **14 HTTP MCP connectors**, and **169 reference knowledge files**. Hooks ship empty by default (as of v3.1+) for clean multi-plugin coexistence; the prior 3-phase hook configuration is preserved at `hooks/hooks-reference.example.json` for users who want to re-enable specific lifecycle events.
+OmniGrowth Engine comprises **163 skills**, **24 specialist agents**, **18 top-level slash commands**, **93 Python scripts**, **14 HTTP MCP connectors**, and **169 reference knowledge files**. Hooks ship empty by default (as of v3.1+) for clean multi-plugin coexistence; the prior 3-phase hook configuration is preserved at `hooks/hooks-reference.example.json` for users who want to re-enable specific lifecycle events.
 
 The plugin uses the standard Claude plugin format: `.claude-plugin/plugin.json` manifest, `skills/` directories with SKILL.md frontmatter, `agents/` for specialist agents, `hooks/hooks.json` for lifecycle automation, `scripts/` for Python execution, and `.mcp.json` for live data integrations. This format is supported by both Claude Code and Claude Cowork.
 
@@ -21,7 +21,7 @@ Everything works. Claude Code is the original target platform, and every feature
 ### What works
 
 - **Hooks**: Empty by default as of v3.1+ for clean multi-plugin coexistence. Prior SessionStart / PreToolUse / SessionEnd hook configuration preserved at `hooks/hooks-reference.example.json` — re-enable per-event by copying entries into `hooks/hooks.json` if you want automated brand context injection, content-compliance interception, or insight persistence.
-- **Skills and Commands**: All 18 top-level `/digital-marketing-pro:` slash commands available. All 163 skills (organized into modules like content-engine, seo-audit, aeo-geo, agency-dashboard, compliance, etc.) auto-discoverable via SKILL.md frontmatter routing.
+- **Skills and Commands**: All 18 top-level `/omni-growth-engine:` slash commands available. All 163 skills (organized into modules like content-engine, seo-audit, aeo-geo, agency-dashboard, compliance, etc.) auto-discoverable via SKILL.md frontmatter routing.
 - **Agents**: All 24 specialist agents activate based on conversation context (Marketing Strategist, Content Creator, SEO Specialist, Media Buyer, Analytics Analyst, Brand Guardian, Competitive Intel, PR Outreach, Growth Engineer, Influencer Manager, Email Specialist, CRO Specialist, Social Media Manager, Agency Operations, Marketing Scientist, Localization Specialist, Performance Monitor, Quality Assurance, Memory Manager, CRM Manager, Journey Orchestrator, Intelligence Curator, Market Intelligence, Execution Coordinator). Ongoing competitor monitoring is handled by Competitive Intel in `mode: monitoring` (the former standalone Competitor Intelligence agent merged into it).
 - **Scripts**: All 93 Python scripts run natively — covering brand management, content scoring, campaign tracking, email testing, A/B testing, social optimization, technical SEO auditing, local SEO checking, ROI calculation, budget optimization, CLV analysis, revenue forecasting, GEO/AEO visibility tracking, C2PA content provenance, and more. Requires Python 3.8+ with optional dependencies.
 - **MCP**: 14 HTTP MCP connectors available when env vars are configured (Slack, Canva, Figma, HubSpot, Amplitude, Notion, Ahrefs, SimilarWeb, Klaviyo, Google Calendar, Gmail, Stripe, Asana, Webflow). Additional Cowork-compatible aggregator paths (Pipedream, Composio, Zapier, Make.com) catalogued in `.mcp.json.connectors-reference`.
@@ -65,7 +65,7 @@ Claude Code v2.1.149 (released May 2026) exposes per-model token usage and proje
 - 1M-context single-conversation engagements (Opus 4.7+ and the Claude 5 family — see `skills/engagement-workflow/SKILL.md`) trade more tokens for fewer round-trips — `/usage` confirms whether that tradeoff is net cheaper for your tier.
 - On Pro / 5× / 20× Max plans, `/usage` shows quota burn rate against the rolling 5-hour and weekly windows — the warning to stop firing parallel sub-agents *before* you cap out, not after.
 
-**Where to surface this in client reports**: the `/digital-marketing-pro:agency-dashboard` skill's "team utilization" section now references `/usage` output as the source of truth for Claude Code consumption costs (see the dashboard skill for the workflow).
+**Where to surface this in client reports**: the `/omni-growth-engine:agency-dashboard` skill's "team utilization" section now references `/usage` output as the source of truth for Claude Code consumption costs (see the dashboard skill for the workflow).
 
 ### Best for
 
@@ -75,14 +75,14 @@ All serious marketing work. Ongoing brand management, multi-client agency workfl
 
 ## Claude Cowork (Full Support)
 
-Claude Cowork is Anthropic's agentic desktop assistant, available as part of Claude Desktop on macOS and Windows. Cowork supports the same plugin format as Claude Code, which means **everything in Digital Marketing Pro works in Cowork**.
+Claude Cowork is Anthropic's agentic desktop assistant, available as part of Claude Desktop on macOS and Windows. Cowork supports the same plugin format as Claude Code, which means **everything in OmniGrowth Engine works in Cowork**.
 
 ### What works
 
 Every feature listed in the Claude Code section above also works in Cowork:
 
 - **Hooks**: Ship empty by default (as of v3.1+), so nothing auto-fires — the same clean multi-plugin behavior as Claude Code. If you copy the reference SessionStart / PreToolUse / SessionEnd entries from `hooks/hooks-reference.example.json` back into `hooks/hooks.json`, they fire in Cowork too (auto brand-context injection, content-compliance interception, insight persistence).
-- **Skills and Commands**: All 18 top-level `/digital-marketing-pro:` slash commands and all 163 skills work. Invoke commands by typing `/` in Cowork and navigating to the plugin's commands.
+- **Skills and Commands**: All 18 top-level `/omni-growth-engine:` slash commands and all 163 skills work. Invoke commands by typing `/` in Cowork and navigating to the plugin's commands.
 - **Agents**: All 24 specialist agents activate based on conversation context.
 - **Scripts**: Python scripts run in Cowork's execution environment. If Python or optional dependencies are missing, scripts fall back gracefully (structured JSON with `"fallback": true` and exit code 0) --- the plugin never crashes.
 - **MCP**: All 14 HTTP MCP connectors work when configured with your API credentials.
@@ -100,11 +100,11 @@ Cowork adds capabilities beyond what Claude Code offers for marketing work:
 
 ### Installing in Cowork
 
-There are three ways to install Digital Marketing Pro in Cowork:
+There are three ways to install OmniGrowth Engine in Cowork:
 
 **Method 1: Upload in the Cowork UI**
 
-1. Compress the `digital-marketing-pro/` folder into a ZIP file
+1. Compress the `omni-growth-engine/` folder into a ZIP file
 2. Open Cowork in Claude Desktop
 3. Click **Plugin** in the left sidebar
 4. Click **+** then **Upload**
@@ -118,13 +118,13 @@ If the plugin has been published to the [Claude plugin marketplace](https://clau
 1. Open Cowork
 2. Click **Plugin** in the left sidebar
 3. Click **+** then **Browse plugins**
-4. Search for "Digital Marketing Pro"
+4. Search for "OmniGrowth Engine"
 5. Click **Install**
 
 **Method 3: Install via CLI (if you also have Claude Code)**
 
 ```
-claude plugin install digital-marketing-pro
+claude plugin install omni-growth-engine
 ```
 
 This installs the plugin for both Claude Code and Cowork on the same machine.
@@ -134,7 +134,7 @@ This installs the plugin for both Claude Code and Cowork on the same machine.
 After installing, you need to authorize folder access for persistent brand memory:
 
 1. **Authorize the data folder**: When Cowork first tries to access `~/.claude-marketing/`, it will request folder permission. Grant it. This folder stores your brand profiles, campaign data, and marketing insights.
-2. **Set up your brand**: Type `/digital-marketing-pro:brand-setup` in a Cowork conversation to create your first brand profile.
+2. **Set up your brand**: Type `/omni-growth-engine:brand-setup` in a Cowork conversation to create your first brand profile.
 3. **Configure MCP integrations (optional)**: If you want live data from Google Analytics, HubSpot, or other platforms, set the required environment variables. See the [Integrations Guide](integrations-guide.md).
 
 ### What a Cowork session looks like
@@ -162,9 +162,9 @@ Cowork can chain marketing strategy (from the plugin's knowledge) with document 
 
 ### Cowork vs. Anthropic's official marketing plugin
 
-Anthropic ships a [marketing plugin](https://github.com/anthropics/knowledge-work-plugins) as part of their knowledge-work-plugins collection. Digital Marketing Pro is significantly more comprehensive:
+Anthropic ships a [marketing plugin](https://github.com/anthropics/knowledge-work-plugins) as part of their knowledge-work-plugins collection. OmniGrowth Engine is significantly more comprehensive:
 
-| Capability | Anthropic Marketing Plugin | Digital Marketing Pro |
+| Capability | Anthropic Marketing Plugin | OmniGrowth Engine |
 |---|---|---|
 | Marketing skills | 5 (content, campaigns, brand, competitive, analytics) | 163 skills (16 core modules + atomic skills + context engine) |
 | Slash commands | 7 | 18 top-level commands |
@@ -181,7 +181,7 @@ Anthropic ships a [marketing plugin](https://github.com/anthropics/knowledge-wor
 | Multi-brand switching | No | Yes |
 | Hook system | No | Opt-in (ships empty; reference SessionStart/PreToolUse/SessionEnd config preserved) |
 
-The Anthropic plugin is a good starting point for light marketing use. Digital Marketing Pro is built for marketing professionals and agencies who need persistent brand intelligence, compliance automation, and deep domain expertise.
+The Anthropic plugin is a good starting point for light marketing use. OmniGrowth Engine is built for marketing professionals and agencies who need persistent brand intelligence, compliance automation, and deep domain expertise.
 
 ### Best for
 
@@ -267,7 +267,7 @@ One-off marketing questions, quick content drafts when no other interface is ava
 
 ## Team Collaboration
 
-If multiple team members use Digital Marketing Pro:
+If multiple team members use OmniGrowth Engine:
 
 - **Brand profiles are stored locally** at `~/.claude-marketing/` on each machine. Team members working on the same brand need a shared copy of the brand profile directory. Options include syncing via cloud storage (Dropbox, OneDrive, Google Drive) or version-controlling the brand data in a shared repo.
 - **MCP credentials are per-user.** Each team member must configure their own environment variables. API keys and access tokens should never be shared in plain text.
@@ -280,7 +280,7 @@ If multiple team members use Digital Marketing Pro:
 
 | Feature | Claude Code | Claude Cowork | Claude Desktop (no Cowork) | Claude.ai Web |
 |---|:---:|:---:|:---:|:---:|
-| Slash commands (/digital-marketing-pro:) | Yes | Yes | Depends on plugin support | No |
+| Slash commands (/omni-growth-engine:) | Yes | Yes | Depends on plugin support | No |
 | Brand memory (persistent) | Yes | Yes | No | No |
 | SessionStart hook (auto brand context) | Opt-in | Opt-in | No | No |
 | PreToolUse hook (compliance checking) | Opt-in | Opt-in | No | No |
@@ -333,7 +333,7 @@ If multiple team members use Digital Marketing Pro:
 
 ## Plugin Marketplace
 
-Digital Marketing Pro can be discovered and installed from the [Claude Plugin Marketplace](https://claude.com/plugins). The marketplace supports both Claude Code and Cowork installations.
+OmniGrowth Engine can be discovered and installed from the [Claude Plugin Marketplace](https://claude.com/plugins). The marketplace supports both Claude Code and Cowork installations.
 
 To submit or update the plugin in the marketplace, see the [Claude plugin marketplace documentation](https://code.claude.com/docs/en/plugin-marketplaces).
 
@@ -357,6 +357,6 @@ If you are working in Claude Desktop (without Cowork) or Claude.ai and want to a
 
 ## Summary
 
-Digital Marketing Pro delivers its full value in **Claude Code** and **Claude Cowork**. Both interfaces support every plugin feature: hooks, persistent memory, Python scripts, MCP integrations, slash commands, and specialist agents. Cowork adds visual capabilities (document creation, screen review) on top. Other interfaces can access the knowledge base (169 reference files), but they lose the automation, persistence, and live data connections.
+OmniGrowth Engine delivers its full value in **Claude Code** and **Claude Cowork**. Both interfaces support every plugin feature: hooks, persistent memory, Python scripts, MCP integrations, slash commands, and specialist agents. Cowork adds visual capabilities (document creation, screen review) on top. Other interfaces can access the knowledge base (169 reference files), but they lose the automation, persistence, and live data connections.
 
 For marketing professionals: if you have Claude Pro, Max, Team, or Enterprise, use Cowork for the visual desktop experience or Claude Code for the terminal experience. Both give you the complete plugin.

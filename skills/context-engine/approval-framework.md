@@ -1,6 +1,6 @@
 # Approval Framework — Risk Classification & Approval Rules
 
-Every marketing action executed through the Digital Marketing Pro plugin is classified by risk level. This framework determines whether an action can auto-execute or requires explicit user approval. Agents must evaluate risk before any execution step.
+Every marketing action executed through the OmniGrowth Engine plugin is classified by risk level. This framework determines whether an action can auto-execute or requires explicit user approval. Agents must evaluate risk before any execution step.
 
 ---
 

@@ -1,9 +1,9 @@
 ---
 name: executive-dashboard
-description: "Design an executive marketing dashboard as a build-ready specification — 5-7 north-star metrics with rationale, metric hierarchy, chart choices, alert thresholds, data-source mapping, wireframe layout, drill-down structure, and a mobile variant. It designs the dashboard; it does not build or connect a live one. Triggers on \"/digital-marketing-pro:executive-dashboard\", \"design a CMO dashboard\", \"what metrics should the board see\", \"our exec report is too noisy\", \"create a leadership reporting view\". Reads the brand profile and guidelines; pairs with /digital-marketing-pro:exec-summary for the written companion narrative."
+description: "Design an executive marketing dashboard as a build-ready specification — 5-7 north-star metrics with rationale, metric hierarchy, chart choices, alert thresholds, data-source mapping, wireframe layout, drill-down structure, and a mobile variant. It designs the dashboard; it does not build or connect a live one. Triggers on \"/omni-growth-engine:executive-dashboard\", \"design a CMO dashboard\", \"what metrics should the board see\", \"our exec report is too noisy\", \"create a leadership reporting view\". Reads the brand profile and guidelines; pairs with /omni-growth-engine:exec-summary for the written companion narrative."
 ---
 
-# /digital-marketing-pro:executive-dashboard
+# /omni-growth-engine:executive-dashboard
 
 ## Purpose
 
@@ -24,7 +24,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Identify north-star metrics**: Select 5-7 metrics that directly tie marketing activity to business outcomes — revenue influenced, pipeline generated, customer acquisition cost, lifetime value, market share, brand equity indicators
 3. **Design metric hierarchy**: Organize metrics into three tiers — leading indicators (predict future performance), lagging indicators (confirm past results), and health metrics (signal system stability and sustainability)
 4. **Select visualization type per metric**: Choose the optimal chart type for each metric based on data shape and decision context — trend lines for trajectory, gauges for targets, bar charts for comparisons, sparklines for density

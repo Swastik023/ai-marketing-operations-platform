@@ -1,15 +1,15 @@
 ---
 name: keyword-cluster
-description: "Build a pillar+spokes content cluster plan from seed keywords — SERP-overlap clustering via keyword_cluster.py, intent grouping, a priority-scored build order, an internal-link map with anchor suggestions, and a four-gate quality scorecard (cannibalisation, orphan, coverage, anchor diversity), delivered as a numbered file set ending in PLAN.md. Triggers on \"/digital-marketing-pro:keyword-cluster\", \"cluster these keywords\", \"design our topical hub\", \"are these pages cannibalising each other\", \"plan the pillar pages\". Reads the brand profile and compliance rules to filter banned terms; consumes seeds from /digital-marketing-pro:keyword-research and hands PLAN.md to /digital-marketing-pro:content-brief."
+description: "Build a pillar+spokes content cluster plan from seed keywords — SERP-overlap clustering via keyword_cluster.py, intent grouping, a priority-scored build order, an internal-link map with anchor suggestions, and a four-gate quality scorecard (cannibalisation, orphan, coverage, anchor diversity), delivered as a numbered file set ending in PLAN.md. Triggers on \"/omni-growth-engine:keyword-cluster\", \"cluster these keywords\", \"design our topical hub\", \"are these pages cannibalising each other\", \"plan the pillar pages\". Reads the brand profile and compliance rules to filter banned terms; consumes seeds from /omni-growth-engine:keyword-research and hands PLAN.md to /omni-growth-engine:content-brief."
 argument-hint: "[brand-name or path/to/seeds.csv]"
 user-invocable: true
 ---
 
-# /digital-marketing-pro:keyword-cluster
+# /omni-growth-engine:keyword-cluster
 
 ## Purpose
 
-Take a set of seed keywords and produce a publication-ready cluster plan: pillar pages with their spokes, intent-grouped, prioritised by an opinionated scoring formula, with an internal-link map and a four-gate quality scorecard. Output is structured for direct hand-off to `/digital-marketing-pro:content-brief` or `/digital-marketing-pro:content-engine`.
+Take a set of seed keywords and produce a publication-ready cluster plan: pillar pages with their spokes, intent-grouped, prioritised by an opinionated scoring formula, with an internal-link map and a four-gate quality scorecard. Output is structured for direct hand-off to `/omni-growth-engine:content-brief` or `/omni-growth-engine:content-engine`.
 
 ## Context efficiency
 
@@ -23,12 +23,12 @@ Heavy skill. **Grep before Read** any referenced file, then `Read` only matched 
 - Staging programmatic SEO across hundreds of variants (use this once per topic family)
 - Reorganising an existing site's internal-link graph
 
-**Don't use** when you just need keyword *expansion* (use `/digital-marketing-pro:keyword-research`) or when you need *ranking* / SERP-feature analysis (use `/digital-marketing-pro:rank-monitor`, with `--features` for SERP features).
+**Don't use** when you just need keyword *expansion* (use `/omni-growth-engine:keyword-research`) or when you need *ranking* / SERP-feature analysis (use `/omni-growth-engine:rank-monitor`, with `--features` for SERP features).
 
 ## Brand context (auto-applied)
 
 1. Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`
-2. If no brand exists: ask "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults
+2. If no brand exists: ask "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults
 3. Apply industry-specific guidance from `skills/context-engine/industry-profiles.md`
 4. Apply `skills/context-engine/compliance-rules.md` to filter out banned terminology before clustering
 
@@ -68,7 +68,7 @@ All outputs go to `${CLAUDE_PLUGIN_DATA}/{brand}/seo/keyword-cluster/{YYYY-MM-DD
    - `coverage: fail` → < 80% of seeds clustered. Lower `--overlap` to 0.3 or expand seeds.
    - `anchor_diversity: fail` → pillar names too similar. Rewrite cluster names with synonym variation.
    - `fragmentation_warning: true` (pillar-only > 50%) → overlap threshold too strict. Try `--overlap 0.3` first.
-7. **`06-pillar-pages.md`** — for each cluster with `priority_score >= 0.5`, draft a one-paragraph pillar page brief (intent, audience, length target, key questions to answer). These feed `/digital-marketing-pro:content-brief`.
+7. **`06-pillar-pages.md`** — for each cluster with `priority_score >= 0.5`, draft a one-paragraph pillar page brief (intent, audience, length target, key questions to answer). These feed `/omni-growth-engine:content-brief`.
 8. **`07-internal-link-map.md`** — table view of `internal_link_targets` from the script output. Per cluster: which other clusters to link out to + suggested anchor text. This is the file your dev team or CMS template should consume.
 9. **`08-build-order.md`** — sorted by `priority_score` descending. Recommended build cadence: top 10% in Q1, next 30% in Q2, remainder backlog.
 10. **`PLAN.md`** — single-page summary: stats + scorecard + top 5 priority clusters + handoff to next skill in chain.
@@ -108,11 +108,11 @@ A `fragmentation_warning: true` (pillar-only > 50%) is a **soft** signal — the
 
 This skill is a producer in the chain:
 
-1. `/digital-marketing-pro:keyword-research` — generate seeds
-2. **`/digital-marketing-pro:keyword-cluster`** — *this skill*
-3. `/digital-marketing-pro:content-brief` — consumes `PLAN.md` + `06-pillar-pages.md` to brief each pillar
-4. `/digital-marketing-pro:content-engine` — drafts the content
-5. `/digital-marketing-pro:seo-implement` — applies the internal-link map to the CMS
+1. `/omni-growth-engine:keyword-research` — generate seeds
+2. **`/omni-growth-engine:keyword-cluster`** — *this skill*
+3. `/omni-growth-engine:content-brief` — consumes `PLAN.md` + `06-pillar-pages.md` to brief each pillar
+4. `/omni-growth-engine:content-engine` — drafts the content
+5. `/omni-growth-engine:seo-implement` — applies the internal-link map to the CMS
 
 ## Tips & caveats
 
@@ -131,8 +131,8 @@ This skill is a producer in the chain:
 
 ## See also
 
-- `/digital-marketing-pro:keyword-research` — generates seeds (use first)
-- `/digital-marketing-pro:content-brief` — consumes the cluster plan (use next)
-- `/digital-marketing-pro:seo-implement` — applies internal-link map to CMS
-- `/digital-marketing-pro:seo-drift` — re-run quarterly to detect cluster drift
+- `/omni-growth-engine:keyword-research` — generates seeds (use first)
+- `/omni-growth-engine:content-brief` — consumes the cluster plan (use next)
+- `/omni-growth-engine:seo-implement` — applies internal-link map to CMS
+- `/omni-growth-engine:seo-drift` — re-run quarterly to detect cluster drift
 - `scripts/keyword_cluster.py` — the underlying clustering engine

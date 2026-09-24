@@ -1,15 +1,15 @@
 ---
 name: region-config
-description: "Configure a brand's regional settings — timezone, languages, currency, compliance regulations (GDPR, CCPA, APPI, LGPD, EU AI Act Article 50, and more), local platforms, business hours, holiday calendars, and data-residency rules — written to a persistent per-region config file plus a practical compliance checklist. Downstream commands like content-calendar, email-sequence, and performance-report inherit these settings automatically. Triggers on \"/digital-marketing-pro:region-config\", \"set up the Japan market\", \"what compliance rules apply in the EU\", \"configure timezone and currency for APAC\", \"add a new region for this brand\". Reads and updates the brand profile with the region list and compliance summary."
+description: "Configure a brand's regional settings — timezone, languages, currency, compliance regulations (GDPR, CCPA, APPI, LGPD, EU AI Act Article 50, and more), local platforms, business hours, holiday calendars, and data-residency rules — written to a persistent per-region config file plus a practical compliance checklist. Downstream commands like content-calendar, email-sequence, and performance-report inherit these settings automatically. Triggers on \"/omni-growth-engine:region-config\", \"set up the Japan market\", \"what compliance rules apply in the EU\", \"configure timezone and currency for APAC\", \"add a new region for this brand\". Reads and updates the brand profile with the region list and compliance summary."
 ---
 
-# /digital-marketing-pro:region-config
+# /omni-growth-engine:region-config
 
 ## Purpose
 
 Configure regional and market-specific settings for a brand. Sets the timezone for scheduled content delivery, primary language for content generation, applicable compliance and privacy regulations, preferred local platforms, currency for budget and performance reporting, and business hours for communication scheduling. These settings propagate to all downstream commands so that campaigns, content, and reporting automatically respect regional requirements without manual adjustment each time.
 
-This is a setup/configuration command. It writes persistent configuration files that other commands consume. Once a region is configured, commands like `/digital-marketing-pro:content-calendar`, `/digital-marketing-pro:email-sequence`, `/digital-marketing-pro:paid-advertising`, and `/digital-marketing-pro:performance-report` automatically inherit the region's timezone, language, compliance rules, and platform preferences.
+This is a setup/configuration command. It writes persistent configuration files that other commands consume. Once a region is configured, commands like `/omni-growth-engine:content-calendar`, `/omni-growth-engine:email-sequence`, `/omni-growth-engine:paid-advertising`, and `/omni-growth-engine:performance-report` automatically inherit the region's timezone, language, compliance rules, and platform preferences.
 
 Supports both single-market configurations (e.g., "Japan") and broad regional groupings (e.g., "APAC") depending on how granular the brand's market segmentation needs to be.
 
@@ -31,7 +31,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Check existing regional configs**: Look for existing region configuration files at `~/.claude-marketing/brands/{slug}/regions/`. If the specified region already exists, load it and show current settings — then ask whether to update or replace. If this is a new region, proceed with creation. List all currently configured regions for context.
 3. **Apply compliance rules for the region**: Consult `skills/context-engine/compliance-rules.md` and map applicable regulations — GDPR for EU/EEA/UK markets, CCPA/CPRA for California, PDPA for Singapore and Southeast Asia, LGPD for Brazil, PIPA for South Korea, APPI for Japan, PIPEDA for Canada, and DPDPA (Digital Personal Data Protection Act) for India. For any EU/EEA market, also flag **EU AI Act Article 50** AI-content transparency obligations (applicable 2 August 2026): AI-generated marketing assets must carry machine-readable provenance (see `skills/c2pa-metadata/SKILL.md`) and, for deepfakes or public-interest text, a visible disclosure. Record all applicable regulations with their key requirements (consent mechanisms, data retention limits, opt-out requirements, age restrictions, cookie consent banners, AI-content disclosure). Layer any industry-specific regulations on top.
 4. **Set platform preferences**: Consult `skills/context-engine/team-roles-framework.md` for regional platform recommendations. Merge user-provided local platforms with defaults for the region. Set platform priority order — which platforms receive content first, which are secondary, and which are excluded in this market. Note any platform-specific API or account requirements for the region (e.g., separate WeChat Official Account for China, LINE Business Account for Japan).
@@ -63,7 +63,7 @@ A structured region configuration summary containing:
 - **Active regions list**: Updated list of all configured regions for this brand showing region name, timezone, primary language, currency, and compliance framework — confirming where this new region fits in the overall market footprint
 - **Compliance checklist**: Practical checklist for the marketing team — required disclaimers, consent points, data handling rules, content restrictions, and advertising disclosures specific to this region and industry
 - **Configuration file path**: The saved config location for reference and manual editing if needed
-- **Next steps**: Recommended follow-up actions — configure additional regions, run `/digital-marketing-pro:content-calendar` with the new region settings, or update existing campaigns to comply with newly configured rules
+- **Next steps**: Recommended follow-up actions — configure additional regions, run `/omni-growth-engine:content-calendar` with the new region settings, or update existing campaigns to comply with newly configured rules
 - **Audit trail**: Record of who created or modified the region config, when, and what changed — useful for multi-team environments where configuration changes need accountability
 
 ## Agents Used

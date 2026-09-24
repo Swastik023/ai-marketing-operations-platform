@@ -11,7 +11,7 @@ Takes a set of seed keywords and produces a publication-ready cluster plan: pill
 
 ## Trigger
 
-User runs `/digital-marketing-pro:keyword-cluster` or asks for:
+User runs `/omni-growth-engine:keyword-cluster` or asks for:
 - "Cluster these keywords into a content plan"
 - "Build a pillar/spokes architecture for this topic"
 - "Design a topic hub for X"
@@ -28,7 +28,7 @@ User runs `/digital-marketing-pro:keyword-cluster` or asks for:
 ## Process
 
 1. Load brand context + auto-apply industry / compliance rules
-2. Optionally expand seeds via brand's keyword-research MCP (`/digital-marketing-pro:keyword-research`) if input is < 20 keywords
+2. Optionally expand seeds via brand's keyword-research MCP (`/omni-growth-engine:keyword-research`) if input is < 20 keywords
 3. Filter seeds by min-volume / max-KD / banned-word lists
 4. Fetch top-10 SERPs per keyword via connected rank-tracker (with budget guard at 500-credit threshold)
 5. Run `scripts/keyword_cluster.py` with SERP mode (or lexical fallback)
@@ -50,9 +50,9 @@ Numbered intermediate files under `${CLAUDE_PLUGIN_DATA}/{brand}/seo/keyword-clu
 ## After the cluster
 
 Ask: "Would you like me to:
-- Brief the top pillar pages? (`/digital-marketing-pro:content-brief`)
-- Start writing the highest-priority pillar? (`/digital-marketing-pro:content-engine`)
-- Apply the internal-link map to your CMS? (`/digital-marketing-pro:seo-implement`)
-- Schedule a quarterly re-run via `/digital-marketing-pro:seo-drift`?"
+- Brief the top pillar pages? (`/omni-growth-engine:content-brief`)
+- Start writing the highest-priority pillar? (`/omni-growth-engine:content-engine`)
+- Apply the internal-link map to your CMS? (`/omni-growth-engine:seo-implement`)
+- Schedule a quarterly re-run via `/omni-growth-engine:seo-drift`?"
 
 For the full skill spec including the four quality gates, priority-score formula, and chain handoffs, see [skills/keyword-cluster/SKILL.md](../skills/keyword-cluster/SKILL.md).

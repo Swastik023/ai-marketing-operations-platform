@@ -1,6 +1,6 @@
 # Memory Architecture — Persistent Brand Knowledge System
 
-How the Digital Marketing Pro plugin stores, retrieves, and learns from marketing knowledge across sessions.
+How the OmniGrowth Engine plugin stores, retrieves, and learns from marketing knowledge across sessions.
 
 ---
 
@@ -16,7 +16,7 @@ The plugin uses a **5-layer memory architecture**. Each layer serves a different
 | 4 | Universal Agent Memory | Permanent, cloud-hosted | Supermemory API key | Cross-agent knowledge sharing, institutional learning |
 | 5 | Knowledge Base | Permanent, human-editable | Notion or Google Drive credentials | Team documentation, style guides, SOPs |
 
-> **MCP package reality check (verify before `npx`).** Only some of the packages named below are verified-real on npm as of this release. **Verified-real:** `@pinecone-database/mcp` (Layer 2), `mcp-google-drive` (Layer 5). **Unverified / no known official npm package** — do NOT assume these exist; search npm first, and remember `npx` executes remote code, so verify any package before running it (prefer `/digital-marketing-pro:add-integration` for a custom MCP path): `mcp-server-qdrant` (a package by that name exists but is a likely name-squat — the official Qdrant MCP server ships as Python/`uvx`, not npm), `graphiti-mcp` (Layer 3), `@supermemoryai/supermemory-mcp` (Layer 4), and `@notionhq/mcp-server` (Layer 5 — Notion instead ships a hosted HTTP MCP at `https://mcp.notion.com/mcp`). **DMP bundles no memory MCP** — Layer 1 always works locally; Layers 2-5 only work if you connect your own server.
+> **MCP package reality check (verify before `npx`).** Only some of the packages named below are verified-real on npm as of this release. **Verified-real:** `@pinecone-database/mcp` (Layer 2), `mcp-google-drive` (Layer 5). **Unverified / no known official npm package** — do NOT assume these exist; search npm first, and remember `npx` executes remote code, so verify any package before running it (prefer `/omni-growth-engine:add-integration` for a custom MCP path): `mcp-server-qdrant` (a package by that name exists but is a likely name-squat — the official Qdrant MCP server ships as Python/`uvx`, not npm), `graphiti-mcp` (Layer 3), `@supermemoryai/supermemory-mcp` (Layer 4), and `@notionhq/mcp-server` (Layer 5 — Notion instead ships a hosted HTTP MCP at `https://mcp.notion.com/mcp`). **DMP bundles no memory MCP** — Layer 1 always works locally; Layers 2-5 only work if you connect your own server.
 
 ---
 
@@ -224,7 +224,7 @@ Start simple and add layers as needs grow:
 
 ## Sync Operations
 
-The `/digital-marketing-pro:sync-memory` command synchronizes local data with remote memory layers.
+The `/omni-growth-engine:sync-memory` command synchronizes local data with remote memory layers.
 
 **How it works:**
 1. Reads `insights.json` for the active brand
@@ -244,6 +244,6 @@ The `/digital-marketing-pro:sync-memory` command synchronizes local data with re
 }
 ```
 
-**Recommended cadence:** Run `/digital-marketing-pro:sync-memory` after every major campaign review, quarterly business review, or when switching between brands after significant work. Minimum recommended frequency: weekly for active brands.
+**Recommended cadence:** Run `/omni-growth-engine:sync-memory` after every major campaign review, quarterly business review, or when switching between brands after significant work. Minimum recommended frequency: weekly for active brands.
 
 **Conflict resolution:** Remote memory is append-only. The `content_hash` field prevents duplicate entries. If local data is updated (e.g., an insight is revised), the sync creates a new entry with an `updated_from` reference to the original hash.

@@ -84,7 +84,7 @@ If `mode` is not supplied, infer it from the request (one-off analysis → snaps
   `python "${CLAUDE_PLUGIN_ROOT}/scripts/guidelines-manager.py" --brand {slug} --action get --category restrictions`
   When: Before producing competitive reports — check for competitor-mention rules
 
-For SEO keyword-gap clustering, delegate to **seo-specialist** (or the `/digital-marketing-pro:keyword-cluster` skill) rather than inferring keyword volume/difficulty here.
+For SEO keyword-gap clustering, delegate to **seo-specialist** (or the `/omni-growth-engine:keyword-cluster` skill) rather than inferring keyword volume/difficulty here.
 
 ## MCP Integrations
 
@@ -93,7 +93,7 @@ For SEO keyword-gap clustering, delegate to **seo-specialist** (or the `/digital
 - **google-search-console** (optional): own search performance for share-of-voice comparison against competitor keyword targets
 - **google-ads** (optional): auction insights for impression share, overlap rate, position-above rate
 - **meta-marketing** (optional): auction overlap and audience insights for competitive audience analysis
-- **social-listening** (optional): a social-listening connector for brand-mention monitoring and share of conversation — none ships by default; connect one via `/digital-marketing-pro:add-integration` if needed
+- **social-listening** (optional): a social-listening connector for brand-mention monitoring and share of conversation — none ships by default; connect one via `/omni-growth-engine:add-integration` if needed
 - **moz** (optional): domain authority and SERP-feature tracking — verify the MCP package exists on npm before use
 - **google-sheets** (optional): export competitive matrices, benchmark tables, and tracking reports
 

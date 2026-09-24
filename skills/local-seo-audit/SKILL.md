@@ -1,9 +1,9 @@
 ---
 name: local-seo-audit
-description: "Run a comprehensive local SEO audit — Google Business Profile completeness, NAP consistency, citations, reviews, location pages, local schema, local link opportunities, and competitor benchmarking — scored 0-100 and compiled into a prioritized report with the top 5 quick wins and a 90-day week-by-week action plan. Triggers on \"/digital-marketing-pro:local-seo-audit\", \"audit our local SEO\", \"how healthy is our Google Business Profile\", \"check our citations and NAP\", \"why did we drop out of the local pack\". Runs the local-seo-checker script when Python is available, reads the brand profile and compliance rules, and draws on the /digital-marketing-pro:local-seo reference frameworks for GBP, citations, local content, and multi-location work."
+description: "Run a comprehensive local SEO audit — Google Business Profile completeness, NAP consistency, citations, reviews, location pages, local schema, local link opportunities, and competitor benchmarking — scored 0-100 and compiled into a prioritized report with the top 5 quick wins and a 90-day week-by-week action plan. Triggers on \"/omni-growth-engine:local-seo-audit\", \"audit our local SEO\", \"how healthy is our Google Business Profile\", \"check our citations and NAP\", \"why did we drop out of the local pack\". Runs the local-seo-checker script when Python is available, reads the brand profile and compliance rules, and draws on the /omni-growth-engine:local-seo reference frameworks for GBP, citations, local content, and multi-location work."
 ---
 
-# /digital-marketing-pro:local-seo-audit
+# /omni-growth-engine:local-seo-audit
 
 ## Purpose
 
@@ -24,7 +24,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Load reference files**: Read `skills/local-seo/gbp-optimization.md`, `skills/local-seo/citation-management.md`, `skills/local-seo/local-content.md`, and `skills/local-seo/multi-location.md` for local SEO frameworks
 3. **Run local-seo-checker script** (if Python available): `python "${CLAUDE_PLUGIN_ROOT}/scripts/local-seo-checker.py" --nap '{"name":"...","address":"...","phone":"..."}' --industry {industry}` for NAP consistency and GBP completeness scoring
 4. **GBP profile audit**: Evaluate completeness, category selection, attributes, photos, posts, Q&A, services/products, business description, hours accuracy

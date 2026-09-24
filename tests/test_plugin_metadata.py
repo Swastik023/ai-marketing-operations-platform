@@ -13,7 +13,7 @@ class TestPluginMetadata(unittest.TestCase):
 
     def test_probe_version_has_name_and_version(self):
         v = self.pm.probe_version()
-        self.assertEqual(v.get("name"), "digital-marketing-pro")
+        self.assertEqual(v.get("name"), "omni-growth-engine")
         self.assertTrue(v.get("version", "").startswith("3."))
 
     def test_probe_version_includes_required_min(self):
@@ -44,14 +44,14 @@ class TestPluginMetadata(unittest.TestCase):
     def test_probe_skills_list_has_cowork_setup(self):
         skills = self.pm.probe_skills_list()
         slash = [s["slash_command"] for s in skills]
-        self.assertIn("/digital-marketing-pro:cowork-setup", slash,
+        self.assertIn("/omni-growth-engine:cowork-setup", slash,
                       "v3.12.0 must ship the cowork-setup skill")
 
     def test_probe_commands_list_includes_doctor(self):
         cmds = self.pm.probe_commands_list()
         slash = [c["slash_command"] for c in cmds]
-        self.assertIn("/digital-marketing-pro:doctor", slash)
-        self.assertIn("/digital-marketing-pro:cowork-setup", slash)
+        self.assertIn("/omni-growth-engine:doctor", slash)
+        self.assertIn("/omni-growth-engine:cowork-setup", slash)
 
     def test_all_sections_returns_all_keys(self):
         data = self.pm.all_sections()

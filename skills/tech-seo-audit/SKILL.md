@@ -1,10 +1,10 @@
 ---
 name: tech-seo-audit
-description: "Run a technical SEO audit of a site — crawlability, indexation, Core Web Vitals, redirects, structured data, mobile, security — and produce a severity-ranked report with specific fixes, effort estimates, and quick wins. Triggers on \"/digital-marketing-pro:tech-seo-audit\", \"audit my site's technical SEO\", \"why isn't Google indexing my pages\", \"check Core Web Vitals\", \"find crawl errors on my site\". Reads the brand profile and the /digital-marketing-pro:technical-seo reference files; link-profile work is out of scope — pairs with /digital-marketing-pro:seo-audit for the content and E-E-A-T side and /digital-marketing-pro:backlink-gap for competitor link gaps."
+description: "Run a technical SEO audit of a site — crawlability, indexation, Core Web Vitals, redirects, structured data, mobile, security — and produce a severity-ranked report with specific fixes, effort estimates, and quick wins. Triggers on \"/omni-growth-engine:tech-seo-audit\", \"audit my site's technical SEO\", \"why isn't Google indexing my pages\", \"check Core Web Vitals\", \"find crawl errors on my site\". Reads the brand profile and the /omni-growth-engine:technical-seo reference files; link-profile work is out of scope — pairs with /omni-growth-engine:seo-audit for the content and E-E-A-T side and /omni-growth-engine:backlink-gap for competitor link gaps."
 argument-hint: "[URL]"
 ---
 
-# /digital-marketing-pro:tech-seo-audit
+# /omni-growth-engine:tech-seo-audit
 
 ## Purpose
 
@@ -17,7 +17,7 @@ Run a comprehensive technical SEO audit that covers the infrastructure and code-
 The Google **broad core update that started 21 May 2026** is primarily a quality/relevance reweighting, not a technical signal change. If a brand contacts you about ranking volatility in May/June 2026:
 
 - **Run this audit anyway** — Core Updates frequently surface pre-existing technical debt because relative quality matters more during reweighting. Crawl-budget waste on low-quality pages, broken canonical chains, soft-404s, and orphaned JS-rendered routes all amplify Core Update damage.
-- **Resist crawler/rendering "fixes" pitched as Core Update remedies.** No technical change will undo a Core Update hit if the underlying content quality issue isn't addressed. Pair this audit with `/digital-marketing-pro:seo-audit` (content/E-E-A-T side) — both are needed.
+- **Resist crawler/rendering "fixes" pitched as Core Update remedies.** No technical change will undo a Core Update hit if the underlying content quality issue isn't addressed. Pair this audit with `/omni-growth-engine:seo-audit` (content/E-E-A-T side) — both are needed.
 - **Hreflang, structured data, and Core Web Vitals carry their normal weight** — the update did not change technical priorities, only how much E-E-A-T deficits hurt.
 
 ## Input Required
@@ -33,7 +33,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Load reference files**: Read `skills/technical-seo/core-web-vitals.md`, `skills/technical-seo/crawlability.md`, `skills/technical-seo/site-architecture.md`, `skills/technical-seo/indexation.md`, and `skills/technical-seo/international-seo.md` for detailed technical SEO frameworks
 3. **Run tech-seo-auditor script** (if Python available): `python "${CLAUDE_PLUGIN_ROOT}/scripts/tech-seo-auditor.py" --url {url}` to get automated checks on status codes, redirects, meta tags, and page structure
 4. **Core Web Vitals assessment**: Evaluate LCP, INP, and CLS using known thresholds. If GSC MCP is connected, pull real CrUX data. Otherwise, provide optimization checklist based on CMS/platform
@@ -70,7 +70,7 @@ A structured technical SEO audit report containing:
 - **Don't fix what isn't broken.** A site at 95th-percentile CWV doesn't need re-engineering — that effort is better spent on content. Tech-SEO is necessary, not sufficient.
 - **Robots.txt + meta robots conflicts** are common. If both fire, Google obeys the most restrictive. Always cross-check.
 - **For a Core Update window,** run this audit anyway — Core Updates often surface pre-existing tech debt, but the fixes are background work, not Core Update remedies.
-- **Link-profile work is out of scope for this technical audit.** This audit covers own-domain *technical* health (crawlability, indexation, redirects, canonicals, CWV, schema) — not backlinks. For own-domain link health see `/digital-marketing-pro:seo-audit`; for competitor link-gap analysis hand off to `/digital-marketing-pro:backlink-gap`.
+- **Link-profile work is out of scope for this technical audit.** This audit covers own-domain *technical* health (crawlability, indexation, redirects, canonicals, CWV, schema) — not backlinks. For own-domain link health see `/omni-growth-engine:seo-audit`; for competitor link-gap analysis hand off to `/omni-growth-engine:backlink-gap`.
 
 ## Agents Used
 

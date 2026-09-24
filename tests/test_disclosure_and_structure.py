@@ -131,7 +131,7 @@ class TestSkillWiring(unittest.TestCase):
         self.assertIn("detect_surface.py", CONTENT_ENGINE)
         self.assertIn("Never override the script's answer", CONTENT_ENGINE)
         self.assertIn("a recorded choice, not an omission", CONTENT_ENGINE)
-        self.assertIn("survives `/digital-marketing-pro:publish-blog`", CONTENT_ENGINE)
+        self.assertIn("survives `/omni-growth-engine:publish-blog`", CONTENT_ENGINE)
 
     def test_default_wording_is_vendor_neutral(self):
         texts = re.findall(r"`\*Created with AI assistance[^`]*\*`", CONTENT_ENGINE)

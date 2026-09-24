@@ -73,12 +73,12 @@ class TestVersionConsistency(unittest.TestCase):
     def test_grok_marketplace_entry_matches_canonical_version(self):
         data = json.loads(GROK_MARKETPLACE.read_text(encoding="utf-8"))
         entry = data["plugins"][0]
-        self.assertEqual(entry["name"], "digital-marketing-pro")
+        self.assertEqual(entry["name"], "omni-growth-engine")
         self.assertEqual(entry["version"], self.canonical,
                          f".grok-plugin/marketplace.json v={entry['version']} "
                          f"!= canonical v={self.canonical}")
         self.assertEqual(entry["source"]["url"],
-                         "https://github.com/indranilbanerjee/digital-marketing-pro.git",
+                         "https://github.com/swastik-agnihotri/omni-growth-engine.git",
                          "Grok marketplace source must point at this repo")
 
     def test_hermes_plugin_yaml_matches_canonical_version(self):
@@ -300,31 +300,31 @@ class TestInstallCommandCoverage(unittest.TestCase):
         cls.text = README.read_text(encoding="utf-8")
 
     def test_claude_code_install_command_present(self):
-        self.assertIn("/plugin install digital-marketing-pro@neels-plugins", self.text)
+        self.assertIn("/plugin install omni-growth-engine@neels-plugins", self.text)
 
     def test_codex_install_command_present(self):
-        self.assertIn("codex plugin install digital-marketing-pro", self.text)
+        self.assertIn("codex plugin install omni-growth-engine", self.text)
 
     def test_cursor_install_command_present(self):
-        self.assertIn("/add-plugin digital-marketing-pro", self.text)
+        self.assertIn("/add-plugin omni-growth-engine", self.text)
 
     def test_copilot_install_command_present(self):
-        self.assertIn("copilot plugin install digital-marketing-pro", self.text)
+        self.assertIn("copilot plugin install omni-growth-engine", self.text)
 
     def test_antigravity_install_command_present(self):
         self.assertIn("agy plugin install", self.text)
 
     def test_hermes_install_command_present(self):
-        self.assertIn("hermes plugins install indranilbanerjee/digital-marketing-pro", self.text)
+        self.assertIn("hermes plugins install swastik-agnihotri/omni-growth-engine", self.text)
 
     def test_openclaw_install_command_present(self):
         self.assertIn(
-            "openclaw plugins install git:github.com/indranilbanerjee/digital-marketing-pro",
+            "openclaw plugins install git:github.com/swastik-agnihotri/omni-growth-engine",
             self.text
         )
 
     def test_grok_install_command_present(self):
-        self.assertIn("grok plugin install indranilbanerjee/digital-marketing-pro", self.text)
+        self.assertIn("grok plugin install swastik-agnihotri/omni-growth-engine", self.text)
 
 
 class TestCriticalReadmeSections(unittest.TestCase):

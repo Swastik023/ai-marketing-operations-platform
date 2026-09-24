@@ -1,10 +1,10 @@
 ---
 name: seo-audit
-description: "Run a comprehensive SEO audit across technical health, on-page, content quality, E-E-A-T, link profile, and local SEO — producing dated numbered outputs (crawl inventory through prioritised actions) plus a single-page PLAN.md with an impact-by-effort action plan and a four-gate quality scorecard. Triggers on \"/digital-marketing-pro:seo-audit\", \"audit my site's SEO\", \"why did our rankings drop\", \"check our technical SEO health\", \"how strong is our E-E-A-T\". Reads the brand profile; PLAN.md feeds /digital-marketing-pro:seo-implement, /digital-marketing-pro:seo-plan, and /digital-marketing-pro:seo-drift, with link prospecting handed to /digital-marketing-pro:backlink-gap."
+description: "Run a comprehensive SEO audit across technical health, on-page, content quality, E-E-A-T, link profile, and local SEO — producing dated numbered outputs (crawl inventory through prioritised actions) plus a single-page PLAN.md with an impact-by-effort action plan and a four-gate quality scorecard. Triggers on \"/omni-growth-engine:seo-audit\", \"audit my site's SEO\", \"why did our rankings drop\", \"check our technical SEO health\", \"how strong is our E-E-A-T\". Reads the brand profile; PLAN.md feeds /omni-growth-engine:seo-implement, /omni-growth-engine:seo-plan, and /omni-growth-engine:seo-drift, with link prospecting handed to /omni-growth-engine:backlink-gap."
 argument-hint: "[URL]"
 ---
 
-# /digital-marketing-pro:seo-audit
+# /omni-growth-engine:seo-audit
 
 ## Purpose
 
@@ -33,7 +33,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Technical audit**: Crawlability, indexation, Core Web Vitals, mobile usability, structured data, HTTPS, XML sitemap, robots.txt, canonical tags, redirect chains
 3. **On-page audit**: Title tags, meta descriptions, heading hierarchy, keyword usage, image alt text, internal linking structure, URL structure
 4. **Content audit**: Thin content, duplicate content, content gaps, freshness, E-E-A-T signals (author pages, citations, credentials, first-hand experience)
@@ -44,7 +44,7 @@ The user must provide (or will be prompted for):
        --file "${CLAUDE_PLUGIN_DATA}/{brand}/seo/seo-audit/{date}/links-export.json" \
        --brand-domain {brand-domain}
    ```
-   (`--file` is a JSON array of link objects `[{"url","anchor_text","domain","da","follow"}]`, or pass `--links '<json>'` inline; `--brand-domain` excludes internal links.) For competitor link-gap prospecting, hand off to `/digital-marketing-pro:backlink-gap`.
+   (`--file` is a JSON array of link objects `[{"url","anchor_text","domain","da","follow"}]`, or pass `--links '<json>'` inline; `--brand-domain` excludes internal links.) For competitor link-gap prospecting, hand off to `/omni-growth-engine:backlink-gap`.
 7. Score each dimension on a 1-10 scale
 8. Prioritize findings by impact (high/medium/low) and effort (quick win/medium/major project)
 9. Generate the audit report with actionable recommendations
@@ -97,10 +97,10 @@ Downstream skills (`seo-implement`, `seo-plan`, `content-engine`) consume `PLAN.
 
 - **Upstream:** brand profile + (optional) prior `tech-seo-audit`, `aeo-audit` outputs
 - **Downstream:**
-  - `/digital-marketing-pro:seo-implement` — applies the top-N findings to CMS / dev backlog
-  - `/digital-marketing-pro:seo-plan` — consumes via dispatcher pillar scoring
-  - `/digital-marketing-pro:backlink-gap` — for the link-prospect side that `05-link-profile.md` only covers from the own-domain angle
-  - `/digital-marketing-pro:seo-drift` — next quarter, compare two audit snapshots
+  - `/omni-growth-engine:seo-implement` — applies the top-N findings to CMS / dev backlog
+  - `/omni-growth-engine:seo-plan` — consumes via dispatcher pillar scoring
+  - `/omni-growth-engine:backlink-gap` — for the link-prospect side that `05-link-profile.md` only covers from the own-domain angle
+  - `/omni-growth-engine:seo-drift` — next quarter, compare two audit snapshots
 
 ## Tips & caveats
 
@@ -108,7 +108,7 @@ Downstream skills (`seo-implement`, `seo-plan`, `content-engine`) consume `PLAN.
 - **Don't audit at the URL level for sites > 10k pages.** Sample template-typically (cluster by template, audit one representative URL per template, generalise).
 - **E-E-A-T scoring is judgement, not measurement.** Two senior SEOs will disagree by ~1 point per dimension on the same site. Calibrate against the brand's industry: a 7/10 author signal is excellent for SaaS but minimum-viable for a YMYL health publisher.
 - **Local SEO dimension** only applies if the brand profile has `business_model: local` or `target_markets` includes specific geographies with physical service. Otherwise skip.
-- **The link-profile dimension here is own-domain health** (broken links, redirect chains, anchor-text distribution on inbound links). For competitor link-gap analysis, hand off to `/digital-marketing-pro:backlink-gap` — don't try to do both in this audit.
+- **The link-profile dimension here is own-domain health** (broken links, redirect chains, anchor-text distribution on inbound links). For competitor link-gap analysis, hand off to `/omni-growth-engine:backlink-gap` — don't try to do both in this audit.
 
 ## Agents Used
 

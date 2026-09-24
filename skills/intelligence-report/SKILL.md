@@ -1,6 +1,6 @@
 ---
 name: intelligence-report
-description: "Generate an intelligence briefing from the brand's compound intelligence base — total learnings with confidence distribution, cross-agent patterns by channel, audience, and objective, actionable playbooks synthesized from proven strategies, stale learnings flagged for revalidation, and a 0-100 compound intelligence maturity score. Triggers on \"/digital-marketing-pro:intelligence-report\", \"what have we learned across campaigns\", \"summarize our marketing intelligence\", \"generate a playbook for the product launch\", \"where are our knowledge gaps\". Reads the brand profile and pulls stats, patterns, and playbooks from intelligence-graph.py; suited to quarterly planning, strategy reviews, and onboarding."
+description: "Generate an intelligence briefing from the brand's compound intelligence base — total learnings with confidence distribution, cross-agent patterns by channel, audience, and objective, actionable playbooks synthesized from proven strategies, stale learnings flagged for revalidation, and a 0-100 compound intelligence maturity score. Triggers on \"/omni-growth-engine:intelligence-report\", \"what have we learned across campaigns\", \"summarize our marketing intelligence\", \"generate a playbook for the product launch\", \"where are our knowledge gaps\". Reads the brand profile and pulls stats, patterns, and playbooks from intelligence-graph.py; suited to quarterly planning, strategy reviews, and onboarding."
 user-invocable: true
 triggers:
   - generate marketing intelligence report
@@ -13,7 +13,7 @@ triggers:
   - what patterns have we identified
 ---
 
-# /digital-marketing-pro:intelligence-report
+# /omni-growth-engine:intelligence-report
 
 ## Purpose
 
@@ -28,7 +28,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand positioning, channel mix, campaign history, and strategic objectives. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand positioning, channel mix, campaign history, and strategic objectives. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Get intelligence stats**: Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/intelligence-graph.py" --brand {slug} --action get-stats` to retrieve the intelligence base overview — total learnings captured, learnings by agent and channel, confidence score distribution (high, moderate, low), date range of intelligence, and most recent learning timestamp.
 3. **Get cross-agent patterns**: Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/intelligence-graph.py" --brand {slug} --action get-patterns --dimension channel` (repeat with `--dimension audience` and `--dimension objective`) for key dimensions — channel performance patterns, audience response patterns, timing and seasonality patterns, creative and messaging patterns, and budget efficiency patterns. If a focus area was specified, weight pattern retrieval toward that dimension. Identify patterns that span multiple agents (e.g., a timing pattern confirmed by both the email specialist and social media manager).
 4. **Generate playbooks**: If a playbook request was provided, run `python "${CLAUDE_PLUGIN_ROOT}/scripts/intelligence-graph.py" --brand {slug} --action export-playbook --channel {channel} --min-confidence 0.6` to synthesize the highest-confidence learnings for that channel into a step-by-step actionable playbook. (There is no free-text `--scenario` filter — interpret the requested scenario to choose the `--channel`, then build the narrative around the returned learnings.) Each playbook step references the specific learnings and confidence levels that support it. If no playbook was requested, generate a summary of the top three available playbooks based on the strongest pattern clusters.

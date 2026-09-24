@@ -1,9 +1,9 @@
 ---
 name: martech-audit
-description: "Audit the marketing technology stack — map every tool to 11 core functions, flag gaps and redundant overlaps with wasted-spend estimates, score integration health and data silos, rate stack maturity on a 5-level scale, and deliver consolidation recommendations with ROI projections and a phased 0-30-day / 1-3-month / 3-12-month implementation roadmap. Triggers on \"/digital-marketing-pro:martech-audit\", \"audit our martech stack\", \"are we paying for overlapping tools\", \"what's missing from our marketing stack\", \"help us consolidate platforms\". Assessment and recommendations only — it changes no live systems and buys nothing. Reads the brand profile for industry benchmarking and compliance constraints."
+description: "Audit the marketing technology stack — map every tool to 11 core functions, flag gaps and redundant overlaps with wasted-spend estimates, score integration health and data silos, rate stack maturity on a 5-level scale, and deliver consolidation recommendations with ROI projections and a phased 0-30-day / 1-3-month / 3-12-month implementation roadmap. Triggers on \"/omni-growth-engine:martech-audit\", \"audit our martech stack\", \"are we paying for overlapping tools\", \"what's missing from our marketing stack\", \"help us consolidate platforms\". Assessment and recommendations only — it changes no live systems and buys nothing. Reads the brand profile for industry benchmarking and compliance constraints."
 ---
 
-# /digital-marketing-pro:martech-audit
+# /omni-growth-engine:martech-audit
 
 ## Purpose
 
@@ -25,7 +25,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Map current stack to marketing functions**: Categorize every tool across 11 core functions — CRM, email/marketing automation, analytics/BI, paid advertising, social media management, CMS, attribution/tracking, data/CDP, content creation, SEO, and customer support
 3. **Identify gaps**: Flag marketing functions with no tool coverage, assess the business impact of each gap, and recommend solutions at multiple price points
 4. **Identify overlaps**: Detect multiple tools serving the same function, quantify redundant license costs, and estimate wasted spend from feature duplication

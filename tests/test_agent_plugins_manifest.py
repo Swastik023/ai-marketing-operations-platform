@@ -21,7 +21,7 @@ class TestRootManifest(unittest.TestCase):
     def test_schema_and_name(self):
         self.assertEqual(self.m["$schema"],
                          "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json")
-        self.assertEqual(self.m["name"], "digital-marketing-pro")
+        self.assertEqual(self.m["name"], "omni-growth-engine")
 
     def test_version_matches_claude_manifest(self):
         claude = json.loads((REPO / ".claude-plugin" / "plugin.json")

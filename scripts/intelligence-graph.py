@@ -2,7 +2,7 @@
 """
 intelligence-graph.py
 =====================
-Compound marketing intelligence system for Digital Marketing Pro.
+Compound marketing intelligence system for OmniGrowth Engine.
 
 Stores structured learnings from agents, queries them by context, tracks
 confidence over time with evidence, synthesizes cross-agent patterns,
@@ -76,7 +76,7 @@ def _load_all_learnings(active_dir):
 def _brand_check(slug):
     brand_dir = BRANDS_DIR / slug
     if not brand_dir.exists():
-        return {"error": f"Brand '{slug}' not found. Run /digital-marketing-pro:brand-setup first."}
+        return {"error": f"Brand '{slug}' not found. Run /omni-growth-engine:brand-setup first."}
     return None
 
 
@@ -431,7 +431,7 @@ def apply_time_decay(slug, decay_rate):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Intelligence Graph — Compound marketing intelligence system for Digital Marketing Pro"
+        description="Intelligence Graph — Compound marketing intelligence system for OmniGrowth Engine"
     )
     parser.add_argument("--brand", required=True, help="Brand slug")
     parser.add_argument("--action", required=True,

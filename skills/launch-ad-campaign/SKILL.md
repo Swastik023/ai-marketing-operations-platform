@@ -1,11 +1,11 @@
 ---
 name: launch-ad-campaign
-description: "Create and launch a paid ad campaign on Google, Meta, LinkedIn, or TikTok through the connected ad-platform MCP — campaign structure, audience targeting, bid strategy, negative targeting, creative quality scoring, compliance review, and a post-launch monitoring schedule. A mandatory execution gate shows the full spend summary and requires an explicit typed yes before anything goes live; budgets over brand thresholds force re-confirmation and every approval is recorded via approval-manager.py. Triggers on \"/digital-marketing-pro:launch-ad-campaign\", \"launch the Google Ads campaign\", \"put these Meta ads live\", \"start the LinkedIn campaign tomorrow\", \"deploy our TikTok ads\". Reads the brand profile's budget thresholds, guidelines, and agency SOPs; it is the paid-ads subset that /digital-marketing-pro:launch-campaign delegates to."
+description: "Create and launch a paid ad campaign on Google, Meta, LinkedIn, or TikTok through the connected ad-platform MCP — campaign structure, audience targeting, bid strategy, negative targeting, creative quality scoring, compliance review, and a post-launch monitoring schedule. A mandatory execution gate shows the full spend summary and requires an explicit typed yes before anything goes live; budgets over brand thresholds force re-confirmation and every approval is recorded via approval-manager.py. Triggers on \"/omni-growth-engine:launch-ad-campaign\", \"launch the Google Ads campaign\", \"put these Meta ads live\", \"start the LinkedIn campaign tomorrow\", \"deploy our TikTok ads\". Reads the brand profile's budget thresholds, guidelines, and agency SOPs; it is the paid-ads subset that /omni-growth-engine:launch-campaign delegates to."
 disable-model-invocation: false
 argument-hint: "[platform]"
 ---
 
-# /digital-marketing-pro:launch-ad-campaign
+# /omni-growth-engine:launch-ad-campaign
 
 ## Purpose
 
@@ -39,7 +39,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Verify budget against brand thresholds**: Check the campaign budget against `budget_range` in `profile.json`. If the daily or lifetime budget exceeds the brand's defined maximum, halt and require explicit re-confirmation from the user with the exact dollar amount displayed prominently. This safeguard cannot be bypassed — it protects against accidental overspend.
 3. **Verify ad platform connection**: Check which ad platform MCP server is connected and confirm it matches the user's target platform. Verify conversion tracking pixel or tag is active on the brand's website. If not connected, instruct the user to configure the MCP server and tracking first.
 4. **Build campaign structure**: Design the campaign hierarchy per platform conventions — campaign level (objective, budget, schedule), ad group or ad set level (audience, placement, bid), and ad level (creative). Apply naming conventions from brand profile or agency SOPs for clean reporting. Structure ad groups by audience segment, keyword theme, or funnel stage.

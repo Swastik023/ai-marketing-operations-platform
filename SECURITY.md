@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-The latest minor release of Digital Marketing Pro receives security fixes. Older minor versions are not patched — please update first.
+The latest minor release of OmniGrowth Engine receives security fixes. Older minor versions are not patched — please update first.
 
 | Version | Supported |
 |---------|-----------|
@@ -16,7 +16,7 @@ The latest minor release of Digital Marketing Pro receives security fixes. Older
 
 ### How to report
 
-Use GitHub's [Private Security Advisory](https://github.com/indranilbanerjee/digital-marketing-pro/security/advisories/new) feature to report privately. The maintainer will be notified directly and can collaborate with you on a fix before disclosure.
+Use GitHub's [Private Security Advisory](https://github.com/swastik-agnihotri/omni-growth-engine/security/advisories/new) feature to report privately. The maintainer will be notified directly and can collaborate with you on a fix before disclosure.
 
 If you cannot use Private Security Advisories, contact the maintainer via the email listed on [indranil.in](https://indranil.in) with the subject line `[DMP Security]`.
 

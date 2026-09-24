@@ -9,7 +9,7 @@ SKILL.md exceeds the configured threshold (default 500 lines).
 
 Used by:
 - pre-commit-style CI on push
-- /digital-marketing-pro:doctor extended diagnostic
+- /omni-growth-engine:doctor extended diagnostic
 - ad-hoc local sanity check before bumping a release
 
 Usage:

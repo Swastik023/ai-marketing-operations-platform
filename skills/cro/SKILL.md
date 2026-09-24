@@ -1,6 +1,6 @@
 ---
 name: cro
-description: "Audit landing pages, forms, pricing pages, and checkout flows for conversion killers, and design statistically sound A/B tests — ICE-prioritized recommendations, hypothesis templates, and script-computed sample sizes and significance checks. Advises and plans; it does not edit your site or run the tests. Triggers on \"/digital-marketing-pro:cro\", \"audit this landing page\", \"why is our conversion rate so low\", \"how long should this A/B test run\", \"reduce cart abandonment\". Reads the brand profile, industry benchmarks, and campaign history before making recommendations."
+description: "Audit landing pages, forms, pricing pages, and checkout flows for conversion killers, and design statistically sound A/B tests — ICE-prioritized recommendations, hypothesis templates, and script-computed sample sizes and significance checks. Advises and plans; it does not edit your site or run the tests. Triggers on \"/omni-growth-engine:cro\", \"audit this landing page\", \"why is our conversion rate so low\", \"how long should this A/B test run\", \"reduce cart abandonment\". Reads the brand profile, industry benchmarks, and campaign history before making recommendations."
 ---
 
 # CRO (Conversion Rate Optimization)
@@ -32,7 +32,7 @@ Before producing any marketing output from this module:
 5. **Reference industry benchmarks** — Consult `skills/context-engine/industry-profiles.md` for the brand's industry
 6. **Use platform specs** — Reference `skills/context-engine/platform-specs.md` for character limits and format requirements
 7. **Check campaign history** — Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-tracker.py" --brand {slug} --action list-campaigns` before planning new work
-8. **If no brand exists**, say: "No brand profile found. Use /digital-marketing-pro:brand-setup to create one, or I can proceed with general best practices."
+8. **If no brand exists**, say: "No brand profile found. Use /omni-growth-engine:brand-setup to create one, or I can proceed with general best practices."
 9. **Check brand guidelines** — If `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` exists, load and enforce: `restrictions.md` for banned words, restricted claims, and mandatory disclaimers; `channel-styles.md` for channel-specific tone overrides (may differ from base voice); `messaging.md` for approved key messages, taglines, and positioning language; `voice-and-tone.md` for detailed voice rules beyond the 4 numeric scores. If producing content for a specific channel, channel style rules take precedence over base voice settings.
 
 Do not ask the user for information that already exists in their brand profile.

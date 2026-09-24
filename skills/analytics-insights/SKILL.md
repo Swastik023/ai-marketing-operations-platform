@@ -1,6 +1,6 @@
 ---
 name: analytics-insights
-description: "Marketing measurement module — builds KPI trees per business model, reporting templates (weekly, monthly, QBR, campaign), anomaly root-cause diagnosis, MMM and incrementality guidance, dark-social tracking, and privacy-first cookieless measurement architecture, including the GA4 AI Assistant channel group for attributing AI-referred traffic. Triggers on \"/digital-marketing-pro:analytics-insights\", \"why did traffic drop\", \"define our KPIs\", \"design an executive dashboard\", \"can we do marketing mix modeling\". Reads the brand profile, industry benchmarks, and campaign history; pairs with /digital-marketing-pro:gsc-ai-performance and /digital-marketing-pro:aeo-audit to triangulate AI-surface impressions against actual traffic."
+description: "Marketing measurement module — builds KPI trees per business model, reporting templates (weekly, monthly, QBR, campaign), anomaly root-cause diagnosis, MMM and incrementality guidance, dark-social tracking, and privacy-first cookieless measurement architecture, including the GA4 AI Assistant channel group for attributing AI-referred traffic. Triggers on \"/omni-growth-engine:analytics-insights\", \"why did traffic drop\", \"define our KPIs\", \"design an executive dashboard\", \"can we do marketing mix modeling\". Reads the brand profile, industry benchmarks, and campaign history; pairs with /omni-growth-engine:gsc-ai-performance and /omni-growth-engine:aeo-audit to triangulate AI-surface impressions against actual traffic."
 ---
 
 # Analytics & Insights
@@ -12,12 +12,12 @@ Google Analytics 4 added a new **default channel group called "AI Assistant"** o
 - Categorizes the session under the **AI Assistant channel group**
 - Sets the **Medium dimension to `ai-assistant`**
 
-This is the **attribution-side counterpart** to the new GSC AI Performance Report (rolled out 3 June 2026 — see `/digital-marketing-pro:gsc-ai-performance`). Because the GSC AI report intentionally excludes click data, the GA4 AI Assistant channel is currently the cleanest path to attribute *actual traffic* coming from generative AI surfaces.
+This is the **attribution-side counterpart** to the new GSC AI Performance Report (rolled out 3 June 2026 — see `/omni-growth-engine:gsc-ai-performance`). Because the GSC AI report intentionally excludes click data, the GA4 AI Assistant channel is currently the cleanest path to attribute *actual traffic* coming from generative AI surfaces.
 
 **Recommended GA4 setup checks** when onboarding a brand:
 
 1. **Confirm the channel group is live in the property.** Newer GA4 properties get it automatically; older ones may need it to appear after Google's backfill completes. If the brand reports their channel reports look unchanged after 13 May, check explore reports filtered by `sessionDefaultChannelGroup = "AI Assistant"`.
-2. **Add the AI Assistant channel to custom reports + dashboards** — for any brand running an AEO program (`/digital-marketing-pro:aeo-geo`, `/digital-marketing-pro:aeo-audit`), the AI Assistant channel trend is now a primary KPI alongside organic search clicks.
+2. **Add the AI Assistant channel to custom reports + dashboards** — for any brand running an AEO program (`/omni-growth-engine:aeo-geo`, `/omni-growth-engine:aeo-audit`), the AI Assistant channel trend is now a primary KPI alongside organic search clicks.
 3. **Don't merge AI Assistant into "Organic Search" or "Direct".** Some legacy reporting templates roll AI traffic into Direct (because referrers weren't always present) or Organic Search (because answer engines feel "search-like"). Both are misattributions now — the AI Assistant channel is the authoritative bucket.
 4. **Reconcile with `aeo-audit` outputs and the GSC AI report.** Three data sources, three different views:
    - `aeo-audit` (synthetic probing) — what AI engines *could* say about the brand
@@ -54,7 +54,7 @@ Before producing any marketing output from this module:
 5. **Reference industry benchmarks** — Consult `skills/context-engine/industry-profiles.md` for the brand's industry
 6. **Use platform specs** — Reference `skills/context-engine/platform-specs.md` for character limits and format requirements
 7. **Check campaign history** — Run `python campaign-tracker.py --brand {slug} --action list-campaigns` before planning new work
-8. **If no brand exists**, say: "No brand profile found. Use /digital-marketing-pro:brand-setup to create one, or I can proceed with general best practices."
+8. **If no brand exists**, say: "No brand profile found. Use /omni-growth-engine:brand-setup to create one, or I can proceed with general best practices."
 9. **Check brand guidelines** — If `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` exists, load and enforce: `restrictions.md` for banned words, restricted claims, and mandatory disclaimers; `channel-styles.md` for channel-specific tone overrides (may differ from base voice); `messaging.md` for approved key messages, taglines, and positioning language; `voice-and-tone.md` for detailed voice rules beyond the 4 numeric scores. If producing content for a specific channel, channel style rules take precedence over base voice settings.
 
 Do not ask the user for information that already exists in their brand profile.

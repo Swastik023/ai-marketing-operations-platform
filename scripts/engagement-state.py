@@ -18,7 +18,7 @@ Capabilities:
 - Output engagement summary / file tree
 
 Storage:
-    Default workspace: $CLAUDE_PLUGIN_DATA/digital-marketing-pro/brands/{brand}/engagements/{id}/
+    Default workspace: $CLAUDE_PLUGIN_DATA/omni-growth-engine/brands/{brand}/engagements/{id}/
     Fallback workspace: ~/.claude-marketing/brands/{brand}/engagements/{id}/
 
 Usage:
@@ -35,7 +35,7 @@ Usage:
 All commands print JSON output to stdout; errors go to stderr with exit code 1.
 
 Author: Indranil Banerjee
-Plugin: Digital Marketing Pro
+Plugin: OmniGrowth Engine
 """
 
 from __future__ import annotations
@@ -104,7 +104,7 @@ def now_iso() -> str:
 def workspace_root() -> Path:
     """Return the workspace root. Delegates to the shared _common canon so all
     scripts resolve to the SAME place (honours CLAUDE_MARKETING_HOME for tests,
-    CLAUDE_PLUGIN_DATA/digital-marketing-pro when that dir exists, else
+    CLAUDE_PLUGIN_DATA/omni-growth-engine when that dir exists, else
     ~/.claude-marketing)."""
     return _common.workspace_root()
 
@@ -792,7 +792,7 @@ def cmd_list_engagements(args: argparse.Namespace) -> None:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="engagement-state.py",
-        description="Engagement state management for the Digital Marketing Pro plugin's 12-Part methodology.",
+        description="Engagement state management for the OmniGrowth Engine plugin's 12-Part methodology.",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 

@@ -1,6 +1,6 @@
 # Data Analysis & Insights
 
-How Digital Marketing Pro collects, stores, and leverages marketing data across sessions to make every recommendation smarter than the last.
+How OmniGrowth Engine collects, stores, and leverages marketing data across sessions to make every recommendation smarter than the last.
 
 **Audience:** Marketing analysts and data-driven marketers who want to understand the plugin's data infrastructure, how insights accumulate, and how to query historical performance for better decision-making.
 
@@ -51,7 +51,7 @@ Future Sessions (insights inform new strategies)
 | Campaign plans | `~/.claude-marketing/brands/{slug}/campaigns/` | Individual JSON files + `_index.json` |
 | Performance snapshots | `~/.claude-marketing/brands/{slug}/performance/` | Timestamped JSON files |
 | Marketing insights | `~/.claude-marketing/brands/{slug}/insights.json` | Rolling 200-entry JSON array |
-| Brand profile | `~/.claude-marketing/brands/{slug}/profile.json` | JSON (created via `/digital-marketing-pro:brand-setup`) |
+| Brand profile | `~/.claude-marketing/brands/{slug}/profile.json` | JSON (created via `/omni-growth-engine:brand-setup`) |
 
 The key principle: local files serve as the plugin's memory. Anything worth keeping is saved to `~/.claude-marketing/` so it survives between sessions and informs future work.
 
@@ -63,10 +63,10 @@ Campaign data moves through three phases: creation, tracking, and historical ref
 
 ### Phase 1: Creating a Campaign
 
-When you run `/digital-marketing-pro:campaign-plan`, the plugin generates a complete campaign plan and saves it automatically:
+When you run `/omni-growth-engine:campaign-plan`, the plugin generates a complete campaign plan and saves it automatically:
 
 ```
-You: /digital-marketing-pro:campaign-plan
+You: /omni-growth-engine:campaign-plan
 
   Plugin creates a structured campaign plan
   Saved: campaigns/q2-retention-20260415.json
@@ -123,10 +123,10 @@ The campaign index (`_index.json`) provides fast lookup without loading every fi
 
 ### Phase 2: Tracking Performance
 
-When you run `/digital-marketing-pro:performance-report` for an active campaign, the plugin saves a timestamped snapshot:
+When you run `/omni-growth-engine:performance-report` for an active campaign, the plugin saves a timestamped snapshot:
 
 ```
-You: /digital-marketing-pro:performance-report for the Q2 retention campaign
+You: /omni-growth-engine:performance-report for the Q2 retention campaign
 
   Performance snapshot saved: performance/q2-retention-20260415-143022.json
   Compared against original campaign KPIs
@@ -196,7 +196,7 @@ The plugin builds a persistent knowledge base of marketing learnings that compou
 Marketing agents distil 1-3 key learnings from a session and save each via `campaign-tracker.py --action save-insight`. As of v3.1+ this is opt-in rather than a global hook — choose whichever fits your workflow:
 
 1. Set `auto_save_insights: true` in the brand profile and agents save learnings as they go (via `auto-save-insight.py`)
-2. Run `/digital-marketing-pro:sync-memory` to flush session learnings on demand
+2. Run `/omni-growth-engine:sync-memory` to flush session learnings on demand
 3. Re-enable the reference SessionEnd hook (ships disabled by default — see [docs/v3.2-opt-ins.md](v3.2-opt-ins.md)) to save automatically at session end
 
 Each save summarizes the learning and reports what was recorded.
@@ -410,7 +410,7 @@ Performance snapshots are not just single data points. When you take multiple sn
 
 ### How Snapshots Build a Picture
 
-Each time you run `/digital-marketing-pro:performance-report`, a new timestamped file is saved:
+Each time you run `/omni-growth-engine:performance-report`, a new timestamped file is saved:
 
 ```
 performance/
@@ -541,7 +541,7 @@ Understanding what the data layer does not do is just as important as knowing wh
 | No cross-brand insight sharing | Cannot auto-apply learning from Brand A to Brand B | Manually reference across brands: "Apply what we learned from Brand A's email strategy" |
 | Performance data not aggregated | Each snapshot is an independent file, not a time-series database | Ask the plugin to compare multiple snapshots; it loads and compares them on the fly |
 | MCP server dependency for live data | Without connected MCP servers, the plugin relies on manually provided metrics | Connect GA4, GSC, and ad platform MCP servers for automated data ingestion |
-| No automatic anomaly alerting | The plugin detects anomalies during analysis but does not push alerts between sessions | Run `/digital-marketing-pro:performance-report` regularly to catch issues; the plugin flags anomalies when it sees them |
+| No automatic anomaly alerting | The plugin detects anomalies during analysis but does not push alerts between sessions | Run `/omni-growth-engine:performance-report` regularly to catch issues; the plugin flags anomalies when it sees them |
 
 ### What This Means in Practice
 
@@ -551,7 +551,7 @@ The sweet spot is using the plugin's data layer for **institutional knowledge** 
 
 ---
 
-*Digital Marketing Pro v3.17.0 -- Data Analysis & Insights Guide*
+*OmniGrowth Engine v3.17.0 -- Data Analysis & Insights Guide*
 
 ---
 
@@ -645,7 +645,7 @@ python scripts/engagement-state.py lif-show --brand acme-corp --id 2026-q2
 python scripts/engagement-state.py file-tree --brand acme-corp --id 2026-q2
 ```
 
-For interactive use, the same operations are exposed through `/digital-marketing-pro:engagement` subcommands.
+For interactive use, the same operations are exposed through `/omni-growth-engine:engagement` subcommands.
 
 ### 8.4 What This Means for Analytics and Insights
 

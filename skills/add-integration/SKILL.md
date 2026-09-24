@@ -1,14 +1,14 @@
 ---
 name: add-integration
-description: "Walk through adding a custom MCP server integration to the plugin — searches npm for an existing MCP package (or scaffolds a custom server from the plugin's guide), generates the exact .mcp.json entry, sets up environment-variable credentials, tests connectivity, and documents the tools the new server exposes. Triggers on \"/digital-marketing-pro:add-integration\", \"connect Ahrefs to the plugin\", \"add a new MCP server\", \"integrate our internal API\", \"hook up Stripe data\". Reads the brand profile and agency credential profiles at ~/.claude-marketing/credentials/ to map client-specific keys; custom builds follow skills/context-engine/custom-mcp-guide.md."
+description: "Walk through adding a custom MCP server integration to the plugin — searches npm for an existing MCP package (or scaffolds a custom server from the plugin's guide), generates the exact .mcp.json entry, sets up environment-variable credentials, tests connectivity, and documents the tools the new server exposes. Triggers on \"/omni-growth-engine:add-integration\", \"connect Ahrefs to the plugin\", \"add a new MCP server\", \"integrate our internal API\", \"hook up Stripe data\". Reads the brand profile and agency credential profiles at ~/.claude-marketing/credentials/ to map client-specific keys; custom builds follow skills/context-engine/custom-mcp-guide.md."
 argument-hint: "[service-name]"
 ---
 
-# /digital-marketing-pro:add-integration
+# /omni-growth-engine:add-integration
 
 ## Purpose
 
-Guide users through adding a custom MCP server integration to the Digital Marketing Pro plugin. Search for existing MCP packages that provide the desired service connection, configure the server entry in `.mcp.json` with proper command, arguments, and environment variables, test connectivity to verify the integration works, and document the available tools. Supports both pre-built MCP servers from npm and custom implementations for proprietary APIs or internal tools.
+Guide users through adding a custom MCP server integration to the OmniGrowth Engine plugin. Search for existing MCP packages that provide the desired service connection, configure the server entry in `.mcp.json` with proper command, arguments, and environment variables, test connectivity to verify the integration works, and document the available tools. Supports both pre-built MCP servers from npm and custom implementations for proprietary APIs or internal tools.
 
 ## Input Required
 
@@ -20,7 +20,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Check for agency credential profiles at `~/.claude-marketing/credentials/` — if agency mode is active, the new integration may need to be mapped to specific client credential sets. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Check for agency credential profiles at `~/.claude-marketing/credentials/` — if agency mode is active, the new integration may need to be mapped to specific client credential sets. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Search for existing MCP package**: Query npm registry and known MCP server directories for packages matching the requested service — search by service name, API name, and common variations. Evaluate candidates by download count, last update date, GitHub stars, and compatibility with the plugin's MCP configuration format. Present the best match (or top 3 if multiple viable options) with package name, description, supported tools, and any known limitations.
 3. **Generate configuration for pre-built package**: If a suitable package is found, generate the complete `.mcp.json` entry — server name (following the plugin's naming convention: lowercase with hyphens), command (`npx` for npm packages), args array with the package name and any required flags, env object mapping environment variable names to credential references, and a description field summarizing what the integration provides. Show the user the exact JSON block to add.
 4. **Provide custom MCP guidance if needed**: If no suitable pre-built package exists, provide a custom MCP server development template based on `skills/context-engine/custom-mcp-guide.md` — project structure, required tool definitions, input/output schemas, authentication handling, and error response patterns. Include a starter implementation skeleton for the specific API the user wants to connect, with placeholder endpoints and authentication flow.

@@ -1,8 +1,8 @@
 # Technical Architecture Reference
 
-**Digital Marketing Pro** -- Claude Code Plugin v3.17.0
+**OmniGrowth Engine** -- Claude Code Plugin v3.17.0
 
-This document describes the internal architecture of the Digital Marketing Pro plugin for developers and contributors. It covers file structure, the WAT framework mapping, component anatomy, the hook system, script conventions, data persistence, adaptive scoring, the v3.0 methodology layer, and extension points.
+This document describes the internal architecture of the OmniGrowth Engine plugin for developers and contributors. It covers file structure, the WAT framework mapping, component anatomy, the hook system, script conventions, data persistence, adaptive scoring, the v3.0 methodology layer, and extension points.
 
 > **v3.0 note:** v3.0 introduces a methodology orchestration layer on top of the v2.x foundation. Sections 1–11 cover the v2.x architecture that remains unchanged. Section 18 is dedicated to the v3.0 methodology layer (engagement workflow, Two-Views Model, Decision Matrix, Update-Back Rule, Living Project Instruction File, engagement-state script).
 
@@ -11,7 +11,7 @@ This document describes the internal architecture of the Digital Marketing Pro p
 ## 1. Plugin File Structure
 
 ```
-digital-marketing-pro/
+omni-growth-engine/
 ├── .claude-plugin/
 │   └── plugin.json                    # Plugin manifest (2026 spec: homepage, repository as a STRING url, license, keywords — NO $schema key, and repository is a string not a {type,url} object, per the plugin spec)
 ├── .mcp.json                          # ships EMPTY {"mcpServers":{}} — gitignored, zero auto-connecting MCPs
@@ -185,7 +185,7 @@ Twenty-four specialist agents with distinct expertise areas and behavior rules. 
 7. Persists campaign data and insights via campaign-tracker.py
 8. Recommends handoffs to other agents when work crosses domains
 
-Multiple agents can collaborate on a single task. For example, the `/digital-marketing-pro:campaign-plan` command invokes both marketing-strategist and media-buyer agents.
+Multiple agents can collaborate on a single task. For example, the `/omni-growth-engine:campaign-plan` command invokes both marketing-strategist and media-buyer agents.
 
 ### Tools (scripts/*.py)
 
@@ -254,7 +254,7 @@ argument-hint: "[primary-input --option1 --option2]"
 disable-model-invocation: false  # Execution skills (publish, send, launch, import, export) pair this with a mandatory "## Execution gate" typed-yes block
 ---
 
-# /digital-marketing-pro:command-name
+# /omni-growth-engine:command-name
 
 ## Purpose
 [What this command produces and when to use it]
@@ -396,7 +396,7 @@ When enabled, these three reference lifecycle hooks wrap a Claude Code session w
 - **Fires:** When a Claude Code session begins
 - **Runs:** `python setup.py --check-deps --summary`
 - **Behavior:** Checks Python dependencies, reads the active brand profile, and outputs a 15-line brand context summary. This summary is injected directly into Claude's context window so the AI has brand name, industry, voice settings, channels, goals, compliance requirements, and competitor names available immediately.
-- **Fallback:** If Python is unavailable, falls back to `echo Digital Marketing Pro loaded` so the session still starts.
+- **Fallback:** If Python is unavailable, falls back to `echo OmniGrowth Engine loaded` so the session still starts.
 
 ### PreToolUse (type: prompt, matcher: Write|Edit)
 
@@ -453,7 +453,7 @@ Brand profiles follow schema version `1.0.0` (defined in `setup.py` as `SCHEMA_V
 
 The shipped `.mcp.json` is **empty** (`{"mcpServers":{}}`, gitignored) — nothing auto-connects. The tables below are the *conceptual* connector catalog. The HTTP catalog lives in `.mcp.json.connectors-reference`; the npx catalog in `.mcp.json.example`.
 
-> **Package verification required.** The `Package` column below is illustrative and **not all names are verified on npm** — several are known-fictional (e.g. `@anthropic/mcp-google-analytics`, `mcp-salesforce`, `mcp-supermemory`/`graphiti-mcp`, `@notionhq/mcp-server`). See the `_warning` field in `.mcp.json.example` for the verified-vs-fictional breakdown. `npx` runs remote code, so verify any package on npm before use, or prefer `/digital-marketing-pro:add-integration` for a custom MCP path.
+> **Package verification required.** The `Package` column below is illustrative and **not all names are verified on npm** — several are known-fictional (e.g. `@anthropic/mcp-google-analytics`, `mcp-salesforce`, `mcp-supermemory`/`graphiti-mcp`, `@notionhq/mcp-server`). See the `_warning` field in `.mcp.json.example` for the verified-vs-fictional breakdown. `npx` runs remote code, so verify any package on npm before use, or prefer `/omni-growth-engine:add-integration` for a custom MCP path.
 
 ### Server List
 
@@ -832,7 +832,7 @@ The market-intelligence agent uses `macro-signal-tracker.py` to monitor external
 
 ### Creative Intelligence
 
-`creative-fatigue-predictor.py` monitors active ad creatives for fatigue signals: declining CTR, rising frequency, audience saturation curves. It predicts when a creative will exhaust its effectiveness and triggers refresh recommendations before performance degrades. Content decay scanning (`/digital-marketing-pro:content-decay-scan`) applies similar logic to organic content, prioritizing refreshes by estimated revenue impact.
+`creative-fatigue-predictor.py` monitors active ad creatives for fatigue signals: declining CTR, rising frequency, audience saturation curves. It predicts when a creative will exhaust its effectiveness and triggers refresh recommendations before performance degrades. Content decay scanning (`/omni-growth-engine:content-decay-scan`) applies similar logic to organic content, prioritizing refreshes by estimated revenue impact.
 
 ### Self-Healing Operations
 
@@ -995,9 +995,9 @@ v3.0 introduces a methodology orchestration layer on top of the v2.x foundation.
 ### 18.1 New Files Added in v3.0
 
 ```
-digital-marketing-pro/
+omni-growth-engine/
 ├── commands/
-│   └── engagement.md                                # NEW: /digital-marketing-pro:engagement command
+│   └── engagement.md                                # NEW: /omni-growth-engine:engagement command
 ├── scripts/
 │   └── engagement-state.py                          # NEW: persistence + Decision Matrix engine
 ├── skills/
@@ -1037,11 +1037,11 @@ digital-marketing-pro/
 
 ### 18.2 Component Architecture
 
-The methodology layer flows from the `/digital-marketing-pro:engagement` command (entry point) through the `engagement-workflow` skill (orchestrator), which delegates to part-specific skills. All persistence flows through `scripts/engagement-state.py` to the engagement directory tree.
+The methodology layer flows from the `/omni-growth-engine:engagement` command (entry point) through the `engagement-workflow` skill (orchestrator), which delegates to part-specific skills. All persistence flows through `scripts/engagement-state.py` to the engagement directory tree.
 
 Components:
 
-- **Entry point:** `commands/engagement.md` — defines the `/digital-marketing-pro:engagement` subcommands
+- **Entry point:** `commands/engagement.md` — defines the `/omni-growth-engine:engagement` subcommands
 - **Orchestrator:** `skills/engagement-workflow/SKILL.md` — reads engagement state, reads Living Project Instruction File, delegates to part-specific producers
 - **Part producers (new in v3.0):** `four-core-documents` (Part 3), `client-validation-document` (Part 5), `growth-plan` (Part 8), `yearly-planner` (Part 8), `continuous-improvement-loop` (Part 12)
 - **Part producers (existing v2.x):** Parts 2, 4, 7, 9, 10, 11 use existing skills (market-intelligence, competitor-analysis, audience-intelligence, campaign-orchestrator, content-engine, channel-specific paid-advertising/aeo-geo skills, etc.)
@@ -1134,7 +1134,7 @@ The triggered re-run set is the union of all matched triggers' re-run lists.
 - **Atomic writes:** `engagement-state.py` writes to `<filename>.tmp` and renames atomically. Prevents partial writes corrupting JSON.
 - **Versioning:** v1.0 -> v1.1 (minor v1 correction) -> v2.0 (Part 6 re-run) -> v2.1 (Update-Back correction). Old versions are preserved as separate files; nothing is overwritten.
 - **JSON I/O contract:** every `engagement-state.py` command returns JSON to stdout. Errors go to stderr with exit code 1. Skills consume the JSON output programmatically.
-- **CLAUDE_PLUGIN_DATA respected:** when set, the workspace is `$CLAUDE_PLUGIN_DATA/digital-marketing-pro/`; otherwise falls back to `~/.claude-marketing/`.
+- **CLAUDE_PLUGIN_DATA respected:** when set, the workspace is `$CLAUDE_PLUGIN_DATA/omni-growth-engine/`; otherwise falls back to `~/.claude-marketing/`.
 
 ### 18.7 Skill Frontmatter Conventions for v3.0
 
@@ -1175,7 +1175,7 @@ v3.0 is purely additive. Specifically:
 - The brand profile system at `~/.claude-marketing/brands/{slug}/profile.json` is untouched
 - Existing `setup.py`, `campaign-tracker.py`, `adaptive-scorer.py`, etc. continue to function
 - Engagements are stored under `engagements/` subdirectory of the brand directory — sits alongside existing `campaigns/`, `performance/`, `insights.json`, `guidelines/`, etc.
-- Single-skill invocations (e.g., `/digital-marketing-pro:content-engine`) work without an engagement context, just as in v2.7
+- Single-skill invocations (e.g., `/omni-growth-engine:content-engine`) work without an engagement context, just as in v2.7
 
 A user can adopt the methodology selectively: brand A may use the full engagement workflow; brand B may continue with one-off commands. Both work in the same plugin installation.
 
@@ -1207,4 +1207,4 @@ Pattern for adding a new methodology skill:
 3. If the skill produces persistent output, write it to the canonical location under `engagements/{id}/part-XX-.../`
 4. If the skill changes engagement state, invoke `engagement-state.py` (do not hand-write `_engagement.json`)
 5. If the skill changes source documents, trigger a version bump and an LIF change log entry
-6. Add the skill to `commands/engagement.md` if it should be exposed as a `/digital-marketing-pro:engagement <subcommand>` shortcut
+6. Add the skill to `commands/engagement.md` if it should be exposed as a `/omni-growth-engine:engagement <subcommand>` shortcut

@@ -1,11 +1,11 @@
 ---
 name: publish-blog
-description: "Publish a blog post to WordPress or Webflow through the connected CMS MCP with SEO metadata, categories and tags, featured image, slug optimization, and optional scheduling. Runs pre-publish gates — content-scorer.py, brand-voice-scorer.py, SEO and compliance checks — and a MANDATORY approval gate: an Execution Summary the user must approve with an explicit typed yes (logged via approval-manager.py) before anything goes live, then verifies the live URL and schema markup and submits to Google Search Console if connected. Triggers on \"/digital-marketing-pro:publish-blog\", \"publish this post to WordPress\", \"push the draft live on Webflow\", \"schedule this article for Monday\", \"take this blog post live\". Reads the brand profile and platform-publishing-specs.md for CMS field mappings."
+description: "Publish a blog post to WordPress or Webflow through the connected CMS MCP with SEO metadata, categories and tags, featured image, slug optimization, and optional scheduling. Runs pre-publish gates — content-scorer.py, brand-voice-scorer.py, SEO and compliance checks — and a MANDATORY approval gate: an Execution Summary the user must approve with an explicit typed yes (logged via approval-manager.py) before anything goes live, then verifies the live URL and schema markup and submits to Google Search Console if connected. Triggers on \"/omni-growth-engine:publish-blog\", \"publish this post to WordPress\", \"push the draft live on Webflow\", \"schedule this article for Monday\", \"take this blog post live\". Reads the brand profile and platform-publishing-specs.md for CMS field mappings."
 disable-model-invocation: false
 argument-hint: "[--platform=wordpress|webflow]"
 ---
 
-# /digital-marketing-pro:publish-blog
+# /omni-growth-engine:publish-blog
 
 ## Purpose
 
@@ -39,7 +39,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Verify CMS connection**: Check which CMS MCP server is connected (wordpress or webflow) and confirm it matches the user's target platform. If not connected, instruct the user to configure the MCP server first and provide the relevant setup link.
 3. **Score content quality**: Run `content-scorer.py` on the blog draft to evaluate readability (Flesch-Kincaid grade), structure (heading hierarchy, paragraph length, list usage), depth (word count vs topic complexity), and engagement potential. Flag any issues that need fixing before publish.
 4. **Score brand voice alignment**: Run `brand-voice-scorer.py` to verify the content matches the brand's tone, vocabulary, and messaging guidelines. Suggest specific edits if the score falls below the brand's minimum threshold defined in profile.json.

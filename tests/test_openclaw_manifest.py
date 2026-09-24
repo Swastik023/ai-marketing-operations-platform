@@ -23,7 +23,7 @@ class TestOpenClawManifest(unittest.TestCase):
     def test_id_required_and_canonical(self):
         # `id` is the canonical plugin id used in `plugins.entries.<id>`
         self.assertIn("id", self.data)
-        self.assertEqual(self.data["id"], "digital-marketing-pro")
+        self.assertEqual(self.data["id"], "omni-growth-engine")
 
     def test_configSchema_required(self):
         # OpenClaw spec: "Every native OpenClaw plugin must ship a configSchema,

@@ -1,9 +1,9 @@
 ---
 name: content-repurpose
-description: "Turn one piece of content into a multi-channel repurposing plan — a derivative matrix targeting 10+ formats, full platform-adapted drafts, a publishing calendar, UTM-tagged links, and per-piece brand-voice scores; every derivative must pass the standalone test (own hook, own payoff) and the cut list records what failed it. Triggers on \"/digital-marketing-pro:content-repurpose\", \"repurpose this blog post\", \"turn this webinar into social posts\", \"get more mileage out of this article\", \"atomize this whitepaper\". Produces drafts and a schedule, not published posts. Reads the brand profile, channel style overrides, and platform specs."
+description: "Turn one piece of content into a multi-channel repurposing plan — a derivative matrix targeting 10+ formats, full platform-adapted drafts, a publishing calendar, UTM-tagged links, and per-piece brand-voice scores; every derivative must pass the standalone test (own hook, own payoff) and the cut list records what failed it. Triggers on \"/omni-growth-engine:content-repurpose\", \"repurpose this blog post\", \"turn this webinar into social posts\", \"get more mileage out of this article\", \"atomize this whitepaper\". Produces drafts and a schedule, not published posts. Reads the brand profile, channel style overrides, and platform specs."
 ---
 
-# /digital-marketing-pro:content-repurpose
+# /omni-growth-engine:content-repurpose
 
 ## Purpose
 
@@ -23,7 +23,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply voice, compliance, industry context. Check `guidelines/_manifest.json` for restrictions, messaging, channel styles, voice-and-tone rules, and templates. If a template matching this command exists in `~/.claude-marketing/brands/{slug}/templates/`, apply its format. If no brand exists, prompt for `/digital-marketing-pro:brand-setup` or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply voice, compliance, industry context. Check `guidelines/_manifest.json` for restrictions, messaging, channel styles, voice-and-tone rules, and templates. If a template matching this command exists in `~/.claude-marketing/brands/{slug}/templates/`, apply its format. If no brand exists, prompt for `/omni-growth-engine:brand-setup` or proceed with defaults.
 2. **Check campaign history**: Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-tracker.py" --brand {slug} --action list-campaigns` to identify related campaigns and previously published content that derivative pieces can reference or link to.
 3. **Analyze original content**: Extract the core elements -- key messages, data points, compelling quotes, statistics, step-by-step processes, visual concepts, storytelling hooks, counterintuitive insights, and main takeaways. Identify which elements are strongest for each target format.
 4. **Map to channel-specific formats**: Build a repurposing matrix mapping the original content to derivative formats: blog to social threads, webinar to blog series, podcast to audiograms, whitepaper to infographic, case study to testimonial posts, presentation to carousel posts, long-form to short-form snippets, and vice versa. Target 10+ derivative pieces per source — **but the target never overrides the standalone test below; eight strong pieces beat twelve where four are filler.**

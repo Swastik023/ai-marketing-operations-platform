@@ -1,10 +1,10 @@
 ---
 name: case-study-plan
-description: "Build a complete case-study creation blueprint — a Challenge-Solution-Results narrative framework, 15-20 client interview questions plus 10 internal-team questions, a data-visualization plan, format specifications (PDF, web page, slide deck, video script outline, social snippets, sales one-pager), a distribution strategy, a permission/approval checklist, and a draft executive summary. Plans the case study; it does not produce the finished designed asset. Triggers on \"/digital-marketing-pro:case-study-plan\", \"turn this client win into a case study\", \"what should we ask the client in the interview\", \"plan a success story for sales enablement\", \"case study formats and distribution plan\". Reads the brand profile, guidelines, custom templates, and agency SOPs."
+description: "Build a complete case-study creation blueprint — a Challenge-Solution-Results narrative framework, 15-20 client interview questions plus 10 internal-team questions, a data-visualization plan, format specifications (PDF, web page, slide deck, video script outline, social snippets, sales one-pager), a distribution strategy, a permission/approval checklist, and a draft executive summary. Plans the case study; it does not produce the finished designed asset. Triggers on \"/omni-growth-engine:case-study-plan\", \"turn this client win into a case study\", \"what should we ask the client in the interview\", \"plan a success story for sales enablement\", \"case study formats and distribution plan\". Reads the brand profile, guidelines, custom templates, and agency SOPs."
 argument-hint: "[client-name]"
 ---
 
-# /digital-marketing-pro:case-study-plan
+# /omni-growth-engine:case-study-plan
 
 ## Purpose
 
@@ -27,7 +27,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Structure the CSR narrative**: Build the Challenge-Solution-Results framework with sub-sections — situation overview, specific pain points, goals at project start, strategic approach, tactical execution, implementation timeline, quantitative results, qualitative impact, and future outlook. Identify the emotional arc that makes the story compelling, not just informative.
 3. **Develop client interview questions**: Create 15-20 interview questions organized by section — background and context (company size, industry pressures, previous attempts), challenge deep-dive (symptoms, root causes, business impact of inaction), solution experience (selection criteria, onboarding, collaboration quality), results and impact (measurable outcomes, unexpected benefits, team reaction), and forward-looking (ongoing plans, what they would tell peers).
 4. **Plan internal team interview questions**: Draft 10 questions for internal team members who worked on the engagement — strategic rationale, technical approach, challenges encountered during delivery, key turning points, and lessons learned that could inform future engagements.

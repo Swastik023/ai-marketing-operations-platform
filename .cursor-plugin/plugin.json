@@ -1,15 +1,15 @@
 {
-  "name": "digital-marketing-pro",
-  "displayName": "Digital Marketing Pro",
+  "name": "omni-growth-engine",
+  "displayName": "OmniGrowth Engine",
   "version": "3.31.1",
   "description": "Open-source AI marketing plugin for agencies & in-house teams — 163 skills, 24 agents, 12-Part Strategy Flow, Cowork team-persistent, EU AI Act Article 50 ready. Runs on Claude Code, Codex, Cursor, Copilot CLI, Antigravity, Hermes Agent, OpenClaw, Grok + 35+ more Agent Skills platforms.",
   "author": {
     "name": "Indranil Banerjee",
     "email": "neel@neelverse.com"
   },
-  "publisher": "indranilbanerjee",
+  "publisher": "swastik-agnihotri",
   "homepage": "https://indranil.in",
-  "repository": "https://github.com/indranilbanerjee/digital-marketing-pro",
+  "repository": "https://github.com/swastik-agnihotri/omni-growth-engine",
   "license": "MIT",
   "keywords": [
     "digital-marketing",

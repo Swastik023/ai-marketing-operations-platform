@@ -1,6 +1,6 @@
 ---
 name: validate-profile
-description: "Read-only health check that a brand profile is production-ready: required fields, voice and audience completeness, guardrails, compliance-jurisdiction coverage, connector configuration and MCP reachability, output-path writeability, and model-registry age — reported per check as BLOCKER or WARNING without ever printing credential values. Triggers on \"/digital-marketing-pro:validate-profile\", \"is the brand setup correct\", \"check connector credentials\", \"profile sanity check\", \"we rotated an API key — is it wired up\". Reads profile.json and probes connectors via connector-status.py; the prerequisite gate before /digital-marketing-pro:engagement, /digital-marketing-pro:campaign-plan, and /digital-marketing-pro:launch-campaign."
+description: "Read-only health check that a brand profile is production-ready: required fields, voice and audience completeness, guardrails, compliance-jurisdiction coverage, connector configuration and MCP reachability, output-path writeability, and model-registry age — reported per check as BLOCKER or WARNING without ever printing credential values. Triggers on \"/omni-growth-engine:validate-profile\", \"is the brand setup correct\", \"check connector credentials\", \"profile sanity check\", \"we rotated an API key — is it wired up\". Reads profile.json and probes connectors via connector-status.py; the prerequisite gate before /omni-growth-engine:engagement, /omni-growth-engine:campaign-plan, and /omni-growth-engine:launch-campaign."
 user-invocable: true
 triggers:
   - validate brand profile
@@ -12,16 +12,16 @@ triggers:
 allowed-tools: Read Bash Glob Grep
 ---
 
-# /digital-marketing-pro:validate-profile — Brand Profile + Credential Health Check
+# /omni-growth-engine:validate-profile — Brand Profile + Credential Health Check
 
 This skill is the canonical "is this brand ready to ship work?" gate. It validates a brand profile is complete enough for production use AND that every credential/connector referenced by the profile is actually reachable — **without ever printing credential values**.
 
 Use this skill:
 
-- After **`/digital-marketing-pro:brand-setup`** (or `/digital-marketing-pro:client-onboarding`) to confirm the new profile is production-ready.
+- After **`/omni-growth-engine:brand-setup`** (or `/omni-growth-engine:client-onboarding`) to confirm the new profile is production-ready.
 - After **rotating any API key** (Slack, HubSpot, Stripe, Ahrefs, GA4 service account, etc.) so connectivity is re-confirmed without exposing the new value in logs.
-- After **importing brand guidelines** (`/digital-marketing-pro:import-guidelines`) to confirm the merge succeeded.
-- As the **prerequisite check** before `/digital-marketing-pro:engagement`, `/digital-marketing-pro:campaign-plan`, or `/digital-marketing-pro:launch-campaign`.
+- After **importing brand guidelines** (`/omni-growth-engine:import-guidelines`) to confirm the merge succeeded.
+- As the **prerequisite check** before `/omni-growth-engine:engagement`, `/omni-growth-engine:campaign-plan`, or `/omni-growth-engine:launch-campaign`.
 
 ## Why this skill exists
 
@@ -50,15 +50,15 @@ A **BLOCKER** means "do not let the user run engagement / campaign-plan / launch
 
 ### Step 0 — Resolve the brand to validate
 
-If `--brand <slug>` was passed, use it. Otherwise read the active brand from `~/.claude-marketing/brands/_active-brand.json` (set by `/digital-marketing-pro:switch-brand`). If neither is available, error: `"--brand <slug> required, or run /digital-marketing-pro:switch-brand first."` Do NOT validate "everything" — validation is per-brand by design.
+If `--brand <slug>` was passed, use it. Otherwise read the active brand from `~/.claude-marketing/brands/_active-brand.json` (set by `/omni-growth-engine:switch-brand`). If neither is available, error: `"--brand <slug> required, or run /omni-growth-engine:switch-brand first."` Do NOT validate "everything" — validation is per-brand by design.
 
 ### Step 1 — Load the brand profile
 
 ```bash
 BRAND_DIR="$HOME/.claude-marketing/brands/{brand}"
-test -d "$BRAND_DIR" || { echo "Brand directory not found at $BRAND_DIR — run /digital-marketing-pro:brand-setup first."; exit 1; }
+test -d "$BRAND_DIR" || { echo "Brand directory not found at $BRAND_DIR — run /omni-growth-engine:brand-setup first."; exit 1; }
 PROFILE="$BRAND_DIR/profile.json"
-test -f "$PROFILE" || { echo "profile.json missing under $BRAND_DIR — run /digital-marketing-pro:brand-setup."; exit 1; }
+test -f "$PROFILE" || { echo "profile.json missing under $BRAND_DIR — run /omni-growth-engine:brand-setup."; exit 1; }
 ```
 
 Parse the profile JSON and capture: `brand_name`, `industry`, `target_jurisdictions`, `voice.*`, `target_audience.*`, `guardrails.*`, `tracking.backend`, `integrations.*`, `analytics.*`.
@@ -131,7 +131,7 @@ Print a structured report. ALWAYS show every check (don't only print failures �
 ⚠️  Audience profile       primary_persona.role set, reading_level MISSING
 ✅ Guardrails             {N} prohibited_terms, {M} prohibited_claims (industry={industry})
 ✅ Compliance jurisdictions  EU-GDPR ✓ · IN-DPDPA ✓ · US-CCPA ✓
-🛑 Connector — Slack       MISSING_ENV (SLACK_* env not set — add via /digital-marketing-pro:add-integration slack)
+🛑 Connector — Slack       MISSING_ENV (SLACK_* env not set — add via /omni-growth-engine:add-integration slack)
 ✅ Connector — HubSpot     OK (workspace acme-corp, 1247 contacts)
 ✅ Connector — Stripe      OK
 ✅ MCP — gmailmcp.googleapis.com  HTTP 405 (alive)
@@ -139,14 +139,14 @@ Print a structured report. ALWAYS show every check (don't only print failures �
 ⚠️  Model curator           registry is 102 days old — consider scripts/refresh_models.py
 
 Decision: 🛑 BLOCKED — Slack connector not configured. Fix before running:
-  • /digital-marketing-pro:engagement
-  • /digital-marketing-pro:campaign-plan
-  • /digital-marketing-pro:launch-campaign
+  • /omni-growth-engine:engagement
+  • /omni-growth-engine:campaign-plan
+  • /omni-growth-engine:launch-campaign
 
-Re-run /digital-marketing-pro:validate-profile after fixing.
+Re-run /omni-growth-engine:validate-profile after fixing.
 ```
 
-Also emit a machine-readable JSON summary so it can be consumed by `/digital-marketing-pro:check`, `/digital-marketing-pro:status`, or downstream automation:
+Also emit a machine-readable JSON summary so it can be consumed by `/omni-growth-engine:check`, `/omni-growth-engine:status`, or downstream automation:
 
 ```json
 {
@@ -163,13 +163,13 @@ Also emit a machine-readable JSON summary so it can be consumed by `/digital-mar
 1. **Never print credential values.** Connector probes use `--no-secrets`; if a probe accidentally returns a credential in its error string, redact before printing. The skill output goes to logs and clipboards — assume it leaks.
 2. **Read-only.** Never modify the brand profile, credentials, MCP config, or any persistent state. This is a checker, not a fixer. Hand back actionable next commands instead.
 3. **Don't short-circuit.** Run every check even after the first BLOCKER — agencies want the full punch list in one pass.
-4. **Don't validate cross-brand.** Per-brand only, by design. Looping across all brands is a separate workflow (`/digital-marketing-pro:agency-dashboard --health`).
+4. **Don't validate cross-brand.** Per-brand only, by design. Looping across all brands is a separate workflow (`/omni-growth-engine:agency-dashboard --health`).
 5. **Idempotent.** Running this skill twice in a row produces identical output (modulo timestamps). No retries inside the skill — retries are the user's call.
 
 ## Arguments
 
 ```
-/digital-marketing-pro:validate-profile [--brand <slug>] [--json] [--connectors <list>] [--quick]
+/omni-growth-engine:validate-profile [--brand <slug>] [--json] [--connectors <list>] [--quick]
 ```
 
 - `--brand <slug>` — brand to validate (else uses active brand)

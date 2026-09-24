@@ -1,6 +1,6 @@
 ---
 name: agency-dashboard
-description: "Generate a portfolio-level dashboard across ALL client brands — per-client RAG health scores, campaign activity, budget pacing, aggregate KPIs, team utilization, pending approvals, upcoming deadlines, and an alerts panel — built for agency standups and weekly reviews. Triggers on \"/digital-marketing-pro:agency-dashboard\", \"how are all our clients doing\", \"portfolio health check\", \"budget pacing across accounts\", \"which accounts are at risk\". Enumerates every brand under ~/.claude-marketing/brands/ and pulls data via campaign-tracker.py, execution-tracker.py, and team-manager.py; drill into a single client with /digital-marketing-pro:performance-report or /digital-marketing-pro:client-report."
+description: "Generate a portfolio-level dashboard across ALL client brands — per-client RAG health scores, campaign activity, budget pacing, aggregate KPIs, team utilization, pending approvals, upcoming deadlines, and an alerts panel — built for agency standups and weekly reviews. Triggers on \"/omni-growth-engine:agency-dashboard\", \"how are all our clients doing\", \"portfolio health check\", \"budget pacing across accounts\", \"which accounts are at risk\". Enumerates every brand under ~/.claude-marketing/brands/ and pulls data via campaign-tracker.py, execution-tracker.py, and team-manager.py; drill into a single client with /omni-growth-engine:performance-report or /omni-growth-engine:client-report."
 user-invocable: true
 triggers:
   - agency portfolio dashboard
@@ -13,7 +13,7 @@ triggers:
   - overview of all client accounts
 ---
 
-# /digital-marketing-pro:agency-dashboard
+# /omni-growth-engine:agency-dashboard
 
 ## Purpose
 
@@ -34,7 +34,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Enumerate all brands**: Scan `~/.claude-marketing/brands/` for all configured brand directories (excluding `_active-brand.json`). For each brand, load `profile.json` to get client name, industry, engagement type, contract dates, assigned team members, and KPI targets
 3. **Pull campaign data per brand**: For each brand in scope, run `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-tracker.py" --brand {slug} --action list-campaigns` to retrieve active campaigns, statuses, budgets, and objectives (use `--action get-campaign --id {id}` for a single campaign's detail)
 4. **Pull execution status per brand**: For each brand, run `python "${CLAUDE_PLUGIN_ROOT}/scripts/execution-tracker.py" --brand {slug} --action get-history` to get logged executions — completed deliverables, launches, and tasks — then derive pending / overdue status in analysis
@@ -67,7 +67,7 @@ A structured portfolio dashboard containing:
 - **Content pipeline status**: Aggregate view of content in draft, review, approved, and scheduled stages across all brands with stage-by-stage counts and bottleneck identification
 - **Alerts and anomalies panel**: Performance drops, pacing issues, stalled campaigns, MCP connection failures, expiring credentials, or overdue items requiring immediate attention — sorted by severity
 - **Contract and renewal tracker**: Upcoming contract renewals, engagement milestones, and retention risk indicators for clients approaching renewal windows
-- **Drill-down guidance**: Instructions for investigating any individual client in detail using `/digital-marketing-pro:performance-report`, `/digital-marketing-pro:client-report`, or `/digital-marketing-pro:credential-switch` to activate that brand's context
+- **Drill-down guidance**: Instructions for investigating any individual client in detail using `/omni-growth-engine:performance-report`, `/omni-growth-engine:client-report`, or `/omni-growth-engine:credential-switch` to activate that brand's context
 
 ## Agents Used
 

@@ -126,10 +126,10 @@ All four core documents stitched into a single executive-reference file with a m
 
 ## Producing the Documents
 
-Use the `/digital-marketing-pro:engagement` command family:
+Use the `/omni-growth-engine:engagement` command family:
 
-- `/digital-marketing-pro:engagement four-core` — produces all four documents in sequence
-- `/digital-marketing-pro:engagement four-core 3.1` — produces just 3.1 (Business & SBU Analysis)
-- `/digital-marketing-pro:engagement four-core combined` — also produces 3.C Combined Core Document
+- `/omni-growth-engine:engagement four-core` — produces all four documents in sequence
+- `/omni-growth-engine:engagement four-core 3.1` — produces just 3.1 (Business & SBU Analysis)
+- `/omni-growth-engine:engagement four-core combined` — also produces 3.C Combined Core Document
 
 Each document writes to `engagements/{engagement-id}/part-03-four-core-documents/v1/` (or `v2/` for re-runs).

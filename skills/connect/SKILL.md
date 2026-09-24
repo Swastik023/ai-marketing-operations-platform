@@ -1,14 +1,14 @@
 ---
 name: connect
-description: "Guide the connection of a known MCP integration to the plugin — looks up the connector registry via connector-status.py, checks current status, and returns transport-specific setup steps (OAuth for HTTP connectors, env-var credentials plus the exact .mcp.json block for npx connectors), verification steps, and the skills each connector unlocks. Triggers on \"/digital-marketing-pro:connect\", \"connect Google Ads\", \"hook up Slack to the plugin\", \"set up the HubSpot integration\", \"how do I add Mailchimp\". Guidance and status checks only — the user adds credentials themselves; unknown or custom servers route to /digital-marketing-pro:add-integration."
+description: "Guide the connection of a known MCP integration to the plugin — looks up the connector registry via connector-status.py, checks current status, and returns transport-specific setup steps (OAuth for HTTP connectors, env-var credentials plus the exact .mcp.json block for npx connectors), verification steps, and the skills each connector unlocks. Triggers on \"/omni-growth-engine:connect\", \"connect Google Ads\", \"hook up Slack to the plugin\", \"set up the HubSpot integration\", \"how do I add Mailchimp\". Guidance and status checks only — the user adds credentials themselves; unknown or custom servers route to /omni-growth-engine:add-integration."
 argument-hint: "[connector-name]"
 ---
 
-# /digital-marketing-pro:connect
+# /omni-growth-engine:connect
 
 ## Purpose
 
-Guide users through connecting a specific MCP integration to the Digital Marketing Pro plugin. Provides platform-specific setup instructions, credential requirements, configuration steps, and verification. This is the user-friendly entry point for adding integrations — it handles the common cases (known connectors with established setup paths) while `/digital-marketing-pro:add-integration` handles custom or unknown MCP servers.
+Guide users through connecting a specific MCP integration to the OmniGrowth Engine plugin. Provides platform-specific setup instructions, credential requirements, configuration steps, and verification. This is the user-friendly entry point for adding integrations — it handles the common cases (known connectors with established setup paths) while `/omni-growth-engine:add-integration` handles custom or unknown MCP servers.
 
 ## Input Required
 
@@ -27,9 +27,9 @@ The user must provide (or will be prompted for):
 
    **For HTTP connectors** (the 10 registry-backed ones: Slack, Canva, Figma, HubSpot, Ahrefs, Similarweb, Klaviyo, Amplitude, Google Calendar, Gmail):
    - **Nothing is pre-connected.** The shipped `.mcp.json` is empty (`{"mcpServers":{}}`) so a fresh install has zero auto-connecting MCP servers — this is deliberate (it keeps Cowork and multi-tenant installs safe). These HTTP connectors are an **opt-in catalog**, documented in `.mcp.json.connectors-reference`.
-   - To enable one, the user copies its block from `.mcp.json.connectors-reference` into their own `.mcp.json` (or adds it via `/digital-marketing-pro:add-integration`), then restarts the client. HTTP connectors need no API key in the file — once the server is added, Claude prompts for OAuth on first use.
-   - Example: "Slack isn't connected yet. Copy the Slack block from `.mcp.json.connectors-reference` into your `.mcp.json` (or run `/digital-marketing-pro:add-integration slack`), restart, then run `/digital-marketing-pro:send-notification` — you'll be prompted to authorize Slack via OAuth."
-   - Notion, Stripe, Asana, and Webflow are **catalog-only** HTTP servers: configure them directly from `.mcp.json.connectors-reference` the same way, but they are not in the connector registry, so `/digital-marketing-pro:doctor` and `connector-status.py` will not report on them.
+   - To enable one, the user copies its block from `.mcp.json.connectors-reference` into their own `.mcp.json` (or adds it via `/omni-growth-engine:add-integration`), then restarts the client. HTTP connectors need no API key in the file — once the server is added, Claude prompts for OAuth on first use.
+   - Example: "Slack isn't connected yet. Copy the Slack block from `.mcp.json.connectors-reference` into your `.mcp.json` (or run `/omni-growth-engine:add-integration slack`), restart, then run `/omni-growth-engine:send-notification` — you'll be prompted to authorize Slack via OAuth."
+   - Notion, Stripe, Asana, and Webflow are **catalog-only** HTTP servers: configure them directly from `.mcp.json.connectors-reference` the same way, but they are not in the connector registry, so `/omni-growth-engine:doctor` and `connector-status.py` will not report on them.
    - List the skills this connector would enable once added
 
    **For npx connectors** (Google Ads, Meta, Salesforce, Twilio, etc.):
@@ -40,13 +40,13 @@ The user must provide (or will be prompted for):
      - Any prerequisites (developer accounts, app creation, etc.)
    - Show the exact `.mcp.json` entry to add (from the setup guide)
    - Offer two setup paths:
-     1. **Quick**: "Set the environment variables and run `/digital-marketing-pro:add-integration <name>` to configure automatically"
+     1. **Quick**: "Set the environment variables and run `/omni-growth-engine:add-integration <name>` to configure automatically"
      2. **Manual**: Show the JSON block to add to `.mcp.json` directly
    - Note that npx connectors work in Claude Code only, not Cowork
 
 4. **Handle unknown connectors**: If the connector name isn't in the registry:
    - Search for close matches and suggest them
-   - If no match found, explain that it's a custom integration and guide them to `/digital-marketing-pro:add-integration` which handles npm package discovery and custom MCP server setup
+   - If no match found, explain that it's a custom integration and guide them to `/omni-growth-engine:add-integration` which handles npm package discovery and custom MCP server setup
    - List the categories of connectors available so they can explore alternatives
 
 5. **Verify after setup** (for npx connectors): After the user confirms they've set up credentials, offer to verify connectivity:
@@ -64,8 +64,8 @@ A connector setup guide containing:
 - **Credential requirements** (npx only): Exact environment variable names, where to obtain them, and required permissions
 - **Configuration entry** (npx only): The exact JSON block to add to `.mcp.json`, ready to copy
 - **Verification steps**: How to confirm the connector is working after setup
-- **Alternative connectors**: Other connectors in the same category that the user might consider (e.g., "If you prefer Salesforce over HubSpot for CRM, run `/digital-marketing-pro:connect salesforce`")
-- **Next steps**: "Run `/digital-marketing-pro:integrations` to see your updated integration dashboard" and relevant skills to try
+- **Alternative connectors**: Other connectors in the same category that the user might consider (e.g., "If you prefer Salesforce over HubSpot for CRM, run `/omni-growth-engine:connect salesforce`")
+- **Next steps**: "Run `/omni-growth-engine:integrations` to see your updated integration dashboard" and relevant skills to try
 
 ## Agents Used
 

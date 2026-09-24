@@ -1,6 +1,6 @@
 ---
 name: local-seo
-description: "Build local SEO strategy end to end — Google Business Profile optimization, NAP consistency and citation cleanup, local pack ranking tactics, location and service-area pages, review management, local link building, LocalBusiness schema, and multi-location management — delivered as audit reports, checklists, and a 30/60/90-day roadmap. Triggers on \"/digital-marketing-pro:local-seo\", \"optimize my Google Business Profile\", \"why aren't we in the map pack\", \"fix our NAP consistency\", \"local SEO for our 12 locations\", \"rank for near me searches\". Includes Google's 2026 agentic-booking guidance for local services, home repair, beauty, and pet care verticals. Reads the brand profile and compliance rules; its reference files also power /digital-marketing-pro:local-seo-audit."
+description: "Build local SEO strategy end to end — Google Business Profile optimization, NAP consistency and citation cleanup, local pack ranking tactics, location and service-area pages, review management, local link building, LocalBusiness schema, and multi-location management — delivered as audit reports, checklists, and a 30/60/90-day roadmap. Triggers on \"/omni-growth-engine:local-seo\", \"optimize my Google Business Profile\", \"why aren't we in the map pack\", \"fix our NAP consistency\", \"local SEO for our 12 locations\", \"rank for near me searches\". Includes Google's 2026 agentic-booking guidance for local services, home repair, beauty, and pet care verticals. Reads the brand profile and compliance rules; its reference files also power /omni-growth-engine:local-seo-audit."
 ---
 
 # Local SEO
@@ -58,7 +58,7 @@ Before producing any marketing output from this module:
 5. **Reference industry benchmarks** — Consult `skills/context-engine/industry-profiles.md` for the brand's industry
 6. **Use platform specs** — Reference `skills/context-engine/platform-specs.md` for character limits and format requirements
 7. **Check campaign history** — Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-tracker.py" --brand {slug} --action list-campaigns` before planning new work
-8. **If no brand exists**, say: "No brand profile found. Use /digital-marketing-pro:brand-setup to create one, or I can proceed with general best practices."
+8. **If no brand exists**, say: "No brand profile found. Use /omni-growth-engine:brand-setup to create one, or I can proceed with general best practices."
 9. **Check brand guidelines** — If `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` exists, load and enforce: `restrictions.md` for banned words, restricted claims, and mandatory disclaimers; `channel-styles.md` for channel-specific tone overrides (may differ from base voice); `messaging.md` for approved key messages, taglines, and positioning language; `voice-and-tone.md` for detailed voice rules beyond the 4 numeric scores. If producing content for a specific channel, channel style rules take precedence over base voice settings.
 
 Do not ask the user for information that already exists in their brand profile.
@@ -258,7 +258,7 @@ Starting from scratch requires a phased approach: (1) Claim and fully optimize G
 - **Don't fake reviews.** Google's review-spam systems are increasingly aggressive (an April 2026 update reportedly tightened the bar further — verify current enforcement status before advising a client). One detected fake-review pattern can suppress GBP visibility for months.
 - **Service-area businesses** (no storefront) need different proximity strategy than brick-and-mortar — location pages per service area, not per store.
 - **For multi-location brands,** treat each location as its own GBP entity — don't try to consolidate. Cross-link between location pages for internal-link signal.
-- **AI Overviews are increasingly local** — for "near me" queries, AI Mode + AI Overviews now both surface local results. Run `/digital-marketing-pro:aeo-audit` against location-specific queries quarterly.
+- **AI Overviews are increasingly local** — for "near me" queries, AI Mode + AI Overviews now both surface local results. Run `/omni-growth-engine:aeo-audit` against location-specific queries quarterly.
 
 ## Related Skills
 

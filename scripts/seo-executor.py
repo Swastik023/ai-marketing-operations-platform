@@ -387,7 +387,7 @@ def complete_change(slug, change_id):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="SEO execution management for Digital Marketing Pro"
+        description="SEO execution management for OmniGrowth Engine"
     )
     parser.add_argument("--brand", required=True, help="Brand slug")
     parser.add_argument(

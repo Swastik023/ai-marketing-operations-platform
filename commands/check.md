@@ -5,7 +5,7 @@ allowed-tools: Read Bash Glob Grep
 disable-model-invocation: false
 ---
 
-# /digital-marketing-pro:check — Pre-Publish Quality Gate
+# /omni-growth-engine:check — Pre-Publish Quality Gate
 
 Runs the unified evaluation suite on marketing content. Wraps `scripts/eval-runner.py` and produces a single pass / warn / blocked decision with actionable issues.
 
@@ -14,10 +14,10 @@ This is the canonical pre-publish gate for any marketing content (blog posts, ad
 ## Quick examples
 
 ```
-/digital-marketing-pro:check drafts/q2-launch-blog.md
-/digital-marketing-pro:check drafts/healthcare-ad.md --full --brand healthfirst --evidence facts/q2-claims.json --schema ad_copy
-/digital-marketing-pro:check drafts/financial-services-landing.md --compliance --brand finadvisor
-/digital-marketing-pro:check "Inline content can also be checked directly."
+/omni-growth-engine:check drafts/q2-launch-blog.md
+/omni-growth-engine:check drafts/healthcare-ad.md --full --brand healthfirst --evidence facts/q2-claims.json --schema ad_copy
+/omni-growth-engine:check drafts/financial-services-landing.md --compliance --brand finadvisor
+/omni-growth-engine:check "Inline content can also be checked directly."
 ```
 
 ## Modes
@@ -54,7 +54,7 @@ The command returns a unified report with:
 
 ## EU AI Act Article 50 — C2PA verification
 
-For assets flagged as AI-generated (file metadata or accompanying `--evidence` JSON declares `ai_generated: true`) AND brand profile `target_markets` include any EU/EEA jurisdiction, the gate runs C2PA verification on the asset and treats a missing or invalid manifest as a CRITICAL issue. Article 50 applies from **2 Aug 2026** — penalty up to EUR 15M or 3% global turnover. To embed a manifest, use `/digital-marketing-pro:c2pa-metadata`.
+For assets flagged as AI-generated (file metadata or accompanying `--evidence` JSON declares `ai_generated: true`) AND brand profile `target_markets` include any EU/EEA jurisdiction, the gate runs C2PA verification on the asset and treats a missing or invalid manifest as a CRITICAL issue. Article 50 applies from **2 Aug 2026** — penalty up to EUR 15M or 3% global turnover. To embed a manifest, use `/omni-growth-engine:c2pa-metadata`.
 
 ## See also
 

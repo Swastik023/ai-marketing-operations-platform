@@ -11,7 +11,7 @@ Takes two snapshots of SEO performance data — separated by weeks, a Core Updat
 
 ## Trigger
 
-User runs `/digital-marketing-pro:seo-drift` or asks for:
+User runs `/omni-growth-engine:seo-drift` or asks for:
 - "Compare this month vs last month"
 - "What changed since the Core Update?"
 - "Track AI Mode citation drift"
@@ -33,7 +33,7 @@ User runs `/digital-marketing-pro:seo-drift` or asks for:
 4. Validate the four quality gates (date_range_distinct / sample_size / metric_compatibility / no_lookup_collisions)
 5. Narrative analysis of top 10 gainers (cause hypotheses → amplification candidates)
 6. Triage matrix for top 10 losers (`is_yMYL × had_recent_change × Core_Update_window` → action)
-7. If source is GSC AI Performance Report: cross-reference AI Mode citation losses with `/digital-marketing-pro:aeo-audit`
+7. If source is GSC AI Performance Report: cross-reference AI Mode citation losses with `/omni-growth-engine:aeo-audit`
 8. Classification distribution analysis (high reshuffle = AI Mode intent reweighting)
 9. Write `PLAN.md` to `${CLAUDE_PLUGIN_DATA}/{brand}/seo/seo-drift/{date}/`
 
@@ -52,9 +52,9 @@ Numbered intermediate files under `${CLAUDE_PLUGIN_DATA}/{brand}/seo/seo-drift/{
 
 Branch by finding:
 
-- **High decline (>40% of rows)**: "Likely Core Update or competitor catch-up. Run `/digital-marketing-pro:seo-audit` for diagnosis."
-- **High reshuffle (>20% of rows)**: "Likely intent shift (AI Mode reweighting). Run `/digital-marketing-pro:aeo-geo` to align with new intent patterns."
-- **High growth (>30% of rows)**: "Find amplification opportunities. Run `/digital-marketing-pro:content-engine` to brief follow-ups."
+- **High decline (>40% of rows)**: "Likely Core Update or competitor catch-up. Run `/omni-growth-engine:seo-audit` for diagnosis."
+- **High reshuffle (>20% of rows)**: "Likely intent shift (AI Mode reweighting). Run `/omni-growth-engine:aeo-geo` to align with new intent patterns."
+- **High growth (>30% of rows)**: "Find amplification opportunities. Run `/omni-growth-engine:content-engine` to brief follow-ups."
 - **High new (>15% of rows)**: "New SERP coverage — track and validate intent fit."
 
 For the full skill spec including classification rules, position-delta inversion, and Core Update timing guidance, see [skills/seo-drift/SKILL.md](../skills/seo-drift/SKILL.md).

@@ -1,6 +1,6 @@
-# Digital Marketing Pro Testing Guide — v3.17.0
+# OmniGrowth Engine Testing Guide — v3.17.0
 
-Complete testing guide for the Digital Marketing Pro plugin, including the v3.0 12-Part engagement methodology.
+Complete testing guide for the OmniGrowth Engine plugin, including the v3.0 12-Part engagement methodology.
 
 ---
 
@@ -32,8 +32,8 @@ Complete testing guide for the Digital Marketing Pro plugin, including the v3.0 
 
 | Method | URL |
 |--------|-----|
-| **Marketplace** | `https://github.com/indranilbanerjee/neels-plugins.git` |
-| **Direct URL** | `https://github.com/indranilbanerjee/digital-marketing-pro.git` |
+| **Marketplace** | `https://github.com/swastik-agnihotri/neels-plugins.git` |
+| **Direct URL** | `https://github.com/swastik-agnihotri/omni-growth-engine.git` |
 
 ### Pre-Test Cleanup
 
@@ -63,8 +63,8 @@ rm -rf ~/.claude-marketing/
 
 **Steps:**
 1. In Claude Cowork, go to Settings > Plugins > Add Marketplace
-2. Enter URL: `https://github.com/indranilbanerjee/neels-plugins.git`
-3. Install `digital-marketing-pro`
+2. Enter URL: `https://github.com/swastik-agnihotri/neels-plugins.git`
+3. Install `omni-growth-engine`
 
 **Expected Results:**
 - [ ] Marketplace loads without errors
@@ -83,7 +83,7 @@ rm -rf ~/.claude-marketing/
 
 **Steps:**
 1. Settings > Plugins > Add Plugin
-2. Enter URL: `https://github.com/indranilbanerjee/digital-marketing-pro.git`
+2. Enter URL: `https://github.com/swastik-agnihotri/omni-growth-engine.git`
 
 **Expected:** Same results as marketplace installation
 
@@ -94,7 +94,7 @@ rm -rf ~/.claude-marketing/
 **Expected Results:**
 - [ ] Plugin loads with NO auto-firing hook (hooks ship empty); optionally run `python scripts/setup.py --check-deps --summary` yourself
 - [ ] No Python errors or tracebacks
-- [ ] 18 top-level commands visible in the Customize panel (all prefixed `/digital-marketing-pro:`)
+- [ ] 18 top-level commands visible in the Customize panel (all prefixed `/omni-growth-engine:`)
 - [ ] 163 skills visible in Skills section
 - [ ] 24 agents registered (check for no frontmatter errors in logs)
 
@@ -115,7 +115,7 @@ rm -rf ~/.claude-marketing/
 
 ## 3. Command Tests
 
-DM Pro ships 18 top-level commands (all prefixed `/digital-marketing-pro:`). This section details the 7 highest-priority commands; the remaining commands follow the same invocation pattern.
+DM Pro ships 18 top-level commands (all prefixed `/omni-growth-engine:`). This section details the 7 highest-priority commands; the remaining commands follow the same invocation pattern.
 
 ### 3.1 `/brand-setup`
 
@@ -207,110 +207,110 @@ DM Pro has 163 skills. Test a representative sample from each module.
 
 | Skill | Test Prompt | Key Checks |
 |-------|-------------|------------|
-| `/digital-marketing-pro:help` | (no args) | Shows getting started guide, commands by category, examples, troubleshooting |
-| `/digital-marketing-pro:integrations` | (no args) | Shows the 10 registry-backed HTTP connectors + available connectors by category |
-| `/digital-marketing-pro:connect notion` | "Set up Notion" | Step-by-step OAuth instructions |
-| `/digital-marketing-pro:switch-brand` | "Switch to HealthFirst" | Brand context changes, subsequent commands use new brand |
-| `/digital-marketing-pro:context-engine` | "Load TestBrand Alpha" | Brand profile loaded, context confirmed |
-| `/digital-marketing-pro:add-integration` | "Connect my CRM" | Custom connector setup guide |
+| `/omni-growth-engine:help` | (no args) | Shows getting started guide, commands by category, examples, troubleshooting |
+| `/omni-growth-engine:integrations` | (no args) | Shows the 10 registry-backed HTTP connectors + available connectors by category |
+| `/omni-growth-engine:connect notion` | "Set up Notion" | Step-by-step OAuth instructions |
+| `/omni-growth-engine:switch-brand` | "Switch to HealthFirst" | Brand context changes, subsequent commands use new brand |
+| `/omni-growth-engine:context-engine` | "Load TestBrand Alpha" | Brand profile loaded, context confirmed |
+| `/omni-growth-engine:add-integration` | "Connect my CRM" | Custom connector setup guide |
 
 ### SEO & Content Module
 
 | Skill | Test Prompt | Key Checks |
 |-------|-------------|------------|
-| `/digital-marketing-pro:keyword-research` | "keyword research for 'AI project management'" | Clusters, search volume, difficulty, intent |
-| `/digital-marketing-pro:content-brief` | "brief for 'remote team management'" | Keyword data, outline, competitor analysis |
-| `/digital-marketing-pro:tech-seo-audit` | "audit testbrandalpha.com" | Core Web Vitals, crawlability, schema markup |
-| `/digital-marketing-pro:content-calendar` | "Q2 content calendar" | Monthly plan with topics, types, channels |
-| `/digital-marketing-pro:aeo-audit` | "how does our brand appear in AI answers?" | AI visibility assessment across engines |
-| `/digital-marketing-pro:content-decay-scan` | "scan our blog for decay" | Identifies outdated content, stale stats |
-| `/digital-marketing-pro:entity-audit` | "audit brand entity consistency" | Knowledge graph, structured data review |
-| `/digital-marketing-pro:local-seo-audit` | "audit local SEO for HealthFirst" | GBP, NAP consistency, local citations |
-| `/digital-marketing-pro:hreflang-check` | "check hreflang for globalcorp.com" | Tag validation, coverage gaps |
+| `/omni-growth-engine:keyword-research` | "keyword research for 'AI project management'" | Clusters, search volume, difficulty, intent |
+| `/omni-growth-engine:content-brief` | "brief for 'remote team management'" | Keyword data, outline, competitor analysis |
+| `/omni-growth-engine:tech-seo-audit` | "audit testbrandalpha.com" | Core Web Vitals, crawlability, schema markup |
+| `/omni-growth-engine:content-calendar` | "Q2 content calendar" | Monthly plan with topics, types, channels |
+| `/omni-growth-engine:aeo-audit` | "how does our brand appear in AI answers?" | AI visibility assessment across engines |
+| `/omni-growth-engine:content-decay-scan` | "scan our blog for decay" | Identifies outdated content, stale stats |
+| `/omni-growth-engine:entity-audit` | "audit brand entity consistency" | Knowledge graph, structured data review |
+| `/omni-growth-engine:local-seo-audit` | "audit local SEO for HealthFirst" | GBP, NAP consistency, local citations |
+| `/omni-growth-engine:hreflang-check` | "check hreflang for globalcorp.com" | Tag validation, coverage gaps |
 
 ### Paid Advertising & Social Module
 
 | Skill | Test Prompt | Key Checks |
 |-------|-------------|------------|
-| `/digital-marketing-pro:media-plan` | "media plan for $30K Google+Meta budget" | Budget split, targeting, bid strategy, timeline |
-| `/digital-marketing-pro:ad-creative` | "3 LinkedIn ad variations" | Platform-specific specs, scored variants |
-| `/digital-marketing-pro:social-strategy` | "social strategy for LinkedIn and Twitter" | Platform-specific playbooks |
-| `/digital-marketing-pro:ab-test-plan` | "A/B test for landing page headline" | Sample size, duration, hypothesis, significance |
-| `/digital-marketing-pro:launch-ad-campaign` | "launch Google Ads for product launch" | Campaign structure, targeting, creative |
-| `/digital-marketing-pro:retargeting-strategy` | "retargeting plan for trial abandoners" | Audience segments, frequency caps |
-| `/digital-marketing-pro:creative-health` | "check creative fatigue" | Fatigue prediction, refresh recommendations |
+| `/omni-growth-engine:media-plan` | "media plan for $30K Google+Meta budget" | Budget split, targeting, bid strategy, timeline |
+| `/omni-growth-engine:ad-creative` | "3 LinkedIn ad variations" | Platform-specific specs, scored variants |
+| `/omni-growth-engine:social-strategy` | "social strategy for LinkedIn and Twitter" | Platform-specific playbooks |
+| `/omni-growth-engine:ab-test-plan` | "A/B test for landing page headline" | Sample size, duration, hypothesis, significance |
+| `/omni-growth-engine:launch-ad-campaign` | "launch Google Ads for product launch" | Campaign structure, targeting, creative |
+| `/omni-growth-engine:retargeting-strategy` | "retargeting plan for trial abandoners" | Audience segments, frequency caps |
+| `/omni-growth-engine:creative-health` | "check creative fatigue" | Fatigue prediction, refresh recommendations |
 
 ### Analytics & Reporting Module
 
 | Skill | Test Prompt | Key Checks |
 |-------|-------------|------------|
-| `/digital-marketing-pro:analytics-insights` | "KPI framework for SaaS" | Metrics, targets, dashboard design |
-| `/digital-marketing-pro:roi-calculator` | "ROI for $50K campaign with 200 leads" | Math correct, assumptions documented |
-| `/digital-marketing-pro:budget-optimizer` | "optimize $100K across 5 channels" | Allocation with reasoning, diminishing returns |
-| `/digital-marketing-pro:anomaly-scan` | "check for performance anomalies" | Detection methodology, threshold logic |
-| `/digital-marketing-pro:attribution-model` | "set up multi-touch attribution" | Model selection, implementation guidance |
-| `/digital-marketing-pro:cohort-analysis` | "analyze Q1 acquisition cohorts" | Cohort tables, retention curves |
-| `/digital-marketing-pro:performance-check` | "pull live metrics" | Connector status, data freshness |
+| `/omni-growth-engine:analytics-insights` | "KPI framework for SaaS" | Metrics, targets, dashboard design |
+| `/omni-growth-engine:roi-calculator` | "ROI for $50K campaign with 200 leads" | Math correct, assumptions documented |
+| `/omni-growth-engine:budget-optimizer` | "optimize $100K across 5 channels" | Allocation with reasoning, diminishing returns |
+| `/omni-growth-engine:anomaly-scan` | "check for performance anomalies" | Detection methodology, threshold logic |
+| `/omni-growth-engine:attribution-model` | "set up multi-touch attribution" | Model selection, implementation guidance |
+| `/omni-growth-engine:cohort-analysis` | "analyze Q1 acquisition cohorts" | Cohort tables, retention curves |
+| `/omni-growth-engine:performance-check` | "pull live metrics" | Connector status, data freshness |
 
 ### Growth & CRO Module
 
 | Skill | Test Prompt | Key Checks |
 |-------|-------------|------------|
-| `/digital-marketing-pro:funnel-audit` | "audit our signup funnel" | Drop-off analysis, benchmark comparison |
-| `/digital-marketing-pro:landing-page-audit` | "audit our pricing page" | Above-fold, CTA, form, mobile scores |
-| `/digital-marketing-pro:growth-engineering` | "design a referral program" | Viral loop, incentives, K-factor |
-| `/digital-marketing-pro:cro` | "conversion optimization for checkout" | Hypotheses, test plan, priority score |
-| `/digital-marketing-pro:loop-detect` | "find growth loops in our product" | Loop identification, reinforcement analysis |
-| `/digital-marketing-pro:pricing-test` | "test pricing strategies" | Willingness-to-pay, conjoint analysis |
+| `/omni-growth-engine:funnel-audit` | "audit our signup funnel" | Drop-off analysis, benchmark comparison |
+| `/omni-growth-engine:landing-page-audit` | "audit our pricing page" | Above-fold, CTA, form, mobile scores |
+| `/omni-growth-engine:growth-engineering` | "design a referral program" | Viral loop, incentives, K-factor |
+| `/omni-growth-engine:cro` | "conversion optimization for checkout" | Hypotheses, test plan, priority score |
+| `/omni-growth-engine:loop-detect` | "find growth loops in our product" | Loop identification, reinforcement analysis |
+| `/omni-growth-engine:pricing-test` | "test pricing strategies" | Willingness-to-pay, conjoint analysis |
 
 ### PR & Influencer Module
 
 | Skill | Test Prompt | Key Checks |
 |-------|-------------|------------|
-| `/digital-marketing-pro:pr-pitch` | "pitch for product launch" | Pitch template, journalist targets, timing |
-| `/digital-marketing-pro:influencer-brief` | "influencer campaign for SaaS" | Discovery criteria, brief, FTC compliance |
-| `/digital-marketing-pro:crisis-response` | "handle negative PR about data breach" | Response framework, messaging, channels |
-| `/digital-marketing-pro:digital-pr` | "digital PR for link building" | Outreach strategy, asset creation |
+| `/omni-growth-engine:pr-pitch` | "pitch for product launch" | Pitch template, journalist targets, timing |
+| `/omni-growth-engine:influencer-brief` | "influencer campaign for SaaS" | Discovery criteria, brief, FTC compliance |
+| `/omni-growth-engine:crisis-response` | "handle negative PR about data breach" | Response framework, messaging, channels |
+| `/omni-growth-engine:digital-pr` | "digital PR for link building" | Outreach strategy, asset creation |
 
 ### Email & Automation Module
 
 | Skill | Test Prompt | Key Checks |
 |-------|-------------|------------|
-| `/digital-marketing-pro:email-sequence` | "win-back sequence for churned users" | Timing, copy, segmentation, triggers |
-| `/digital-marketing-pro:send-email-campaign` | "send newsletter to subscribers" | MCP connector check, preview, approval |
-| `/digital-marketing-pro:marketing-automation` | "automation workflow for lead nurture" | Trigger logic, branching, scoring |
+| `/omni-growth-engine:email-sequence` | "win-back sequence for churned users" | Timing, copy, segmentation, triggers |
+| `/omni-growth-engine:send-email-campaign` | "send newsletter to subscribers" | MCP connector check, preview, approval |
+| `/omni-growth-engine:marketing-automation` | "automation workflow for lead nurture" | Trigger logic, branching, scoring |
 
 ### Agency Operations Module
 
 | Skill | Test Prompt | Key Checks |
 |-------|-------------|------------|
-| `/digital-marketing-pro:client-report` | "client report for January" | Client-facing format, branded |
-| `/digital-marketing-pro:exec-summary` | "executive summary for Q4" | C-suite ready, strategic insights |
-| `/digital-marketing-pro:agency-dashboard` | "portfolio dashboard" | Multi-client view, aggregate metrics |
-| `/digital-marketing-pro:client-onboarding` | "onboard new client FitnessCo" | Kickoff checklist, data requirements |
-| `/digital-marketing-pro:team-assign` | "assign SEO tasks to team" | Task breakdown, assignments, deadlines |
-| `/digital-marketing-pro:qbr-plan` | "prepare QBR for TestBrand" | Agenda, data requirements, insights |
+| `/omni-growth-engine:client-report` | "client report for January" | Client-facing format, branded |
+| `/omni-growth-engine:exec-summary` | "executive summary for Q4" | C-suite ready, strategic insights |
+| `/omni-growth-engine:agency-dashboard` | "portfolio dashboard" | Multi-client view, aggregate metrics |
+| `/omni-growth-engine:client-onboarding` | "onboard new client FitnessCo" | Kickoff checklist, data requirements |
+| `/omni-growth-engine:team-assign` | "assign SEO tasks to team" | Task breakdown, assignments, deadlines |
+| `/omni-growth-engine:qbr-plan` | "prepare QBR for TestBrand" | Agenda, data requirements, insights |
 
 ### Intelligence & Memory Module
 
 | Skill | Test Prompt | Key Checks |
 |-------|-------------|------------|
-| `/digital-marketing-pro:save-knowledge` | "save that LinkedIn ads work best for us" | Learning stored persistently |
-| `/digital-marketing-pro:recall` | "what worked for our LinkedIn campaigns?" | Relevant learnings retrieved |
-| `/digital-marketing-pro:search-knowledge` | "find campaign results from Q1" | Search returns relevant entries |
-| `/digital-marketing-pro:intelligence-report` | "full intelligence briefing" | Compound learnings, pattern recognition |
-| `/digital-marketing-pro:learn` | "SEO traffic grew 40% after content refresh" | Insight stored with context |
+| `/omni-growth-engine:save-knowledge` | "save that LinkedIn ads work best for us" | Learning stored persistently |
+| `/omni-growth-engine:recall` | "what worked for our LinkedIn campaigns?" | Relevant learnings retrieved |
+| `/omni-growth-engine:search-knowledge` | "find campaign results from Q1" | Search returns relevant entries |
+| `/omni-growth-engine:intelligence-report` | "full intelligence briefing" | Compound learnings, pattern recognition |
+| `/omni-growth-engine:learn` | "SEO traffic grew 40% after content refresh" | Insight stored with context |
 
 ### Advanced Skills
 
 | Skill | Test Prompt | Key Checks |
 |-------|-------------|------------|
-| `/digital-marketing-pro:simulate` | "simulate revenue impact of doubling ad spend" | Revenue model, assumptions, scenarios |
-| `/digital-marketing-pro:what-if` | "what if we cut social media budget by 50%?" | Scenario comparison, trade-offs |
-| `/digital-marketing-pro:focus-group` | "test messaging with target audience" | Synthetic personas, feedback, insights |
-| `/digital-marketing-pro:journey-design` | "design onboarding journey" | Cross-channel touchpoints, timing |
-| `/digital-marketing-pro:market-weather` | "marketing weather report" | Macro signals, timing recommendations |
-| `/digital-marketing-pro:dark-funnel` | "map invisible buyer journey" | Unmeasured touchpoints, heuristics |
+| `/omni-growth-engine:simulate` | "simulate revenue impact of doubling ad spend" | Revenue model, assumptions, scenarios |
+| `/omni-growth-engine:what-if` | "what if we cut social media budget by 50%?" | Scenario comparison, trade-offs |
+| `/omni-growth-engine:focus-group` | "test messaging with target audience" | Synthetic personas, feedback, insights |
+| `/omni-growth-engine:journey-design` | "design onboarding journey" | Cross-channel touchpoints, timing |
+| `/omni-growth-engine:market-weather` | "marketing weather report" | Macro signals, timing recommendations |
+| `/omni-growth-engine:dark-funnel` | "map invisible buyer journey" | Unmeasured touchpoints, heuristics |
 
 ---
 
@@ -326,30 +326,30 @@ DM Pro has 24 specialist agents. Verify they register correctly and respond when
 
 | # | Agent | Primary Skills |
 |---|-------|---------------|
-| 1 | agency-operations | `/digital-marketing-pro:agency-dashboard`, `/digital-marketing-pro:client-report`, `/digital-marketing-pro:team-assign` |
-| 2 | analytics-analyst | `/digital-marketing-pro:analytics-insights`, `/digital-marketing-pro:anomaly-scan`, `/digital-marketing-pro:attribution-model` |
-| 3 | brand-guardian | `/digital-marketing-pro:eval-content`, brand compliance checks |
-| 4 | competitive-intel | `/digital-marketing-pro:competitor-analysis`, `/digital-marketing-pro:share-of-voice`, `/digital-marketing-pro:competitor-monitor`, `/digital-marketing-pro:competitor-alerts` (mode: snapshot\|monitoring) |
-| 5 | content-creator | `/digital-marketing-pro:content-engine`, `/digital-marketing-pro:content-brief`, `/digital-marketing-pro:content-repurpose` |
-| 6 | crm-manager | `/digital-marketing-pro:crm-sync`, `/digital-marketing-pro:pipeline-update`, `/digital-marketing-pro:lead-import` |
-| 7 | cro-specialist | `/digital-marketing-pro:cro`, `/digital-marketing-pro:landing-page-audit`, `/digital-marketing-pro:funnel-audit` |
-| 8 | email-specialist | `/digital-marketing-pro:email-sequence`, `/digital-marketing-pro:send-email-campaign` |
-| 9 | execution-coordinator | `/digital-marketing-pro:launch-ad-campaign`, `/digital-marketing-pro:publish-blog`, `/digital-marketing-pro:schedule-social` |
-| 10 | growth-engineer | `/digital-marketing-pro:growth-engineering`, `/digital-marketing-pro:loop-detect` |
-| 11 | influencer-manager | `/digital-marketing-pro:influencer-brief`, `/digital-marketing-pro:influencer-creator` |
-| 12 | intelligence-curator | `/digital-marketing-pro:intelligence-report`, `/digital-marketing-pro:learn` |
-| 13 | journey-orchestrator | `/digital-marketing-pro:journey-design`, `/digital-marketing-pro:funnel-architect` |
-| 14 | localization-specialist | `/digital-marketing-pro:translate-content`, `/digital-marketing-pro:localize-campaign` |
-| 15 | market-intelligence | `/digital-marketing-pro:market-weather`, `/digital-marketing-pro:emerging-channels` |
-| 16 | marketing-scientist | `/digital-marketing-pro:simulate`, `/digital-marketing-pro:attribution-report` |
-| 17 | marketing-strategist | `/digital-marketing-pro:campaign-plan`, `/digital-marketing-pro:launch-plan` |
-| 18 | media-buyer | `/digital-marketing-pro:media-plan`, `/digital-marketing-pro:paid-advertising`, `/digital-marketing-pro:budget-tracker` |
-| 19 | memory-manager | `/digital-marketing-pro:save-knowledge`, `/digital-marketing-pro:recall`, `/digital-marketing-pro:sync-memory` |
-| 20 | performance-monitor-agent | `/digital-marketing-pro:performance-check`, `/digital-marketing-pro:anomaly-scan` |
-| 21 | pr-outreach | `/digital-marketing-pro:pr-pitch`, `/digital-marketing-pro:digital-pr`, `/digital-marketing-pro:crisis-response` |
-| 22 | quality-assurance | `/digital-marketing-pro:eval-suite`, `/digital-marketing-pro:quality-report` |
-| 23 | seo-specialist | `/digital-marketing-pro:seo-audit`, `/digital-marketing-pro:keyword-research`, `/digital-marketing-pro:tech-seo-audit` |
-| 24 | social-media-manager | `/digital-marketing-pro:social-strategy`, `/digital-marketing-pro:schedule-social` |
+| 1 | agency-operations | `/omni-growth-engine:agency-dashboard`, `/omni-growth-engine:client-report`, `/omni-growth-engine:team-assign` |
+| 2 | analytics-analyst | `/omni-growth-engine:analytics-insights`, `/omni-growth-engine:anomaly-scan`, `/omni-growth-engine:attribution-model` |
+| 3 | brand-guardian | `/omni-growth-engine:eval-content`, brand compliance checks |
+| 4 | competitive-intel | `/omni-growth-engine:competitor-analysis`, `/omni-growth-engine:share-of-voice`, `/omni-growth-engine:competitor-monitor`, `/omni-growth-engine:competitor-alerts` (mode: snapshot\|monitoring) |
+| 5 | content-creator | `/omni-growth-engine:content-engine`, `/omni-growth-engine:content-brief`, `/omni-growth-engine:content-repurpose` |
+| 6 | crm-manager | `/omni-growth-engine:crm-sync`, `/omni-growth-engine:pipeline-update`, `/omni-growth-engine:lead-import` |
+| 7 | cro-specialist | `/omni-growth-engine:cro`, `/omni-growth-engine:landing-page-audit`, `/omni-growth-engine:funnel-audit` |
+| 8 | email-specialist | `/omni-growth-engine:email-sequence`, `/omni-growth-engine:send-email-campaign` |
+| 9 | execution-coordinator | `/omni-growth-engine:launch-ad-campaign`, `/omni-growth-engine:publish-blog`, `/omni-growth-engine:schedule-social` |
+| 10 | growth-engineer | `/omni-growth-engine:growth-engineering`, `/omni-growth-engine:loop-detect` |
+| 11 | influencer-manager | `/omni-growth-engine:influencer-brief`, `/omni-growth-engine:influencer-creator` |
+| 12 | intelligence-curator | `/omni-growth-engine:intelligence-report`, `/omni-growth-engine:learn` |
+| 13 | journey-orchestrator | `/omni-growth-engine:journey-design`, `/omni-growth-engine:funnel-architect` |
+| 14 | localization-specialist | `/omni-growth-engine:translate-content`, `/omni-growth-engine:localize-campaign` |
+| 15 | market-intelligence | `/omni-growth-engine:market-weather`, `/omni-growth-engine:emerging-channels` |
+| 16 | marketing-scientist | `/omni-growth-engine:simulate`, `/omni-growth-engine:attribution-report` |
+| 17 | marketing-strategist | `/omni-growth-engine:campaign-plan`, `/omni-growth-engine:launch-plan` |
+| 18 | media-buyer | `/omni-growth-engine:media-plan`, `/omni-growth-engine:paid-advertising`, `/omni-growth-engine:budget-tracker` |
+| 19 | memory-manager | `/omni-growth-engine:save-knowledge`, `/omni-growth-engine:recall`, `/omni-growth-engine:sync-memory` |
+| 20 | performance-monitor-agent | `/omni-growth-engine:performance-check`, `/omni-growth-engine:anomaly-scan` |
+| 21 | pr-outreach | `/omni-growth-engine:pr-pitch`, `/omni-growth-engine:digital-pr`, `/omni-growth-engine:crisis-response` |
+| 22 | quality-assurance | `/omni-growth-engine:eval-suite`, `/omni-growth-engine:quality-report` |
+| 23 | seo-specialist | `/omni-growth-engine:seo-audit`, `/omni-growth-engine:keyword-research`, `/omni-growth-engine:tech-seo-audit` |
+| 24 | social-media-manager | `/omni-growth-engine:social-strategy`, `/omni-growth-engine:schedule-social` |
 
 **Checks:**
 - [ ] All 24 agents have valid frontmatter (`name` in kebab-case + `description`)
@@ -367,7 +367,7 @@ DM Pro has ~86 Python scripts. Test key scripts that are critical to plugin oper
 | Script | Trigger | Test | Expected |
 |--------|---------|------|----------|
 | `setup.py` | manual / optional | `python scripts/setup.py --check-deps --summary` | Checks dependencies, prints summary, no errors |
-| `connector-status.py` | `/digital-marketing-pro:integrations` | Run integrations command | Lists 10 registry-backed HTTP + available connectors by category |
+| `connector-status.py` | `/omni-growth-engine:integrations` | Run integrations command | Lists 10 registry-backed HTTP + available connectors by category |
 | `campaign-tracker.py` | skill-invoked (e.g. sync-memory) | Save an insight | Session insights saved |
 | `guidelines-manager.py` | Brand compliance | Set up brand with guidelines | Rules stored and enforced |
 
@@ -434,7 +434,7 @@ The behaviors a hook layer *could* enforce are instead enforced **inside the ski
 
 These run when a content skill or the `brand-guardian` / `quality-assurance` agents process content — not automatically on every Write/Edit.
 
-**Test:** Run `/digital-marketing-pro:check` or `/digital-marketing-pro:eval-content` on intentionally bad content:
+**Test:** Run `/omni-growth-engine:check` or `/omni-growth-engine:eval-content` on intentionally bad content:
 
 | Bad content | Expected detection |
 |---|---|
@@ -448,7 +448,7 @@ Every execution skill carries an in-body **`## Execution gate`** — it presents
 
 | Action | Expected |
 |---|---|
-| `/digital-marketing-pro:launch-campaign` | Execution Summary + typed-`yes` approval gate before any platform call |
+| `/omni-growth-engine:launch-campaign` | Execution Summary + typed-`yes` approval gate before any platform call |
 | publish-blog / send-email-campaign / launch-ad-campaign | Preview + approval required; any non-approval cancels |
 | CRM writes | Confirmation required before overwrite |
 
@@ -487,18 +487,18 @@ Verify connectors map to the right workflow categories per CONNECTORS.md:
 
 | Category | Connectors | Skills Affected |
 |----------|------------|----------------|
-| Communication | Slack | `/digital-marketing-pro:send-notification` |
-| Design | Canva, Figma | `/digital-marketing-pro:ad-creative`, design assets |
-| CRM | HubSpot | `/digital-marketing-pro:crm-sync`, `/digital-marketing-pro:lead-import`, `/digital-marketing-pro:pipeline-update` |
-| Analytics | Amplitude | `/digital-marketing-pro:analytics-insights`, `/digital-marketing-pro:performance-check` |
-| Knowledge base | Notion | `/digital-marketing-pro:save-knowledge`, brand docs |
-| SEO | Ahrefs, Similarweb | `/digital-marketing-pro:seo-audit`, `/digital-marketing-pro:keyword-research`, `/digital-marketing-pro:competitor-analysis` |
-| Email marketing | Klaviyo | `/digital-marketing-pro:send-email-campaign` |
-| Calendar | Google Calendar | `/digital-marketing-pro:content-calendar` |
-| Email | Gmail | `/digital-marketing-pro:send-report`, draft delivery |
-| Payments | Stripe | `/digital-marketing-pro:roi-calculator`, revenue data |
-| Project management | Asana | `/digital-marketing-pro:team-assign` |
-| CMS | Webflow | `/digital-marketing-pro:publish-blog` |
+| Communication | Slack | `/omni-growth-engine:send-notification` |
+| Design | Canva, Figma | `/omni-growth-engine:ad-creative`, design assets |
+| CRM | HubSpot | `/omni-growth-engine:crm-sync`, `/omni-growth-engine:lead-import`, `/omni-growth-engine:pipeline-update` |
+| Analytics | Amplitude | `/omni-growth-engine:analytics-insights`, `/omni-growth-engine:performance-check` |
+| Knowledge base | Notion | `/omni-growth-engine:save-knowledge`, brand docs |
+| SEO | Ahrefs, Similarweb | `/omni-growth-engine:seo-audit`, `/omni-growth-engine:keyword-research`, `/omni-growth-engine:competitor-analysis` |
+| Email marketing | Klaviyo | `/omni-growth-engine:send-email-campaign` |
+| Calendar | Google Calendar | `/omni-growth-engine:content-calendar` |
+| Email | Gmail | `/omni-growth-engine:send-report`, draft delivery |
+| Payments | Stripe | `/omni-growth-engine:roi-calculator`, revenue data |
+| Project management | Asana | `/omni-growth-engine:team-assign` |
+| CMS | Webflow | `/omni-growth-engine:publish-blog` |
 
 ### 8.3 Graceful Degradation
 
@@ -507,7 +507,7 @@ Verify connectors map to the right workflow categories per CONNECTORS.md:
 **Expected:**
 - [ ] Skill doesn't crash
 - [ ] Clear message about which connector is needed
-- [ ] Instructions on how to connect it (or suggest `/digital-marketing-pro:connect <name>`)
+- [ ] Instructions on how to connect it (or suggest `/omni-growth-engine:connect <name>`)
 - [ ] Fallback behavior (manual data input, alternative approach, or skip)
 - [ ] Verify-then-guide pattern (never silent failure)
 
@@ -525,11 +525,11 @@ Verify connectors map to the right workflow categories per CONNECTORS.md:
 
 | Test | Expected |
 |------|----------|
-| `/digital-marketing-pro:keyword-research` (no keyword) | Asks for keyword/topic |
-| `/digital-marketing-pro:campaign-plan` (no details) | Asks for brand, budget, goals |
-| `/digital-marketing-pro:seo-audit` (no URL) | Asks for website URL |
-| `/digital-marketing-pro:media-plan` (no budget) | Asks for budget and channels |
-| `/digital-marketing-pro:email-sequence` (no context) | Asks for goal, audience, trigger |
+| `/omni-growth-engine:keyword-research` (no keyword) | Asks for keyword/topic |
+| `/omni-growth-engine:campaign-plan` (no details) | Asks for brand, budget, goals |
+| `/omni-growth-engine:seo-audit` (no URL) | Asks for website URL |
+| `/omni-growth-engine:media-plan` (no budget) | Asks for budget and channels |
+| `/omni-growth-engine:email-sequence` (no context) | Asks for goal, audience, trigger |
 
 ### 9.2 Brand Context
 
@@ -588,7 +588,7 @@ Run this after any changes to verify nothing is broken.
 
 ### Commands
 
-- [ ] All 18 commands appear in Customize panel (all prefixed `/digital-marketing-pro:`)
+- [ ] All 18 commands appear in Customize panel (all prefixed `/omni-growth-engine:`)
 - [ ] `/brand-setup` completes full setup flow
 - [ ] `/campaign-plan` generates multi-channel plan with budget
 - [ ] `/seo-audit` produces comprehensive report
@@ -599,16 +599,16 @@ Run this after any changes to verify nothing is broken.
 
 ### Skills
 
-- [ ] `/digital-marketing-pro:help` shows complete, accurate information
-- [ ] `/digital-marketing-pro:integrations` shows the 10 registry-backed HTTP connectors with correct status
+- [ ] `/omni-growth-engine:help` shows complete, accurate information
+- [ ] `/omni-growth-engine:integrations` shows the 10 registry-backed HTTP connectors with correct status
 - [ ] All 163 skills respond to invocation (spot check at minimum)
 - [ ] Skills handle missing connectors gracefully
 
 ### Skill Platform Features
 
-- [ ] Argument hints show in Skills UI when typing `/digital-marketing-pro:` (spot check 3-5 skills)
-- [ ] Execution skills (e.g., `/digital-marketing-pro:publish-blog`, `/digital-marketing-pro:send-email-campaign`) cannot be triggered by Claude without explicit user invocation
-- [ ] `/digital-marketing-pro:help` has `name: help` in frontmatter (was missing pre-v2.5.1)
+- [ ] Argument hints show in Skills UI when typing `/omni-growth-engine:` (spot check 3-5 skills)
+- [ ] Execution skills (e.g., `/omni-growth-engine:publish-blog`, `/omni-growth-engine:send-email-campaign`) cannot be triggered by Claude without explicit user invocation
+- [ ] `/omni-growth-engine:help` has `name: help` in frontmatter (was missing pre-v2.5.1)
 - [ ] `skills/campaign-plan/evals/evals.json` exists and is valid JSON with 3 test cases
 - [ ] `skills/seo-audit/evals/evals.json` exists and is valid JSON with 2 test cases
 - [ ] `skills/content-engine/evals/evals.json` exists and is valid JSON with 3 test cases
@@ -649,7 +649,7 @@ If time is limited, test in this order:
 | 2 | `/brand-setup` command | 3.1 | Foundation for all other tests |
 | 3 | `/campaign-plan` command | 3.2 | Validates core strategic skill |
 | 4 | `/seo-audit` command | 3.3 | Validates technical analysis |
-| 5 | `/digital-marketing-pro:help` and `/digital-marketing-pro:integrations` | 4 | Validates help accuracy and connector status |
+| 5 | `/omni-growth-engine:help` and `/omni-growth-engine:integrations` | 4 | Validates help accuracy and connector status |
 | 6 | Hook config check (ships empty) | 7 | Confirms zero global hooks; guardrails are skill-enforced |
 | 7 | Key skills (one per module) | 4 | Validates breadth of skill coverage |
 | 8 | MCP connectors | 8 | Requires external service accounts |
@@ -670,7 +670,7 @@ This test does not require Claude — it validates the persistence engine direct
 ```bash
 # Set up an isolated test workspace
 export CLAUDE_PLUGIN_DATA="$(mktemp -d)"
-cd /path/to/digital-marketing-pro
+cd /path/to/omni-growth-engine
 
 # Test 1: Initialise an engagement
 python scripts/engagement-state.py init --brand "test-brand" --id "2026-q2"
@@ -724,23 +724,23 @@ Within a Claude session with the plugin installed:
 
 | # | Test | Expected behaviour |
 |---|------|-------------------|
-| 1 | `/digital-marketing-pro:engagement start <brand-slug> 2026-test` | Engagement directory created; Stone vs Opinion intake walked |
-| 2 | `/digital-marketing-pro:engagement status` | Status table shown; current part = 1 |
-| 3 | `/digital-marketing-pro:engagement file-tree <brand-slug> 2026-test` | Directory tree printed with all 12 part subdirs + reports + LIF |
-| 4 | `/digital-marketing-pro:engagement lif-show <brand-slug> 2026-test` | Living Project Instruction File printed |
-| 5 | `/digital-marketing-pro:engagement list-engagements` | Test engagement listed |
+| 1 | `/omni-growth-engine:engagement start <brand-slug> 2026-test` | Engagement directory created; Stone vs Opinion intake walked |
+| 2 | `/omni-growth-engine:engagement status` | Status table shown; current part = 1 |
+| 3 | `/omni-growth-engine:engagement file-tree <brand-slug> 2026-test` | Directory tree printed with all 12 part subdirs + reports + LIF |
+| 4 | `/omni-growth-engine:engagement lif-show <brand-slug> 2026-test` | Living Project Instruction File printed |
+| 5 | `/omni-growth-engine:engagement list-engagements` | Test engagement listed |
 
 ### 12.3 Methodology skill discovery
 
 Verify that the 6 new methodology skills are discovered by Claude:
 
 ```
-/digital-marketing-pro:engagement-workflow
-/digital-marketing-pro:four-core-documents
-/digital-marketing-pro:client-validation-document
-/digital-marketing-pro:growth-plan
-/digital-marketing-pro:yearly-planner
-/digital-marketing-pro:continuous-improvement-loop
+/omni-growth-engine:engagement-workflow
+/omni-growth-engine:four-core-documents
+/omni-growth-engine:client-validation-document
+/omni-growth-engine:growth-plan
+/omni-growth-engine:yearly-planner
+/omni-growth-engine:continuous-improvement-loop
 ```
 
 Each should show its description and not return "command not found."
@@ -776,10 +776,10 @@ After installing v3.0, verify v2.7 still works:
 
 | # | Test | Expected behaviour |
 |---|------|-------------------|
-| 1 | `/digital-marketing-pro:brand-setup` (existing brand) | Works as before; profile loaded |
-| 2 | `/digital-marketing-pro:campaign-plan` (no engagement context) | Works as before; produces campaign brief |
-| 3 | `/digital-marketing-pro:content-engine` (no engagement context) | Works as before |
-| 4 | `/digital-marketing-pro:competitor-analysis` (no engagement context) | Works as before |
+| 1 | `/omni-growth-engine:brand-setup` (existing brand) | Works as before; profile loaded |
+| 2 | `/omni-growth-engine:campaign-plan` (no engagement context) | Works as before; produces campaign brief |
+| 3 | `/omni-growth-engine:content-engine` (no engagement context) | Works as before |
+| 4 | `/omni-growth-engine:competitor-analysis` (no engagement context) | Works as before |
 | 5 | Hooks ship empty | No auto-fire on session start (correct) |
 | 6 | Skill-enforced compliance | /check + brand-guardian flag issues on demand |
 | 7 | Skill-saved insights | sync-memory / save-knowledge persist insights |

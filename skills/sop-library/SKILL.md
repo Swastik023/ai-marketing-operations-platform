@@ -1,9 +1,9 @@
 ---
 name: sop-library
-description: "Manage the agency's Standard Operating Procedure library — create SOPs from category templates, list the library, assign SOPs to brands with per-brand overrides, check compliance against logged executions, version updates with archived backups, and view full histories. Triggers on \"/digital-marketing-pro:sop-library\", \"create an SOP for blog publishing\", \"assign the reporting SOP to this brand\", \"are we following our SOPs\", \"update the campaign launch checklist\". Stores SOPs under ~/.claude-marketing/sops/, reads execution history via execution-tracker.py for compliance scoring, flags declining adherence, and pairs with brand profiles in multi-client agency workflows."
+description: "Manage the agency's Standard Operating Procedure library — create SOPs from category templates, list the library, assign SOPs to brands with per-brand overrides, check compliance against logged executions, version updates with archived backups, and view full histories. Triggers on \"/omni-growth-engine:sop-library\", \"create an SOP for blog publishing\", \"assign the reporting SOP to this brand\", \"are we following our SOPs\", \"update the campaign launch checklist\". Stores SOPs under ~/.claude-marketing/sops/, reads execution history via execution-tracker.py for compliance scoring, flags declining adherence, and pairs with brand profiles in multi-client agency workflows."
 ---
 
-# /digital-marketing-pro:sop-library
+# /omni-growth-engine:sop-library
 
 ## Purpose
 
@@ -28,7 +28,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Check SOP storage**: Read the SOP library at `~/.claude-marketing/sops/`. Each SOP is stored as a JSON file with metadata (name, category, version, priority, created date, last updated, author, assigned brands, steps array, checklists, and version history)
 3. **For CREATE action**: Generate a new SOP from the specified category template. Include:
    - Objective statement and scope definition

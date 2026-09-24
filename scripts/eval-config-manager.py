@@ -129,7 +129,7 @@ def resolve_brand(slug: str | None) -> str:
     if not active_path.exists():
         print(json.dumps({
             "error": "No --brand provided and no active brand found.",
-            "hint": "Provide --brand <slug> or set an active brand via /digital-marketing-pro:switch-brand.",
+            "hint": "Provide --brand <slug> or set an active brand via /omni-growth-engine:switch-brand.",
         }, indent=2))
         sys.exit(1)
 

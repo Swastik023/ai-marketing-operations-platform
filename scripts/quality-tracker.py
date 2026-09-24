@@ -2,7 +2,7 @@
 """
 quality-tracker.py
 ==================
-Persistent content quality evaluation tracker for Digital Marketing Pro.
+Persistent content quality evaluation tracker for OmniGrowth Engine.
 
 Logs eval scores over time, computes weekly trends, detects quality
 regression across scoring dimensions, and surfaces best/worst content.
@@ -73,7 +73,7 @@ def get_quality_dir(slug):
     """Return the quality tracking directory for a brand, creating if needed."""
     brand_dir = BRANDS_DIR / slug
     if not brand_dir.exists():
-        return None, f"Brand '{slug}' not found. Run /digital-marketing-pro:brand-setup first."
+        return None, f"Brand '{slug}' not found. Run /omni-growth-engine:brand-setup first."
 
     quality_dir = brand_dir / "quality"
     quality_dir.mkdir(exist_ok=True)
@@ -441,7 +441,7 @@ def action_get_worst(slug, limit, content_type, days):
 
 def build_parser():
     parser = argparse.ArgumentParser(
-        description="Quality evaluation tracker for Digital Marketing Pro.",
+        description="Quality evaluation tracker for OmniGrowth Engine.",
         epilog=(
             "Actions:\n"
             "  log-eval          Log a new content evaluation\n"
@@ -499,7 +499,7 @@ def main():
     if not slug:
         print(json.dumps({
             "error": "No brand specified and no active brand set. "
-                     "Use --brand <slug> or run /digital-marketing-pro:brand-setup first."
+                     "Use --brand <slug> or run /omni-growth-engine:brand-setup first."
         }))
         sys.exit(1)
 

@@ -503,7 +503,7 @@ def summary_action(slug):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Narrative Mapper — Map competitive positioning and narrative territories for Digital Marketing Pro"
+        description="Narrative Mapper — Map competitive positioning and narrative territories for OmniGrowth Engine"
     )
     parser.add_argument("--brand", required=True, help="Brand slug")
     parser.add_argument(

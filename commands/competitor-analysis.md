@@ -11,7 +11,7 @@ Deliver a comprehensive competitive intelligence report across all major marketi
 
 ## Trigger
 
-User runs `/digital-marketing-pro:competitor-analysis` or asks to analyze competitors, benchmark against competition, find competitive gaps, or understand the competitive landscape.
+User runs `/omni-growth-engine:competitor-analysis` or asks to analyze competitors, benchmark against competition, find competitive gaps, or understand the competitive landscape.
 
 ## Inputs
 
@@ -49,7 +49,7 @@ Gather the following from the user. If not provided, ask before proceeding:
 
 **If tools are not connected:**
 - Use web search to research the SEO landscape
-- Note: "For detailed ranking data, connect Ahrefs or Similarweb via `/digital-marketing-pro:connect`."
+- Note: "For detailed ranking data, connect Ahrefs or Similarweb via `/omni-growth-engine:connect`."
 
 Assess:
 - Domain authority comparison
@@ -125,12 +125,12 @@ For each competitor: Strengths, Weaknesses, Opportunities (for your brand), Thre
 ## After the Analysis
 
 Ask: "Would you like me to:
-- Set up ongoing competitor monitoring? (`/digital-marketing-pro:competitor-monitor`)
-- Create a counter-narrative strategy? (`/digital-marketing-pro:counter-narrative`)
-- Draft content to fill the competitive gaps identified? (`/digital-marketing-pro:content-brief`)
-- Build a share-of-voice tracking dashboard? (`/digital-marketing-pro:share-of-voice`)
-- Analyze competitor ad creative in detail? (`/digital-marketing-pro:paid-advertising`)
-- Map the full narrative landscape? (`/digital-marketing-pro:narrative-landscape`)"
+- Set up ongoing competitor monitoring? (`/omni-growth-engine:competitor-monitor`)
+- Create a counter-narrative strategy? (`/omni-growth-engine:counter-narrative`)
+- Draft content to fill the competitive gaps identified? (`/omni-growth-engine:content-brief`)
+- Build a share-of-voice tracking dashboard? (`/omni-growth-engine:share-of-voice`)
+- Analyze competitor ad creative in detail? (`/omni-growth-engine:paid-advertising`)
+- Map the full narrative landscape? (`/omni-growth-engine:narrative-landscape`)"
 
 ## Execution discipline — parallel dispatch
 

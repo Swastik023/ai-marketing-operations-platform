@@ -1,11 +1,11 @@
 ---
 name: send-sms
-description: "Send an SMS or WhatsApp marketing message through a connected Twilio or Brevo MCP, with consent verification (TCPA/GDPR/CASL), quiet-hours enforcement, opt-out and message-length checks, cost estimates, and delivery tracking. Nothing sends without an Execution Summary and explicit typed approval — the gate cannot be skipped. Triggers on \"/digital-marketing-pro:send-sms\", \"send an SMS blast\", \"send this WhatsApp message to the list\", \"text our customers about the sale\", \"schedule an SMS for tomorrow morning\". Reads the brand profile and compliance rules, scores the message with the brand-voice scorer, and logs every send to the execution audit trail."
+description: "Send an SMS or WhatsApp marketing message through a connected Twilio or Brevo MCP, with consent verification (TCPA/GDPR/CASL), quiet-hours enforcement, opt-out and message-length checks, cost estimates, and delivery tracking. Nothing sends without an Execution Summary and explicit typed approval — the gate cannot be skipped. Triggers on \"/omni-growth-engine:send-sms\", \"send an SMS blast\", \"send this WhatsApp message to the list\", \"text our customers about the sale\", \"schedule an SMS for tomorrow morning\". Reads the brand profile and compliance rules, scores the message with the brand-voice scorer, and logs every send to the execution audit trail."
 disable-model-invocation: false
 argument-hint: "[message-type]"
 ---
 
-# /digital-marketing-pro:send-sms
+# /omni-growth-engine:send-sms
 
 ## Purpose
 
@@ -34,7 +34,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Verify consent compliance**: Check that all recipients have documented opt-in consent for the selected channel. Apply jurisdiction-specific rules — TCPA express written consent for US recipients, GDPR explicit consent with recorded lawful basis for EU, CASL express or implied consent with expiration tracking for Canada. Flag any recipients missing required consent and exclude them from the send with a per-recipient compliance report.
 3. **Enforce quiet hours**: Determine each recipient's timezone from phone number country code and area code where deterministic, or from stored audience profile data. Block any immediate sends where the recipient's local time falls between 9pm and 8am. For scheduled sends, verify the scheduled time respects quiet hours in all recipient timezones. Flag conflicts and suggest the nearest compliant send window.
 4. **Validate opt-out mechanism**: Scan the message body for a compliant opt-out instruction — "Reply STOP to unsubscribe" or jurisdiction-appropriate equivalent. For WhatsApp, verify the opt-out flow is configured in the business account settings. If missing or non-compliant, reject the send and require the user to add opt-out language before proceeding.

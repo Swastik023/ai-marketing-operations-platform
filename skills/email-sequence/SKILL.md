@@ -1,10 +1,10 @@
 ---
 name: email-sequence
-description: "Design a complete, ESP-ready email sequence — per-email subject line options, preview text, body copy with CTAs, send timing, segmentation and branching logic, plus a bulk-sender deliverability checklist (SPF/DKIM/DMARC, one-click unsubscribe, complaint-rate limits). Designs only; it sends nothing. Triggers on \"/digital-marketing-pro:email-sequence\", \"build a welcome sequence\", \"write a cart abandonment flow\", \"our emails keep landing in spam\", \"nurture sequence for trial users\". Reads the brand profile, voice, templates, and compliance rules; actual sending belongs to /digital-marketing-pro:send-email-campaign."
+description: "Design a complete, ESP-ready email sequence — per-email subject line options, preview text, body copy with CTAs, send timing, segmentation and branching logic, plus a bulk-sender deliverability checklist (SPF/DKIM/DMARC, one-click unsubscribe, complaint-rate limits). Designs only; it sends nothing. Triggers on \"/omni-growth-engine:email-sequence\", \"build a welcome sequence\", \"write a cart abandonment flow\", \"our emails keep landing in spam\", \"nurture sequence for trial users\". Reads the brand profile, voice, templates, and compliance rules; actual sending belongs to /omni-growth-engine:send-email-campaign."
 argument-hint: "[sequence-type]"
 ---
 
-# /digital-marketing-pro:email-sequence
+# /omni-growth-engine:email-sequence
 
 ## Purpose
 
@@ -23,7 +23,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. Map the sequence to the customer journey stage and define the narrative arc
 3. Determine optimal email count and send cadence based on sequence type
 4. Write each email: subject line (2-3 options), preview text, body copy with clear CTA
@@ -34,7 +34,7 @@ The user must provide (or will be prompted for):
 
 ### Bulk-sender deliverability checklist (Gmail / Yahoo / Outlook)
 
-Any brand sending at bulk volume (~5,000+ messages/day to a mailbox provider) must meet the mailbox-provider sender requirements or mail is throttled or rejected. Bake these into the sequence's implementation notes (ported from `/digital-marketing-pro:send-email-campaign`, with Outlook 2025 added):
+Any brand sending at bulk volume (~5,000+ messages/day to a mailbox provider) must meet the mailbox-provider sender requirements or mail is throttled or rejected. Bake these into the sequence's implementation notes (ported from `/omni-growth-engine:send-email-campaign`, with Outlook 2025 added):
 
 - **Authenticate the sending domain**: SPF **and** DKIM **and** a published DMARC policy (at least `p=none`, aligned) — required by **Gmail & Yahoo (Feb 2024)** and **Microsoft Outlook / Outlook.com (rolling out through 2025 for senders ≥5,000/day)**.
 - **One-click unsubscribe**: include the `List-Unsubscribe` header with one-click support (RFC 8058), and honour opt-outs within 2 days. A visible unsubscribe link in the body is still required in addition.

@@ -1,11 +1,11 @@
 ---
 name: seo-plan
-description: "Build a 12-month SEO strategy and phased roadmap with industry templates (SaaS, ecommerce, local, publisher, agency). With fresh specialist outputs it runs as a dispatcher: scores four pillars — technical, content, topical, AI search — and makes the weakest pillar the plan's lead theme; missing specialists re-run only after explicit confirmation. Plans and prioritises only — makes no live changes. Triggers on \"/digital-marketing-pro:seo-plan\", \"build an SEO strategy\", \"what should our SEO roadmap be\", \"plan SEO for a new site\", \"which SEO pillar is weakest\". Reads specialist PLAN.md outputs (tech-seo-audit, content-decay-scan, aeo-audit, backlink-gap, keyword-cluster, seo-drift); feeds /digital-marketing-pro:content-engine and /digital-marketing-pro:campaign-plan."
+description: "Build a 12-month SEO strategy and phased roadmap with industry templates (SaaS, ecommerce, local, publisher, agency). With fresh specialist outputs it runs as a dispatcher: scores four pillars — technical, content, topical, AI search — and makes the weakest pillar the plan's lead theme; missing specialists re-run only after explicit confirmation. Plans and prioritises only — makes no live changes. Triggers on \"/omni-growth-engine:seo-plan\", \"build an SEO strategy\", \"what should our SEO roadmap be\", \"plan SEO for a new site\", \"which SEO pillar is weakest\". Reads specialist PLAN.md outputs (tech-seo-audit, content-decay-scan, aeo-audit, backlink-gap, keyword-cluster, seo-drift); feeds /omni-growth-engine:content-engine and /omni-growth-engine:campaign-plan."
 argument-hint: "[business-type]"
 user-invocable: true
 ---
 
-# /digital-marketing-pro:seo-plan
+# /omni-growth-engine:seo-plan
 
 ## Purpose
 
@@ -21,13 +21,13 @@ Look under `${CLAUDE_PLUGIN_DATA}/{brand}/seo/` for the latest dated subfolder o
 
 | Specialist skill | Output folder |
 |---|---|
-| `/digital-marketing-pro:tech-seo-audit` | `seo/tech-seo-audit/{YYYY-MM-DD}/PLAN.md` |
-| `/digital-marketing-pro:content-decay-scan` | `seo/content-decay-scan/{YYYY-MM-DD}/PLAN.md` |
-| `/digital-marketing-pro:aeo-audit` | `seo/aeo-audit/{YYYY-MM-DD}/PLAN.md` |
-| `/digital-marketing-pro:backlink-gap` | `seo/backlink-gap/{YYYY-MM-DD}/PLAN.md` |
-| `/digital-marketing-pro:gsc-ai-performance` | `seo/gsc-ai-performance/{YYYY-MM-DD}/PLAN.md` |
-| `/digital-marketing-pro:keyword-cluster` | `seo/keyword-cluster/{YYYY-MM-DD}/PLAN.md` |
-| `/digital-marketing-pro:seo-drift` | `seo/seo-drift/{YYYY-MM-DD}/PLAN.md` |
+| `/omni-growth-engine:tech-seo-audit` | `seo/tech-seo-audit/{YYYY-MM-DD}/PLAN.md` |
+| `/omni-growth-engine:content-decay-scan` | `seo/content-decay-scan/{YYYY-MM-DD}/PLAN.md` |
+| `/omni-growth-engine:aeo-audit` | `seo/aeo-audit/{YYYY-MM-DD}/PLAN.md` |
+| `/omni-growth-engine:backlink-gap` | `seo/backlink-gap/{YYYY-MM-DD}/PLAN.md` |
+| `/omni-growth-engine:gsc-ai-performance` | `seo/gsc-ai-performance/{YYYY-MM-DD}/PLAN.md` |
+| `/omni-growth-engine:keyword-cluster` | `seo/keyword-cluster/{YYYY-MM-DD}/PLAN.md` |
+| `/omni-growth-engine:seo-drift` | `seo/seo-drift/{YYYY-MM-DD}/PLAN.md` |
 
 Any folder dated within the last **30 days** counts as fresh — its `PLAN.md` becomes a primary input.
 
@@ -231,7 +231,7 @@ PLAN.md                     (the deliverable)
 
 - **competitor-scraper.py** — Competitor site analysis
 - **tech-seo-auditor.py** — Current site technical assessment
-- **keyword_cluster.py** — Keyword clustering with SERP-overlap + quality scorecard (use via `/digital-marketing-pro:keyword-cluster`)
+- **keyword_cluster.py** — Keyword clustering with SERP-overlap + quality scorecard (use via `/omni-growth-engine:keyword-cluster`)
 - **content-scorer.py** — Current content quality baseline
 
 ## Quality scorecard
@@ -253,18 +253,18 @@ If any gate fails, surface the failure prominently in `PLAN.md` rather than sile
 This skill is both a consumer (of specialists) and a producer (of the master plan):
 
 **Upstream (specialists this skill reads from):**
-- `/digital-marketing-pro:tech-seo-audit`
-- `/digital-marketing-pro:content-decay-scan`
-- `/digital-marketing-pro:aeo-audit`
-- `/digital-marketing-pro:backlink-gap`
-- `/digital-marketing-pro:gsc-ai-performance`
-- `/digital-marketing-pro:keyword-cluster`
-- `/digital-marketing-pro:seo-drift`
+- `/omni-growth-engine:tech-seo-audit`
+- `/omni-growth-engine:content-decay-scan`
+- `/omni-growth-engine:aeo-audit`
+- `/omni-growth-engine:backlink-gap`
+- `/omni-growth-engine:gsc-ai-performance`
+- `/omni-growth-engine:keyword-cluster`
+- `/omni-growth-engine:seo-drift`
 
 **Downstream (skills that consume this plan):**
-- `/digital-marketing-pro:content-engine` — drafts the content scheduled in `04-content-strategy.md`
-- `/digital-marketing-pro:campaign-plan` — turns the roadmap into a sprint plan with owners
-- `/digital-marketing-pro:performance-report` — re-measures against `08-kpi-dashboard.md` cadence
+- `/omni-growth-engine:content-engine` — drafts the content scheduled in `04-content-strategy.md`
+- `/omni-growth-engine:campaign-plan` — turns the roadmap into a sprint plan with owners
+- `/omni-growth-engine:performance-report` — re-measures against `08-kpi-dashboard.md` cadence
 
 ## Tips & caveats
 

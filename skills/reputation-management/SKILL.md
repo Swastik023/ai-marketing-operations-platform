@@ -1,6 +1,6 @@
 ---
 name: reputation-management
-description: "Full reputation playbook: FTC-compliant review generation, negative-review response frameworks, 3-tier crisis communication with a 72-hour severe-crisis timeline, 4-layer brand safety assessment, sentiment monitoring design, and 30/60/90-day recovery plans — delivered as ready-to-use plans, drafted responses, and audits. Triggers on \"/digital-marketing-pro:reputation-management\", \"we're getting hit with negative reviews\", \"prepare a crisis communication plan\", \"how do we get more Google reviews\", \"someone is spreading misinformation about us\". Reads the brand profile, guidelines, and compliance rules; it plans and drafts — it does not post responses or monitor platforms itself. For a single review reply, /digital-marketing-pro:review-response is the focused sibling."
+description: "Full reputation playbook: FTC-compliant review generation, negative-review response frameworks, 3-tier crisis communication with a 72-hour severe-crisis timeline, 4-layer brand safety assessment, sentiment monitoring design, and 30/60/90-day recovery plans — delivered as ready-to-use plans, drafted responses, and audits. Triggers on \"/omni-growth-engine:reputation-management\", \"we're getting hit with negative reviews\", \"prepare a crisis communication plan\", \"how do we get more Google reviews\", \"someone is spreading misinformation about us\". Reads the brand profile, guidelines, and compliance rules; it plans and drafts — it does not post responses or monitor platforms itself. For a single review reply, /omni-growth-engine:review-response is the focused sibling."
 ---
 
 # Reputation Management
@@ -33,7 +33,7 @@ Before producing any marketing output from this module:
 5. **Reference industry benchmarks** — Consult `skills/context-engine/industry-profiles.md` for the brand's industry
 6. **Use platform specs** — Reference `skills/context-engine/platform-specs.md` for character limits and format requirements
 7. **Check campaign history** — Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-tracker.py" --brand {slug} --action list-campaigns` before planning new work
-8. **If no brand exists**, say: "No brand profile found. Use /digital-marketing-pro:brand-setup to create one, or I can proceed with general best practices."
+8. **If no brand exists**, say: "No brand profile found. Use /omni-growth-engine:brand-setup to create one, or I can proceed with general best practices."
 9. **Check brand guidelines** — If `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` exists, load and enforce: `restrictions.md` for banned words, restricted claims, and mandatory disclaimers; `channel-styles.md` for channel-specific tone overrides (may differ from base voice); `messaging.md` for approved key messages, taglines, and positioning language; `voice-and-tone.md` for detailed voice rules beyond the 4 numeric scores. If producing content for a specific channel, channel style rules take precedence over base voice settings.
 
 Do not ask the user for information that already exists in their brand profile.

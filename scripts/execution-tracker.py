@@ -2,7 +2,7 @@
 """
 execution-tracker.py
 ====================
-Audit trail for all executed actions across platforms in Digital Marketing Pro.
+Audit trail for all executed actions across platforms in OmniGrowth Engine.
 
 Logs every publish, send, launch, and sync so the plugin maintains a complete
 record of what was done, when, and on which platform.
@@ -289,7 +289,7 @@ from connector_resolver import resolve_action  # noqa: E402
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Execution audit trail for Digital Marketing Pro")
+    parser = argparse.ArgumentParser(description="Execution audit trail for OmniGrowth Engine")
     parser.add_argument("--brand", required=True, help="Brand slug")
     parser.add_argument("--action", required=True,
                         choices=["log-execution", "get-history", "get-stats",

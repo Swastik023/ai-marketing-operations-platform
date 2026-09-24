@@ -1,11 +1,11 @@
-# Tessl skill-review rubric for Digital Marketing Pro.
+# Tessl skill-review rubric for OmniGrowth Engine.
 # Encodes the scoring dimensions the `tessl review` CLI applies to changed SKILL.md files.
 # Each dimension is scored 0-10; the overall score is the weighted mean. Adjust weights to taste.
 # (Structure follows the Tessl rubric shape — verify field names against the current Tessl docs
 #  if the CLI rejects a key.)
 
 version: 1
-name: digital-marketing-pro-skill-rubric
+name: omni-growth-engine-skill-rubric
 
 # Skills scoring below this overall value get flagged in the PR comment (advisory, non-blocking).
 fail_threshold: 70

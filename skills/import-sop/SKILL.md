@@ -1,9 +1,9 @@
 ---
 name: import-sop
-description: "Import agency Standard Operating Procedures — approval workflows, campaign launch checklists, escalation procedures, QA steps — and structure them into numbered, role-assigned steps with human-approval gates marked. SOPs save at the agency level so they apply across every client brand, not per-brand. Triggers on \"/digital-marketing-pro:import-sop\", \"add our content approval workflow\", \"import our launch checklist\", \"here is our crisis escalation process\", \"every deliverable must follow these steps\". Reads the active brand profile for context, merges with an existing SOP of the same name after confirmation, and explains which commands will reference the SOP."
+description: "Import agency Standard Operating Procedures — approval workflows, campaign launch checklists, escalation procedures, QA steps — and structure them into numbered, role-assigned steps with human-approval gates marked. SOPs save at the agency level so they apply across every client brand, not per-brand. Triggers on \"/omni-growth-engine:import-sop\", \"add our content approval workflow\", \"import our launch checklist\", \"here is our crisis escalation process\", \"every deliverable must follow these steps\". Reads the active brand profile for context, merges with an existing SOP of the same name after confirmation, and explains which commands will reference the SOP."
 ---
 
-# /digital-marketing-pro:import-sop
+# /omni-growth-engine:import-sop
 
 ## Purpose
 
@@ -23,7 +23,7 @@ If the user doesn't provide a name, infer it from the content.
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for existing guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for existing guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 
 2. **Classify the SOP type**:
    - **Content workflow**: Review, approval, and publishing steps for content

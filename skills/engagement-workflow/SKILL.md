@@ -1,6 +1,6 @@
 ---
 name: engagement-workflow
-description: "Orchestrate a full marketing engagement through the 12-Part methodology — Stone vs Opinion intake, external research, Four Core Documents, client validation, Decision Matrix v2 re-runs, growth planning, channel fan-out, and the continuous-improvement loop — with checkpointed, resumable state at every part. Triggers on \"/digital-marketing-pro:engagement-workflow\", \"start a new engagement\", \"what part of the engagement are we on\", \"apply the decision matrix\", \"advance to the next part\". Reads and writes engagement state via engagement-state.py only, and dispatches to /digital-marketing-pro:four-core-documents, growth-plan, yearly-planner, and continuous-improvement-loop."
+description: "Orchestrate a full marketing engagement through the 12-Part methodology — Stone vs Opinion intake, external research, Four Core Documents, client validation, Decision Matrix v2 re-runs, growth planning, channel fan-out, and the continuous-improvement loop — with checkpointed, resumable state at every part. Triggers on \"/omni-growth-engine:engagement-workflow\", \"start a new engagement\", \"what part of the engagement are we on\", \"apply the decision matrix\", \"advance to the next part\". Reads and writes engagement state via engagement-state.py only, and dispatches to /omni-growth-engine:four-core-documents, growth-plan, yearly-planner, and continuous-improvement-loop."
 user-invocable: true
 triggers:
   - start a new engagement
@@ -16,13 +16,13 @@ engagement-part: orchestrator
 view-preference: both
 ---
 
-# /digital-marketing-pro:engagement-workflow — 12-Part Engagement Orchestrator
+# /omni-growth-engine:engagement-workflow — 12-Part Engagement Orchestrator
 
 This skill orchestrates the full marketing engagement using the 12-Part sequential methodology. Every brand engagement runs through the same 12 parts in sequence, producing a canonical set of files at each stage.
 
 ## Context efficiency
 
-Heavy skill. **Grep before Read** any referenced file, then `Read` only matched ranges with `offset` + `limit`. List the brand's workspace at `~/.claude-marketing/brands/{slug}/` (or `$CLAUDE_PLUGIN_DATA/digital-marketing-pro/brands/{slug}/` when that env var is set) before opening files. On re-invocation mid-session, skip files already in context.
+Heavy skill. **Grep before Read** any referenced file, then `Read` only matched ranges with `offset` + `limit`. List the brand's workspace at `~/.claude-marketing/brands/{slug}/` (or `$CLAUDE_PLUGIN_DATA/omni-growth-engine/brands/{slug}/` when that env var is set) before opening files. On re-invocation mid-session, skip files already in context.
 
 Read these references before producing output:
 - [engagement-flow-methodology.md](../context-engine/engagement-flow-methodology.md) — the full 12-Part flow
@@ -34,7 +34,7 @@ Read these references before producing output:
 
 ## Operating Mode
 
-This skill is invoked via the `/digital-marketing-pro:engagement` command family. The command is a thin router — **this skill is the single source of truth** for the engagement lifecycle, the checkpoint protocol, and the per-part production contract. Each subcommand maps to a specific lifecycle action. The skill calls `engagement-state.py` for persistence via:
+This skill is invoked via the `/omni-growth-engine:engagement` command family. The command is a thin router — **this skill is the single source of truth** for the engagement lifecycle, the checkpoint protocol, and the per-part production contract. Each subcommand maps to a specific lifecycle action. The skill calls `engagement-state.py` for persistence via:
 
 ```
 python "${CLAUDE_PLUGIN_ROOT}/scripts/engagement-state.py" <subcommand> ...
@@ -73,10 +73,10 @@ Pass the **actual deliverable path for that part** (e.g. Part 3 saves the Four C
 
 ```bash
 # BLOCKING gate — Part 5 and Part 8 deliverables cannot be checkpointed until this passes
-/digital-marketing-pro:check "{path_to_deliverable}" --full --brand {brand}
+/omni-growth-engine:check "{path_to_deliverable}" --full --brand {brand}
 ```
 
-If `/digital-marketing-pro:check --full` returns BLOCKED, fix the CRITICAL issues before checkpointing the part.
+If `/omni-growth-engine:check --full` returns BLOCKED, fix the CRITICAL issues before checkpointing the part.
 
 **4. After the final part, publish every artifact to the user-visible folder and finalize:**
 
@@ -88,9 +88,9 @@ python "${CLAUDE_PLUGIN_ROOT}/scripts/checkpoint-manager.py" finalize \
     --brand "{brand}" --run-id "{run_id}" --status completed
 ```
 
-Then point the user at the visible output folder via `/digital-marketing-pro:output-folder {brand}`.
+Then point the user at the visible output folder via `/omni-growth-engine:output-folder {brand}`.
 
-To resume an interrupted run, use `/digital-marketing-pro:resume` — it reloads every saved part and continues from the next un-checkpointed part.
+To resume an interrupted run, use `/omni-growth-engine:resume` — it reloads every saved part and continues from the next un-checkpointed part.
 
 ## State validation & rework caps
 
@@ -112,13 +112,13 @@ To resume an interrupted run, use `/digital-marketing-pro:resume` — it reloads
 
 ## Subcommands
 
-### `/digital-marketing-pro:engagement start <brand-slug> <engagement-id>`
+### `/omni-growth-engine:engagement start <brand-slug> <engagement-id>`
 
 **Purpose:** Initialise a new engagement.
 
 **Steps:**
 
-1. Validate that the brand profile exists at `~/.claude-marketing/brands/{brand-slug}/profile.json`. If not, instruct the user to run `/digital-marketing-pro:brand-setup` first.
+1. Validate that the brand profile exists at `~/.claude-marketing/brands/{brand-slug}/profile.json`. If not, instruct the user to run `/omni-growth-engine:brand-setup` first.
 2. Run `python ${CLAUDE_PLUGIN_ROOT}/scripts/engagement-state.py init --brand {brand-slug} --id {engagement-id}`.
 3. Confirm the directory tree was created and report the next required action (Part 1 intake).
 4. Walk the user through Part 1 Stone vs Opinion intake by asking the questions one batch at a time.
@@ -163,7 +163,7 @@ python ${CLAUDE_PLUGIN_ROOT}/scripts/engagement-state.py add-opinion --brand {sl
 
 **On completion of Part 1:** mark Part 1 as completed via `mark-part-completed --part 1`, advise the user to proceed to Part 2 (External Research).
 
-### `/digital-marketing-pro:engagement next [brand] [id]`
+### `/omni-growth-engine:engagement next [brand] [id]`
 
 **Purpose:** Advance to the next part.
 
@@ -175,7 +175,7 @@ python ${CLAUDE_PLUGIN_ROOT}/scripts/engagement-state.py add-opinion --brand {sl
 4. On confirmation, mark current as completed, advance current_part pointer
 5. Brief the user on what the new part requires
 
-### `/digital-marketing-pro:engagement status [brand] [id]`
+### `/omni-growth-engine:engagement status [brand] [id]`
 
 **Purpose:** Show engagement status.
 
@@ -192,7 +192,7 @@ python ${CLAUDE_PLUGIN_ROOT}/scripts/engagement-state.py add-opinion --brand {sl
    - LIF last updated: date
 4. If the engagement has open items needing resolution, list them
 
-### `/digital-marketing-pro:engagement file-tree [brand] [id]`
+### `/omni-growth-engine:engagement file-tree [brand] [id]`
 
 **Purpose:** Show the engagement directory file tree.
 
@@ -202,7 +202,7 @@ python ${CLAUDE_PLUGIN_ROOT}/scripts/engagement-state.py add-opinion --brand {sl
 2. Format as an indented tree
 3. Highlight files that are missing per the canonical structure. Use `engagement-state.py validate-part --part {N}` to diff each completed part's actual files against the `PART_DEFINITIONS` manifest (e.g., if Part 3 is marked completed but `3.1-business-and-sbu-analysis.md` is missing, `validate-part` flags it deterministically instead of eyeballing).
 
-### `/digital-marketing-pro:engagement validate [brand] [id]`
+### `/omni-growth-engine:engagement validate [brand] [id]`
 
 **Purpose:** Run the Part 5 Client Validation flow.
 
@@ -212,13 +212,13 @@ python ${CLAUDE_PLUGIN_ROOT}/scripts/engagement-state.py add-opinion --brand {sl
 
 1. Verify pre-conditions (Parts 2, 3, 4 completed)
 2. Invoke the `client-validation-document` skill — it produces the Part 5 deliverable: a structured document presenting each finding from v1 with ACCEPT/REJECT/EDIT/DEFER options
-3. **Run the full quality gate on the Part 5 deliverable before it goes to the client:** `/digital-marketing-pro:check "{part5_path}" --full --brand {brand}`. If it returns BLOCKED, fix the CRITICAL issues first (this gate is mandatory before Part 5 and Part 8 deliverables).
+3. **Run the full quality gate on the Part 5 deliverable before it goes to the client:** `/omni-growth-engine:check "{part5_path}" --full --brand {brand}`. If it returns BLOCKED, fix the CRITICAL issues first (this gate is mandatory before Part 5 and Part 8 deliverables).
 4. After the user reviews and provides decisions, parse them into a triggers list per the Decision Matrix categories
 5. Run `engagement-state.py decision-matrix --triggers "{comma-separated}"` to compute the v2 re-run plan
 6. Present the re-run plan to the user
 7. Mark Part 5 completed; on user approval of the re-run plan, advance to Part 6
 
-### `/digital-marketing-pro:engagement re-run-decision [brand] [id]`
+### `/omni-growth-engine:engagement re-run-decision [brand] [id]`
 
 **Purpose:** Apply the Decision Matrix to compute v2 re-runs.
 
@@ -231,7 +231,7 @@ python ${CLAUDE_PLUGIN_ROOT}/scripts/engagement-state.py add-opinion --brand {sl
 5. Await user approval — they can accept, modify (skip some, add others), or reject
 6. Record the executed plan via `engagement-state.py record-rerun-execution`
 
-### `/digital-marketing-pro:engagement update-back [brand] [id] --doc <doc-id> --reason <reason>`
+### `/omni-growth-engine:engagement update-back [brand] [id] --doc <doc-id> --reason <reason>`
 
 **Purpose:** Apply the Update-Back Rule to bump a source document version after Part 7+.
 
@@ -246,13 +246,13 @@ python ${CLAUDE_PLUGIN_ROOT}/scripts/engagement-state.py add-opinion --brand {sl
 5. Update the Living Project Instruction File via `lif-log-change` — it now appends the change to `living-instruction-file.md` and refreshes the header date, so the LIF reflects the correction immediately
 6. Identify downstream documents that may need review and add to the engagement's review queue
 
-### `/digital-marketing-pro:engagement lif-show [brand] [id]`
+### `/omni-growth-engine:engagement lif-show [brand] [id]`
 
 **Purpose:** Display the Living Project Instruction File.
 
 **Steps:** Run `engagement-state.py lif-show` and format the markdown output for readability.
 
-### `/digital-marketing-pro:engagement list-engagements [brand]`
+### `/omni-growth-engine:engagement list-engagements [brand]`
 
 **Purpose:** List all engagements (optionally filtered by brand).
 
@@ -262,10 +262,10 @@ python ${CLAUDE_PLUGIN_ROOT}/scripts/engagement-state.py add-opinion --brand {sl
 
 The command family also exposes four production shorthands that route straight to the part-producing skills (documented in *Per-Part Production Targets* below). These match the command surface one-to-one:
 
-- `/digital-marketing-pro:engagement four-core <brand> <id> [--doc 3.X] [--view v2] [--combined]` — Part 3, invokes the `four-core-documents` skill
-- `/digital-marketing-pro:engagement growth-plan <brand> <id>` — Part 8, invokes the `growth-plan` skill
-- `/digital-marketing-pro:engagement yearly-planner <brand> <id>` — Part 8 companion, invokes the `yearly-planner` skill
-- `/digital-marketing-pro:engagement loop <brand> <id>` — Part 12, invokes the `continuous-improvement-loop` skill
+- `/omni-growth-engine:engagement four-core <brand> <id> [--doc 3.X] [--view v2] [--combined]` — Part 3, invokes the `four-core-documents` skill
+- `/omni-growth-engine:engagement growth-plan <brand> <id>` — Part 8, invokes the `growth-plan` skill
+- `/omni-growth-engine:engagement yearly-planner <brand> <id>` — Part 8 companion, invokes the `yearly-planner` skill
+- `/omni-growth-engine:engagement loop <brand> <id>` — Part 12, invokes the `continuous-improvement-loop` skill
 
 ## Per-Part Production Targets
 
@@ -317,7 +317,7 @@ Several parts of the engagement contain **independent sub-tasks** that should be
 3. **Subagents never mutate engagement state.** A subagent must NOT call `lif-log-change`, `mark-part-completed`, `bump-version`, or any other `engagement-state.py` write, and must NOT touch `_engagement.json` or `living-instruction-file.md`. Those are unlocked read-modify-write files; concurrent writers lose updates. Each subagent returns its output as per-part files only. After a parallel batch completes, the **orchestrator alone** applies state mutations — one `lif-log-change` per batch, plus `mark-part-completed` / `bump-version` as needed — and then re-reads the LIF before the next step.
 4. If a parallel batch fails partway, the failed subagent's outputs are NOT auto-rolled-back — re-dispatch only the failed ones; the successful peers stay valid.
 
-For multi-dimensional commands outside the 12-part flow (e.g. `/digital-marketing-pro:competitor-analysis`, `/digital-marketing-pro:seo-audit`, `/digital-marketing-pro:content-engine`), the same pattern applies — dispatch independent dimensions in parallel via multiple `Task` calls in a single message.
+For multi-dimensional commands outside the 12-part flow (e.g. `/omni-growth-engine:competitor-analysis`, `/omni-growth-engine:seo-audit`, `/omni-growth-engine:content-engine`), the same pattern applies — dispatch independent dimensions in parallel via multiple `Task` calls in a single message.
 
 ## Running an engagement in a single conversation
 

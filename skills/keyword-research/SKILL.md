@@ -1,14 +1,14 @@
 ---
 name: keyword-research
-description: "Standalone keyword research — expands seeds via the brand's connected keyword MCP (Ahrefs, Semrush, SE Ranking, or GSC), classifies search intent, maps keywords to content types, surfaces competitor content gaps, long-tail and SERP-feature opportunities, and delivers a prioritized keyword strategy document. Volume and difficulty come from the connected provider and are never fabricated. Triggers on \"/digital-marketing-pro:keyword-research\", \"what keywords should we target\", \"find content gaps versus competitors\", \"expand these seed keywords\", \"which queries have buying intent\". Reads the brand profile, guidelines, and campaign history; hands 20+ raw keywords to /digital-marketing-pro:keyword-cluster for pillar+spokes clustering."
+description: "Standalone keyword research — expands seeds via the brand's connected keyword MCP (Ahrefs, Semrush, SE Ranking, or GSC), classifies search intent, maps keywords to content types, surfaces competitor content gaps, long-tail and SERP-feature opportunities, and delivers a prioritized keyword strategy document. Volume and difficulty come from the connected provider and are never fabricated. Triggers on \"/omni-growth-engine:keyword-research\", \"what keywords should we target\", \"find content gaps versus competitors\", \"expand these seed keywords\", \"which queries have buying intent\". Reads the brand profile, guidelines, and campaign history; hands 20+ raw keywords to /omni-growth-engine:keyword-cluster for pillar+spokes clustering."
 argument-hint: "[topic or seed keywords]"
 ---
 
-# /digital-marketing-pro:keyword-research
+# /omni-growth-engine:keyword-research
 
 ## Purpose
 
-Standalone keyword *research* tool — expansion, search-intent classification, and competitor gap analysis. Produces a prioritized, intent-classified keyword list with content recommendations. Volume and keyword-difficulty figures come from the brand's connected keyword MCP (Ahrefs / Semrush / SE Ranking / GSC) — this skill surfaces and interprets them, it does not fabricate them. **Clustering into a pillar+spokes plan is delegated to `/digital-marketing-pro:keyword-cluster`** (the `keyword_cluster.py` engine); this skill produces the seeds that skill consumes.
+Standalone keyword *research* tool — expansion, search-intent classification, and competitor gap analysis. Produces a prioritized, intent-classified keyword list with content recommendations. Volume and keyword-difficulty figures come from the brand's connected keyword MCP (Ahrefs / Semrush / SE Ranking / GSC) — this skill surfaces and interprets them, it does not fabricate them. **Clustering into a pillar+spokes plan is delegated to `/omni-growth-engine:keyword-cluster`** (the `keyword_cluster.py` engine); this skill produces the seeds that skill consumes.
 
 ## Input Required
 
@@ -24,7 +24,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply voice, compliance, industry context. Check `guidelines/_manifest.json` for restrictions, messaging, channel styles, voice-and-tone rules, and templates. If a template matching this command exists in `~/.claude-marketing/brands/{slug}/templates/`, apply its format. If no brand exists, prompt for `/digital-marketing-pro:brand-setup` or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply voice, compliance, industry context. Check `guidelines/_manifest.json` for restrictions, messaging, channel styles, voice-and-tone rules, and templates. If a template matching this command exists in `~/.claude-marketing/brands/{slug}/templates/`, apply its format. If no brand exists, prompt for `/omni-growth-engine:brand-setup` or proceed with defaults.
 2. **Check campaign history**: Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-tracker.py" --brand {slug} --action list-campaigns` to identify previous keyword research and content campaigns to build upon rather than duplicate.
 3. **Load reference files**: Consult `skills/content-engine/` for content strategy context and `skills/context-engine/industry-profiles.md` for industry-specific keyword benchmarks and search behavior patterns.
 4. **Expand the seed set**: Use the brand's connected keyword MCP (Ahrefs `getRelatedKeywords`, Semrush, SE Ranking, or GSC query mining) to expand seeds into a candidate list, pulling provider volume and keyword-difficulty figures where available. Record the provider and pull date — volume/KD are provider estimates, not measurements, and providers disagree by 20-50%. Do **not** claim volume/KD/trend numbers the connected tools didn't return.
@@ -60,7 +60,7 @@ A structured keyword strategy document containing:
 - **Search volume from any provider is an estimate.** Ahrefs, Semrush, GSC, SE Ranking all disagree by 20-50% on the same keyword. Use ranges, not point estimates.
 - **Keyword difficulty (KD) is a heuristic, not a measurement.** A KD of 60 means "competitive" — not "impossible". A small brand with niche authority can rank for KD-70 keywords against generalist KD-30 sites.
 - **Long-tail isn't always lower-volume.** With AI search rewriting queries, the actual click-driving query may differ from the seed. Always check the *resulting* query a user typed via GSC, not the rank-tracker assumption.
-- **Hand off to `/digital-marketing-pro:keyword-cluster`** once you have ≥ 20 raw keywords. Clustering before writing is what produces topical authority, not keyword lists.
+- **Hand off to `/omni-growth-engine:keyword-cluster`** once you have ≥ 20 raw keywords. Clustering before writing is what produces topical authority, not keyword lists.
 - **Don't research the same keyword set quarterly.** Re-research only when business model, target market, or competitive landscape changes. Otherwise the deltas are noise.
 - **Intent classification beats volume.** A "buy [product]" query at 200/mo is worth more than "what is [product]" at 5000/mo for most commercial brands.
 

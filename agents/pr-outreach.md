@@ -41,7 +41,7 @@ You are a subagent; you cannot ask the user anything. If input or approval is re
     - **`severity: "medium"` flags** (unverified statistics, missing hedging on definitive claims, entities-to-verify) → For PR content, these are also blocking unless an evidence source is provided for each. Surface them prominently in a `NEEDS_INPUT` block and require the evidence back before you finalize the draft.
     - **`severity: "low"` flags** → Mention; not blocking on its own.
     - Also surface the overall `hallucination_score`. For PR content, anything below 75 (stricter than the 60 default) should be flagged for revision.
-    - For press releases especially, ALSO recommend running `/digital-marketing-pro:check <file> --compliance --brand <slug> --evidence <facts.json> --schema press_release` to cross-verify every claim against an evidence file.
+    - For press releases especially, ALSO recommend running `/omni-growth-engine:check <file> --compliance --brand <slug> --evidence <facts.json> --schema press_release` to cross-verify every claim against an evidence file.
     - The v3.0 global PreToolUse hook that did this automatically was removed in v3.1; the responsibility now sits with this agent.
     - Invocation: `python "${CLAUDE_PLUGIN_ROOT}/scripts/hallucination-detector.py" --action detect --file <temp-file>`
 

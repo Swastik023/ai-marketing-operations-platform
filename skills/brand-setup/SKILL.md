@@ -1,6 +1,6 @@
 ---
 name: brand-setup
-description: "Create or update the brand profile every other skill reads — a quick 5-question or full 17-question interactive setup capturing identity, business model, industry and compliance markets, 4-dimension voice scales, channels, goals, and competitors, saved to ~/.claude-marketing/brands/{slug}/profile.json via scripts/setup.py. Triggers on \"/digital-marketing-pro:brand-setup\", \"set up a new brand\", \"onboard a new client\", \"switch to another brand\", \"update our brand voice\". Also handles brand switching (updates _active-brand.json) and field-level profile edits; run this first — all marketing skills auto-apply the resulting profile, voice samples, and compliance rules."
+description: "Create or update the brand profile every other skill reads — a quick 5-question or full 17-question interactive setup capturing identity, business model, industry and compliance markets, 4-dimension voice scales, channels, goals, and competitors, saved to ~/.claude-marketing/brands/{slug}/profile.json via scripts/setup.py. Triggers on \"/omni-growth-engine:brand-setup\", \"set up a new brand\", \"onboard a new client\", \"switch to another brand\", \"update our brand voice\". Also handles brand switching (updates _active-brand.json) and field-level profile edits; run this first — all marketing skills auto-apply the resulting profile, voice samples, and compliance rules."
 argument-hint: "[brand-name or --full]"
 ---
 
@@ -28,12 +28,12 @@ From these 5 answers, intelligently populate the full profile:
 - Infer industry, business model type, and compliance requirements
 - Map voice descriptors to the 1-10 scales (e.g., "professional" → formality: 8, "fun" → humor: 7)
 - Set sensible defaults for everything else
-- Tell the user: "Quick profile created! You can refine it anytime with /digital-marketing-pro:brand-setup --full"
+- Tell the user: "Quick profile created! You can refine it anytime with /omni-growth-engine:brand-setup --full"
 
 ### Full Setup (17 questions — comprehensive profiling)
 Use the full setup when:
 - User explicitly asks for detailed/full/comprehensive setup
-- User says "/digital-marketing-pro:brand-setup --full"
+- User says "/omni-growth-engine:brand-setup --full"
 - User wants to update specific sections of an existing profile
 
 ## Process (Full Setup)

@@ -590,7 +590,7 @@ RESOLUTION_LADDER = [
     "Use any translation tool the user has ALREADY connected (MCP server or "
     "otherwise) — never instruct installing a commercial product.",
     "Ask the user which translation service to use, and record the answer "
-    "with /digital-marketing-pro:language-config set-translation-pref so the "
+    "with /omni-growth-engine:language-config set-translation-pref so the "
     "next run resolves without asking.",
 ]
 

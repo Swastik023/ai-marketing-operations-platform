@@ -40,7 +40,7 @@ class TestHermesPluginYaml(unittest.TestCase):
 
     def test_required_name_present(self):
         name = _read_yaml_field(self.yaml_text, "name")
-        self.assertEqual(name, "digital-marketing-pro")
+        self.assertEqual(name, "omni-growth-engine")
 
     def test_required_version_present_and_semver(self):
         version = _read_yaml_field(self.yaml_text, "version")

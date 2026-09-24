@@ -2,12 +2,12 @@
 """
 plugin-metadata.py
 ==================
-Single source of truth for "what's in this Digital Marketing Pro install right now."
+Single source of truth for "what's in this OmniGrowth Engine install right now."
 Returns LIVE counts and lists by reading the filesystem and plugin.json -
 nothing hardcoded.
 
-Used by /digital-marketing-pro:status, /digital-marketing-pro:doctor, and
-/digital-marketing-pro:cowork-setup so version + count strings never drift
+Used by /omni-growth-engine:status, /omni-growth-engine:doctor, and
+/omni-growth-engine:cowork-setup so version + count strings never drift
 out of sync with reality when a skill is added or a release ships.
 
 Usage:
@@ -37,7 +37,7 @@ if hasattr(sys.stdout, "reconfigure"):
         pass
 
 PLUGIN_ROOT = Path(__file__).resolve().parent.parent
-SLASH_PREFIX = "/digital-marketing-pro:"
+SLASH_PREFIX = "/omni-growth-engine:"
 
 
 def probe_version() -> dict:
@@ -190,7 +190,7 @@ def probe_environment() -> dict:
         cowork_warning = (
             "Cowork sandbox detected. Brand state at ~/.claude-marketing/ writes "
             "to the per-session Linux sandbox, NOT a persistent location. "
-            "Files vanish at session end. Run /digital-marketing-pro:cowork-setup "
+            "Files vanish at session end. Run /omni-growth-engine:cowork-setup "
             "to route brand state through a Drive MCP so it persists for the team."
         )
 

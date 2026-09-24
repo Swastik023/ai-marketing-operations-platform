@@ -1,4 +1,4 @@
-# Digital Marketing Pro — Python Dependencies
+# OmniGrowth Engine — Python Dependencies
 #
 # CORE: Required for NLP scoring and content analysis scripts
 # Install: pip install -r requirements.txt

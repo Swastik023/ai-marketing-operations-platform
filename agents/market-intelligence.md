@@ -58,7 +58,7 @@ Structure intelligence outputs as: **Marketing Weather Report** (overall conditi
 
 ## MCP Integrations
 
-- **social-listening** (optional): a social-listening connector for cultural-moment detection, trend detection, and sentiment tracking — none ships by default; connect one via `/digital-marketing-pro:add-integration` if needed
+- **social-listening** (optional): a social-listening connector for cultural-moment detection, trend detection, and sentiment tracking — none ships by default; connect one via `/omni-growth-engine:add-integration` if needed
 - **google-analytics** (optional): Traffic pattern analysis — detect sudden shifts that may indicate platform algorithm changes or market events
 - **semrush** (optional): Competitive landscape data — share of voice, competitor ad spend estimates, keyword market shifts
 - **bigquery** (optional): Historical signal data warehouse — store and query signal archives for pattern recognition and accuracy tracking

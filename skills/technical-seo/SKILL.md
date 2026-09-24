@@ -1,6 +1,6 @@
 ---
 name: technical-seo
-description: "Deep technical SEO knowledge module covering Core Web Vitals, crawlability, indexation, site architecture, JavaScript SEO, redirects, structured data, hreflang, and migrations — producing audit reports, redirect maps, robots.txt and JSON-LD specs, and migration checklists. Triggers on \"/digital-marketing-pro:technical-seo\", \"my LCP is failing\", \"plan a site migration\", \"fix redirect chains\", \"write schema markup for my pages\", \"crawl budget problems\". Reads the brand profile plus its own reference files (core-web-vitals, crawlability, site-architecture, indexation, international-seo) and backs the /digital-marketing-pro:tech-seo-audit command."
+description: "Deep technical SEO knowledge module covering Core Web Vitals, crawlability, indexation, site architecture, JavaScript SEO, redirects, structured data, hreflang, and migrations — producing audit reports, redirect maps, robots.txt and JSON-LD specs, and migration checklists. Triggers on \"/omni-growth-engine:technical-seo\", \"my LCP is failing\", \"plan a site migration\", \"fix redirect chains\", \"write schema markup for my pages\", \"crawl budget problems\". Reads the brand profile plus its own reference files (core-web-vitals, crawlability, site-architecture, indexation, international-seo) and backs the /omni-growth-engine:tech-seo-audit command."
 ---
 
 # Technical SEO
@@ -41,7 +41,7 @@ Before producing any marketing output from this module:
 5. **Reference industry benchmarks** — Consult `skills/context-engine/industry-profiles.md` for the brand's industry
 6. **Use platform specs** — Reference `skills/context-engine/platform-specs.md` for character limits and format requirements
 7. **Check campaign history** — Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-tracker.py" --brand {slug} --action list-campaigns` before planning new work
-8. **If no brand exists**, say: "No brand profile found. Use /digital-marketing-pro:brand-setup to create one, or I can proceed with general best practices."
+8. **If no brand exists**, say: "No brand profile found. Use /omni-growth-engine:brand-setup to create one, or I can proceed with general best practices."
 9. **Check brand guidelines** — If `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` exists, load and enforce: `restrictions.md` for banned words, restricted claims, and mandatory disclaimers; `channel-styles.md` for channel-specific tone overrides (may differ from base voice); `messaging.md` for approved key messages, taglines, and positioning language; `voice-and-tone.md` for detailed voice rules beyond the 4 numeric scores. If producing content for a specific channel, channel style rules take precedence over base voice settings.
 
 Do not ask the user for information that already exists in their brand profile.

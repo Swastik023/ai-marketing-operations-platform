@@ -2,7 +2,7 @@
 """
 crm-sync.py
 ===========
-CRM data sync management for Digital Marketing Pro.
+CRM data sync management for OmniGrowth Engine.
 
 Manages the local side of CRM integration: data preparation, field mapping,
 deduplication logic, and sync tracking.  Actual CRM API calls happen via MCP
@@ -397,7 +397,7 @@ from connector_resolver import resolve_action  # noqa: E402
 
 
 def main():
-    parser = argparse.ArgumentParser(description="CRM data sync management for Digital Marketing Pro")
+    parser = argparse.ArgumentParser(description="CRM data sync management for OmniGrowth Engine")
     parser.add_argument("--brand", required=True, help="Brand slug")
     parser.add_argument("--action", required=True,
                         choices=["prepare-contact", "prepare-deal", "check-dedup",

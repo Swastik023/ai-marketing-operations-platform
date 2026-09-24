@@ -80,7 +80,7 @@ COWORK_CONFIG_PATH = CLAUDE_MARKETING / "_cowork-config.json"
 def read_cowork_config() -> dict:
     if not COWORK_CONFIG_PATH.exists():
         return {"configured": False,
-                "note": "Run /digital-marketing-pro:cowork-setup to wire DMP for Cowork team usage."}
+                "note": "Run /omni-growth-engine:cowork-setup to wire DMP for Cowork team usage."}
     try:
         data = json.loads(COWORK_CONFIG_PATH.read_text(encoding="utf-8"))
         data["configured"] = True

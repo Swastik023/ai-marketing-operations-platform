@@ -68,7 +68,7 @@ status: "no_op"). Skills should not surface no_op as an error — it is
 the user's choice not to opt into ambient learning capture.
 
 Author: Indranil Banerjee
-Plugin: Digital Marketing Pro
+Plugin: OmniGrowth Engine
 """
 
 from __future__ import annotations
@@ -93,7 +93,7 @@ import _common  # noqa: E402
 def workspace_root() -> Path:
     """Return the workspace root. Delegates to the shared _common canon so all
     scripts resolve to the SAME place (honours CLAUDE_MARKETING_HOME for tests,
-    CLAUDE_PLUGIN_DATA/digital-marketing-pro when that dir exists, else
+    CLAUDE_PLUGIN_DATA/omni-growth-engine when that dir exists, else
     ~/.claude-marketing)."""
     return _common.workspace_root()
 

@@ -1,6 +1,6 @@
 # Evaluation Framework Guide -- Content QA System
 
-The Digital Marketing Pro eval system is an automated quality assurance pipeline that scores marketing content across six dimensions before it reaches publication. It catches hallucinations, unverified claims, structural problems, brand voice drift, readability issues, and general content quality gaps -- then persists results over time so you can detect regression and improve continuously.
+The OmniGrowth Engine eval system is an automated quality assurance pipeline that scores marketing content across six dimensions before it reaches publication. It catches hallucinations, unverified claims, structural problems, brand voice drift, readability issues, and general content quality gaps -- then persists results over time so you can detect regression and improve continuously.
 
 This guide covers the full architecture, when to use each eval type, how to interpret results, and how to configure the system for different industries and content types.
 

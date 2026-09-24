@@ -1,6 +1,6 @@
 ---
 name: context-engine
-description: "Load and manage the shared marketing context other skills build on — the active brand profile (voice, audiences, competitors, goals), industry benchmark profiles, geographic and industry compliance rules, platform specs, and scoring rubrics — plus brand switching and campaign-data persistence under ~/.claude-marketing/. Triggers on \"/digital-marketing-pro:context-engine\", \"switch to brand X\", \"what are the benchmarks for my industry\", \"which compliance rules apply to us\", \"load my brand context\". Pairs with /digital-marketing-pro:brand-setup to create profiles and /digital-marketing-pro:switch-brand to change them; its reference files are read by nearly every sibling skill."
+description: "Load and manage the shared marketing context other skills build on — the active brand profile (voice, audiences, competitors, goals), industry benchmark profiles, geographic and industry compliance rules, platform specs, and scoring rubrics — plus brand switching and campaign-data persistence under ~/.claude-marketing/. Triggers on \"/omni-growth-engine:context-engine\", \"switch to brand X\", \"what are the benchmarks for my industry\", \"which compliance rules apply to us\", \"load my brand context\". Pairs with /omni-growth-engine:brand-setup to create profiles and /omni-growth-engine:switch-brand to change them; its reference files are read by nearly every sibling skill."
 argument-hint: "[brand-slug]"
 ---
 
@@ -28,7 +28,7 @@ This skill loads and manages:
 
 1. Check `~/.claude-marketing/brands/_active-brand.json` for the currently active brand
 2. If active brand exists, load `~/.claude-marketing/brands/{slug}/profile.json`
-3. If no active brand, prompt: "No active brand configured. Run /digital-marketing-pro:brand-setup to create one, or tell me about your brand and I'll help set it up."
+3. If no active brand, prompt: "No active brand configured. Run /omni-growth-engine:brand-setup to create one, or tell me about your brand and I'll help set it up."
 
 ### Brand Profile Schema
 
@@ -98,7 +98,7 @@ When user says "switch to [brand name]":
 2. The script handles fuzzy matching, validation, and updates `_active-brand.json`
 3. Confirm: "Switched to [brand_name]. All marketing outputs will now use this brand's voice, compliance rules, and context."
 
-Or use: `/digital-marketing-pro:switch-brand`
+Or use: `/omni-growth-engine:switch-brand`
 
 ## How Other Modules Use This Skill
 

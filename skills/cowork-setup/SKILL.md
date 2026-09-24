@@ -1,13 +1,13 @@
 ---
 name: cowork-setup
-description: "One-shot setup that wires Digital Marketing Pro for team use in Anthropic Cowork — verifies the sandbox via plugin-metadata.py, checks a Google Drive MCP is connected, creates the canonical Drive folder skeleton (_brands/, _runs/, _plans/), and writes the routing config via drive-sync-state.py so brand profiles, plans, and run checkpoints persist across sessions. Triggers on \"/digital-marketing-pro:cowork-setup\", \"set up DMP for my team in Cowork\", \"brand profiles aren't persisting between sessions\", \"route outputs to our shared Drive\", \"first-time Cowork install\". Run once per team; in local Claude Code it only offers optional Drive mirroring. Pairs with /digital-marketing-pro:brand-setup next and /digital-marketing-pro:doctor to verify routing."
+description: "One-shot setup that wires OmniGrowth Engine for team use in Anthropic Cowork — verifies the sandbox via plugin-metadata.py, checks a Google Drive MCP is connected, creates the canonical Drive folder skeleton (_brands/, _runs/, _plans/), and writes the routing config via drive-sync-state.py so brand profiles, plans, and run checkpoints persist across sessions. Triggers on \"/omni-growth-engine:cowork-setup\", \"set up DMP for my team in Cowork\", \"brand profiles aren't persisting between sessions\", \"route outputs to our shared Drive\", \"first-time Cowork install\". Run once per team; in local Claude Code it only offers optional Drive mirroring. Pairs with /omni-growth-engine:brand-setup next and /omni-growth-engine:doctor to verify routing."
 argument-hint: "[--brand <name>] [--drive-root <folder-name>]"
 effort: low
 ---
 
-# /digital-marketing-pro:cowork-setup
+# /omni-growth-engine:cowork-setup
 
-The one-time setup that makes Digital Marketing Pro persistent in Cowork by a team. Wires up the Cowork → Drive routing so brand profiles, campaign plans, audit reports, and run records survive past the end of the current Cowork session.
+The one-time setup that makes OmniGrowth Engine persistent in Cowork by a team. Wires up the Cowork → Drive routing so brand profiles, campaign plans, audit reports, and run records survive past the end of the current Cowork session.
 
 ## Why this skill exists
 
@@ -56,7 +56,7 @@ Scan your available tools for any Google Drive MCP. Common signatures:
 > 1. In Cowork, click your profile menu → **Settings** → **Integrations**
 > 2. Find **Google Drive** in the list → click **Connect**
 > 3. Sign in with the Google account that owns your team's shared Drive
-> 4. Come back here and re-run `/digital-marketing-pro:cowork-setup`
+> 4. Come back here and re-run `/omni-growth-engine:cowork-setup`
 >
 > Alternative: a Notion MCP also works as a persistence target — DMP will treat each brand as a Notion page. If you'd prefer that route, add Notion to your Cowork Integrations panel and re-run this skill."
 
@@ -122,7 +122,7 @@ python "${CLAUDE_PLUGIN_ROOT}/scripts/drive-sync-state.py" --action read-config
 Show a clean summary:
 
 ```
-Digital Marketing Pro is now wired for Cowork team usage:
+OmniGrowth Engine is now wired for Cowork team usage:
 
 Environment:           Cowork sandbox (Linux)
 Drive integration:     <name>
@@ -131,27 +131,27 @@ Config saved at:       ~/.claude-marketing/_cowork-config.json
 
 What this means in practice:
 
-- /digital-marketing-pro:brand-setup -> profile lands in
+- /omni-growth-engine:brand-setup -> profile lands in
   Drive/<folder>/_brands/<brand-slug>/profile.json (persists across sessions)
-- /digital-marketing-pro:campaign-plan -> plan lands in
+- /omni-growth-engine:campaign-plan -> plan lands in
   Drive/<folder>/<brand>/campaigns/<YYYY-MM>/<slug>/PLAN.md
-- /digital-marketing-pro:seo-audit -> audit + intermediates land in
+- /omni-growth-engine:seo-audit -> audit + intermediates land in
   Drive/<folder>/<brand>/audits/<date>/
-- /digital-marketing-pro:status -> reads brand state from Drive first,
+- /omni-growth-engine:status -> reads brand state from Drive first,
   falls back to local sandbox if Drive call fails
-- /digital-marketing-pro:resume -> picks up an interrupted run by
+- /omni-growth-engine:resume -> picks up an interrupted run by
   pulling its checkpoint files from Drive/<folder>/_runs/
 
 Your team accesses everything via Google Drive directly. No
 Cowork-specific paths to remember.
 
 Next step:
-  /digital-marketing-pro:brand-setup "Your Brand Name"
+  /omni-growth-engine:brand-setup "Your Brand Name"
 ```
 
 ### Step 6 — Optional: kick off a brand setup
 
-If `--brand <name>` was passed, automatically launch `/digital-marketing-pro:brand-setup "<name>"` after the summary. This makes the very first run "one command, fully set up."
+If `--brand <name>` was passed, automatically launch `/omni-growth-engine:brand-setup "<name>"` after the summary. This makes the very first run "one command, fully set up."
 
 ## How the Cowork-aware skills use this config
 
@@ -168,15 +168,15 @@ If `needs_upload: true`, the agent uses its Drive MCP to upload the file and the
 ## What this skill does NOT do
 
 - It does not change DMP's behavior in local Claude Code (where host filesystem is fine).
-- It does not migrate existing local-mode brands to Drive. To do that after the fact: re-run `/digital-marketing-pro:brand-setup "<brand>"` in Cowork after this skill finishes — the brand-setup skill will upload the local profile to Drive.
+- It does not migrate existing local-mode brands to Drive. To do that after the fact: re-run `/omni-growth-engine:brand-setup "<brand>"` in Cowork after this skill finishes — the brand-setup skill will upload the local profile to Drive.
 - It does not create a service-account JSON. Cowork-mode uses the MCP path exclusively (no Google Cloud setup needed).
 - It does not check whether your Drive has enough space. Brand profiles + plans are tiny (<100KB typical), so this is rarely a concern, but flag it if you hit a quota error during a real run.
 - It does not replace the local fallback — if a Drive call fails for any reason, DMP still writes locally and re-queues the upload.
 
 ## See also
 
-- `/digital-marketing-pro:status` — confirm Cowork+Drive is detected after setup
-- `/digital-marketing-pro:brand-setup` — actual brand setup (now Drive-default in Cowork)
-- `/digital-marketing-pro:doctor` — per-action readiness check (now reports Cowork+Drive routing too)
+- `/omni-growth-engine:status` — confirm Cowork+Drive is detected after setup
+- `/omni-growth-engine:brand-setup` — actual brand setup (now Drive-default in Cowork)
+- `/omni-growth-engine:doctor` — per-action readiness check (now reports Cowork+Drive routing too)
 - `scripts/plugin-metadata.py --section environment` — the underlying probe
 - README "Cowork team usage" section — canonical doc for which surface to use

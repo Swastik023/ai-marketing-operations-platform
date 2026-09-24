@@ -1,9 +1,9 @@
 ---
 name: autopilot-status
-description: "Campaign autopilot operations dashboard — 0-100 health scores for all active campaigns, a chronological log of auto-corrections taken (bid, budget, audience, creative, pause) with before/after metrics, the current guardrail rule table, campaigns escalated for human attention ranked by urgency, and estimated savings from automated interventions. Triggers on \"/digital-marketing-pro:autopilot-status\", \"how is autopilot doing\", \"what did the autopilot change\", \"which campaigns need my attention\", \"show guardrail settings\". Runs campaign-health-monitor.py for health scores, corrections history, and the savings report; reads the brand profile for KPI targets, naming conventions, and budget constraints."
+description: "Campaign autopilot operations dashboard — 0-100 health scores for all active campaigns, a chronological log of auto-corrections taken (bid, budget, audience, creative, pause) with before/after metrics, the current guardrail rule table, campaigns escalated for human attention ranked by urgency, and estimated savings from automated interventions. Triggers on \"/omni-growth-engine:autopilot-status\", \"how is autopilot doing\", \"what did the autopilot change\", \"which campaigns need my attention\", \"show guardrail settings\". Runs campaign-health-monitor.py for health scores, corrections history, and the savings report; reads the brand profile for KPI targets, naming conventions, and budget constraints."
 ---
 
-# /digital-marketing-pro:autopilot-status
+# /omni-growth-engine:autopilot-status
 
 ## Purpose
 
@@ -19,7 +19,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand-specific campaign naming conventions, KPI targets, and budget constraints to contextualize health scores and savings calculations. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand-specific campaign naming conventions, KPI targets, and budget constraints to contextualize health scores and savings calculations. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Gather campaign health scores**: Execute `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-health-monitor.py" --brand {slug} --action health-score --campaign-id {id} --metrics '{...campaign metrics...}'` for each active campaign (or filtered subset). Each campaign receives a composite health score (0-100) based on performance vs. KPI targets, budget pacing accuracy, audience delivery, creative fatigue indicators, and anomaly detection. Campaigns are classified as healthy (80-100), attention-needed (50-79), or critical (below 50).
 3. **Retrieve recent auto-corrections**: Query `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-health-monitor.py" --brand {slug} --action corrections-history --since {YYYY-MM-DD}` for the specified time period. Each correction record includes the campaign affected, what was detected (the trigger condition), what action was taken (bid adjustment, budget reallocation, audience modification, creative rotation, pause), the before and after metric values, and the timestamp of the intervention.
 4. **Load current guardrails configuration**: Read the active guardrail rules — maximum budget deviation percentage, minimum ROAS threshold before pause, click-through rate floor, cost-per-acquisition ceiling, frequency cap limits, creative fatigue rotation triggers, and any custom brand-specific rules. Display which guardrails are active, their threshold values, and what automated action each triggers when breached.

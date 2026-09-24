@@ -1,11 +1,11 @@
 ---
 name: video-packaging
-description: "Generate or critique video packaging — title + thumbnail-text pairs where the title carries context and keywords, the thumbnail text carries the tension, and any word echoed between them is rejected as wasted real estate. Generate mode delivers 3 pairs tagged by discovery intent (search vs browse) with a recommendation and A/B note; critique mode returns a PASS/FIX/FAIL verdict with 3 fixed pairs. Triggers on \"/digital-marketing-pro:video-packaging\", \"title for this video\", \"thumbnail text ideas\", \"why is no one clicking this video\", \"critique this title\", \"package this video\". Pairs with /digital-marketing-pro:video-script, pulls real query phrasing from /digital-marketing-pro:keyword-research for search-intent titles, and gates title claims through /digital-marketing-pro:check before anything ships."
+description: "Generate or critique video packaging — title + thumbnail-text pairs where the title carries context and keywords, the thumbnail text carries the tension, and any word echoed between them is rejected as wasted real estate. Generate mode delivers 3 pairs tagged by discovery intent (search vs browse) with a recommendation and A/B note; critique mode returns a PASS/FIX/FAIL verdict with 3 fixed pairs. Triggers on \"/omni-growth-engine:video-packaging\", \"title for this video\", \"thumbnail text ideas\", \"why is no one clicking this video\", \"critique this title\", \"package this video\". Pairs with /omni-growth-engine:video-script, pulls real query phrasing from /omni-growth-engine:keyword-research for search-intent titles, and gates title claims through /omni-growth-engine:check before anything ships."
 argument-hint: "[brand-name] [--topic <video topic>] [--critique \"<existing title> / <thumb text>\"]"
 user-invocable: true
 ---
 
-# /digital-marketing-pro:video-packaging
+# /omni-growth-engine:video-packaging
 
 Packaging decides whether a video gets watched; the content only decides
 whether it deserved to be. On every video surface the viewer sees two elements
@@ -32,7 +32,7 @@ A video idea earns discovery one of two ways, and the packaging differs:
 **No search or browse logic → not a video idea yet.** Route it back through
 topic development before spending packaging effort on it. For search-intent
 videos, pull the real query phrasing from
-/digital-marketing-pro:keyword-research rather than guessing it.
+/omni-growth-engine:keyword-research rather than guessing it.
 
 ## Generate mode
 
@@ -95,7 +95,7 @@ the video does not deliver]
   viewer gets fails — curiosity-gap packaging that the content cannot pay off
   is churn, and on regulated brands it is a compliance finding.
 - **Packaging never outpromises the video.** The claims in a title pass the
-  same brand guardrails as any other copy; run /digital-marketing-pro:check
+  same brand guardrails as any other copy; run /omni-growth-engine:check
   before anything ships.
 - **Three pairs minimum in Generate; three fixes minimum in Critique.** One
   option is a decision already made; the client gets choices with reasoning.
@@ -104,8 +104,8 @@ the video does not deliver]
 
 ## Pairs with
 
-- /digital-marketing-pro:video-script — the script this packaging fronts;
+- /omni-growth-engine:video-script — the script this packaging fronts;
   its thumbnail-concept step follows the same pairing rule
-- /digital-marketing-pro:keyword-research — real query phrasing for
+- /omni-growth-engine:keyword-research — real query phrasing for
   search-intent titles
-- /digital-marketing-pro:check — claims and compliance gate before publishing
+- /omni-growth-engine:check — claims and compliance gate before publishing

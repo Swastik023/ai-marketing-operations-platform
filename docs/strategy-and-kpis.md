@@ -1,6 +1,6 @@
 # Business KPIs to Marketing Strategy
 
-> A practitioner's guide for CMOs and marketing strategy leads using the Digital Marketing Pro plugin.
+> A practitioner's guide for CMOs and marketing strategy leads using the OmniGrowth Engine plugin.
 >
 > This document shows how to connect business objectives to measurable KPIs, translate KPI gaps into campaign strategies, and close the measurement loop so every planning cycle is smarter than the last.
 
@@ -41,11 +41,11 @@ Each stage in this loop maps to a specific part of the plugin:
 | **KPI Framework** | Decompose goals into a hierarchical metric tree with targets and benchmarks | Analytics & Insights module (`kpi-frameworks.md`) |
 | **Campaign Strategy** | Translate KPI gaps into phased campaign plans with budget allocation | Campaign Orchestrator module (budget-allocation.md, channel-strategy.md) |
 | **Execution** | Produce content, launch ads, send emails, build funnels | Content Engine, Paid Advertising, Email Marketing modules |
-| **Measurement** | Track performance against KPI targets, detect anomalies | `/digital-marketing-pro:performance-report` command + `campaign-tracker.py` |
-| **Insights** | Extract learnings from what worked and what did not | `auto-save-insight.py` (opt-in) or `/digital-marketing-pro:sync-memory` + `campaign-tracker.py --action save-insight` |
+| **Measurement** | Track performance against KPI targets, detect anomalies | `/omni-growth-engine:performance-report` command + `campaign-tracker.py` |
+| **Insights** | Extract learnings from what worked and what did not | `auto-save-insight.py` (opt-in) or `/omni-growth-engine:sync-memory` + `campaign-tracker.py --action save-insight` |
 | **Refined Strategy** | Next planning cycle uses historical insights to improve | Campaign Orchestrator reads past campaign data and insights |
 
-The critical insight is that the **Insights** stage is not optional. Without it, every planning cycle starts from scratch. With it, every cycle builds on accumulated institutional knowledge. The plugin captures these learnings to `~/.claude-marketing/brands/{slug}/insights.json` — on demand via `/digital-marketing-pro:sync-memory`, automatically when you set `auto_save_insights: true` in the brand profile (agents then save as they go), or at session end if you re-enable the reference SessionEnd hook (it ships disabled by default; see [docs/v3.2-opt-ins.md](v3.2-opt-ins.md)).
+The critical insight is that the **Insights** stage is not optional. Without it, every planning cycle starts from scratch. With it, every cycle builds on accumulated institutional knowledge. The plugin captures these learnings to `~/.claude-marketing/brands/{slug}/insights.json` — on demand via `/omni-growth-engine:sync-memory`, automatically when you set `auto_save_insights: true` in the brand profile (agents then save as they go), or at session end if you re-enable the reference SessionEnd hook (it ships disabled by default; see [docs/v3.2-opt-ins.md](v3.2-opt-ins.md)).
 
 ---
 
@@ -53,7 +53,7 @@ The critical insight is that the **Insights** stage is not optional. Without it,
 
 Strategy starts with the business, not with marketing channels. Before touching KPIs, campaigns, or budgets, the plugin needs to understand what the business is trying to achieve, what model it operates, and what constraints it faces.
 
-This information lives in the brand profile, specifically in the `goals`, `business_model`, and `industry` sections. You set it up through `/digital-marketing-pro:brand-setup` and can update it any time.
+This information lives in the brand profile, specifically in the `goals`, `business_model`, and `industry` sections. You set it up through `/omni-growth-engine:brand-setup` and can update it any time.
 
 ### Worked Example: GreenPeak Outdoors
 
@@ -216,12 +216,12 @@ For GreenPeak, the funnel-weighted model made the most sense because the gap was
 
 ## 5. Step 4: Execute and Measure
 
-With the strategy defined and campaigns in flight, the `/digital-marketing-pro:performance-report` command becomes the operating rhythm. It pulls KPI data, compares against targets, flags anomalies, and provides recommendations.
+With the strategy defined and campaigns in flight, the `/omni-growth-engine:performance-report` command becomes the operating rhythm. It pulls KPI data, compares against targets, flags anomalies, and provides recommendations.
 
 ### A Real Performance Report
 
 ```
-You: /digital-marketing-pro:performance-report
+You: /omni-growth-engine:performance-report
 
 Performance Report: GreenPeak Outdoors -- Q2 Review
 
@@ -287,11 +287,11 @@ The `campaign-tracker.py` script stores these in `~/.claude-marketing/brands/gre
 
 ## 6. Step 5: Close the Loop
 
-This is the step that transforms a one-time campaign into a compounding marketing system. The plugin captures learnings from your working sessions and stores them for future use. As of v3.1+ this is opt-in rather than automatic: enable `auto_save_insights: true` in the brand profile (agents save as they go), run `/digital-marketing-pro:sync-memory` on demand, or re-enable the reference SessionEnd hook (ships disabled — see [docs/v3.2-opt-ins.md](v3.2-opt-ins.md)).
+This is the step that transforms a one-time campaign into a compounding marketing system. The plugin captures learnings from your working sessions and stores them for future use. As of v3.1+ this is opt-in rather than automatic: enable `auto_save_insights: true` in the brand profile (agents save as they go), run `/omni-growth-engine:sync-memory` on demand, or re-enable the reference SessionEnd hook (ships disabled — see [docs/v3.2-opt-ins.md](v3.2-opt-ins.md)).
 
 ### How Insights Get Saved
 
-With ambient capture enabled (`auto_save_insights: true`), or when you run `/digital-marketing-pro:sync-memory`, the plugin saves session learnings:
+With ambient capture enabled (`auto_save_insights: true`), or when you run `/omni-growth-engine:sync-memory`, the plugin saves session learnings:
 
 ```
 Saving 2 insights for greenpeak-outdoors...
@@ -477,13 +477,13 @@ The strategy-to-measurement loop is not a theoretical framework. It is the actua
 | Build KPI framework | Review and refine the generated KPI tree | Generates a business-model-specific tree with industry benchmarks |
 | Plan campaigns | Describe the KPI gap you want to close | Produces phased campaign strategy with budget allocation tied to KPIs |
 | Execute | Create content and launch campaigns | Scores content against your adaptive weights; tracks campaigns |
-| Measure | Run `/digital-marketing-pro:performance-report` | Compares results to targets, detects anomalies, generates recommendations |
-| Learn | Enable ambient capture or run `/digital-marketing-pro:sync-memory` | Saves insights; next session starts with accumulated knowledge |
+| Measure | Run `/omni-growth-engine:performance-report` | Compares results to targets, detects anomalies, generates recommendations |
+| Learn | Enable ambient capture or run `/omni-growth-engine:sync-memory` | Saves insights; next session starts with accumulated knowledge |
 
 The goal is not to automate strategy. Strategy requires human judgment about where to compete, what risks to take, and which trade-offs to accept. The goal is to ensure that judgment is always informed by structured data, and that every decision you make adds to a growing base of institutional knowledge rather than disappearing into a Slack thread.
 
-Start with `/digital-marketing-pro:brand-setup`. Define your goals. Let the KPI framework guide your campaign strategy. Measure what matters. Save what you learn. Repeat.
+Start with `/omni-growth-engine:brand-setup`. Define your goals. Let the KPI framework guide your campaign strategy. Measure what matters. Save what you learn. Repeat.
 
 ---
 
-*This guide is part of the Digital Marketing Pro plugin (v3.17.0). For the complete KPI tree reference, see `skills/analytics-insights/kpi-frameworks.md`. For industry benchmark data across 22 industries, see `skills/context-engine/industry-profiles.md`.*
+*This guide is part of the OmniGrowth Engine plugin (v3.17.0). For the complete KPI tree reference, see `skills/analytics-insights/kpi-frameworks.md`. For industry benchmark data across 22 industries, see `skills/context-engine/industry-profiles.md`.*

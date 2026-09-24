@@ -1,11 +1,11 @@
 ---
 name: signal-mine
-description: "Triage a raw dump of external material — news, social threads, community discussions, competitor moves, sales-call notes — into content angles the brand has authority to make, each mapped to a pillar with a format and timeliness window, plus an explicit dropped-signals list recording why the rest were rejected. Triggers on \"/digital-marketing-pro:signal-mine\", \"mine this\", \"what content is in here\", \"turn this industry news into ideas\", \"any angles for us in this thread\". Requires the brand profile (pillars, audience, competitors) and stops without one; unverified claims route to /digital-marketing-pro:verify-claims before anything cites them; surviving angles feed /digital-marketing-pro:content-engine."
+description: "Triage a raw dump of external material — news, social threads, community discussions, competitor moves, sales-call notes — into content angles the brand has authority to make, each mapped to a pillar with a format and timeliness window, plus an explicit dropped-signals list recording why the rest were rejected. Triggers on \"/omni-growth-engine:signal-mine\", \"mine this\", \"what content is in here\", \"turn this industry news into ideas\", \"any angles for us in this thread\". Requires the brand profile (pillars, audience, competitors) and stops without one; unverified claims route to /omni-growth-engine:verify-claims before anything cites them; surviving angles feed /omni-growth-engine:content-engine."
 argument-hint: "[brand-name] [--signals <pasted material>]"
 user-invocable: true
 ---
 
-# /digital-marketing-pro:signal-mine
+# /omni-growth-engine:signal-mine
 
 The intelligence layer between "interesting" and "ours to say". Raw input comes
 from anywhere — a newsletter, a Reddit thread, three competitor posts, notes
@@ -23,7 +23,7 @@ the discipline is refusing the ideas that do not serve this brand's authority.
 - **The brand profile** — pillars, audience, positioning, competitors from
   `~/.claude-marketing/brands/{slug}/`. **No profile → stop**: signal-mining
   without pillars produces trend-chasing, which is the exact failure mode this
-  skill exists to prevent. Run /digital-marketing-pro:brand-setup first.
+  skill exists to prevent. Run /omni-growth-engine:brand-setup first.
 
 ## Process
 
@@ -56,7 +56,7 @@ the discipline is refusing the ideas that do not serve this brand's authority.
 
 ## Sourcing note
 [Which signals carry claims that need verification before anything cites them —
-route those through /digital-marketing-pro:verify-claims before drafting]
+route those through /omni-growth-engine:verify-claims before drafting]
 ```
 
 ## Critical rules

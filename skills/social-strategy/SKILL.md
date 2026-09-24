@@ -1,10 +1,10 @@
 ---
 name: social-strategy
-description: "Build a platform-specific social media strategy: 3-5 content pillars, posting cadence, content-mix ratios, an engagement playbook with response templates, growth tactics, KPI targets, and a 30-day quick-start plan across Instagram, TikTok, LinkedIn, X, YouTube, Facebook, Pinterest, and Threads. Strategy only — schedules and publishes nothing. Triggers on \"/digital-marketing-pro:social-strategy\", \"build our social media strategy\", \"how often should we post on LinkedIn\", \"define our content pillars\", \"our engagement is flat, what's the plan\". Reads the brand profile, guidelines, and agency SOPs so pillars, cadence, and playbooks match brand voice and compliance rules."
+description: "Build a platform-specific social media strategy: 3-5 content pillars, posting cadence, content-mix ratios, an engagement playbook with response templates, growth tactics, KPI targets, and a 30-day quick-start plan across Instagram, TikTok, LinkedIn, X, YouTube, Facebook, Pinterest, and Threads. Strategy only — schedules and publishes nothing. Triggers on \"/omni-growth-engine:social-strategy\", \"build our social media strategy\", \"how often should we post on LinkedIn\", \"define our content pillars\", \"our engagement is flat, what's the plan\". Reads the brand profile, guidelines, and agency SOPs so pillars, cadence, and playbooks match brand voice and compliance rules."
 argument-hint: "[platform or objective]"
 ---
 
-# /digital-marketing-pro:social-strategy
+# /omni-growth-engine:social-strategy
 
 ## Purpose
 
@@ -23,7 +23,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. Audit current social presence: content mix, posting frequency, engagement patterns, follower quality
 3. Define 3-5 content pillars aligned with brand expertise and audience interests
 4. Set platform-specific posting cadence based on algorithm best practices and team capacity

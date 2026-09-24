@@ -31,7 +31,7 @@ This module is imported by:
   - execution-tracker.py   (enable-automation, schedule-posts, notify-influencers,
                             pr-send, internal-kickoff, launch-ads)
   - seo-executor.py        (audit-current)
-  - action-doctor.py       (the /digital-marketing-pro:doctor command)
+  - action-doctor.py       (the /omni-growth-engine:doctor command)
 """
 from __future__ import annotations
 
@@ -744,7 +744,7 @@ def _execute_arm_watchdog(brand, kwargs):
     if not brand_dir.exists():
         return {
             "status": "error",
-            "error": f"Brand '{brand}' not found. Run /digital-marketing-pro:brand-setup first.",
+            "error": f"Brand '{brand}' not found. Run /omni-growth-engine:brand-setup first.",
         }
 
     watchdog_dir = brand_dir / "watchdogs"
@@ -793,7 +793,7 @@ def _execute_arm_watchdog(brand, kwargs):
         "alert_thresholds_pct": deviation_pct,
         "check_interval_hours": config["check_interval_hours"],
         "next_action": f"performance-monitor detects metric anomalies against this watchdog's "
-                       f"thresholds. Run /digital-marketing-pro:status to see active watchdogs.",
+                       f"thresholds. Run /omni-growth-engine:status to see active watchdogs.",
     }
 
 
@@ -1058,7 +1058,7 @@ def _build_setup_hint(candidates: list[str]) -> dict:
                 "package_status": "no-known-npm-package",
                 "note": info.get(
                     "note",
-                    "No verified MCP package on npm — use /digital-marketing-pro:add-integration "
+                    "No verified MCP package on npm — use /omni-growth-engine:add-integration "
                     "to wire a custom server. npx runs remote code; verify any package before use."),
             })
         else:

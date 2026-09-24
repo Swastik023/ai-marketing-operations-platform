@@ -1,10 +1,10 @@
 ---
 name: ad-creative
-description: "Generate 3-5 ad copy variations per platform — headlines, descriptions, and CTAs formatted to Google, Meta, LinkedIn, TikTok, X, and Pinterest specs — each scored 1-10 with policy-compliance flags, A/B testing groupings, and a message-match check against the landing page. Triggers on \"/digital-marketing-pro:ad-creative\", \"write ad copy for Meta\", \"give me RSA headline variations\", \"we need LinkedIn ad copy\", \"draft TikTok ad creative\". Reads the brand profile, guidelines, and compliance rules; routes video ad scripts to /digital-marketing-pro:video-script and gates AI-generated visuals for EU campaigns through /digital-marketing-pro:c2pa-metadata and /digital-marketing-pro:check."
+description: "Generate 3-5 ad copy variations per platform — headlines, descriptions, and CTAs formatted to Google, Meta, LinkedIn, TikTok, X, and Pinterest specs — each scored 1-10 with policy-compliance flags, A/B testing groupings, and a message-match check against the landing page. Triggers on \"/omni-growth-engine:ad-creative\", \"write ad copy for Meta\", \"give me RSA headline variations\", \"we need LinkedIn ad copy\", \"draft TikTok ad creative\". Reads the brand profile, guidelines, and compliance rules; routes video ad scripts to /omni-growth-engine:video-script and gates AI-generated visuals for EU campaigns through /omni-growth-engine:c2pa-metadata and /omni-growth-engine:check."
 argument-hint: "[platform]"
 ---
 
-# /digital-marketing-pro:ad-creative
+# /omni-growth-engine:ad-creative
 
 ## Purpose
 
@@ -16,7 +16,7 @@ The user must provide (or will be prompted for):
 
 - **Product/service**: What is being advertised
 - **Platform(s)**: Google Ads, Meta (Facebook/Instagram), LinkedIn, TikTok, X, Pinterest
-- **Ad format**: RSA, single image, carousel, video script, story, etc. For video ad scripts (6s bumper, 15s skippable, 30s spot, UGC-style), route to /digital-marketing-pro:video-script — its step 2.4 carries the per-format structural rules (the 5-second skip deadline, one-message bumpers, native-style disclosure) and its output passes the /check gate. This skill owns the copy layer around the video: headlines, descriptions, and CTAs.
+- **Ad format**: RSA, single image, carousel, video script, story, etc. For video ad scripts (6s bumper, 15s skippable, 30s spot, UGC-style), route to /omni-growth-engine:video-script — its step 2.4 carries the per-format structural rules (the 5-second skip deadline, one-message bumpers, native-style disclosure) and its output passes the /check gate. This skill owns the copy layer around the video: headlines, descriptions, and CTAs.
 - **Campaign objective**: Awareness, traffic, leads, conversions, app installs
 - **Target audience**: Who the ads are for
 - **Key offer/CTA**: Promotion, value prop, or desired action
@@ -24,7 +24,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. Identify platform-specific constraints: character limits, format requirements, policy restrictions
 3. Generate 3-5 ad copy variations per platform, each with a distinct angle (benefit, urgency, social proof, curiosity, direct)
 4. Score each variation on: brand alignment, clarity, emotional impact, CTA strength, policy compliance
@@ -49,16 +49,16 @@ When the brief includes static visuals or short-form video, recommend the model 
 
 | Asset type | Recommended model (May 2026) | When to use | Compliance note |
 |---|---|---|---|
-| Product hero stills, lifestyle photography, e-commerce tiles | **Google Nano Banana Pro** (Gemini 3 Pro Image, multi-image composition, character/object consistency) | Strong text rendering inside images (logos, on-pack copy), brand-character consistency across a campaign, high-fidelity product realism. | Outputs ship with SynthID watermarking by default; ALSO sign with C2PA via `/digital-marketing-pro:c2pa-metadata` before any EU distribution. |
+| Product hero stills, lifestyle photography, e-commerce tiles | **Google Nano Banana Pro** (Gemini 3 Pro Image, multi-image composition, character/object consistency) | Strong text rendering inside images (logos, on-pack copy), brand-character consistency across a campaign, high-fidelity product realism. | Outputs ship with SynthID watermarking by default; ALSO sign with C2PA via `/omni-growth-engine:c2pa-metadata` before any EU distribution. |
 | Short-form social video (≤8s reels, organic vertical) | **Gemini Veo 3.1** (synchronized native audio, longer/more coherent clips than Veo 3.0) | Reels, TikTok, Shorts cut-downs, ad-creative experimentation. | Synthetic-voice / synthetic-human content must carry a visible deepfake disclosure under EU Article 50 — see `skills/context-engine/compliance-rules.md` §1.1b. |
 | Long-form video with native audio / multi-modal storytelling | **Gemini Omni** (multimodal generation, May 2026 I/O launch — text + image + audio + video unified) | Connected-content campaigns where a single brief produces a hero film, social cut-downs, audio version, and stills consistently. Best for brands with disciplined creative governance — Omni's range outpaces most brand-safety review processes. | Default Omni outputs carry SynthID + Gemini provenance markers. Add C2PA before EU publish. Run synthetic-person outputs past Legal — Omni's photoreal humans frequently hit "substantial AI manipulation" thresholds under Article 50. |
-| Static image — fast iteration / mood-boarding | OpenAI gpt-image-2, Midjourney v7, Adobe Firefly | Internal mood boards, concept exploration. Not for shipped EU creative without C2PA. | None of these auto-embed C2PA — manually sign with `/digital-marketing-pro:c2pa-metadata` before EU publish. |
+| Static image — fast iteration / mood-boarding | OpenAI gpt-image-2, Midjourney v7, Adobe Firefly | Internal mood boards, concept exploration. Not for shipped EU creative without C2PA. | None of these auto-embed C2PA — manually sign with `/omni-growth-engine:c2pa-metadata` before EU publish. |
 
 **Workflow recommendation:**
 
 1. Brief the visual concept in this skill's output (subject, composition, brand-character constraints, on-pack text if any).
-2. Hand the visual spec to whichever production track owns image/video — your design team, any AI image/video tool (the model table above maps use-case → generator), or a connected design platform (e.g. the Canva / Figma MCP connectors listed in `/digital-marketing-pro:integrations`). The spec is deliberately tool-agnostic: any production track can consume it unchanged.
-3. Treat all AI-generated visuals as **Article 50 in-scope** until proven otherwise. The pre-publish gate (`/digital-marketing-pro:check`) blocks unsigned AI assets for EU-targeted campaigns.
+2. Hand the visual spec to whichever production track owns image/video — your design team, any AI image/video tool (the model table above maps use-case → generator), or a connected design platform (e.g. the Canva / Figma MCP connectors listed in `/omni-growth-engine:integrations`). The spec is deliberately tool-agnostic: any production track can consume it unchanged.
+3. Treat all AI-generated visuals as **Article 50 in-scope** until proven otherwise. The pre-publish gate (`/omni-growth-engine:check`) blocks unsigned AI assets for EU-targeted campaigns.
 
 ## Agents Used
 

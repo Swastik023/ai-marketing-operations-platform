@@ -11,7 +11,7 @@ Create or update a brand marketing profile that powers every skill in the plugin
 
 ## Trigger
 
-User runs `/digital-marketing-pro:brand-setup` or asks to set up a new brand, onboard a new client, create a brand profile, or switch between brands.
+User runs `/omni-growth-engine:brand-setup` or asks to set up a new brand, onboard a new client, create a brand profile, or switch between brands.
 
 ## Inputs
 
@@ -42,7 +42,7 @@ Ask only the 5 essential questions above. From these, intelligently populate the
 - Infer industry, business model, and compliance requirements from the elevator pitch
 - Map voice descriptors to 1-10 scales (e.g., "professional" = formality: 8, "fun" = humor: 7)
 - Set sensible defaults for everything else
-- Tell the user: "Quick profile created! Refine anytime with `/digital-marketing-pro:brand-setup --full`"
+- Tell the user: "Quick profile created! Refine anytime with `/omni-growth-engine:brand-setup --full`"
 
 ### Full Setup (17 questions — comprehensive profiling)
 
@@ -85,8 +85,8 @@ Profiles are saved to `~/.claude-marketing/brands/{slug}/profile.json` and autom
 ## Brand Switching (Agency Use)
 
 For agencies managing multiple brands:
-- Switch active brand: `/digital-marketing-pro:switch-brand AcmeMed`
-- List all brands: `/digital-marketing-pro:switch-brand --list`
+- Switch active brand: `/omni-growth-engine:switch-brand AcmeMed`
+- List all brands: `/omni-growth-engine:switch-brand --list`
 - Each brand gets isolated context — no cross-contamination
 
 ## After Setup
@@ -94,8 +94,8 @@ For agencies managing multiple brands:
 After creating the profile, ask:
 
 "Brand profile for [name] is ready. Would you like to:
-- Import an existing style guide? (`/digital-marketing-pro:import-guidelines`)
-- Run a competitive analysis? (`/digital-marketing-pro:competitor-analysis`)
-- Plan your first campaign? (`/digital-marketing-pro:campaign-plan`)
-- Audit your SEO? (`/digital-marketing-pro:seo-audit`)
-- Check which connectors are active? (`/digital-marketing-pro:integrations`)"
+- Import an existing style guide? (`/omni-growth-engine:import-guidelines`)
+- Run a competitive analysis? (`/omni-growth-engine:competitor-analysis`)
+- Plan your first campaign? (`/omni-growth-engine:campaign-plan`)
+- Audit your SEO? (`/omni-growth-engine:seo-audit`)
+- Check which connectors are active? (`/omni-growth-engine:integrations`)"

@@ -1,6 +1,6 @@
 # Cross-Channel Strategy Synchronization
 
-> A practitioner's guide for multi-channel marketing managers using the Digital Marketing Pro plugin.
+> A practitioner's guide for multi-channel marketing managers using the OmniGrowth Engine plugin.
 >
 > This document explains how to plan, execute, and measure campaigns that span multiple marketing channels while maintaining consistent brand messaging, coordinated timing, and unified tracking. It covers the plugin's architecture for cross-channel work, walks through a complete product launch example, and shows how to adapt, measure, and refine your channel strategy over time.
 
@@ -308,14 +308,14 @@ Without the standardized taxonomy, this table does not exist. With it, you can s
 
 ## 6. Mid-Campaign Strategy Adjustments
 
-Campaigns rarely run perfectly from day one. The plugin supports mid-campaign analysis and reallocation through the `/digital-marketing-pro:performance-report` command, which compares current results against the targets set in the campaign plan.
+Campaigns rarely run perfectly from day one. The plugin supports mid-campaign analysis and reallocation through the `/omni-growth-engine:performance-report` command, which compares current results against the targets set in the campaign plan.
 
 ### Reading a Mid-Campaign Report
 
 ```
 (Week 2 of the UltraLight launch)
 
-You: /digital-marketing-pro:performance-report for the UltraLight launch
+You: /omni-growth-engine:performance-report for the UltraLight launch
 
 Plugin:
 
@@ -429,7 +429,7 @@ The quarterly review is not just a report. It feeds back into the plugin's plann
 
 **Format optimization.** Knowing that Instagram Reels outperform Carousels on engagement (3.4% vs. 2.1%) while Carousels outperform on conversion (2.4% vs. 1.8%) lets you assign the right format to the right campaign phase. Reels for awareness phases, Carousels for conversion phases.
 
-**Insight accumulation.** These findings are saved to `insights.json` (via ambient capture when `auto_save_insights: true`, or on demand with `/digital-marketing-pro:sync-memory`), so the next time you plan a campaign, the plugin already knows that UGC content outperforms studio creative on Instagram, that email is your most efficient channel, and that LinkedIn works for B2B partnership campaigns but is not cost-effective for direct consumer acquisition.
+**Insight accumulation.** These findings are saved to `insights.json` (via ambient capture when `auto_save_insights: true`, or on demand with `/omni-growth-engine:sync-memory`), so the next time you plan a campaign, the plugin already knows that UGC content outperforms studio creative on Instagram, that email is your most efficient channel, and that LinkedIn works for B2B partnership campaigns but is not cost-effective for direct consumer acquisition.
 
 ### The Compounding Effect of Quarterly Reviews
 
@@ -456,15 +456,15 @@ The plugin prevents this by enforcing a shared architecture:
 | Campaign Orchestrator | Coordinates timing, budget, and KPIs across channels | Channels work together, not in parallel |
 | Content Engine + Platform Specs | Adapts one message to each platform's format | Consistency without copy-paste |
 | UTM Taxonomy | Standardized tracking across all channels | Every conversion is attributed correctly |
-| `/digital-marketing-pro:content-calendar` | Synchronized editorial calendar | Timing is coordinated, not accidental |
-| `/digital-marketing-pro:campaign-plan` | Phased multi-channel campaign plans | Each channel knows its role in each phase |
-| `/digital-marketing-pro:performance-report` | Cross-channel performance comparison | Reallocation decisions based on data |
+| `/omni-growth-engine:content-calendar` | Synchronized editorial calendar | Timing is coordinated, not accidental |
+| `/omni-growth-engine:campaign-plan` | Phased multi-channel campaign plans | Each channel knows its role in each phase |
+| `/omni-growth-engine:performance-report` | Cross-channel performance comparison | Reallocation decisions based on data |
 | Insight capture (`auto_save_insights` / `/sync-memory`) | Insights preserved for future planning | Next campaign is smarter than the last |
 
 The goal is not to make every channel say the same thing in the same way. It is to make every channel say the right thing in the right way for that platform, while staying connected to the same strategy, the same brand, and the same measurement system.
 
-Start with `/digital-marketing-pro:campaign-plan` to build your next cross-channel campaign. Use `/digital-marketing-pro:content-calendar` to coordinate the timing. Let the Content Engine adapt your message to each platform. Track everything with standardized UTMs. Review with `/digital-marketing-pro:performance-report`. Learn, adjust, and repeat.
+Start with `/omni-growth-engine:campaign-plan` to build your next cross-channel campaign. Use `/omni-growth-engine:content-calendar` to coordinate the timing. Let the Content Engine adapt your message to each platform. Track everything with standardized UTMs. Review with `/omni-growth-engine:performance-report`. Learn, adjust, and repeat.
 
 ---
 
-*This guide is part of the Digital Marketing Pro plugin (v3.17.0). For channel selection matrices and synergy maps, see `skills/campaign-orchestrator/channel-strategy.md`. For platform specifications and character limits, see `skills/context-engine/platform-specs.md`. For UTM naming conventions, see `skills/campaign-orchestrator/utm-tracking.md`.*
+*This guide is part of the OmniGrowth Engine plugin (v3.17.0). For channel selection matrices and synergy maps, see `skills/campaign-orchestrator/channel-strategy.md`. For platform specifications and character limits, see `skills/context-engine/platform-specs.md`. For UTM naming conventions, see `skills/campaign-orchestrator/utm-tracking.md`.*

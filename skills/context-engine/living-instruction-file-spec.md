@@ -165,14 +165,14 @@ The LIF is automatically updated when:
 ### Manual update
 
 ```
-/digital-marketing-pro:engagement lif update --section "open-items" --add "{item description}"
+/omni-growth-engine:engagement lif update --section "open-items" --add "{item description}"
 ```
 
 ### Manual read
 
 ```
-/digital-marketing-pro:engagement lif show
-/digital-marketing-pro:engagement lif show --section "currently-true"
+/omni-growth-engine:engagement lif show
+/omni-growth-engine:engagement lif show --section "currently-true"
 ```
 
 ## How skills consume the LIF

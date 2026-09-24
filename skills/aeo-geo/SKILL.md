@@ -1,6 +1,6 @@
 ---
 name: aeo-geo
-description: "Strategy module for Answer Engine / Generative Engine Optimization — audits AI visibility, restructures content for citation, runs entity-consistency checks across Knowledge Graph, Wikidata, Wikipedia, Crunchbase, and LinkedIn, and produces JSON-LD schema specs, monitoring frameworks, and a 90-day LLM content strategy. Triggers on \"/digital-marketing-pro:aeo-geo\", \"how do we get cited by AI\", \"optimize for AI Overviews\", \"fix our entity consistency\", \"do we need llms.txt\". Reads the brand profile, compliance rules, and industry benchmarks; its measurement counterpart is /digital-marketing-pro:aeo-audit, with GSC actuals via /digital-marketing-pro:gsc-ai-performance."
+description: "Strategy module for Answer Engine / Generative Engine Optimization — audits AI visibility, restructures content for citation, runs entity-consistency checks across Knowledge Graph, Wikidata, Wikipedia, Crunchbase, and LinkedIn, and produces JSON-LD schema specs, monitoring frameworks, and a 90-day LLM content strategy. Triggers on \"/omni-growth-engine:aeo-geo\", \"how do we get cited by AI\", \"optimize for AI Overviews\", \"fix our entity consistency\", \"do we need llms.txt\". Reads the brand profile, compliance rules, and industry benchmarks; its measurement counterpart is /omni-growth-engine:aeo-audit, with GSC actuals via /omni-growth-engine:gsc-ai-performance."
 ---
 
 # AEO/GEO Intelligence
@@ -37,7 +37,7 @@ Activate this module when the user's request involves any of the following:
 
 - For AI Overviews and AI Mode (inside Google Search): use existing snippet directives — `nosnippet`, `data-nosnippet`, `max-snippet`, `noindex`. Robots.txt for Googlebot is the canonical control. **There is no AI-specific robots/meta directive.**
 - For Google's *other* AI systems (Gemini app training, Vertex AI grounding outside Search): use the **Google-Extended** user agent in robots.txt. This is a distinct control from Googlebot.
-- **NEW (3 June 2026):** Search Console now ships an **opt-out toggle** at the property level — flip it to exclude the site from grounding AI Overviews / AI Mode responses without editing robots.txt. See `/digital-marketing-pro:gsc-ai-performance` for the decision framework on when to use it.
+- **NEW (3 June 2026):** Search Console now ships an **opt-out toggle** at the property level — flip it to exclude the site from grounding AI Overviews / AI Mode responses without editing robots.txt. See `/omni-growth-engine:gsc-ai-performance` for the decision framework on when to use it.
 
 **EU AI Act Article 50 (applicable 2 August 2026)** — for AI-generated marketing content surfaced in EU markets, see `skills/context-engine/eu-code-of-practice.md` for the voluntary Code of Practice (WG1 providers / WG2 deployers) and the C2PA `c2pa.ai-disclosure` assertion path. Compliance is plugin-level and applies to `c2pa-metadata` outputs.
 
@@ -52,7 +52,7 @@ Before producing any marketing output from this module:
 5. **Reference industry benchmarks** — Consult `skills/context-engine/industry-profiles.md` for the brand's industry
 6. **Use platform specs** — Reference `skills/context-engine/platform-specs.md` for character limits and format requirements
 7. **Check campaign history** — Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-tracker.py" --brand {slug} --action list-campaigns` before planning new work
-8. **If no brand exists**, say: "No brand profile found. Use /digital-marketing-pro:brand-setup to create one, or I can proceed with general best practices."
+8. **If no brand exists**, say: "No brand profile found. Use /omni-growth-engine:brand-setup to create one, or I can proceed with general best practices."
 9. **Check brand guidelines** — If `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` exists, load and enforce: `restrictions.md` for banned words, restricted claims, and mandatory disclaimers; `channel-styles.md` for channel-specific tone overrides (may differ from base voice); `messaging.md` for approved key messages, taglines, and positioning language; `voice-and-tone.md` for detailed voice rules beyond the 4 numeric scores. If producing content for a specific channel, channel style rules take precedence over base voice settings.
 
 Do not ask the user for information that already exists in their brand profile.
@@ -74,7 +74,7 @@ If the user cannot provide all context, proceed with what is available and flag 
 
 ## Capabilities
 
-- **AI Visibility Audit**: Systematic testing of how a brand appears across the 6 canonical surfaces — Google AI Mode, Google AI Overviews, ChatGPT, Perplexity, Gemini, and Copilot — for target queries (scored with the standard defined in `/digital-marketing-pro:aeo-audit`)
+- **AI Visibility Audit**: Systematic testing of how a brand appears across the 6 canonical surfaces — Google AI Mode, Google AI Overviews, ChatGPT, Perplexity, Gemini, and Copilot — for target queries (scored with the standard defined in `/omni-growth-engine:aeo-audit`)
 - **Citation Optimization**: Restructuring content to maximize the probability of being cited as a source in AI-generated responses
 - **Entity Consistency Audit**: Cross-referencing brand information across Google Knowledge Graph, Wikidata, Wikipedia, Crunchbase, LinkedIn, and industry databases to identify inconsistencies
 - **LLM Content Strategy**: Creating content specifically designed to be ingested and accurately represented by language models
@@ -202,7 +202,7 @@ If the user cannot provide all context, proceed with what is available and flag 
 - **Entity consistency across Knowledge Graph, Wikidata, Wikipedia, LinkedIn, Crunchbase is the single highest-leverage AEO investment** — more impactful than schema tweaks.
 - **AI citations are stickier than blue-link rankings** but slower to win. Expect 3-6 months of consistent work before measurable shift.
 - **Don't try to "trick" AI into citing you** with stuffed content or fake authority signals. AI platforms detect and demote this faster than traditional search.
-- **`Google-Extended` (robots.txt) opts out of Google's *other* AI systems** (Gemini training, Vertex grounding) — distinct from the in-Search-Console toggle for AI Overviews/AI Mode (rolled out 3 Jun 2026 via `/digital-marketing-pro:gsc-ai-performance`).
+- **`Google-Extended` (robots.txt) opts out of Google's *other* AI systems** (Gemini training, Vertex grounding) — distinct from the in-Search-Console toggle for AI Overviews/AI Mode (rolled out 3 Jun 2026 via `/omni-growth-engine:gsc-ai-performance`).
 - **EU markets** require Article 50 disclosure on AI-generated content (applicable 2 Aug 2026) — see `skills/context-engine/eu-code-of-practice.md`.
 
 ## Related Skills

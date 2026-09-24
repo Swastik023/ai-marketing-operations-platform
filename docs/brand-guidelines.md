@@ -1,6 +1,6 @@
 # Brand Guidelines, Guardrails & Agency SOPs
 
-This guide covers how to import and use brand guidelines, restrictions, channel-specific styles, deliverable templates, and agency SOPs with Digital Marketing Pro.
+This guide covers how to import and use brand guidelines, restrictions, channel-specific styles, deliverable templates, and agency SOPs with OmniGrowth Engine.
 
 ## Why Import Guidelines?
 
@@ -20,7 +20,7 @@ Brand guidelines capture the **how** — the detailed rules that make content au
 ### Import Your First Guidelines
 
 ```
-/digital-marketing-pro:import-guidelines
+/omni-growth-engine:import-guidelines
 ```
 
 You can paste content from existing documents or describe rules conversationally:
@@ -52,9 +52,9 @@ Saves to `restrictions.md` with alternatives suggested for each banned word.
 
 Guidelines persist — import them once, and they're applied in every future session. You can add to them over time:
 
-> Session 1: /digital-marketing-pro:import-guidelines → import voice & tone guide
-> Session 2: /digital-marketing-pro:import-guidelines → add restrictions
-> Session 3: /digital-marketing-pro:import-guidelines → add channel-specific styles
+> Session 1: /omni-growth-engine:import-guidelines → import voice & tone guide
+> Session 2: /omni-growth-engine:import-guidelines → add restrictions
+> Session 3: /omni-growth-engine:import-guidelines → add channel-specific styles
 
 Each import asks whether to merge with or replace existing content.
 
@@ -64,7 +64,7 @@ Each import asks whether to merge with or replace existing content.
 
 Once imported, guidelines are enforced automatically across all plugin modules and commands:
 
-1. **Status snapshot**: The brand summary (`/digital-marketing-pro:status`, or session start if you enable the SessionStart hook) shows guideline counts alongside voice scores and channel info
+1. **Status snapshot**: The brand summary (`/omni-growth-engine:status`, or session start if you enable the SessionStart hook) shows guideline counts alongside voice scores and channel info
 2. **Content creation**: Every module checks restrictions before generating content. Banned words are flagged, restricted claims get qualifications, mandatory disclaimers are appended
 3. **Channel-specific output**: When creating content for a specific channel (LinkedIn post, Instagram caption, email), channel styles override the base voice settings
 4. **Content review**: The Brand Guardian agent checks all content against guidelines before approval
@@ -99,7 +99,7 @@ The plugin uses your brand profile's voice scores (formality 7, energy 5, humor 
 
 ### After Importing Guidelines
 
-> You: /digital-marketing-pro:import-guidelines
+> You: /omni-growth-engine:import-guidelines
 >
 > You: Here's our style guide:
 > - Always lead with the customer problem, not our solution
@@ -128,14 +128,14 @@ Templates define the output structure for plugin commands. Instead of getting th
 ### Importing a Template
 
 ```
-/digital-marketing-pro:import-template
+/omni-growth-engine:import-template
 ```
 
 **Example:**
 
 > You: Our monthly performance reports should have: Executive Summary (3 bullets max), Channel Performance (table with MTD vs target), Campaign Highlights (top 3), Issues & Risks, Recommendations, Next Month Plan.
 
-The plugin saves this as a template. Next time you run `/digital-marketing-pro:performance-report`, it follows your custom structure.
+The plugin saves this as a template. Next time you run `/omni-growth-engine:performance-report`, it follows your custom structure.
 
 ### Which Commands Use Templates?
 
@@ -143,12 +143,12 @@ Any command can use a custom template. Name your template to match the command:
 
 | Template Name | Used By |
 |---|---|
-| `performance-report` | `/digital-marketing-pro:performance-report` |
+| `performance-report` | `/omni-growth-engine:performance-report` |
 | `proposal` | Campaign plan outputs |
-| `content-brief` | `/digital-marketing-pro:content-brief` |
-| `campaign-plan` | `/digital-marketing-pro:campaign-plan` |
-| `pr-pitch` | `/digital-marketing-pro:pr-pitch` |
-| `competitor-analysis` | `/digital-marketing-pro:competitor-analysis` |
+| `content-brief` | `/omni-growth-engine:content-brief` |
+| `campaign-plan` | `/omni-growth-engine:campaign-plan` |
+| `pr-pitch` | `/omni-growth-engine:pr-pitch` |
+| `competitor-analysis` | `/omni-growth-engine:competitor-analysis` |
 
 Custom-named templates can be referenced by any module when relevant.
 
@@ -161,7 +161,7 @@ SOPs (Standard Operating Procedures) define **workflow steps** — approval proc
 ### Importing an SOP
 
 ```
-/digital-marketing-pro:import-sop
+/omni-growth-engine:import-sop
 ```
 
 **Example:**
@@ -183,7 +183,7 @@ The plugin saves this as a content approval workflow. When generating content, i
 
 ### How SOPs Are Applied
 
-When you use commands like `/digital-marketing-pro:campaign-plan` or `/digital-marketing-pro:content-brief`, the plugin checks for relevant SOPs and:
+When you use commands like `/omni-growth-engine:campaign-plan` or `/omni-growth-engine:content-brief`, the plugin checks for relevant SOPs and:
 
 - Adds workflow steps to the output ("Submit to legal review before publishing")
 - Flags when a step requires human approval
@@ -220,12 +220,12 @@ All files are markdown — human-readable, easy to edit, and version-controllabl
 
 ### Per-Brand Guidelines
 
-Each brand has its own guidelines directory. When you switch brands (`/digital-marketing-pro:switch-brand`), the active guidelines change too:
+Each brand has its own guidelines directory. When you switch brands (`/omni-growth-engine:switch-brand`), the active guidelines change too:
 
-> You: /digital-marketing-pro:switch-brand acme
+> You: /omni-growth-engine:switch-brand acme
 > → Loads Acme Corp guidelines (restrictions, voice rules, channel styles)
 >
-> You: /digital-marketing-pro:switch-brand globex
+> You: /omni-growth-engine:switch-brand globex
 > → Loads Globex Corp guidelines (different restrictions, different voice)
 
 ### Shared SOPs
@@ -243,7 +243,7 @@ Templates are brand-specific. Acme Corp may want a different report format than 
 
 ### Check What's Configured
 
-Run `/digital-marketing-pro:status` (or enable the SessionStart hook) to see the brand summary, which shows:
+Run `/omni-growth-engine:status` (or enable the SessionStart hook) to see the brand summary, which shows:
 
 ```
 Guidelines: 41 rules across 4 categories · 15 restrictions · 3 templates · 2 SOPs
@@ -261,7 +261,7 @@ Displays `channel-styles.md` with per-channel rules.
 
 ### Update Guidelines
 
-> You: /digital-marketing-pro:import-guidelines
+> You: /omni-growth-engine:import-guidelines
 
 Add new rules, update existing ones, or replace a category entirely. The plugin asks whether to merge or replace.
 

@@ -1,10 +1,10 @@
 ---
 name: content-calendar
-description: "Generate a structured content calendar for a month, quarter, or custom range — topics mapped to platforms and publish dates, content-pillar and funnel-stage tags, repurposing chains from each core piece, SEO keyword targets, and owner assignments when team capacity is given. Triggers on \"/digital-marketing-pro:content-calendar\", \"plan next month's content\", \"build a quarterly editorial calendar\", \"what should we publish in March\", \"map our content pillars to a schedule\". Planning output only — it does not schedule or publish posts. Reads the brand profile, guidelines, and compliance rules for pillars and voice."
+description: "Generate a structured content calendar for a month, quarter, or custom range — topics mapped to platforms and publish dates, content-pillar and funnel-stage tags, repurposing chains from each core piece, SEO keyword targets, and owner assignments when team capacity is given. Triggers on \"/omni-growth-engine:content-calendar\", \"plan next month's content\", \"build a quarterly editorial calendar\", \"what should we publish in March\", \"map our content pillars to a schedule\". Planning output only — it does not schedule or publish posts. Reads the brand profile, guidelines, and compliance rules for pillars and voice."
 argument-hint: "[month or quarter]"
 ---
 
-# /digital-marketing-pro:content-calendar
+# /omni-growth-engine:content-calendar
 
 ## Purpose
 
@@ -23,7 +23,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. Define or validate content pillars based on brand expertise and audience needs
 3. Map key dates, seasonal trends, and industry events to the calendar
 4. Generate topic ideas for each pillar, distributed across the time period

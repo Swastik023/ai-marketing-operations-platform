@@ -1,10 +1,10 @@
 ---
 name: crisis-response
-description: "Assess a PR crisis and deliver a structured response plan — severity classification (Level 1-3), a ready-to-publish holding statement, tailored messaging per stakeholder group, an hour-by-hour communication timeline, and a trust-rebuilding roadmap. Drafts and plans only; it publishes nothing. Triggers on \"/digital-marketing-pro:crisis-response\", \"we're getting slammed on social media\", \"draft a holding statement fast\", \"a negative story just broke about us\", \"how do we respond to this backlash\". Reads the brand profile, voice settings, guidelines, and market compliance rules before drafting any statement."
+description: "Assess a PR crisis and deliver a structured response plan — severity classification (Level 1-3), a ready-to-publish holding statement, tailored messaging per stakeholder group, an hour-by-hour communication timeline, and a trust-rebuilding roadmap. Drafts and plans only; it publishes nothing. Triggers on \"/omni-growth-engine:crisis-response\", \"we're getting slammed on social media\", \"draft a holding statement fast\", \"a negative story just broke about us\", \"how do we respond to this backlash\". Reads the brand profile, voice settings, guidelines, and market compliance rules before drafting any statement."
 argument-hint: "[situation-description]"
 ---
 
-# /digital-marketing-pro:crisis-response
+# /omni-growth-engine:crisis-response
 
 ## Purpose
 
@@ -23,7 +23,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Severity classification**: Level 1 (monitor), Level 2 (respond), Level 3 (full mobilization) based on reach, impact, and trajectory
 3. Assess the narrative: What is being said? What is the public sentiment? What is the worst-case escalation?
 4. Identify all stakeholder groups and prioritize communication order

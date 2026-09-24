@@ -116,7 +116,7 @@ For brands with common-word names:
 | Task | Frequency | Action |
 |------|-----------|--------|
 | Google Knowledge Panel check | Weekly | Screenshot and compare to previous |
-| AI Mode + AI Overviews brand-fact spot check | Weekly | Ask "What is [Brand]?" in both surfaces; confirm NAP/leadership/description match the profile. Reconcile impressions via `/digital-marketing-pro:gsc-ai-performance` |
+| AI Mode + AI Overviews brand-fact spot check | Weekly | Ask "What is [Brand]?" in both surfaces; confirm NAP/leadership/description match the profile. Reconcile impressions via `/omni-growth-engine:gsc-ai-performance` |
 | Wikidata review | Monthly | Check for unauthorized edits |
 | Cross-platform consistency scan | Quarterly | Full audit checklist across all platforms |
 | Crunchbase/LinkedIn update | After any change | Update immediately when info changes |

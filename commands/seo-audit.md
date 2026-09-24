@@ -11,7 +11,7 @@ Audit a website's SEO health across all major ranking dimensions: technical infr
 
 ## Trigger
 
-User runs `/digital-marketing-pro:seo-audit` or asks for an SEO audit, keyword research, content gap analysis, technical SEO check, or competitor SEO comparison.
+User runs `/omni-growth-engine:seo-audit` or asks for an SEO audit, keyword research, content gap analysis, technical SEO check, or competitor SEO comparison.
 
 ## Inputs
 
@@ -40,7 +40,7 @@ Gather the following from the user. If not provided, ask before proceeding:
 
 **If tools are not connected:**
 - Use web search to research the keyword landscape
-- Note: "For precise volume and difficulty data, connect an SEO tool via `/digital-marketing-pro:connect ahrefs` or `/digital-marketing-pro:connect similarweb`."
+- Note: "For precise volume and difficulty data, connect an SEO tool via `/omni-growth-engine:connect ahrefs` or `/omni-growth-engine:connect similarweb`."
 
 For each keyword opportunity, assess:
 - **Search volume signals** — relative demand (high, medium, low)
@@ -146,12 +146,12 @@ Each action includes: what to do, expected impact (high/medium/low), effort esti
 ## After the Audit
 
 Ask: "Would you like me to:
-- Draft content briefs for the top keyword opportunities? (`/digital-marketing-pro:content-brief`)
-- Create optimized title tags and meta descriptions? (`/digital-marketing-pro:seo-implement`)
-- Run a deeper technical audit? (`/digital-marketing-pro:tech-seo-audit`)
-- Set up keyword ranking monitoring? (`/digital-marketing-pro:rank-monitor`)
-- Check AI answer engine visibility? (`/digital-marketing-pro:aeo-audit`)
-- Compare SEO performance against specific competitors? (`/digital-marketing-pro:competitor-analysis`)"
+- Draft content briefs for the top keyword opportunities? (`/omni-growth-engine:content-brief`)
+- Create optimized title tags and meta descriptions? (`/omni-growth-engine:seo-implement`)
+- Run a deeper technical audit? (`/omni-growth-engine:tech-seo-audit`)
+- Set up keyword ranking monitoring? (`/omni-growth-engine:rank-monitor`)
+- Check AI answer engine visibility? (`/omni-growth-engine:aeo-audit`)
+- Compare SEO performance against specific competitors? (`/omni-growth-engine:competitor-analysis`)"
 
 ## Execution discipline — parallel dispatch
 

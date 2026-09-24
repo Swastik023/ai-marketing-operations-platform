@@ -5,7 +5,7 @@ allowed-tools: Bash Read
 disable-model-invocation: false
 ---
 
-# /digital-marketing-pro:execute-action — Fire an Action Against Real API
+# /omni-growth-engine:execute-action — Fire an Action Against Real API
 
 Resolves an action via `connector_resolver` and (optionally) executes it via `connector_executor` using stdlib `urllib.request`. No third-party deps, no OAuth flow — credentials read from env vars only.
 
@@ -13,7 +13,7 @@ Resolves an action via `connector_resolver` and (optionally) executes it via `co
 
 | Flag combo | What happens |
 |------------|-------------|
-| no flags | Dry-run: returns the resolved manifest (same as `/digital-marketing-pro:doctor --action <id>`) — no HTTP call |
+| no flags | Dry-run: returns the resolved manifest (same as `/omni-growth-engine:doctor --action <id>`) — no HTTP call |
 | `--execute` only | Read ops fire immediately. Write ops are BLOCKED with `execute_blocked_reason`. |
 | `--execute --confirm` | Write ops also fire. Execution is logged to `~/.claude-marketing/brands/{brand}/executions/`. |
 
@@ -44,20 +44,20 @@ For all of these, the **`manifest_ready`** response includes the exact HTTP requ
 
 ```
 # Dry-run: see the manifest for HubSpot list-workflows
-/digital-marketing-pro:execute-action --action audit-workflows --brand acme
+/omni-growth-engine:execute-action --action audit-workflows --brand acme
 
 # Read op: fire HubSpot list-workflows (read-only, no --confirm needed)
 HUBSPOT_PRIVATE_APP_TOKEN=pat-na1-xxx \
-/digital-marketing-pro:execute-action --action audit-workflows --brand acme --execute
+/omni-growth-engine:execute-action --action audit-workflows --brand acme --execute
 
 # Write op: post Slack kickoff message (requires --confirm)
 SLACK_BOT_TOKEN=xoxb-xxx \
-/digital-marketing-pro:execute-action --action internal-kickoff --brand acme \
+/omni-growth-engine:execute-action --action internal-kickoff --brand acme \
   --data '{"plan": {"slack_channel": "#launches", "kickoff_message": "Launch day!"}}' \
   --execute --confirm
 
 # Write op without --confirm: BLOCKED
-/digital-marketing-pro:execute-action --action create-campaign --brand acme --execute
+/omni-growth-engine:execute-action --action create-campaign --brand acme --execute
 # -> execute_blocked_reason: "action create-campaign is a write op; --confirm flag is required"
 ```
 
@@ -76,7 +76,7 @@ SLACK_BOT_TOKEN=xoxb-xxx \
 - [scripts/connector_executor.py](../scripts/connector_executor.py) — the underlying executor
 - [scripts/connector_resolver.py](../scripts/connector_resolver.py) — the resolver
 - [scripts/action-doctor.py](../scripts/action-doctor.py) — readiness diagnostic (no execution)
-- [/digital-marketing-pro:doctor](doctor.md) — per-action readiness map
+- [/omni-growth-engine:doctor](doctor.md) — per-action readiness map
 
 ## Run
 

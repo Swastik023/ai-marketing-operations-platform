@@ -1,11 +1,11 @@
 ---
 name: send-notification
-description: "Send internal team notifications through a connected Slack or Intercom MCP — campaign status updates, performance alerts, and approval requests formatted by urgency tier (info/warning/critical with @here escalation), with inline campaign or approval context, call-to-action blocks, and a 24-hour alert-fatigue check on the target channel. Strictly internal team messaging, never customer outreach, and every send passes a mandatory approval gate with a formatted preview first. Triggers on \"/digital-marketing-pro:send-notification\", \"ping the team that the campaign launched\", \"alert #marketing about the bounce-rate spike\", \"send an approval request to Slack\", \"notify leadership before EOD\". Reads the brand profile and the channel's recent notification history."
+description: "Send internal team notifications through a connected Slack or Intercom MCP — campaign status updates, performance alerts, and approval requests formatted by urgency tier (info/warning/critical with @here escalation), with inline campaign or approval context, call-to-action blocks, and a 24-hour alert-fatigue check on the target channel. Strictly internal team messaging, never customer outreach, and every send passes a mandatory approval gate with a formatted preview first. Triggers on \"/omni-growth-engine:send-notification\", \"ping the team that the campaign launched\", \"alert #marketing about the bounce-rate spike\", \"send an approval request to Slack\", \"notify leadership before EOD\". Reads the brand profile and the channel's recent notification history."
 disable-model-invocation: false
 argument-hint: "[channel or recipient]"
 ---
 
-# /digital-marketing-pro:send-notification
+# /omni-growth-engine:send-notification
 
 ## Purpose
 
@@ -34,7 +34,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Format notification by urgency**: Structure the notification content based on urgency level. For `info`: clean standard message with brand name header and timestamp. For `warning`: highlighted block with caution indicator, metric context with threshold comparison, and deadline if applicable. For `critical`: urgent header with action-required flag, @here/@channel mention (Slack) or highest priority flag (Intercom), red indicator, and response deadline. All levels include the brand name, notification type label, and formatted timestamp.
 3. **Attach related context**: If a campaign ID, approval ID, metric snapshot, or dashboard link was provided, resolve it to a human-readable summary — campaign name with current status and key metrics, approval details with pending actions and deadline, or metric values with trend indicators and threshold comparisons. Embed this context directly in the notification body so recipients have full situational awareness without leaving the messaging platform.
 4. **Format follow-up action**: If a follow-up action was specified, render it as a distinct call-to-action block — visually separated from the notification body with clear action text, owner (mentioned team member or channel), and deadline if specified. In Slack, use a section block with button-style formatting. In Intercom, use a note with action assignment.

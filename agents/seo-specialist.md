@@ -38,7 +38,7 @@ Structure SEO recommendations as: Priority (Quick Win / Strategic / Fill-In), Op
 
 ## Tools & Scripts
 
-- **keyword_cluster.py** — SERP-overlap keyword clusterer (used by /digital-marketing-pro:keyword-cluster)
+- **keyword_cluster.py** — SERP-overlap keyword clusterer (used by /omni-growth-engine:keyword-cluster)
   `python "${CLAUDE_PLUGIN_ROOT}/scripts/keyword_cluster.py" --keywords keywords.csv --serps serps.json --overlap 0.4`
   When: During keyword research — group keywords into pillar+spoke clusters and map intent
 
@@ -118,12 +118,12 @@ Load when relevant:
 
 ## Additional SEO Skills (invoke when relevant)
 
-- **programmatic-seo** (`/digital-marketing-pro:programmatic-seo`) — Programmatic SEO at scale: data source assessment, template engines, URL patterns, quality gates (WARNING at 100 pages, HARD STOP at 500), thin content safeguards, index bloat prevention, Scaled Content Abuse policy enforcement
-- **competitor-pages** (`/digital-marketing-pro:competitor-pages`) — "X vs Y" comparison pages, "alternatives to X" pages, roundup pages, feature matrices with Product/SoftwareApplication/ItemList schema and conversion-optimized layouts
-- **image-seo-audit** (`/digital-marketing-pro:image-seo-audit`) — Dedicated image optimization: alt text, file sizes (tiered thresholds), WebP/AVIF, responsive images, lazy loading, fetchpriority, CLS prevention, CDN usage
-- **page-seo-analysis** (`/digital-marketing-pro:page-seo-analysis`) — Deep single-page SEO analysis: all ranking dimensions for one URL, with schema deprecation checking and competitor comparison
-- **sitemap-manager** (`/digital-marketing-pro:sitemap-manager`) — XML sitemap analysis and generation with industry templates (SaaS, ecommerce, local, publisher, agency)
-- **seo-plan** (`/digital-marketing-pro:seo-plan`) — Comprehensive SEO strategy with industry-specific templates, competitive analysis, content roadmap, and phased 4-phase implementation plan
+- **programmatic-seo** (`/omni-growth-engine:programmatic-seo`) — Programmatic SEO at scale: data source assessment, template engines, URL patterns, quality gates (WARNING at 100 pages, HARD STOP at 500), thin content safeguards, index bloat prevention, Scaled Content Abuse policy enforcement
+- **competitor-pages** (`/omni-growth-engine:competitor-pages`) — "X vs Y" comparison pages, "alternatives to X" pages, roundup pages, feature matrices with Product/SoftwareApplication/ItemList schema and conversion-optimized layouts
+- **image-seo-audit** (`/omni-growth-engine:image-seo-audit`) — Dedicated image optimization: alt text, file sizes (tiered thresholds), WebP/AVIF, responsive images, lazy loading, fetchpriority, CLS prevention, CDN usage
+- **page-seo-analysis** (`/omni-growth-engine:page-seo-analysis`) — Deep single-page SEO analysis: all ranking dimensions for one URL, with schema deprecation checking and competitor comparison
+- **sitemap-manager** (`/omni-growth-engine:sitemap-manager`) — XML sitemap analysis and generation with industry templates (SaaS, ecommerce, local, publisher, agency)
+- **seo-plan** (`/omni-growth-engine:seo-plan`) — Comprehensive SEO strategy with industry-specific templates, competitive analysis, content roadmap, and phased 4-phase implementation plan
 
 ## Cross-Agent Collaboration
 

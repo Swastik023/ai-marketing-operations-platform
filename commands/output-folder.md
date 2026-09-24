@@ -10,13 +10,13 @@ Show the user where DMP actually saves the finished workflow deliverables, and (
 
 ## Trigger
 
-User runs `/digital-marketing-pro:output-folder`, or asks any variant of "where are my engagement files", "I can't find the campaign plan deliverables", "open output folder", "show me where it saved everything".
+User runs `/omni-growth-engine:output-folder`, or asks any variant of "where are my engagement files", "I can't find the campaign plan deliverables", "open output folder", "show me where it saved everything".
 
 ## Background
 
 DMP writes two copies of every workflow artifact:
 
-1. **Internal tracking copy** at `~/.claude-marketing/brands/{brand}/output/{workflow}/{run_id}/...` (or `$CLAUDE_PLUGIN_DATA/digital-marketing-pro/brands/{brand}/output/...` when that env var is set). This is the system-of-record for `/digital-marketing-pro:status`, the checkpoint manager, audit history. It lives inside a dotfolder that Windows hides by default.
+1. **Internal tracking copy** at `~/.claude-marketing/brands/{brand}/output/{workflow}/{run_id}/...` (or `$CLAUDE_PLUGIN_DATA/omni-growth-engine/brands/{brand}/output/...` when that env var is set). This is the system-of-record for `/omni-growth-engine:status`, the checkpoint manager, audit history. It lives inside a dotfolder that Windows hides by default.
 2. **User-visible published copy** at `~/Documents/DigitalMarketingPro/{brand}/{workflow}/{YYYY-MM}/{filename}` (or wherever `$DIGITAL_MARKETING_PRO_PUBLISH_DIR` points). This is the one to surface.
 
 The published copy was added specifically because users running the 12-Part engagement workflow couldn't find the 50-60 deliverable files it produces. They were saving — just somewhere Explorer hid by default.
@@ -30,7 +30,7 @@ The published-output directory is:
 - `$DIGITAL_MARKETING_PRO_PUBLISH_DIR/{brand}/[{workflow}/]` if the env var is set, or
 - `~/Documents/DigitalMarketingPro/{brand}/[{workflow}/]` otherwise.
 
-Default to the active brand if no argument was provided. If neither is available, prompt: "Which brand's output folder? Run `/digital-marketing-pro:output-folder <brand>` or set up a brand with `/digital-marketing-pro:brand-setup`."
+Default to the active brand if no argument was provided. If neither is available, prompt: "Which brand's output folder? Run `/omni-growth-engine:output-folder <brand>` or set up a brand with `/omni-growth-engine:brand-setup`."
 
 If the user supplied a workflow argument (e.g. `engagement`, `campaign-plan`, `seo-audit`), drill down to that subfolder.
 
@@ -79,10 +79,10 @@ If the open fails (headless environment, no associated handler), don't error —
 The output folder doesn't exist yet — that means no workflow has
 finished and published for "{brand}" yet. Run a workflow first:
 
-  /digital-marketing-pro:engagement          # full 12-Part Strategy Flow
-  /digital-marketing-pro:campaign-plan       # multi-channel campaign
-  /digital-marketing-pro:seo-audit           # SEO + AI visibility audit
-  /digital-marketing-pro:competitor-analysis # deep-dive
+  /omni-growth-engine:engagement          # full 12-Part Strategy Flow
+  /omni-growth-engine:campaign-plan       # multi-channel campaign
+  /omni-growth-engine:seo-audit           # SEO + AI visibility audit
+  /omni-growth-engine:competitor-analysis # deep-dive
 
 Then come back here. Expected location after the first published run:
   {visible_publish_dir}
@@ -99,7 +99,7 @@ Workspace-wide / agency-wide override:
 export DIGITAL_MARKETING_PRO_PUBLISH_DIR="$HOME/Dropbox/Marketing/DMP-Outputs"
 
 # Per-run
-DIGITAL_MARKETING_PRO_PUBLISH_DIR="/mnt/team-share/DMP" /digital-marketing-pro:engagement ...
+DIGITAL_MARKETING_PRO_PUBLISH_DIR="/mnt/team-share/DMP" /omni-growth-engine:engagement ...
 ```
 
 The internal tracking copy (under `~/.claude-marketing/`) is unchanged — that stays as DMP's system-of-record. The env var only affects the visible publish copy.

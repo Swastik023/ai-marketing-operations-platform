@@ -2,7 +2,7 @@
 """
 _common.py
 ==========
-Shared helpers for every Digital Marketing Pro Python script. Stdlib only.
+Shared helpers for every OmniGrowth Engine Python script. Stdlib only.
 
 Why this exists: the tracker/checkpoint/state scripts each carried private
 copies of workspace resolution, slugification, JSON persistence, the
@@ -17,7 +17,7 @@ sys.path defensively.
 
 Path policy (DMP canon):
   * workspace_root() - $CLAUDE_MARKETING_HOME if set (used by tests); else
-    $CLAUDE_PLUGIN_DATA/digital-marketing-pro if $CLAUDE_PLUGIN_DATA is set AND
+    $CLAUDE_PLUGIN_DATA/omni-growth-engine if $CLAUDE_PLUGIN_DATA is set AND
     that directory exists; else ~/.claude-marketing.
   * brands_root()    - workspace_root()/brands   (the `brands/` segment is
     canonical for DMP).
@@ -39,7 +39,7 @@ from pathlib import Path
 # ── Constants ───────────────────────────────────────────────────────
 
 BRAND_NOT_FOUND = (
-    "Brand '{slug}' not found. Run /digital-marketing-pro:brand-setup first."
+    "Brand '{slug}' not found. Run /omni-growth-engine:brand-setup first."
 )
 
 # Canonical AI-visibility surfaces (single source of truth for the SEO/AEO/GEO
@@ -81,11 +81,11 @@ def now_iso() -> str:
 # ── Paths ───────────────────────────────────────────────────────────
 
 def workspace_root() -> Path:
-    """Root of Digital Marketing Pro persistent data.
+    """Root of OmniGrowth Engine persistent data.
 
     Resolution order:
       1. $CLAUDE_MARKETING_HOME (explicit override; used by tests)
-      2. $CLAUDE_PLUGIN_DATA/digital-marketing-pro if $CLAUDE_PLUGIN_DATA is
+      2. $CLAUDE_PLUGIN_DATA/omni-growth-engine if $CLAUDE_PLUGIN_DATA is
          set (non-empty) AND that directory exists; $PLUGIN_DATA (the Agent
          Plugins 1.0 standard name — non-Claude hosts set only this) is the
          fallback spelling
@@ -98,7 +98,7 @@ def workspace_root() -> Path:
     if plugin_data:  # empty string must NOT resolve to Path(".")
         base = Path(plugin_data).expanduser()
         if base.exists():
-            return base / "digital-marketing-pro"
+            return base / "omni-growth-engine"
     return Path.home() / ".claude-marketing"
 
 

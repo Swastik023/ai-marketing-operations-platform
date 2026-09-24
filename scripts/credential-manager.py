@@ -219,7 +219,7 @@ def delete_profile(brand_slug):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Credential profile management for Digital Marketing Pro"
+        description="Credential profile management for OmniGrowth Engine"
     )
     parser.add_argument(
         "--action", required=True,

@@ -1,6 +1,6 @@
 ---
 name: paid-advertising
-description: "Plan, structure, and audit paid media campaigns across Google, Meta, LinkedIn, TikTok, Microsoft, programmatic, retail media, native, and audio — campaign hierarchy, audience architecture, bid strategy, budget allocation and pacing, creative strategy, and current platform API changes (Google Ads v24/v25, Meta v25). Produces campaign plans, platform audit scorecards, budget models, creative briefs, and optimization playbooks. Triggers on \"/digital-marketing-pro:paid-advertising\", \"plan a Google Ads campaign\", \"audit our Meta account\", \"which bid strategy should we use\", \"allocate our paid media budget\". Reads the brand profile, guidelines, and campaign history via campaign-tracker.py; plans and recommends only — launching is handled by /digital-marketing-pro:launch-campaign."
+description: "Plan, structure, and audit paid media campaigns across Google, Meta, LinkedIn, TikTok, Microsoft, programmatic, retail media, native, and audio — campaign hierarchy, audience architecture, bid strategy, budget allocation and pacing, creative strategy, and current platform API changes (Google Ads v24/v25, Meta v25). Produces campaign plans, platform audit scorecards, budget models, creative briefs, and optimization playbooks. Triggers on \"/omni-growth-engine:paid-advertising\", \"plan a Google Ads campaign\", \"audit our Meta account\", \"which bid strategy should we use\", \"allocate our paid media budget\". Reads the brand profile, guidelines, and campaign history via campaign-tracker.py; plans and recommends only — launching is handled by /omni-growth-engine:launch-campaign."
 ---
 
 # Paid Advertising
@@ -49,7 +49,7 @@ Before producing any marketing output from this module:
 5. **Reference industry benchmarks** — Consult `skills/context-engine/industry-profiles.md` for the brand's industry
 6. **Use platform specs** — Reference `skills/context-engine/platform-specs.md` for character limits and format requirements
 7. **Check campaign history** — Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-tracker.py" --brand {slug} --action list-campaigns` before planning new work
-8. **If no brand exists**, say: "No brand profile found. Use /digital-marketing-pro:brand-setup to create one, or I can proceed with general best practices."
+8. **If no brand exists**, say: "No brand profile found. Use /omni-growth-engine:brand-setup to create one, or I can proceed with general best practices."
 9. **Check brand guidelines** — If `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` exists, load and enforce: `restrictions.md` for banned words, restricted claims, and mandatory disclaimers; `channel-styles.md` for channel-specific tone overrides (may differ from base voice); `messaging.md` for approved key messages, taglines, and positioning language; `voice-and-tone.md` for detailed voice rules beyond the 4 numeric scores. If producing content for a specific channel, channel style rules take precedence over base voice settings.
 
 Do not ask the user for information that already exists in their brand profile.

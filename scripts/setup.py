@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Digital Marketing Pro — Setup & Dependency Manager
+OmniGrowth Engine — Setup & Dependency Manager
 
 Handles:
 - First-run dependency installation (lite or full mode)
@@ -75,7 +75,7 @@ def check_brand():
     """Check if an active brand is configured."""
     if not ACTIVE_BRAND_FILE.exists():
         print("NO_BRAND: No active brand configured.")
-        print("Run /digital-marketing-pro:brand-setup to create a brand profile.")
+        print("Run /omni-growth-engine:brand-setup to create a brand profile.")
         return False
 
     try:
@@ -100,7 +100,7 @@ def print_brand_summary():
     """Print rich brand context summary for SessionStart injection."""
     if not ACTIVE_BRAND_FILE.exists():
         print("=== DIGITAL MARKETING PRO ===")
-        print("No active brand. Run /digital-marketing-pro:brand-setup to create one.")
+        print("No active brand. Run /omni-growth-engine:brand-setup to create one.")
         scripts_dir = Path(__file__).resolve().parent
         print(f"Scripts: {scripts_dir}")
         print(f"Plugin root: {scripts_dir.parent}")
@@ -114,7 +114,7 @@ def print_brand_summary():
 
         if not profile_path.exists():
             print("=== DIGITAL MARKETING PRO ===")
-            print(f"BROKEN_BRAND: '{slug}' profile not found. Run /digital-marketing-pro:brand-setup.")
+            print(f"BROKEN_BRAND: '{slug}' profile not found. Run /omni-growth-engine:brand-setup.")
             scripts_dir = Path(__file__).resolve().parent
             print(f"Scripts: {scripts_dir}")
             print(f"Plugin root: {scripts_dir.parent}")
@@ -538,7 +538,7 @@ def migrate_schema():
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Digital Marketing Pro — Setup")
+    parser = argparse.ArgumentParser(description="OmniGrowth Engine — Setup")
     parser.add_argument("--check-deps", action="store_true", help="Check dependencies")
     parser.add_argument("--check-brand", action="store_true", help="Check active brand")
     parser.add_argument("--install", choices=["lite", "full"], help="Install dependencies")

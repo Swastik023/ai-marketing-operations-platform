@@ -2,7 +2,7 @@
 """
 campaign-tracker.py
 ===================
-Persistent campaign data storage and retrieval for Digital Marketing Pro.
+Persistent campaign data storage and retrieval for OmniGrowth Engine.
 
 Stores campaign plans, performance snapshots, and learnings in the brand's
 ~/.claude-marketing/brands/{slug}/ directory so the plugin can reference
@@ -284,7 +284,7 @@ def get_violations(slug, category=None, severity=None, limit=50):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Campaign data persistence for Digital Marketing Pro")
+    parser = argparse.ArgumentParser(description="Campaign data persistence for OmniGrowth Engine")
     parser.add_argument("--brand", required=True, help="Brand slug")
     parser.add_argument("--action", required=True,
                         choices=["save-campaign", "list-campaigns", "get-campaign",

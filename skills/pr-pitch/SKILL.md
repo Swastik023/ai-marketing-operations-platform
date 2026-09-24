@@ -1,10 +1,10 @@
 ---
 name: pr-pitch
-description: "Build a complete media pitch package: an email-ready core pitch with subject line options, 3-5 outlet-specific variations, a target media list with journalist beats and approach notes, an outreach timeline, plus press release draft, fact sheet, and quote bank. Also crafts responses for journalist request platforms (Qwoted, Featured, Source of Sources). Triggers on \"/digital-marketing-pro:pr-pitch\", \"pitch this story to journalists\", \"build a media list for our launch\", \"respond to this journalist request\", \"write a press release and pitch\". Reads the brand profile, guidelines, and custom templates for voice and compliance; produces the materials only — it does not send any outreach."
+description: "Build a complete media pitch package: an email-ready core pitch with subject line options, 3-5 outlet-specific variations, a target media list with journalist beats and approach notes, an outreach timeline, plus press release draft, fact sheet, and quote bank. Also crafts responses for journalist request platforms (Qwoted, Featured, Source of Sources). Triggers on \"/omni-growth-engine:pr-pitch\", \"pitch this story to journalists\", \"build a media list for our launch\", \"respond to this journalist request\", \"write a press release and pitch\". Reads the brand profile, guidelines, and custom templates for voice and compliance; produces the materials only — it does not send any outreach."
 argument-hint: "[topic or news-hook]"
 ---
 
-# /digital-marketing-pro:pr-pitch
+# /omni-growth-engine:pr-pitch
 
 ## Purpose
 
@@ -23,7 +23,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. Identify the core news hook and refine the angle for maximum editorial appeal
 3. Craft pitch templates tailored to outlet type (national, trade, broadcast, podcast, newsletter)
 4. Build a target media list with journalist names, beats, outlets, and contact approach

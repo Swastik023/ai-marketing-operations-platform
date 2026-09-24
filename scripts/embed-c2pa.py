@@ -216,7 +216,7 @@ def generate_self_signed_cert(tmp_dir):
 
     subject = issuer = x509.Name([
         x509.NameAttribute(NameOID.COMMON_NAME, "DMP Dev Self-Signed C2PA"),
-        x509.NameAttribute(NameOID.ORGANIZATION_NAME, "Digital Marketing Pro"),
+        x509.NameAttribute(NameOID.ORGANIZATION_NAME, "OmniGrowth Engine"),
         x509.NameAttribute(NameOID.COUNTRY_NAME, "US"),
     ])
 

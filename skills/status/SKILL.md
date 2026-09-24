@@ -1,6 +1,6 @@
 ---
 name: status
-description: "Print a read-only status snapshot of the active brand via scripts/dm-status.py: profile summary, engagements with current part and update age, last five insights, recent compliance violations, and Python dependency mode — with --quiet, --json, --section, and --brand variants. Triggers on \"/digital-marketing-pro:status\", \"what's my DMP status\", \"what brand am I on\", \"show engagement status\", \"status snapshot\". Never modifies state: switching brands is /digital-marketing-pro:switch-brand, advancing engagements is /digital-marketing-pro:engagement, connector status is /digital-marketing-pro:integrations, and content checks are /digital-marketing-pro:check."
+description: "Print a read-only status snapshot of the active brand via scripts/dm-status.py: profile summary, engagements with current part and update age, last five insights, recent compliance violations, and Python dependency mode — with --quiet, --json, --section, and --brand variants. Triggers on \"/omni-growth-engine:status\", \"what's my DMP status\", \"what brand am I on\", \"show engagement status\", \"status snapshot\". Never modifies state: switching brands is /omni-growth-engine:switch-brand, advancing engagements is /omni-growth-engine:engagement, connector status is /omni-growth-engine:integrations, and content checks are /omni-growth-engine:check."
 user-invocable: true
 triggers:
   - what's my dmp status
@@ -14,15 +14,15 @@ triggers:
 allowed-tools: Read Bash Glob Grep
 ---
 
-# /digital-marketing-pro:status — Unified Status Snapshot
+# /omni-growth-engine:status — Unified Status Snapshot
 
-This skill prints a complete status snapshot for the active Digital Marketing Pro brand: profile summary, all engagements with their current part and update age, recent insights, recent compliance violations, and Python dependency mode.
+This skill prints a complete status snapshot for the active OmniGrowth Engine brand: profile summary, all engagements with their current part and update age, recent insights, recent compliance violations, and Python dependency mode.
 
 ## Context efficiency
 
-Heavy skill. **Grep before Read** any referenced file, then `Read` only matched ranges with `offset` + `limit`. List the brand's workspace at `~/.claude-marketing/brands/{slug}/` (or `$CLAUDE_PLUGIN_DATA/digital-marketing-pro/brands/{slug}/` when that env var is set) before opening files. On re-invocation mid-session, skip files already in context.
+Heavy skill. **Grep before Read** any referenced file, then `Read` only matched ranges with `offset` + `limit`. List the brand's workspace at `~/.claude-marketing/brands/{slug}/` (or `$CLAUDE_PLUGIN_DATA/omni-growth-engine/brands/{slug}/` when that env var is set) before opening files. On re-invocation mid-session, skip files already in context.
 
-An earlier version ran a SessionStart hook that executed `setup.py` at every Claude Code session start to print a 15-line brand summary banner. That hook was removed because it fired globally across every project regardless of whether the user was doing marketing work. `/digital-marketing-pro:status` is the explicit on-demand replacement — a richer view, when you ask for it.
+An earlier version ran a SessionStart hook that executed `setup.py` at every Claude Code session start to print a 15-line brand summary banner. That hook was removed because it fired globally across every project regardless of whether the user was doing marketing work. `/omni-growth-engine:status` is the explicit on-demand replacement — a richer view, when you ask for it.
 
 ## What it shows
 
@@ -41,7 +41,7 @@ The status snapshot has 5 sections:
 ### Default
 
 ```
-/digital-marketing-pro:status
+/omni-growth-engine:status
 ```
 
 Full snapshot for the active brand. Reads from `~/.claude-marketing/brands/_active-brand.json` to find the active slug.
@@ -49,7 +49,7 @@ Full snapshot for the active brand. Reads from `~/.claude-marketing/brands/_acti
 ### Specific brand
 
 ```
-/digital-marketing-pro:status --brand acme-corp
+/omni-growth-engine:status --brand acme-corp
 ```
 
 Snapshot for a named brand (does not change the active brand pointer).
@@ -57,7 +57,7 @@ Snapshot for a named brand (does not change the active brand pointer).
 ### Compact one-liner
 
 ```
-/digital-marketing-pro:status --quiet
+/omni-growth-engine:status --quiet
 ```
 
 Output:
@@ -69,7 +69,7 @@ DMP STATUS | Acme Corp | engagements: 2 active / 3 total | deps: lite
 ### JSON output
 
 ```
-/digital-marketing-pro:status --json
+/omni-growth-engine:status --json
 ```
 
 Machine-readable JSON for downstream skill consumption or scripting.
@@ -77,18 +77,18 @@ Machine-readable JSON for downstream skill consumption or scripting.
 ### Single section
 
 ```
-/digital-marketing-pro:status --section brand
-/digital-marketing-pro:status --section engagements
-/digital-marketing-pro:status --section insights
-/digital-marketing-pro:status --section compliance
-/digital-marketing-pro:status --section deps
+/omni-growth-engine:status --section brand
+/omni-growth-engine:status --section engagements
+/omni-growth-engine:status --section insights
+/omni-growth-engine:status --section compliance
+/omni-growth-engine:status --section deps
 ```
 
 Print only the requested section. Useful when you only need one piece of state.
 
 ## How the skill operates
 
-1. **Resolve target brand.** If `--brand` provided, use it. Otherwise read `~/.claude-marketing/brands/_active-brand.json` for the active slug. If no active brand, instruct the user to run `/digital-marketing-pro:brand-setup` first.
+1. **Resolve target brand.** If `--brand` provided, use it. Otherwise read `~/.claude-marketing/brands/_active-brand.json` for the active slug. If no active brand, instruct the user to run `/omni-growth-engine:brand-setup` first.
 
 2. **Execute the script.**
    ```
@@ -104,7 +104,7 @@ Print only the requested section. Useful when you only need one piece of state.
 ### Example 1: Default snapshot
 
 ```
-User: /digital-marketing-pro:status
+User: /omni-growth-engine:status
 
 Skill runs: python "${CLAUDE_PLUGIN_ROOT}/scripts/dm-status.py"
 Output:
@@ -166,8 +166,8 @@ PYTHON DEPENDENCIES
   Available:    nltk, textstat, requests, beautifulsoup4, qrcode, Pillow
 
 ============================================================
-Tip: /digital-marketing-pro:status --json for machine-readable output
-Tip: /digital-marketing-pro:status --quiet for one-line summary
+Tip: /omni-growth-engine:status --json for machine-readable output
+Tip: /omni-growth-engine:status --quiet for one-line summary
 ============================================================
 
 Skill highlights:
@@ -178,7 +178,7 @@ Skill highlights:
 ### Example 2: Quick check during a session
 
 ```
-User: /digital-marketing-pro:status --quiet
+User: /omni-growth-engine:status --quiet
 
 Output: DMP STATUS | Acme Corp | engagements: 2 active / 2 total | deps: full
 ```
@@ -186,7 +186,7 @@ Output: DMP STATUS | Acme Corp | engagements: 2 active / 2 total | deps: full
 ### Example 3: JSON for scripting
 
 ```
-User: /digital-marketing-pro:status --json
+User: /omni-growth-engine:status --json
 
 Output: {valid JSON snapshot — pipeable to jq, parseable by other skills}
 ```
@@ -194,12 +194,12 @@ Output: {valid JSON snapshot — pipeable to jq, parseable by other skills}
 ### Example 4: When no brand is set up
 
 ```
-User: /digital-marketing-pro:status
+User: /omni-growth-engine:status
 
 Output:
 No active brand found.
-Pass --brand <slug> explicitly, or run /digital-marketing-pro:brand-setup to create one.
-Workspace: ~/.claude-marketing      # or $CLAUDE_PLUGIN_DATA/digital-marketing-pro if set
+Pass --brand <slug> explicitly, or run /omni-growth-engine:brand-setup to create one.
+Workspace: ~/.claude-marketing      # or $CLAUDE_PLUGIN_DATA/omni-growth-engine if set
 ```
 
 ## Behaviour rules
@@ -207,26 +207,26 @@ Workspace: ~/.claude-marketing      # or $CLAUDE_PLUGIN_DATA/digital-marketing-p
 1. **Never modify state.** Read-only operation. Never write to brand profile, engagement state, or any persistent file.
 2. **Never error silently.** If a brand profile is missing or corrupt, the script reports the specific error in the output.
 3. **Surface health indicators after the snapshot.** If JSON output is requested or if the skill is parsing for downstream use, highlight: engagements with no update in 14+ days, pending re-run decisions, recent compliance violations, missing Python deps.
-4. **Respect CLAUDE_PLUGIN_DATA.** When the env var is set, the script reads from `$CLAUDE_PLUGIN_DATA/digital-marketing-pro/...` instead of `~/.claude-marketing/...`.
+4. **Respect CLAUDE_PLUGIN_DATA.** When the env var is set, the script reads from `$CLAUDE_PLUGIN_DATA/omni-growth-engine/...` instead of `~/.claude-marketing/...`.
 5. **Fast.** The script reads only state files; never invokes other scripts; never makes network calls.
 
 ## What this skill does NOT do
 
 - Does not modify brand profile, engagement state, or any persistent file
 - Does not save insights, compliance violations, or any data
-- Does not trigger eval scripts (use `/digital-marketing-pro:check` for that)
-- Does not advance engagement parts (use `/digital-marketing-pro:engagement next` for that)
-- Does not switch active brand (use `/digital-marketing-pro:switch-brand` for that)
+- Does not trigger eval scripts (use `/omni-growth-engine:check` for that)
+- Does not advance engagement parts (use `/omni-growth-engine:engagement next` for that)
+- Does not switch active brand (use `/omni-growth-engine:switch-brand` for that)
 
 ## Related skills + commands
 
-- `/digital-marketing-pro:brand-setup` — create or update a brand profile
-- `/digital-marketing-pro:switch-brand` — change the active brand
-- `/digital-marketing-pro:engagement status` — engagement-specific deep status
-- `/digital-marketing-pro:check` — pre-publish quality gate on content
-- `/digital-marketing-pro:integrations` — connector status (separate from /digital-marketing-pro:status)
+- `/omni-growth-engine:brand-setup` — create or update a brand profile
+- `/omni-growth-engine:switch-brand` — change the active brand
+- `/omni-growth-engine:engagement status` — engagement-specific deep status
+- `/omni-growth-engine:check` — pre-publish quality gate on content
+- `/omni-growth-engine:integrations` — connector status (separate from /omni-growth-engine:status)
 
 ## Related references
 
 - `scripts/dm-status.py` — the underlying script
-- `docs/getting-started.md` — context on what was lost when the SessionStart hook was removed and why /digital-marketing-pro:status replaced it
+- `docs/getting-started.md` — context on what was lost when the SessionStart hook was removed and why /omni-growth-engine:status replaced it

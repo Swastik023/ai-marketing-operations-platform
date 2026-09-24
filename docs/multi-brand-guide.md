@@ -1,6 +1,6 @@
 # Multi-Brand & Agency Guide
 
-A guide to managing multiple brands, corporate portfolios, and agency client rosters with the Digital Marketing Pro plugin for Claude Code.
+A guide to managing multiple brands, corporate portfolios, and agency client rosters with the OmniGrowth Engine plugin for Claude Code.
 
 ---
 
@@ -114,7 +114,7 @@ You are the marketing coordinator at P&G, responsible for Tide (laundry), Pamper
 #### Setting Up the Brands
 
 ```
-You: /digital-marketing-pro:brand-setup
+You: /omni-growth-engine:brand-setup
 
 Brand name: Tide
 Elevator pitch: America's #1 laundry detergent, delivering powerful clean in every load.
@@ -124,7 +124,7 @@ Tone keywords: energetic, confident, bold, clean, powerful
 Avoid: gentle, delicate, luxury | Prefer: powerful, clean, fresh, tackle, brilliant
 Channels: TV, Instagram, TikTok | Competitors: Persil, All, Arm & Hammer
 
-You: /digital-marketing-pro:brand-setup
+You: /omni-growth-engine:brand-setup
 
 Brand name: Pampers
 Elevator pitch: Helps babies and toddlers sleep, play, and grow.
@@ -134,7 +134,7 @@ Tone keywords: warm, nurturing, trustworthy, gentle, reassuring
 Avoid: cheap, aggressive, extreme | Prefer: gentle, soft, comfort, protection, care
 Channels: Instagram, Pinterest, parenting blogs | Competitors: Huggies, Luvs, Honest Company
 
-You: /digital-marketing-pro:brand-setup
+You: /omni-growth-engine:brand-setup
 
 Brand name: Gillette
 Elevator pitch: The world's leading men's grooming brand.
@@ -154,13 +154,13 @@ Other examples: `unilever-dove`, `nestle-nespresso`, `loreal-maybelline`.
 #### Switching Brands and Seeing the Difference
 
 ```
-You: /digital-marketing-pro:switch-brand pg-tide
+You: /omni-growth-engine:switch-brand pg-tide
 You: Write a TikTok campaign concept for our new detergent pods
 
 (Output uses Tide's energetic/bold voice, CPG compliance, TikTok 4000-char specs,
  references Persil and Arm & Hammer as competitive context)
 
-You: /digital-marketing-pro:switch-brand pg-pampers
+You: /omni-growth-engine:switch-brand pg-pampers
 You: Write a TikTok campaign concept for our new overnight diapers
 
 (Output uses Pampers' warm/nurturing voice, childcare advertising compliance,
@@ -192,17 +192,17 @@ For campaigns that span multiple brands, use this workflow:
 2. **Execute per brand.** Switch to each brand and create brand-specific deliverables:
 
 ```
-You: /digital-marketing-pro:switch-brand pg-corporate
-You: /digital-marketing-pro:campaign-plan
+You: /omni-growth-engine:switch-brand pg-corporate
+You: /omni-growth-engine:campaign-plan
 (Outline the multi-brand holiday campaign: timeline, shared themes, budget split)
 
-You: /digital-marketing-pro:switch-brand pg-tide
+You: /omni-growth-engine:switch-brand pg-tide
 You: Create Tide-specific holiday assets. Focus on Instagram and TikTok.
 
-You: /digital-marketing-pro:switch-brand pg-pampers
+You: /omni-growth-engine:switch-brand pg-pampers
 You: Create Pampers-specific holiday assets. Focus on Instagram and Pinterest.
 
-You: /digital-marketing-pro:switch-brand pg-gillette
+You: /omni-growth-engine:switch-brand pg-gillette
 You: Create Gillette-specific holiday assets. Focus on YouTube and Instagram.
 ```
 
@@ -231,14 +231,14 @@ This pattern is for marketing agencies managing multiple clients with distinct i
 Use the 17-question full setup for agency clients. The deeper the profile, the better every output.
 
 ```
-You: /digital-marketing-pro:brand-setup
+You: /omni-growth-engine:brand-setup
 (Answer all 17 questions from the client kickoff meeting and brand guidelines)
 ```
 
 **Step 2: Import competitor data**
 
 ```
-You: /digital-marketing-pro:competitor-analysis
+You: /omni-growth-engine:competitor-analysis
 ```
 
 **Step 3: Set channel handles**
@@ -251,14 +251,14 @@ You: Update the brand profile with these handles:
 **Step 4: Create the first campaign plan**
 
 ```
-You: /digital-marketing-pro:campaign-plan
+You: /omni-growth-engine:campaign-plan
 ```
 
 With the profile complete, every future request for this client uses their full context automatically.
 
 ### A Day in the Life
 
-**9:00 AM -- Session starts; the last active client is still selected. Run `/digital-marketing-pro:status` for its summary**
+**9:00 AM -- Session starts; the last active client is still selected. Run `/omni-growth-engine:status` for its summary**
 
 ```
 === DIGITAL MARKETING PRO ===
@@ -282,7 +282,7 @@ You: Draft this week's Instagram posts for Artisan Bakery
 (Warm, community-focused Instagram content with food photography tips,
  local event tie-ins. Uses "artisanal," "handcrafted," "neighborhood.")
 
-You: /digital-marketing-pro:switch-brand techflow-saas
+You: /omni-growth-engine:switch-brand techflow-saas
 
 Plugin: Switched to TechFlow SaaS (techflow-saas).
         Industry: Technology. Business model: B2B SaaS.
@@ -302,8 +302,8 @@ You: Write a LinkedIn campaign for our Q2 product launch targeting enterprise CT
 **10:00 AM -- Switch to the hotel client**
 
 ```
-You: /digital-marketing-pro:switch-brand luxury-hotel-group
-You: /digital-marketing-pro:email-sequence
+You: /omni-growth-engine:switch-brand luxury-hotel-group
+You: /omni-growth-engine:email-sequence
 You: Design a 5-email welcome sequence for new loyalty program members
 
 (Elegant, experiential email copy with hospitality benchmarks, luxury voice.
@@ -334,7 +334,7 @@ Brand profiles can be shared across team members:
 ### Viewing All Brands
 
 ```
-You: /digital-marketing-pro:switch-brand
+You: /omni-growth-engine:switch-brand
 
 Output:
   BRANDS:
@@ -351,7 +351,7 @@ The asterisk (`*`) marks the currently active brand.
 
 **Slash command:**
 ```
-You: /digital-marketing-pro:switch-brand techflow-saas
+You: /omni-growth-engine:switch-brand techflow-saas
 ```
 
 **Natural language:**
@@ -363,7 +363,7 @@ The plugin supports fuzzy matching -- partial matches on slug or brand name will
 
 ### Updating a Brand
 
-Run `/digital-marketing-pro:brand-setup` while a brand is active, and the plugin will ask what you want to update rather than starting from scratch. You can also update fields directly:
+Run `/omni-growth-engine:brand-setup` while a brand is active, and the plugin will ask what you want to update rather than starting from scratch. You can also update fields directly:
 
 ```
 You: Update the Artisan Bakery profile: add TikTok to active channels
@@ -403,7 +403,7 @@ Avoid special characters, spaces, and uppercase in slugs.
 
 **Use quick setup (5 questions)** for short-term projects, prospect testing, personal experiments, and situations where you need to start immediately.
 
-You can always upgrade from quick to full by running `/digital-marketing-pro:brand-setup` again.
+You can always upgrade from quick to full by running `/omni-growth-engine:brand-setup` again.
 
 ### Voice Dimension Reference
 
@@ -437,9 +437,9 @@ You can always upgrade from quick to full by running `/digital-marketing-pro:bra
 
 **Monthly:** Update KPIs and performance data. Refine `avoid_words` and `prefer_words`. Add new voice samples.
 
-**Quarterly:** Update competitor lists and re-run `/digital-marketing-pro:competitor-analysis`. Review target markets. Check compliance for regulatory changes.
+**Quarterly:** Update competitor lists and re-run `/omni-growth-engine:competitor-analysis`. Review target markets. Check compliance for regulatory changes.
 
-**Annually:** Full `/digital-marketing-pro:brand-setup` refresh for each active brand. Archive churned clients. Review portfolio consistency.
+**Annually:** Full `/omni-growth-engine:brand-setup` refresh for each active brand. Archive churned clients. Review portfolio consistency.
 
 ### Backup Strategy
 
@@ -464,16 +464,16 @@ If your agency manages two competitors in the same industry:
 
 | Task | Command |
 |------|---------|
-| Create a new brand (quick) | `/digital-marketing-pro:brand-setup` |
-| Create a new brand (full) | `/digital-marketing-pro:brand-setup --full` |
-| List all brands | `/digital-marketing-pro:switch-brand` (no argument) |
-| Switch active brand | `/digital-marketing-pro:switch-brand {slug}` |
-| View active brand summary | Run `/digital-marketing-pro:status` or ask "What brand is active?" |
-| Update existing brand | `/digital-marketing-pro:brand-setup` while brand is active |
+| Create a new brand (quick) | `/omni-growth-engine:brand-setup` |
+| Create a new brand (full) | `/omni-growth-engine:brand-setup --full` |
+| List all brands | `/omni-growth-engine:switch-brand` (no argument) |
+| Switch active brand | `/omni-growth-engine:switch-brand {slug}` |
+| View active brand summary | Run `/omni-growth-engine:status` or ask "What brand is active?" |
+| Update existing brand | `/omni-growth-engine:brand-setup` while brand is active |
 | Archive a brand | Rename directory to `_archived-{slug}` |
 | Restore an archived brand | Rename directory back to `{slug}` |
 | Backup all brands | Copy `~/.claude-marketing/brands/` |
 
 ---
 
-*Part of the Digital Marketing Pro documentation. For installation and general usage, see the main README.*
+*Part of the OmniGrowth Engine documentation. For installation and general usage, see the main README.*

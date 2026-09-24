@@ -2,7 +2,7 @@
 """
 guidelines-manager.py
 =====================
-Brand guidelines, templates, and SOP management for Digital Marketing Pro.
+Brand guidelines, templates, and SOP management for OmniGrowth Engine.
 
 Manages per-brand guidelines (voice & tone, messaging, restrictions, channel styles,
 visual identity), per-brand templates (proposals, reports, briefs), and agency-level
@@ -216,7 +216,7 @@ def summary(slug):
                 "total_rules": 0,
                 "custom_files": [],
                 "templates": 0,
-                "note": "No guidelines configured. Use /digital-marketing-pro:import-guidelines to add.",
+                "note": "No guidelines configured. Use /omni-growth-engine:import-guidelines to add.",
             }
             # Check templates
             if templates_dir.exists():
@@ -282,7 +282,7 @@ def get_category(slug, category):
         return {
             "category": category,
             "exists": False,
-            "note": f"No {category} guidelines configured. Use /digital-marketing-pro:import-guidelines to add.",
+            "note": f"No {category} guidelines configured. Use /omni-growth-engine:import-guidelines to add.",
         }
 
     content = filepath.read_text(encoding="utf-8")
@@ -575,7 +575,7 @@ def delete_sop(name):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Brand guidelines, templates, and SOP management for Digital Marketing Pro"
+        description="Brand guidelines, templates, and SOP management for OmniGrowth Engine"
     )
     parser.add_argument("--brand", help="Brand slug (required for brand-level actions)")
     parser.add_argument(

@@ -1,14 +1,14 @@
-# Digital Marketing Pro — agent context
+# OmniGrowth Engine — agent context
 
 This file is auto-loaded by OpenAI Codex, Google Antigravity, GitHub Copilot CLI, Cursor (when in the agent context chain), and other Agent Skills runtimes. It is the equivalent of `CLAUDE.md` for non-Claude surfaces.
 
 ## What this plugin is
 
-Digital Marketing Pro is a comprehensive open-source AI marketing plugin shipping **163 skills, 24 specialist agents, a 12-Part Strategy Flow, and EU AI Act Article 50 readiness**. Built for marketing agencies, in-house teams running 50–200 brands, and consultancies.
+OmniGrowth Engine is a comprehensive open-source AI marketing plugin shipping **163 skills, 24 specialist agents, a 12-Part Strategy Flow, and EU AI Act Article 50 readiness**. Built for marketing agencies, in-house teams running 50–200 brands, and consultancies.
 
 **Supported surfaces (v3.31.1):** Claude Code (CLI + IDE extensions, min v2.1.157), Anthropic Cowork, OpenAI Codex (CLI + IDE + App), Cursor 2.5+, GitHub Copilot CLI, Google Antigravity 2.0 (CLI + IDE), **Hermes Agent (Nous Research, Desktop v0.15.2+)**, **OpenClaw (formerly Clawdbot/Moltbot)**, **Grok (xAI Build CLI, native `.grok-plugin/` pair)**. Plus 35+ additional platforms via the Agent Skills open standard (Goose, OpenHands, OpenCode, Junie, Gemini CLI, Roo Code, Kiro, Amp, Letta, Mux, Factory, Workshop, Tabnine, Mistral Vibe, and more — see README "Works on 40+ agent harnesses").
 
-**Cowork-specific:** On Anthropic Cowork the per-session filesystem is ephemeral (`~/.claude-marketing/` AND `${CLAUDE_PLUGIN_DATA}` BOTH vanish at session end — known platform issue #51398). Run `/digital-marketing-pro:cowork-setup` once per team to route brand state through a Google Drive MCP so profiles, plans, and reports survive across sessions.
+**Cowork-specific:** On Anthropic Cowork the per-session filesystem is ephemeral (`~/.claude-marketing/` AND `${CLAUDE_PLUGIN_DATA}` BOTH vanish at session end — known platform issue #51398). Run `/omni-growth-engine:cowork-setup` once per team to route brand state through a Google Drive MCP so profiles, plans, and reports survive across sessions.
 
 ## How to use it as an agent
 
@@ -39,7 +39,7 @@ Digital Marketing Pro is a comprehensive open-source AI marketing plugin shippin
 
 - `skills/<name>/SKILL.md` — 158 Agent Skills (the surface area). Each is byte-portable across all supported surfaces.
 - `agents/<name>.md` — 24 specialist agent definitions (Claude Code subagent format; on Codex use TOML conversion at `~/.codex/agents/`, on Antigravity use `/agent` ad-hoc spawn). Full list in the **Specialist agents (24)** section below.
-- `commands/<name>.md` — Claude Code slash commands (`/digital-marketing-pro:<name>`). On other surfaces invoke via natural-language intent — the SKILL.md routing picks up the same handler.
+- `commands/<name>.md` — Claude Code slash commands (`/omni-growth-engine:<name>`). On other surfaces invoke via natural-language intent — the SKILL.md routing picks up the same handler.
 - `plugin.yaml` + `__init__.py` at repo root — **Hermes Agent native plugin** (native since v3.13.0). `__init__.py` exposes `register(ctx)` which walks `skills/` and exposes all 163 skills via `ctx.register_skill()`. Read ONLY by Hermes; ignored by every other platform.
 - `openclaw.plugin.json` at repo root — **OpenClaw native manifest** (native since v3.13.0). `skills` field points at `./skills`. OpenClaw also auto-detects `.claude-plugin/plugin.json` as a Claude-compatible bundle fallback.
 - `scripts/*.py` — 86 Python helpers (optional, run when Python 3.8+ is present). Includes `_common.py` (shared workspace-root / slugify / atomic-write helpers), `connector_resolver.py` + `connector_executor.py` (8 executable HTTP connectors), `resolve_model.py` + `refresh_models.py` (shared model curator with auto-fall-forward on deprecated IDs), `plugin-metadata.py` (environment + asset probes), `drive-sync-state.py` (Cowork+Drive routing ledger), `check_skill_contracts.py` (doc-vs-argparse linter), and `skill-line-check.py` (CI line guard).

@@ -1,10 +1,10 @@
 ---
 name: import-guidelines
-description: "Import brand guidelines — voice and tone rules, messaging, banned words and restrictions, channel styles, visual identity — and structure them into enforceable markdown files in the brand's guidelines layer, auto-classified by category, conflict-checked against the brand profile, and merged with existing rules rather than overwritten. Triggers on \"/digital-marketing-pro:import-guidelines\", \"here's our brand voice guide\", \"add these banned words\", \"import our style guide\", \"save the rule that we never use jargon\". Reads the active brand profile and existing guidelines manifest; saved guidelines are then applied automatically across all content-producing commands."
+description: "Import brand guidelines — voice and tone rules, messaging, banned words and restrictions, channel styles, visual identity — and structure them into enforceable markdown files in the brand's guidelines layer, auto-classified by category, conflict-checked against the brand profile, and merged with existing rules rather than overwritten. Triggers on \"/omni-growth-engine:import-guidelines\", \"here's our brand voice guide\", \"add these banned words\", \"import our style guide\", \"save the rule that we never use jargon\". Reads the active brand profile and existing guidelines manifest; saved guidelines are then applied automatically across all content-producing commands."
 argument-hint: "[file-path or URL]"
 ---
 
-# /digital-marketing-pro:import-guidelines
+# /omni-growth-engine:import-guidelines
 
 ## Purpose
 
@@ -23,7 +23,7 @@ If the user doesn't specify a category, analyze the content and route it to the 
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for existing guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load existing guidelines to merge with (not overwrite). If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for existing guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load existing guidelines to merge with (not overwrite). If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 
 2. **Classify the content** — Determine which guideline category (or categories) the input belongs to:
    - Voice rules, writing style, tone → `voice-and-tone.md`
@@ -67,7 +67,7 @@ If the user doesn't specify a category, analyze the content and route it to the 
 - Preview of the structured guideline file
 - Any conflicts flagged between guidelines and existing brand profile
 - Suggestion to import additional categories if relevant content was detected
-- Reminder: "These guidelines will be automatically applied when creating content. Use `/digital-marketing-pro:import-guidelines` again to add more."
+- Reminder: "These guidelines will be automatically applied when creating content. Use `/omni-growth-engine:import-guidelines` again to add more."
 
 ## Guideline Categories Reference
 

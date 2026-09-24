@@ -1,10 +1,10 @@
 ---
 name: aeo-audit
-description: "Audit how a brand appears across the 6 canonical AI answer surfaces — ChatGPT, Perplexity, Google AI Mode, AI Overviews, Gemini, Copilot — probing 10-25 queries into a numbered output bundle with per-platform visibility scorecards, citation-accuracy checks, a competitor matrix, content gaps, and an optimization playbook behind a four-gate quality scorecard. Triggers on \"/digital-marketing-pro:aeo-audit\", \"does ChatGPT know about our brand\", \"check our AI search visibility\", \"how does Perplexity describe us\", \"are we showing up in AI Overviews\". Reads the brand profile; reconciles probes against GSC actuals via /digital-marketing-pro:gsc-ai-performance and defines the AI-visibility scoring standard reused by geo-monitor and share-of-voice."
+description: "Audit how a brand appears across the 6 canonical AI answer surfaces — ChatGPT, Perplexity, Google AI Mode, AI Overviews, Gemini, Copilot — probing 10-25 queries into a numbered output bundle with per-platform visibility scorecards, citation-accuracy checks, a competitor matrix, content gaps, and an optimization playbook behind a four-gate quality scorecard. Triggers on \"/omni-growth-engine:aeo-audit\", \"does ChatGPT know about our brand\", \"check our AI search visibility\", \"how does Perplexity describe us\", \"are we showing up in AI Overviews\". Reads the brand profile; reconciles probes against GSC actuals via /omni-growth-engine:gsc-ai-performance and defines the AI-visibility scoring standard reused by geo-monitor and share-of-voice."
 argument-hint: "[brand-name or URL]"
 ---
 
-# /digital-marketing-pro:aeo-audit
+# /omni-growth-engine:aeo-audit
 
 ## Purpose
 
@@ -12,9 +12,9 @@ Evaluate the brand's visibility and accuracy across AI answer engines. Analyze h
 
 **AI Mode vs AI Overviews — why both matter:** AI Overviews are the summary block at the top of a classic Google SERP and trigger on a subset of queries. AI Mode is a conversational tab (and now the default search experience for opted-in users) backed by Gemini 3.5 Flash with deeper reasoning, follow-ups, and a different citation pattern. The two surfaces select different sources for the same query in a large share of cases (internal observation, 05/2026 — "40–60%" is a rough estimate; re-verify against your own probe set). Audit both.
 
-**Cross-reference with GSC AI Performance Report (rolled out 3 June 2026):** The Google Search Console AI Performance Report (UK rollout first, global to follow) gives you actual *impressions* in AI Overviews + AI Mode for verified properties. Synthetic probe results from this skill should be reconciled against GSC actuals — see `/digital-marketing-pro:gsc-ai-performance` for the workflow. Important caveat: the GSC report intentionally excludes click data; click-through attribution must come from GA4 (the new `AI Assistant` channel group, added 13 May 2026, captures `Medium=ai-assistant` referrals from ChatGPT/Gemini/Claude; see `/digital-marketing-pro:analytics-insights`).
+**Cross-reference with GSC AI Performance Report (rolled out 3 June 2026):** The Google Search Console AI Performance Report (UK rollout first, global to follow) gives you actual *impressions* in AI Overviews + AI Mode for verified properties. Synthetic probe results from this skill should be reconciled against GSC actuals — see `/omni-growth-engine:gsc-ai-performance` for the workflow. Important caveat: the GSC report intentionally excludes click data; click-through attribution must come from GA4 (the new `AI Assistant` channel group, added 13 May 2026, captures `Medium=ai-assistant` referrals from ChatGPT/Gemini/Claude; see `/omni-growth-engine:analytics-insights`).
 
-**Google's official position on AI optimization** (Google AI Optimization Guide, updated 15 May 2026): no `llms.txt`, no AI-specific schema, no separate AI eligibility gate. Pages eligible for snippets in classic Search are eligible for AI Features. Don't manufacture work around fictional ranking factors — `/digital-marketing-pro:aeo-geo` documents what *does* work (entity consistency, citation-worthy snippets, knowledge graph alignment).
+**Google's official position on AI optimization** (Google AI Optimization Guide, updated 15 May 2026): no `llms.txt`, no AI-specific schema, no separate AI eligibility gate. Pages eligible for snippets in classic Search are eligible for AI Features. Don't manufacture work around fictional ranking factors — `/omni-growth-engine:aeo-geo` documents what *does* work (entity consistency, citation-worthy snippets, knowledge graph alignment).
 
 **Information Agents (Google AI Pro / Ultra, summer 2026 launch):** Google announced at I/O 2026 a new class of persistent agents that continuously monitor web / news / real-time data for subscribers and deliver synthesized updates with actionable capabilities. Once these go live, they become a **7th probe target** for this skill (alongside ChatGPT / Perplexity / AI Mode / AI Overviews / Gemini / Copilot). Until then, treat AI Mode as the proxy — agents are powered by the same Gemini 3.5 Flash backbone. Source: [blog.google/search-io-2026](https://blog.google/products-and-platforms/products/search/search-io-2026/).
 
@@ -30,7 +30,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. **Also check for guidelines** at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions and relevant category files. Check for custom templates at `~/.claude-marketing/brands/{slug}/templates/`. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. Define a test query set: branded queries, category queries, comparison queries, "best of" queries, problem-solution queries
 3. Analyze how the brand appears in AI responses for each query type
 4. Check citation accuracy: Are facts correct? Are URLs valid? Is the description current?
@@ -70,7 +70,7 @@ All AEO audit outputs go to `${CLAUDE_PLUGIN_DATA}/{brand}/seo/aeo-audit/{YYYY-M
 PLAN.md                     single-page deliverable
 ```
 
-Reconcile `03-platform-scorecard.md` against `/digital-marketing-pro:gsc-ai-performance` actuals — probe results show what AI *could* surface; GSC shows what it *actually* surfaced.
+Reconcile `03-platform-scorecard.md` against `/omni-growth-engine:gsc-ai-performance` actuals — probe results show what AI *could* surface; GSC shows what it *actually* surfaced.
 
 ## Quality scorecard
 
@@ -89,17 +89,17 @@ This skill defines the plugin's **single AI-visibility scoring standard.** Every
 
 - **Canonical surfaces (6):** Google AI Mode, Google AI Overviews, ChatGPT, Perplexity, Gemini, Microsoft Copilot. This exact set is the `PLATFORMS` constant in `scripts/geo-tracker.py` — reference that constant, don't re-list a different set.
 - **Canonical rubric:** the per-platform 1-10 visibility score plus the four gates above. Score each platform separately; never average across platforms (a brand can be 9/10 on Perplexity and 2/10 on ChatGPT — the average misleads).
-- **Recurring mode:** `/digital-marketing-pro:geo-monitor` applies this same rubric on a schedule (weekly / monthly) and tracks it over time. The 0-100 GEO health score + A-F letter grade that `geo-tracker.py` emits is the **trend view** of the same underlying data — a longitudinal roll-up, not a second scoring model.
-- **Consumers:** `geo-monitor` (recurring), `share-of-voice` (its AI dimension), `rank-monitor` (AI Overview citation presence in `--features` mode). All reconcile synthetic probe scores against GSC actuals via `/digital-marketing-pro:gsc-ai-performance`.
+- **Recurring mode:** `/omni-growth-engine:geo-monitor` applies this same rubric on a schedule (weekly / monthly) and tracks it over time. The 0-100 GEO health score + A-F letter grade that `geo-tracker.py` emits is the **trend view** of the same underlying data — a longitudinal roll-up, not a second scoring model.
+- **Consumers:** `geo-monitor` (recurring), `share-of-voice` (its AI dimension), `rank-monitor` (AI Overview citation presence in `--features` mode). All reconcile synthetic probe scores against GSC actuals via `/omni-growth-engine:gsc-ai-performance`.
 
 ## Chain handoffs
 
-- **Upstream:** `/digital-marketing-pro:aeo-geo` for the strategy framing this audit measures against
+- **Upstream:** `/omni-growth-engine:aeo-geo` for the strategy framing this audit measures against
 - **Downstream:**
-  - `/digital-marketing-pro:gsc-ai-performance` — reconcile synthetic probe results against GSC actuals
-  - `/digital-marketing-pro:keyword-cluster` — `06-content-gaps.md` becomes seed input for clustering
-  - `/digital-marketing-pro:entity-audit` — drives `05-source-authority.md` corrections in Knowledge Graph
-  - `/digital-marketing-pro:seo-drift` — next quarter, compare two AEO snapshots
+  - `/omni-growth-engine:gsc-ai-performance` — reconcile synthetic probe results against GSC actuals
+  - `/omni-growth-engine:keyword-cluster` — `06-content-gaps.md` becomes seed input for clustering
+  - `/omni-growth-engine:entity-audit` — drives `05-source-authority.md` corrections in Knowledge Graph
+  - `/omni-growth-engine:seo-drift` — next quarter, compare two AEO snapshots
 
 ## Tips & caveats
 

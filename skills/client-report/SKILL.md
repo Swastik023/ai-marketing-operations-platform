@@ -1,9 +1,9 @@
 ---
 name: client-report
-description: "Generate a white-labeled client report in agency voice — weekly pulse, monthly review, or QBR — with a KPI scorecard vs targets and comparison period, channel breakdowns, top wins with attribution, root-cause analysis of misses, 3-5 strategic recommendations, and budget efficiency. Requires explicit approval before any external send; only then can it deliver via connected Slack, email, or Google Sheets MCPs and log the delivery. Triggers on \"/digital-marketing-pro:client-report\", \"prepare the monthly report for the client\", \"build the QBR for this account\", \"send the weekly performance pulse\", \"white-labeled performance report\". Reads the brand profile and pulls data via campaign-tracker.py, execution-tracker.py, and connected platform MCPs; formats via report-generator.py."
+description: "Generate a white-labeled client report in agency voice — weekly pulse, monthly review, or QBR — with a KPI scorecard vs targets and comparison period, channel breakdowns, top wins with attribution, root-cause analysis of misses, 3-5 strategic recommendations, and budget efficiency. Requires explicit approval before any external send; only then can it deliver via connected Slack, email, or Google Sheets MCPs and log the delivery. Triggers on \"/omni-growth-engine:client-report\", \"prepare the monthly report for the client\", \"build the QBR for this account\", \"send the weekly performance pulse\", \"white-labeled performance report\". Reads the brand profile and pulls data via campaign-tracker.py, execution-tracker.py, and connected platform MCPs; formats via report-generator.py."
 ---
 
-# /digital-marketing-pro:client-report
+# /omni-growth-engine:client-report
 
 ## Purpose
 
@@ -29,7 +29,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Pull all metrics for the brand**: Query connected MCP servers and run `python "${CLAUDE_PLUGIN_ROOT}/scripts/campaign-tracker.py" --brand {slug} --action list-campaigns` (then `--action get-campaign --id {id}` per campaign) to gather performance data across all active channels; filter to the specified date range during analysis
 3. **Gather campaign history and execution log**: Run `python "${CLAUDE_PLUGIN_ROOT}/scripts/execution-tracker.py" --brand {slug} --action get-history` to compile all deliverables completed, campaigns launched, optimizations made, and tests concluded, then filter to the reporting period during analysis
 4. **Calculate KPIs vs targets and vs comparison period**: Compute actuals against the brand's stated KPI targets from `profile.json` and against the selected comparison period — calculate deltas, percentage changes, trend direction, and statistical significance where sample sizes allow

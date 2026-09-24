@@ -1,6 +1,6 @@
 ---
 name: campaign-audit
-description: "Inventory and score everything currently running for a brand across paid search, paid social, email, organic, SEO, AEO/GEO, CRM, and analytics — produces a dated audit document with a 4-tier triage (healthy / quick win / strategic gap / red flag), a quick-wins backlog, and a compliance posture section. Strictly read-only: it never pauses, edits, or launches anything. Triggers on \"/digital-marketing-pro:campaign-audit\", \"what's currently running for this brand\", \"audit our existing campaigns\", \"we just inherited this account\", \"where is budget leaking\". Requires a validated brand profile (run validate-profile first); missing connectors degrade gracefully into findings. Feeds /digital-marketing-pro:campaign-plan and pairs with /digital-marketing-pro:performance-check."
+description: "Inventory and score everything currently running for a brand across paid search, paid social, email, organic, SEO, AEO/GEO, CRM, and analytics — produces a dated audit document with a 4-tier triage (healthy / quick win / strategic gap / red flag), a quick-wins backlog, and a compliance posture section. Strictly read-only: it never pauses, edits, or launches anything. Triggers on \"/omni-growth-engine:campaign-audit\", \"what's currently running for this brand\", \"audit our existing campaigns\", \"we just inherited this account\", \"where is budget leaking\". Requires a validated brand profile (run validate-profile first); missing connectors degrade gracefully into findings. Feeds /omni-growth-engine:campaign-plan and pairs with /omni-growth-engine:performance-check."
 user-invocable: true
 triggers:
   - audit existing campaigns
@@ -12,13 +12,13 @@ triggers:
 allowed-tools: Read Bash Glob Grep
 ---
 
-# /digital-marketing-pro:campaign-audit — Cross-Channel Current-State Audit
+# /omni-growth-engine:campaign-audit — Cross-Channel Current-State Audit
 
-This skill produces a single document describing **everything currently running for a brand across every channel** — what's live, what's spending, what's performing, what's leaking budget, what's quietly broken. It's the prerequisite for any informed `/digital-marketing-pro:campaign-plan`, `/digital-marketing-pro:performance-report`, or `/digital-marketing-pro:competitor-analysis` refresh.
+This skill produces a single document describing **everything currently running for a brand across every channel** — what's live, what's spending, what's performing, what's leaking budget, what's quietly broken. It's the prerequisite for any informed `/omni-growth-engine:campaign-plan`, `/omni-growth-engine:performance-report`, or `/omni-growth-engine:competitor-analysis` refresh.
 
 ## Context efficiency
 
-Heavy skill. **Grep before Read** any referenced file, then `Read` only matched ranges with `offset` + `limit`. List the brand's data dir (`~/.claude-marketing/brands/{slug}/`, or `$CLAUDE_PLUGIN_DATA/digital-marketing-pro/brands/{slug}/` when that env var is set) before opening files. On re-invocation mid-session, skip files already in context.
+Heavy skill. **Grep before Read** any referenced file, then `Read` only matched ranges with `offset` + `limit`. List the brand's data dir (`~/.claude-marketing/brands/{slug}/`, or `$CLAUDE_PLUGIN_DATA/omni-growth-engine/brands/{slug}/` when that env var is set) before opening files. On re-invocation mid-session, skip files already in context.
 
 Use this skill:
 
@@ -57,12 +57,12 @@ The audit also captures **what's NOT happening** that should be — channels wit
 
 This skill assumes:
 
-1. The brand profile exists and `/digital-marketing-pro:validate-profile --brand {brand}` returns `passed` or `passed_with_warnings`. If it returns `blocked`, refuse and tell the user to fix the blockers first — auditing on a broken profile produces a corrupt baseline.
+1. The brand profile exists and `/omni-growth-engine:validate-profile --brand {brand}` returns `passed` or `passed_with_warnings`. If it returns `blocked`, refuse and tell the user to fix the blockers first — auditing on a broken profile produces a corrupt baseline.
 2. Connector credentials for the channels in scope are configured (Google Ads, Meta Business, LinkedIn Campaign Manager, the email platform, the CRM, GA4, GSC, etc.). Missing connectors degrade the audit gracefully — they don't block it; the audit just notes "{channel} skipped — connector not configured" in the relevant section.
 
 ### Step 1 — Confirm the active brand and audit scope
 
-If `--brand <slug>` was supplied, use it. Otherwise use the active brand. If neither, error: `"--brand <slug> required, or run /digital-marketing-pro:switch-brand first."`
+If `--brand <slug>` was supplied, use it. Otherwise use the active brand. If neither, error: `"--brand <slug> required, or run /omni-growth-engine:switch-brand first."`
 
 If `--channels <list>` was supplied (e.g. `paid_search,email,seo`), restrict to those. Otherwise audit every channel for which a connector is configured.
 
@@ -127,7 +127,7 @@ Write the audit to `~/.claude-marketing/brands/{slug}/audits/campaign-audit-{YYY
 # Current-State Campaign Audit — {brand_name}
 
 **Run date:** {YYYY-MM-DD}
-**Auditor:** /digital-marketing-pro:campaign-audit
+**Auditor:** /omni-growth-engine:campaign-audit
 **Active brand profile:** {profile_version_or_last_modified}
 **Channels in scope:** {list}
 **Channels skipped:** {list with reason}
@@ -182,7 +182,7 @@ Bulleted list. Each item: channel · why it's missing · what minimum viable act
 
 **Next steps:**
 - Take the quick-wins backlog into a 30-min triage with the account lead.
-- Bring the strategic gaps to the next `/digital-marketing-pro:campaign-plan` conversation.
+- Bring the strategic gaps to the next `/omni-growth-engine:campaign-plan` conversation.
 - Resolve every 🔴 red flag before the next routine work cycle.
 ```
 
@@ -225,8 +225,8 @@ In the conversation, print:
    3. {item}
 
    Next: walk the quick-wins backlog in a 30-min triage, or run
-   /digital-marketing-pro:performance-check for a metrics-only snapshot,
-   or /digital-marketing-pro:campaign-plan to start the next planning cycle.
+   /omni-growth-engine:performance-check for a metrics-only snapshot,
+   or /omni-growth-engine:campaign-plan to start the next planning cycle.
 ```
 
 ## Behaviour rules
@@ -240,7 +240,7 @@ In the conversation, print:
 ## Arguments
 
 ```
-/digital-marketing-pro:campaign-audit [--brand <slug>] [--channels <list>] [--quick]
+/omni-growth-engine:campaign-audit [--brand <slug>] [--channels <list>] [--quick]
     [--competitors <list>] [--red-flag-spend-threshold <amount>] [--json]
 ```
 

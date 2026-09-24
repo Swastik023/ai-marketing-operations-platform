@@ -11,7 +11,7 @@ Identifies the highest-leverage backlink prospects — domains that link to mult
 
 ## Trigger
 
-User runs `/digital-marketing-pro:backlink-gap` or asks for:
+User runs `/omni-growth-engine:backlink-gap` or asks for:
 - "Find link prospects from my competitors"
 - "Where did my competitors gain links?"
 - "Backlink-gap audit"
@@ -21,7 +21,7 @@ User runs `/digital-marketing-pro:backlink-gap` or asks for:
 ## Inputs
 
 1. **Your domain** — the brand's primary domain
-2. **Competitors** — 2 minimum (1 allowed but warns), 3–5 is the sweet spot. Auto-fetched from `/digital-marketing-pro:competitor-analysis` if a fresh run exists.
+2. **Competitors** — 2 minimum (1 allowed but warns), 3–5 is the sweet spot. Auto-fetched from `/omni-growth-engine:competitor-analysis` if a fresh run exists.
 3. **Backlink data source** — Ahrefs / Semrush / SE Ranking / Moz MCP. Connector must be configured.
 4. **Minimum DR filter** (optional) — default 20; YMYL industries should set 40
 
@@ -49,9 +49,9 @@ Numbered intermediate files under `${CLAUDE_PLUGIN_DATA}/{brand}/seo/backlink-ga
 ## After the audit
 
 Ask: "Would you like me to:
-- Send the top 10 prospects to a digital PR workflow? (`/digital-marketing-pro:digital-pr`)
-- Draft pitches for the top 5 broken-link replacements? (`/digital-marketing-pro:pr-pitch`)
-- Schedule quarterly re-runs to track gains? (`/digital-marketing-pro:seo-drift`)
+- Send the top 10 prospects to a digital PR workflow? (`/omni-growth-engine:digital-pr`)
+- Draft pitches for the top 5 broken-link replacements? (`/omni-growth-engine:pr-pitch`)
+- Schedule quarterly re-runs to track gains? (`/omni-growth-engine:seo-drift`)
 - Open the prospect shortlist for review?"
 
 For the full skill spec including the priority-score formula, why link-count is weighted higher than traffic, and chain handoffs, see [skills/backlink-gap/SKILL.md](../skills/backlink-gap/SKILL.md).

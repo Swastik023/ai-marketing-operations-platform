@@ -1,23 +1,23 @@
 ---
 name: rank-monitor
-description: "Set up and run keyword ranking monitoring — baseline capture, scheduled position checks against GSC and connected rank-tracker MCPs, and severity-tiered alerts (minor/major/critical) on drops; --features adds a query-by-SERP-feature ownership matrix including AI Overview citation presence. Triggers on \"/digital-marketing-pro:rank-monitor\", \"track our keyword rankings\", \"why did our rankings drop\", \"alert me when positions change\", \"are we in the AI Overview for this query\". Reads the brand profile and saved keyword lists; for scored AI visibility pair with /digital-marketing-pro:geo-monitor, and for snapshot comparison /digital-marketing-pro:seo-drift."
+description: "Set up and run keyword ranking monitoring — baseline capture, scheduled position checks against GSC and connected rank-tracker MCPs, and severity-tiered alerts (minor/major/critical) on drops; --features adds a query-by-SERP-feature ownership matrix including AI Overview citation presence. Triggers on \"/omni-growth-engine:rank-monitor\", \"track our keyword rankings\", \"why did our rankings drop\", \"alert me when positions change\", \"are we in the AI Overview for this query\". Reads the brand profile and saved keyword lists; for scored AI visibility pair with /omni-growth-engine:geo-monitor, and for snapshot comparison /omni-growth-engine:seo-drift."
 argument-hint: "[brand-name] [--features]"
 ---
 
-# /digital-marketing-pro:rank-monitor
+# /omni-growth-engine:rank-monitor
 
 ## Purpose
 
 Set up and manage keyword ranking monitoring — and, with `--features`, SERP-feature tracking in the same run. Track target keyword positions across Google, establish baselines, detect drops greater than 5 positions, and generate alerts when rankings change significantly. In `--features` mode, also track which SERP features appear for each query (AI Overviews, Featured Snippets, People Also Ask, Knowledge Panels, Local Pack, Image Pack, Video Carousel, Shopping) and whether the brand owns them. This gives ongoing visibility into organic performance — catching ranking declines early, spotting upward trends, and tracking the increasingly feature-rich results page.
 
-> **Merged skill (was `rank-monitor` + `serp-tracker`).** SERP-feature tracking is now the `--features` mode of this one skill. The old `/digital-marketing-pro:serp-tracker` is a deprecation pointer to here.
+> **Merged skill (was `rank-monitor` + `serp-tracker`).** SERP-feature tracking is now the `--features` mode of this one skill. The old `/omni-growth-engine:serp-tracker` is a deprecation pointer to here.
 
 ### Data sources (read this before configuring)
 
 - **Google Search Console MCP** is the authoritative position + impressions source for verified properties. GSC returns per-query/per-page positions, impressions, clicks, and CTR — it does **not** return the full per-query SERP-feature layout or AI Overview citation lists. Do not claim otherwise.
 - **Rank-tracker MCPs** (Ahrefs / Semrush / SE Ranking, if connected) fill in positions for keywords/competitors GSC can't see and provide their own SERP-feature flags.
 - **Moz MCP** (`mcp-moz`) is **optional** — verify the package exists on npm before use (`npm view mcp-moz`); `npx` executes remote code, so don't wire an unverified package. If Moz isn't connected, use GSC + whichever rank-tracker MCP the brand already has.
-- **AI Overview presence** in `--features` mode records only *whether* an AI Overview appeared and *whether the brand was cited in it* (a binary SERP-feature signal). For scored AI-visibility measurement across the 6 canonical AI surfaces, use `/digital-marketing-pro:geo-monitor` / `/digital-marketing-pro:aeo-audit` (the canonical AI-visibility scoring standard) and, for actual impressions, `/digital-marketing-pro:gsc-ai-performance`. Do not re-implement AI-visibility scoring here.
+- **AI Overview presence** in `--features` mode records only *whether* an AI Overview appeared and *whether the brand was cited in it* (a binary SERP-feature signal). For scored AI-visibility measurement across the 6 canonical AI surfaces, use `/omni-growth-engine:geo-monitor` / `/omni-growth-engine:aeo-audit` (the canonical AI-visibility scoring standard) and, for actual impressions, `/omni-growth-engine:gsc-ai-performance`. Do not re-implement AI-visibility scoring here.
 
 ## Input Required
 
@@ -33,7 +33,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Capture current rankings baseline**: Query the connected rank sources (GSC MCP, plus any rank-tracker / Moz MCP available) for the current ranking position of each target keyword. Record position, ranking URL, click-through rate and impressions from GSC where available. In `--features` mode, also record which SERP features are present for the query (from the rank-tracker's feature flags or manual observation) and the owning domain per feature. For competitor domains, capture their positions (and feature ownership) for the same keywords.
 3. **Configure monitoring schedule**: Save the keyword list, mode (`rankings` or `rankings+features`), monitoring frequency, alert thresholds, competitor domains, device type, and target country to `${CLAUDE_PLUGIN_DATA}/{brand}/seo/rank-monitor/config.json`. Create or update the baseline snapshot at `${CLAUDE_PLUGIN_DATA}/{brand}/seo/rank-monitor/baseline.json` with the current positions (and, in `--features` mode, the feature matrix) as the reference point.
 4. **On each monitoring check: query and compare**: Pull current positions for all tracked keywords. Compare each keyword's current position to both the baseline (original position when monitoring started) and the previous check (last recorded position). Calculate absolute change from baseline, change since last check, rolling 7-day and 30-day trend direction, and average position across all tracked keywords. In `--features` mode, diff the feature matrix against the previous snapshot (features gained/lost, ownership changes, AI Overview appearance/citation changes).
@@ -46,11 +46,11 @@ When `--features` is set, the run also builds a query-by-feature matrix. Tracked
 
 | Feature | What "owned" means | Optimization signal |
 |---|---|---|
-| **AI Overview** | An AI Overview appeared AND the brand's URL is one of its cited sources | Binary citation-presence signal only. For scored AI visibility use `/digital-marketing-pro:geo-monitor` |
+| **AI Overview** | An AI Overview appeared AND the brand's URL is one of its cited sources | Binary citation-presence signal only. For scored AI visibility use `/omni-growth-engine:geo-monitor` |
 | **Featured Snippet** | Brand holds position 0 for the query | Format for extraction: paragraph (40-60 words), list (5-8 items), or table |
 | **People Also Ask** | A brand URL answers a PAA question for the query | Target PAA questions with FAQ-style H2/H3 content |
-| **Knowledge Panel** | Panel shows for the brand entity | Strengthen entity signals (Wikidata, GBP, structured data) — see `/digital-marketing-pro:entity-audit` |
-| **Local Pack** | Brand appears in the map 3-pack | GBP optimization + local schema — see `/digital-marketing-pro:local-seo` |
+| **Knowledge Panel** | Panel shows for the brand entity | Strengthen entity signals (Wikidata, GBP, structured data) — see `/omni-growth-engine:entity-audit` |
+| **Local Pack** | Brand appears in the map 3-pack | GBP optimization + local schema — see `/omni-growth-engine:local-seo` |
 | **Image / Video Carousel** | Brand asset appears in the carousel | Optimize alt text / filenames (images) or titles, descriptions, transcripts (video) |
 | **Shopping / Sitelinks** | Brand listing present | Product schema / site structure |
 
@@ -69,7 +69,7 @@ A structured ranking (and, in `--features` mode, SERP-feature) report containing
 
 ## Tips & caveats
 
-- **GSC has no AI Overview citation export.** The `--features` AI Overview signal is observational (did an AIO appear, is the brand cited). Reconcile true AI impressions via `/digital-marketing-pro:gsc-ai-performance` and scored AI visibility via `/digital-marketing-pro:geo-monitor`.
+- **GSC has no AI Overview citation export.** The `--features` AI Overview signal is observational (did an AIO appear, is the brand cited). Reconcile true AI impressions via `/omni-growth-engine:gsc-ai-performance` and scored AI visibility via `/omni-growth-engine:geo-monitor`.
 - **Position deltas are noisier than click/impression deltas** — a keyword bouncing between positions 8 and 12 produces big percentage swings that mean little. Trust impression/click moves more for diagnosis.
 - **GSC data lags ~3 days.** When pulling "current" data, end the window 3 days ago.
 - **Don't over-track.** 50-150 high-value keywords tracked well beats 2,000 tracked as noise.
@@ -81,6 +81,6 @@ A structured ranking (and, in `--features` mode, SERP-feature) report containing
 
 ## See also
 
-- `/digital-marketing-pro:geo-monitor` — scored AI visibility across the 6 canonical AI surfaces (the AI-visibility scoring standard)
-- `/digital-marketing-pro:gsc-ai-performance` — actual AI Overview / AI Mode impressions from GSC
-- `/digital-marketing-pro:seo-drift` — compare two ranking snapshots and surface top movers
+- `/omni-growth-engine:geo-monitor` — scored AI visibility across the 6 canonical AI surfaces (the AI-visibility scoring standard)
+- `/omni-growth-engine:gsc-ai-performance` — actual AI Overview / AI Mode impressions from GSC
+- `/omni-growth-engine:seo-drift` — compare two ranking snapshots and surface top movers

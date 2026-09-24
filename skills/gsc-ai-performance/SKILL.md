@@ -1,10 +1,10 @@
 ---
 name: gsc-ai-performance
-description: "Baseline and interpret Google Search Console's AI Performance Report — combined AI Overviews + AI Mode impressions, cited pages, country and device mix (no click data; attribution stays in GA4) — from a user-supplied CSV export, with an in-SC AI opt-out recommendation and a gated quality scorecard. Triggers on \"/digital-marketing-pro:gsc-ai-performance\", \"read the new GSC AI report\", \"baseline our AI search visibility\", \"how many AI Overviews impressions do we get\", \"should we opt out of AI results\". Parses and archives exports via gsc-ai-performance.py, reconciles actuals against /digital-marketing-pro:aeo-audit probes, and feeds /digital-marketing-pro:seo-drift."
+description: "Baseline and interpret Google Search Console's AI Performance Report — combined AI Overviews + AI Mode impressions, cited pages, country and device mix (no click data; attribution stays in GA4) — from a user-supplied CSV export, with an in-SC AI opt-out recommendation and a gated quality scorecard. Triggers on \"/omni-growth-engine:gsc-ai-performance\", \"read the new GSC AI report\", \"baseline our AI search visibility\", \"how many AI Overviews impressions do we get\", \"should we opt out of AI results\". Parses and archives exports via gsc-ai-performance.py, reconciles actuals against /omni-growth-engine:aeo-audit probes, and feeds /omni-growth-engine:seo-drift."
 argument-hint: "[brand-name or site URL]"
 ---
 
-# /digital-marketing-pro:gsc-ai-performance
+# /omni-growth-engine:gsc-ai-performance
 
 ## Purpose
 
@@ -26,7 +26,7 @@ Google rolled out a new **GSC AI Performance Report** on **3 June 2026** ([Searc
 | Data availability | Backfilled from **18 May 2026**; access expanded broadly in July 2026, with a companion deep-dive help doc on AI controls |
 | Geographic rollout | UK first, then global ([source](https://searchengineland.com/google-search-console-ai-performance-reports-and-controls-to-block-your-content-in-ai-responses-479298)) |
 
-**Critical interpretation guidance:** The report shows when your pages were SHOWN in AI Overviews / AI Mode, not when users clicked through to them. Because click data is absent, all downstream attribution to AI traffic must come from your analytics (GA4's new `AI Assistant` channel — added 13 May 2026 — is the matching analytics-side surface; see `/digital-marketing-pro:analytics-insights`).
+**Critical interpretation guidance:** The report shows when your pages were SHOWN in AI Overviews / AI Mode, not when users clicked through to them. Because click data is absent, all downstream attribution to AI traffic must come from your analytics (GA4's new `AI Assistant` channel — added 13 May 2026 — is the matching analytics-side surface; see `/omni-growth-engine:analytics-insights`).
 
 ## When to use this skill
 
@@ -38,7 +38,7 @@ Google rolled out a new **GSC AI Performance Report** on **3 June 2026** ([Searc
 ## Brand context (auto-applied)
 
 1. Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`
-2. If no brand exists: ask "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults
+2. If no brand exists: ask "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults
 3. Apply industry-specific guidance from `skills/context-engine/industry-profiles.md` (YMYL industries may want opt-out toggled ON until E-E-A-T audit is clean)
 4. Reference `skills/context-engine/compliance-rules.md` for jurisdiction-specific rules (EU markets — see `skills/context-engine/eu-code-of-practice.md` for Article 50 transparency context)
 
@@ -70,11 +70,11 @@ If the brand isn't in the UK rollout yet, the gate framework still applies but `
 
 ## Chain handoffs
 
-- **Upstream:** `/digital-marketing-pro:brand-setup` for property verification
+- **Upstream:** `/omni-growth-engine:brand-setup` for property verification
 - **Downstream:**
-  - `/digital-marketing-pro:aeo-geo` — optimization based on what's surfacing (or not)
-  - `/digital-marketing-pro:seo-drift` — month-over-month tracking using the exported CSVs
-  - `/digital-marketing-pro:analytics-insights` — GA4 AI Assistant channel attribution closes the click-side gap
+  - `/omni-growth-engine:aeo-geo` — optimization based on what's surfacing (or not)
+  - `/omni-growth-engine:seo-drift` — month-over-month tracking using the exported CSVs
+  - `/omni-growth-engine:analytics-insights` — GA4 AI Assistant channel attribution closes the click-side gap
 
 ## Process
 
@@ -89,7 +89,7 @@ If the brand isn't in the UK rollout yet, the gate framework still applies but `
        --archive
    ```
    Real flags only: `--brand` (required), `--csv` (path to the GSC export), `--api` (best-effort; Google has not published an AI-report API yet), `--site`, `--format text|json`, `--archive`. There is **no** `summary` subcommand — the script reads the CSV and emits the parsed metrics.
-4. **Reconcile against `aeo-audit`** — synthetic queries from `/digital-marketing-pro:aeo-audit` test what AI engines *might* surface; the GSC report shows what they *actually* surfaced. Significant gaps either way are signals:
+4. **Reconcile against `aeo-audit`** — synthetic queries from `/omni-growth-engine:aeo-audit` test what AI engines *might* surface; the GSC report shows what they *actually* surfaced. Significant gaps either way are signals:
    - GSC shows much more than aeo-audit found → your test query set is too narrow; expand it
    - aeo-audit found brand in synthetic results but GSC shows few impressions → low query volume for those topics; redirect AEO effort to higher-volume topics
 5. **Opt-out decision** — if any of the following apply, consider the in-SC opt-out toggle:
@@ -97,7 +97,7 @@ If the brand isn't in the UK rollout yet, the gate framework still applies but `
    - Brand's content is paywalled or login-gated (AI surfacing of partial content can damage funnel)
    - Brand is the subject of active reputation management — surfacing in AI answers amplifies whatever sentiment AI models have absorbed
    - Editorial team wants to ship corrections via the brand's own properties first, not via AI synthesis
-6. **Run optimization recommendations** — for brands NOT opting out, route to `/digital-marketing-pro:aeo-geo` for the optimization playbook (entity consistency, citation-worthy snippets, knowledge graph alignment).
+6. **Run optimization recommendations** — for brands NOT opting out, route to `/omni-growth-engine:aeo-geo` for the optimization playbook (entity consistency, citation-worthy snippets, knowledge graph alignment).
 7. **Set up monthly tracking** — schedule a recurring `gsc-ai-performance` baseline (CSV export → dated archive folder) so trend lines emerge over the next 6–12 months as AI search adoption grows.
 
 ## Output
@@ -127,8 +127,8 @@ A structured GSC AI performance brief containing:
 
 ## See also
 
-- `/digital-marketing-pro:aeo-audit` — synthetic AI-engine probing
-- `/digital-marketing-pro:aeo-geo` — optimization playbook for AI visibility
-- `/digital-marketing-pro:analytics-insights` — GA4 AI Assistant channel attribution
+- `/omni-growth-engine:aeo-audit` — synthetic AI-engine probing
+- `/omni-growth-engine:aeo-geo` — optimization playbook for AI visibility
+- `/omni-growth-engine:analytics-insights` — GA4 AI Assistant channel attribution
 - `skills/context-engine/eu-code-of-practice.md` — EU Article 50 transparency context for AI-cited content
 - `scripts/gsc-ai-performance.py` — helper script (placeholder until Google publishes API; reads exported CSV today)

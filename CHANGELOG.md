@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the Digital Marketing Pro plugin are documented here.
+All notable changes to the OmniGrowth Engine plugin are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). This project uses [Semantic Versioning](https://semver.org/).
 
@@ -54,7 +54,7 @@ for precise, reproducible reports. Tests: 381 → 402.
 - New `.grok-plugin/plugin.json` (mirrors the Claude manifest + the
   `"skills": "./skills/"` pointer Grok's loader uses) and
   `.grok-plugin/marketplace.json` (single-plugin marketplace source), so
-  `grok plugin install indranilbanerjee/digital-marketing-pro` works directly.
+  `grok plugin install swastik-agnihotri/omni-growth-engine` works directly.
   Grok also reads the Claude Code manifests for compatibility
   ([Grok Build docs](https://docs.x.ai/build/features/skills-plugins-marketplaces));
   the native pair is the first-class lane.
@@ -338,7 +338,7 @@ A seventh proxy in `structural-tell-scan.py`: specifics introduced once and aban
 
 ### Changed
 
-- `/digital-marketing-pro:check` now reports **both** tell tiers in one advisory section, and still **NEVER** lets either affect the PASS/WARN/BLOCKED decision.
+- `/omni-growth-engine:check` now reports **both** tell tiers in one advisory section, and still **NEVER** lets either affect the PASS/WARN/BLOCKED decision.
 - Both scans keep their thresholds inside their own scripts, deliberately outside every eval config — guard-tested.
 
 ### Notes
@@ -369,7 +369,7 @@ removal exists in this plugin, permanently.
   "text": null|custom, "author": null|name}`. Default wording is
   author-optional, vendor-neutral (guard-tested), and claims only the review
   the pipeline performs. Applied inside the `09-publish-ready.md` body so it
-  survives `/digital-marketing-pro:publish-blog`; the decision is recorded
+  survives `/omni-growth-engine:publish-blog`; the decision is recorded
   in handoff metadata either way. Complements (never replaces) the existing
   `eu_disclosure_if_ai` gate.
 - **`scripts/structural-tell-scan.py`** — Tier-2 structural AI-tell proxies
@@ -506,7 +506,7 @@ routing, not just thin docs.
 
 - **Every skill description (163/163) rewritten**: states what the skill does
   and produces, then "Triggers on" with ≥4 quoted phrases a user would
-  actually type (the `/digital-marketing-pro:<name>` slash alias always
+  actually type (the `/omni-growth-engine:<name>` slash alias always
   first), then what it reads or pairs with. Median length grew from a
   one-liner to ~720 characters of routing signal.
 - **The rewrite doubled as an honesty audit.** Every description was written
@@ -650,7 +650,7 @@ machinery or to /check, and no ad-format craft at all.
   again late; **UGC-style** — native-feeling is a style, not a disclosure
   exemption (FTC/ASA rules apply in full).
 - **`/video-script` step 11 — the unified gate.** Every finished script's
-  narration and on-screen text routes through /digital-marketing-pro:check,
+  narration and on-screen text routes through /omni-growth-engine:check,
   the same hallucination + brand-voice + claims gate every other deliverable
   passes. For ad scripts it is non-negotiable: paid distribution multiplies
   whatever the script gets wrong, and platforms adjudicate claims complaints
@@ -785,7 +785,7 @@ All claims below verified against primary sources on 2026-07-12 (vendor docs, EU
 
 ### Added
 
-- **`scripts/_common.py`** — one shared workspace-root resolver (`$CLAUDE_PLUGIN_DATA/digital-marketing-pro/brands/{slug}/` → `~/.claude-marketing/brands/{slug}/`), one `slugify_brand`, atomic JSON writes, safe JSON loads, a UTF-8 stdout guard, and a `finish()` exit helper — adopted across the script layer to kill the storage split-brain and the four-different-slugify bug.
+- **`scripts/_common.py`** — one shared workspace-root resolver (`$CLAUDE_PLUGIN_DATA/omni-growth-engine/brands/{slug}/` → `~/.claude-marketing/brands/{slug}/`), one `slugify_brand`, atomic JSON writes, safe JSON loads, a UTF-8 stdout guard, and a `finish()` exit helper — adopted across the script layer to kill the storage split-brain and the four-different-slugify bug.
 - **`scripts/check_skill_contracts.py`** — a doc-vs-argparse linter that parses every fenced script call in SKILL.md/commands/agents and validates flags/actions against each script's real argparse. Wired into the test suite so contract rot can't silently return.
 - **C2PA 2.4 AI-disclosure** — `embed-c2pa.py` gains `--ai-disclosure`, embedding the `c2pa.ai-disclosure` assertion (the EU AI Act **Article 50** machine-readable pathway, applicable 2026-08-02) alongside the existing IPTC digital-source-type claim.
 - **Tessl CLI review workflow** — `.github/workflows/skill-review.yml` moves off the retired `tesslio/skill-review@main` Action to the `tessl review` CLI, with scoring dimensions encoded in the new `.github/tessl-rubric.yml` (closes issue #8).
@@ -1017,13 +1017,13 @@ Research first, then build. Verified every claim against primary sources before 
 
 - **`plugin.yaml`** at repo root — Hermes-native manifest. Fields: `name`, `version`, `description`, `author`, `license`, `homepage`, `provides_tools: []`, `provides_hooks: []`, `requires_env: []`. Zero env vars required, zero global hooks (matches our policy on every other platform).
 - **`__init__.py`** at repo root — Python adapter exposing `register(ctx)` that Hermes calls at plugin load. The function walks our `skills/` directory, parses YAML frontmatter for `name` + `description`, and registers each of the 158 skills via `ctx.register_skill(name, path_to_SKILL_md)`. **Defensive coding throughout** — stdlib only, no third-party Python dependencies; if Hermes' API surface differs from the documented spec, the adapter logs and degrades gracefully rather than crashing (Hermes guarantees "crashes disable the plugin but don't crash Hermes" — we go further and never raise). Includes an `audit()` introspection function so a Hermes user can sanity-check the adapter before installing: `python __init__.py` prints the discovered skill count + first 5 skill names.
-- Install command: `hermes plugins install indranilbanerjee/digital-marketing-pro`.
+- Install command: `hermes plugins install swastik-agnihotri/omni-growth-engine`.
 - Verified: registers all 158 skills against a mock Hermes context in the test suite.
 
 ### Added — Native OpenClaw manifest
 
-- **`openclaw.plugin.json`** at repo root — minimal-but-complete OpenClaw native manifest. Required fields: `id` (`digital-marketing-pro`) + `configSchema` (empty object with `additionalProperties: false`). Optional fields populated: `name`, `description`, `version`, `skills: ["./skills"]`. The `skills` field tells OpenClaw to walk our `./skills` directory for SKILL.md files — same directory every other platform uses.
-- Install command: `openclaw plugins install git:github.com/indranilbanerjee/digital-marketing-pro`.
+- **`openclaw.plugin.json`** at repo root — minimal-but-complete OpenClaw native manifest. Required fields: `id` (`omni-growth-engine`) + `configSchema` (empty object with `additionalProperties: false`). Optional fields populated: `name`, `description`, `version`, `skills: ["./skills"]`. The `skills` field tells OpenClaw to walk our `./skills` directory for SKILL.md files — same directory every other platform uses.
+- Install command: `openclaw plugins install git:github.com/swastik-agnihotri/omni-growth-engine`.
 - Backward-compatibility note: OpenClaw also auto-detects our existing `.claude-plugin/plugin.json` as a Claude-compatible bundle, so we'd work without `openclaw.plugin.json` — but shipping the native manifest enables ClawHub marketplace eligibility + first-class discoverability.
 
 ### Added — "Works on 40+ agent harnesses" README section
@@ -1100,7 +1100,7 @@ Triggered by user push-back on a self-audit-only recommendation: actual web rese
 
 ### Added
 
-- **`/digital-marketing-pro:cowork-setup` skill + command.** New `skills/cowork-setup/SKILL.md` walks through a 6-step Cowork team-setup: detect sandbox → verify Drive MCP → create canonical Drive folder (`<root>/_brands/`, `_runs/`, `_plans/`) → store per-team config → confirm routing expectations → optionally chain into `brand-setup`. Multi-team isolation via per-team folder names. Falls back to local-only mode on Claude Code.
+- **`/omni-growth-engine:cowork-setup` skill + command.** New `skills/cowork-setup/SKILL.md` walks through a 6-step Cowork team-setup: detect sandbox → verify Drive MCP → create canonical Drive folder (`<root>/_brands/`, `_runs/`, `_plans/`) → store per-team config → confirm routing expectations → optionally chain into `brand-setup`. Multi-team isolation via per-team folder names. Falls back to local-only mode on Claude Code.
 - **`scripts/plugin-metadata.py`** — environment + asset probes. Detects Cowork vs local Claude Code, reports plugin version + skill / agent / command / script counts + connector availability.
 - **`scripts/drive-sync-state.py`** — Cowork+Drive routing ledger. Manages three concerns: per-team Drive root config (`~/.claude-marketing/_cowork-config.json`), per-brand profile sync state (SHA-256 hash compare to detect drift), per-run checkpoint sync pending lists. Agent reads pending lists after each phase and uses Drive MCP for actual transfers.
 - **`scripts/skill-line-check.py`** — CI guard for the documented 500-line SKILL.md guideline. Default warn at 400, error at 500. All 158 skills currently under threshold (heaviest: `four-core-documents` at 368).
@@ -1110,7 +1110,7 @@ Triggered by user push-back on a self-audit-only recommendation: actual web rese
 ### Changed
 
 - **`.claude-plugin/plugin.json`** — bumped to v3.12.0, added `"requiredMinimumVersion": "2.1.157"` (Claude Code refuses to load DMP on older builds; landed in CC v2.1.163 June 4 2026). Updated description from 157 to 158 skills + "Cowork-ready" badge.
-- **`/digital-marketing-pro:doctor`** now reports two additional sections beyond the per-action readiness map: **Model curator status** (registry age + severity bands: `ok` <60d, `warn` 60-119d, `urgent` >=120d, with the exact `refresh_models.py` invocation when stale), and **Cowork+Drive routing status** (flags `urgent` when Cowork is detected but `cowork-setup` hasn't run, so users see the brand-state-vanishes-at-session-end risk before it bites).
+- **`/omni-growth-engine:doctor`** now reports two additional sections beyond the per-action readiness map: **Model curator status** (registry age + severity bands: `ok` <60d, `warn` 60-119d, `urgent` >=120d, with the exact `refresh_models.py` invocation when stale), and **Cowork+Drive routing status** (flags `urgent` when Cowork is detected but `cowork-setup` hasn't run, so users see the brand-state-vanishes-at-session-end risk before it bites).
 - **`disable-model-invocation: true`** added to the 5 true side-effect commands: `execute-action`, `cowork-setup`, `resume`, `check`, `output-folder`. Their descriptions no longer load into the model's per-session description listing, saving context budget. `brand-setup`, `doctor`, `status` deliberately left open — those are natural-language entry points users expect Claude to be able to invoke.
 - **Fixed 3 "Read all" eager-load anti-patterns** in `skills/growth-plan/SKILL.md`, `skills/client-validation-document/SKILL.md`, `skills/continuous-improvement-loop/SKILL.md`. Replaced with explicit grep-first + targeted Read with offset+limit guidance that respects the per-skill 5K-token auto-compaction budget.
 - **Added `## Context efficiency` sections** to 3 more top-heaviest SKILL.md files (`seo-plan`, `content-engine`, `analytics-insights`), bringing the total to 16 / top-16 heaviest skills with explicit context-efficiency guidance.
@@ -1139,15 +1139,15 @@ Skill count: 157 → **158** (`cowork-setup` added). 192/192 skills still pass C
 
 ### Added — 3 new skills + 3 supporting Python scripts
 
-- **`/digital-marketing-pro:keyword-cluster`** — build pillar+spokes content architecture from seed keywords with SERP-overlap clustering (Jaccard ≥ 0.4 default) or lexical fallback. Four-gate quality scorecard (cannibalisation / orphan / coverage / anchor_diversity) plus a fragmentation-warning soft signal. New `scripts/keyword_cluster.py` (stdlib only) — tested end-to-end with synthetic SERP data + edge cases.
-- **`/digital-marketing-pro:backlink-gap`** — find domains linking to your competitors but not to you, prioritised by DR + link-overlap count + traffic + topical relevance. Four-gate scorecard (data_freshness / sample_size / competitor_coverage / link_overlap_signal). New `scripts/backlink_gap.py` — handles Ahrefs / Semrush / SE Ranking / Moz export formats via column auto-detection.
-- **`/digital-marketing-pro:seo-drift`** — compare two SEO snapshots (GSC classic, GSC AI Performance Report, rank tracker, AEO probe) and surface biggest movers per metric with auto-classification (growth / decline / reshuffle / stable / new / lost). Four-gate scorecard. New `scripts/seo_drift.py` — handles GSC-shape data + arbitrary join keys via `--join-on`.
+- **`/omni-growth-engine:keyword-cluster`** — build pillar+spokes content architecture from seed keywords with SERP-overlap clustering (Jaccard ≥ 0.4 default) or lexical fallback. Four-gate quality scorecard (cannibalisation / orphan / coverage / anchor_diversity) plus a fragmentation-warning soft signal. New `scripts/keyword_cluster.py` (stdlib only) — tested end-to-end with synthetic SERP data + edge cases.
+- **`/omni-growth-engine:backlink-gap`** — find domains linking to your competitors but not to you, prioritised by DR + link-overlap count + traffic + topical relevance. Four-gate scorecard (data_freshness / sample_size / competitor_coverage / link_overlap_signal). New `scripts/backlink_gap.py` — handles Ahrefs / Semrush / SE Ranking / Moz export formats via column auto-detection.
+- **`/omni-growth-engine:seo-drift`** — compare two SEO snapshots (GSC classic, GSC AI Performance Report, rank tracker, AEO probe) and surface biggest movers per metric with auto-classification (growth / decline / reshuffle / stable / new / lost). Four-gate scorecard. New `scripts/seo_drift.py` — handles GSC-shape data + arbitrary join keys via `--join-on`.
 
 Skill count: 154 → **157**. 194/194 skills still pass Codex `[a-z0-9-]+` regex.
 
 ### Changed — dispatcher pattern + numbered output convention
 
-- **`/digital-marketing-pro:seo-plan` upgraded with Confirm-Then-Dispatch + pillar scoring**:
+- **`/omni-growth-engine:seo-plan` upgraded with Confirm-Then-Dispatch + pillar scoring**:
   - Step D0: auto-detect fresh specialist outputs in `${CLAUDE_PLUGIN_DATA}/{brand}/seo/` (≤30 days)
   - Step D1: never silently re-runs specialists — single Y/N prompt (default N) with cost estimate before fan-out
   - Step D2: scores 4 pillars (Technical / Content / Topical / AI Search) 1-10 from specialist outputs
@@ -1168,7 +1168,7 @@ Skill count: 154 → **157**. 194/194 skills still pass Codex `[a-z0-9-]+` regex
 ### How to update
 
 ```bash
-/plugin update digital-marketing-pro@neels-plugins
+/plugin update omni-growth-engine@neels-plugins
 /reload-plugins
 ```
 
@@ -1189,12 +1189,12 @@ If on Cowork / claude.ai / Desktop: Plugins panel → Update.
 
 ### Why this release exists
 
-Closes [#4](https://github.com/indranilbanerjee/digital-marketing-pro/issues/4) — community suggestion from @internet-dot to list DMP in the awesome-codex-plugins curated marketplace. The awesome-list's bundle structure requires `interface.composerIcon` + `assets/icon.svg` (or .png), neither of which DMP shipped previously. v3.10.1 adds both so the upstream PR to the awesome-list can reference real published assets.
+Closes [#4](https://github.com/swastik-agnihotri/omni-growth-engine/issues/4) — community suggestion from @internet-dot to list DMP in the awesome-codex-plugins curated marketplace. The awesome-list's bundle structure requires `interface.composerIcon` + `assets/icon.svg` (or .png), neither of which DMP shipped previously. v3.10.1 adds both so the upstream PR to the awesome-list can reference real published assets.
 
 ### How to update
 
 ```bash
-/plugin update digital-marketing-pro@neels-plugins
+/plugin update omni-growth-engine@neels-plugins
 /reload-plugins
 ```
 
@@ -1206,7 +1206,7 @@ Six discrete updates triggered by genuine platform changes that shipped April–
 
 ### Added
 
-- **New skill: `/digital-marketing-pro:gsc-ai-performance`** — query and interpret Google Search Console's new AI Performance Report (rolled out 3 June 2026, UK first). Combined AI Overviews + AI Mode impressions/pages/countries/devices/dates. No click data (use GA4 AI Assistant channel for attribution). New `scripts/gsc-ai-performance.py` reads exported CSV; API path returns a structured "not yet supported by Google" message with a recheck date stamp. Skill count 153 → **154**. Sources: [SEL 3 Jun 2026](https://searchengineland.com/google-search-console-ai-performance-reports-and-controls-to-block-your-content-in-ai-responses-479298).
+- **New skill: `/omni-growth-engine:gsc-ai-performance`** — query and interpret Google Search Console's new AI Performance Report (rolled out 3 June 2026, UK first). Combined AI Overviews + AI Mode impressions/pages/countries/devices/dates. No click data (use GA4 AI Assistant channel for attribution). New `scripts/gsc-ai-performance.py` reads exported CSV; API path returns a structured "not yet supported by Google" message with a recheck date stamp. Skill count 153 → **154**. Sources: [SEL 3 Jun 2026](https://searchengineland.com/google-search-console-ai-performance-reports-and-controls-to-block-your-content-in-ai-responses-479298).
 - **New reference doc: `skills/context-engine/eu-code-of-practice.md`** — voluntary EU Code of Practice on AI-generated content (page dated 22 May 2026). WG1 (providers, machine-readable marking) + WG2 (deployers, disclosure). Final publication targeted May–June 2026, applicable for AI Act Article 50 from 2 August 2026. Pairs with C2PA 2.4 `c2pa.ai-disclosure` assertion as the canonical deployer-side compliance path. Source: [EU Digital Strategy 22 May 2026](https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content).
 
 ### Changed
@@ -1225,7 +1225,7 @@ Findings backed by direct WebFetch of primary sources after the deep-research wo
 ### How to update
 
 ```bash
-/plugin update digital-marketing-pro@neels-plugins
+/plugin update omni-growth-engine@neels-plugins
 /reload-plugins
 ```
 
@@ -1254,7 +1254,7 @@ If on Cowork / claude.ai / Desktop: Plugins panel → Update.
 ### How to update
 
 ```bash
-/plugin update digital-marketing-pro@neels-plugins
+/plugin update omni-growth-engine@neels-plugins
 /reload-plugins
 ```
 
@@ -1377,7 +1377,7 @@ Honest position from v3.7.13 onwards: **Claude Code (CLI + IDE extensions) + Ant
 
 - Both DMP test harnesses still pass: `_shared/dmp_action_test_harness.py` (27/27 resolver scenarios) + `_shared/dmp_executor_test_harness.py` (17/17 mock-HTTP-server tests). Combined: 44/44, no regressions from v3.7.11.
 - All 4 `connector-status.py` actions (`status`, `list-available`, `check`, `setup-guide`) + `--probe-only` path verified working end-to-end after refactor.
-- `/digital-marketing-pro:doctor` returns the same readiness map as v3.7.11 (1 real / 8 manifest-ready / 5 stub-unconfigured = 14 total).
+- `/omni-growth-engine:doctor` returns the same readiness map as v3.7.11 (1 real / 8 manifest-ready / 5 stub-unconfigured = 14 total).
 
 ## [3.7.11] — 2026-05-26
 
@@ -1429,7 +1429,7 @@ The May 2026 doc verification surfaced 6 errors in the v3.7.10 manifests, now fi
 ### Added
 
 - **`scripts/connector_executor.py`** — stdlib HTTP executor. Public API: `execute_manifest(http_request, env, data, timeout, connector)` for direct manifest execution; `execute_action(action_id, brand, execute, confirm, data, timeout, log_to_tracker, env, **kwargs)` for resolve+execute orchestration. `EXECUTE_PROFILES` table holds per-connector env var + auth handler + success codes + post-checks. CLI mode supports dry-run / execute / confirm / data flags.
-- **`commands/execute-action.md`** — `/digital-marketing-pro:execute-action` slash command. Wraps `connector_executor.py` with full safety-gate documentation, executable-vs-OAuth-only matrix, and 6 worked examples covering dry-run, read-op execute, write-op execute, blocked-without-confirm, OAuth-only, missing-credential.
+- **`commands/execute-action.md`** — `/omni-growth-engine:execute-action` slash command. Wraps `connector_executor.py` with full safety-gate documentation, executable-vs-OAuth-only matrix, and 6 worked examples covering dry-run, read-op execute, write-op execute, blocked-without-confirm, OAuth-only, missing-credential.
 - **`_shared/dmp_executor_test_harness.py`** — 17 tests against a stdlib `http.server` mock HTTP server in a daemon thread. Coverage:
   - 8 connector-specific tests (Slack incl. body.ok check + logical-failure variant, HubSpot read + write, Klaviyo list + PATCH with vnd.api+json, SendGrid 202, Brevo lowercase header, Mailchimp Basic auth)
   - 6 safety-gate tests (OAuth-only blocks, write requires confirm, missing credential, unconfigured connector, 404 = failure, network error = clean status, unresolved placeholder NEVER fires)
@@ -1437,7 +1437,7 @@ The May 2026 doc verification surfaced 6 errors in the v3.7.10 manifests, now fi
 
 ### Changed
 
-- Plugin command count: 13 -> 14 (`/digital-marketing-pro:execute-action` added)
+- Plugin command count: 13 -> 14 (`/omni-growth-engine:execute-action` added)
 - Script count: 76 -> 77 (`connector_executor.py` added)
 - Manifest builders in `connector_resolver.py` updated with the 6 corrections above
 
@@ -1477,7 +1477,7 @@ The May 2026 doc verification surfaced 6 errors in the v3.7.10 manifests, now fi
 - **`scripts/_connector_registry.py`** — single source of truth for the connector catalog (33 connectors, 11 categories). Imported by both `connector-status.py` and the new resolver. Includes `is_connector_configured(name)` (probes `.mcp.json` membership + env-var presence), `redact_secrets()` for credential-safe response filtering.
 - **`scripts/connector_resolver.py`** — the resolver layer. `ACTION_SPECS` table maps each of the 14 actions (`inventory`, `automations`, `cadence`, `diagnostic`, `arm-watchdog`, `audit-workflows`, `create-campaign`, `enable-automation`, `schedule-posts`, `notify-influencers`, `pr-send`, `internal-kickoff`, `launch-ads`, `audit-current`) to its candidate connectors, manifest builder (concrete HTTP request shapes for Google Ads / Meta Marketing / LinkedIn / TikTok / HubSpot / Salesforce / Klaviyo / Mailchimp / Brevo / Customer.io / SendGrid / Gmail / Cision / Muckrack / Slack / Google Calendar / Ahrefs / Similarweb / SEMrush / Google Search Console), and operation type (`read` / `write` / `local`). `arm-watchdog` is fully implemented as a local executor that writes a real watchdog config; the remaining 13 return either `manifest_ready` (one of the candidates is configured) or `stub_unconfigured` (none are).
 - **`scripts/action-doctor.py`** — per-action readiness diagnostic. Resolves every action against the live `.mcp.json` + env-var state and reports the mode (`real` / `manifest_ready` / `stub_unconfigured`) for each one, with a one-step unlock guide for the blocked ones. Defensive UTF-8 stdout reconfigure for Windows cp1252 consoles.
-- **`commands/doctor.md`** — `/digital-marketing-pro:doctor` slash command. Wraps `action-doctor.py`. The canonical pre-flight check before running `campaign-audit` or `launch-campaign`. Output options: full readiness table, `--summary` one-liner, `--action <id>` drill-in, `--json`.
+- **`commands/doctor.md`** — `/omni-growth-engine:doctor` slash command. Wraps `action-doctor.py`. The canonical pre-flight check before running `campaign-audit` or `launch-campaign`. Output options: full readiness table, `--summary` one-liner, `--action <id>` drill-in, `--json`.
 - **`_shared/dmp_action_test_harness.py`** — comprehensive test harness. For every non-local action, exercises (1) unconfigured mode — empty `.mcp.json` → expects `stub_unconfigured` with `setup_hint.setup_options` populated; (2) configured mode — temporarily writes a single matching connector entry to `.mcp.json` → expects `manifest_ready` with a complete `http_request` shape (method + url + headers/body/params + auth_pattern). For `arm-watchdog`, runs an end-to-end execution test and verifies the watchdog file is written to disk and matches the response. Backs up + restores the user's real `.mcp.json` around every scenario. 27 total scenarios; all pass.
 
 ### Changed
@@ -1525,19 +1525,19 @@ The May 2026 doc verification surfaced 6 errors in the v3.7.10 manifests, now fi
 Full audit across all 153 SKILL.md + 25 agent + 10 command files (broader than v3.7.6's "just the 3 new skills" audit):
 
 - 2 more missing actions: `execution-tracker.py --action launch-ads`, `seo-executor.py --action audit-current` (called from the v3.7.5 skills, missed in v3.7.6). Both added as stub-implementation handlers.
-- 2 broken slash refs in v3.7.5 SKILL.md docs: `/digital-marketing-pro:performance-monitor` (no such skill — corrected to `/digital-marketing-pro:performance-check`) and `/digital-marketing-pro:setup` (no such command — corrected to `/digital-marketing-pro:add-integration`).
+- 2 broken slash refs in v3.7.5 SKILL.md docs: `/omni-growth-engine:performance-monitor` (no such skill — corrected to `/omni-growth-engine:performance-check`) and `/omni-growth-engine:setup` (no such command — corrected to `/omni-growth-engine:add-integration`).
 - 2 broken internal file refs: `docs/custom-mcp-guide.md` (corrected to `skills/context-engine/custom-mcp-guide.md`) and `skills/context-engine/industry-benchmarks.md` (replaced with the existing `industry-profiles.md` + `channel-families.md` fallback chain).
 - Re-audit after fixes: **0 broken slash refs, 0 missing script actions, 0 broken internal file refs**.
 
 ### Added — resumable workflows (Shreea's "too long" fix)
 
 - **`scripts/checkpoint-manager.py`** — per-step checkpoint storage for every long DMP workflow. Supports `engagement` (the 12-Part Strategy Flow), `campaign-plan`, `content-engine`, `seo-audit`, `competitor-analysis`, `campaign-audit`, `launch-campaign`, plus a `custom` slot for any other long flow. Subcommands: `init`, `save`, `status`, `load`, `list`, `resume`, `finalize`, `discard`. Atomic writes; stdlib only; works in headless / cron contexts. Ported from the ContentForge v3.12.3 pattern, adapted for DMP's multi-workflow surface (CF was content-only; DMP has 8 distinct long workflows).
-- **`commands/resume.md`** — `/digital-marketing-pro:resume [workflow] [run-id]`. Picks the run to resume (auto-pick latest in_progress, or filter by workflow, or explicit run-id), reloads every saved part as context, hands control to the agent/sub-flow that owns the next un-checkpointed part. Warns if `last_updated` > 7 days (market data drifts). Lists all in-progress runs when there's ambiguity.
+- **`commands/resume.md`** — `/omni-growth-engine:resume [workflow] [run-id]`. Picks the run to resume (auto-pick latest in_progress, or filter by workflow, or explicit run-id), reloads every saved part as context, hands control to the agent/sub-flow that owns the next un-checkpointed part. Warns if `last_updated` > 7 days (market data drifts). Lists all in-progress runs when there's ambiguity.
 
 ### Added — dual-copy save (visible output folder)
 
 - **`scripts/output-publisher.py`** — dual-copy publisher. Every artifact a workflow produces now lands in TWO locations: internal tracking copy under `~/.claude-marketing/{brand}/output/{workflow}/...` (system-of-record) AND user-visible copy under `~/Documents/DigitalMarketingPro/{brand}/{workflow}/{YYYY-MM}/{filename}` (visible in Explorer / Finder by default). Override the visible root with `DIGITAL_MARKETING_PRO_PUBLISH_DIR` env var or `--publish-dir`. Subcommands: `publish` (single file), `publish-run` (bulk-publish every artifact in a checkpoint-manager run), `where` (print both paths without copying), `open` (print + open in OS file manager via Windows `start` / macOS `open` / Linux `xdg-open`).
-- **`commands/output-folder.md`** — `/digital-marketing-pro:output-folder [brand] [workflow]`. Direct answer to "where did my 50 engagement files save?" Prints the absolute visible path and opens it in the OS file manager. Configuration section documents the env-var override for Dropbox / shared-drive setups.
+- **`commands/output-folder.md`** — `/omni-growth-engine:output-folder [brand] [workflow]`. Direct answer to "where did my 50 engagement files save?" Prints the absolute visible path and opens it in the OS file manager. Configuration section documents the env-var override for Dropbox / shared-drive setups.
 
 ### Changed
 
@@ -1588,15 +1588,15 @@ The `connector-status.py` flags (`--probe-only`, `--no-secrets`) are **fully imp
 
 ### Added — 3 new skills (`skills/`)
 
-- **`validate-profile/SKILL.md`** — `/digital-marketing-pro:validate-profile`. The canonical "is this brand ready to ship work?" gate. Validates the brand profile is complete enough for production AND that every connector / MCP / credential it references is actually reachable — without ever printing credential values. Ten validation dimensions: required identity, voice profile, audience profile, guardrails (upgraded to BLOCKER for regulated industries), compliance-jurisdiction cross-check against `compliance-rules.md`, connector reachability (`--no-secrets` probes), MCP server health, credential storage, output-path writeability, model-curator currency. Emits both a human report and a machine-readable JSON summary. **Pre-requisite for `/engagement`, `/campaign-plan`, `/launch-campaign`.**
-- **`campaign-audit/SKILL.md`** — `/digital-marketing-pro:campaign-audit`. Cross-channel current-state audit covering paid search, paid social, retail media, email, organic social, content/SEO, AEO/GEO across the 6 AI surfaces (Google AI Mode + Perplexity + ChatGPT search + Claude search + Copilot + Gemini App), CRM/automation, web analytics, influencer/PR, compliance posture. Scores every item across four tiers (🟢 healthy / 🟡 quick win / 🟠 strategic gap / 🔴 red flag) with a configurable spend threshold for waste detection. Produces a single audit document with executive summary, per-channel inventory, cross-channel observations, compliance posture, AEO/GEO snapshot, quick-wins backlog, strategic gaps, red flags, and channels-not-running-that-should-be. Dual-copy save (internal tracking + user-visible `~/Documents/DigitalMarketingPro/{brand}/audits/`) mirroring the ContentForge v3.12.3 pattern.
-- **`launch-campaign/SKILL.md`** — `/digital-marketing-pro:launch-campaign`. Multi-channel launch orchestrator — broader than `launch-ad-campaign` (paid-ads only). Takes an approved campaign plan and walks the full 14-step activation in dependency order: CRM Campaign object → landing-page verify → email automation enable → paid search → paid social → retail media → organic social → influencer notification → PR send → internal kickoff → UTM tracking → attribution confirmation → day-1 watchdog → launch record. Refuses to start unless every prerequisite passes (`validate-profile` clean, plan status `approved`, assets reachable, conversion tracking live, EU AI Act Article 50 disclosure verified for EU launches). Dry-run preview mandatory before execution; per-step checkpoint after each action; no auto-retry on failure (day-1 retries create duplicate campaigns / doubled emails); dual-copy launch record.
+- **`validate-profile/SKILL.md`** — `/omni-growth-engine:validate-profile`. The canonical "is this brand ready to ship work?" gate. Validates the brand profile is complete enough for production AND that every connector / MCP / credential it references is actually reachable — without ever printing credential values. Ten validation dimensions: required identity, voice profile, audience profile, guardrails (upgraded to BLOCKER for regulated industries), compliance-jurisdiction cross-check against `compliance-rules.md`, connector reachability (`--no-secrets` probes), MCP server health, credential storage, output-path writeability, model-curator currency. Emits both a human report and a machine-readable JSON summary. **Pre-requisite for `/engagement`, `/campaign-plan`, `/launch-campaign`.**
+- **`campaign-audit/SKILL.md`** — `/omni-growth-engine:campaign-audit`. Cross-channel current-state audit covering paid search, paid social, retail media, email, organic social, content/SEO, AEO/GEO across the 6 AI surfaces (Google AI Mode + Perplexity + ChatGPT search + Claude search + Copilot + Gemini App), CRM/automation, web analytics, influencer/PR, compliance posture. Scores every item across four tiers (🟢 healthy / 🟡 quick win / 🟠 strategic gap / 🔴 red flag) with a configurable spend threshold for waste detection. Produces a single audit document with executive summary, per-channel inventory, cross-channel observations, compliance posture, AEO/GEO snapshot, quick-wins backlog, strategic gaps, red flags, and channels-not-running-that-should-be. Dual-copy save (internal tracking + user-visible `~/Documents/DigitalMarketingPro/{brand}/audits/`) mirroring the ContentForge v3.12.3 pattern.
+- **`launch-campaign/SKILL.md`** — `/omni-growth-engine:launch-campaign`. Multi-channel launch orchestrator — broader than `launch-ad-campaign` (paid-ads only). Takes an approved campaign plan and walks the full 14-step activation in dependency order: CRM Campaign object → landing-page verify → email automation enable → paid search → paid social → retail media → organic social → influencer notification → PR send → internal kickoff → UTM tracking → attribution confirmation → day-1 watchdog → launch record. Refuses to start unless every prerequisite passes (`validate-profile` clean, plan status `approved`, assets reachable, conversion tracking live, EU AI Act Article 50 disclosure verified for EU launches). Dry-run preview mandatory before execution; per-step checkpoint after each action; no auto-retry on failure (day-1 retries create duplicate campaigns / doubled emails); dual-copy launch record.
 
 ### Changed — context-engine guides reverted to real skill refs
 
-- **`skills/context-engine/agency-operations-guide.md`** step 8 now points at `/digital-marketing-pro:campaign-audit` directly (v3.7.4 used a workaround chain of `competitor-analysis` + `performance-check` because the skill didn't exist yet).
-- **`skills/context-engine/agency-operations-guide.md`** credential-rotation guidance now points at `/digital-marketing-pro:validate-profile --connectors ...` instead of the v3.7.4 workaround of `check` + `status`.
-- **`skills/context-engine/crm-integration-guide.md`** Campaign-object creation now references `/digital-marketing-pro:launch-campaign` (with `launch-ad-campaign` cited as the paid-ads-only subset).
+- **`skills/context-engine/agency-operations-guide.md`** step 8 now points at `/omni-growth-engine:campaign-audit` directly (v3.7.4 used a workaround chain of `competitor-analysis` + `performance-check` because the skill didn't exist yet).
+- **`skills/context-engine/agency-operations-guide.md`** credential-rotation guidance now points at `/omni-growth-engine:validate-profile --connectors ...` instead of the v3.7.4 workaround of `check` + `status`.
+- **`skills/context-engine/crm-integration-guide.md`** Campaign-object creation now references `/omni-growth-engine:launch-campaign` (with `launch-ad-campaign` cited as the paid-ads-only subset).
 
 ### Changed — counts
 
@@ -1619,13 +1619,13 @@ The `connector-status.py` flags (`--probe-only`, `--no-secrets`) are **fully imp
 
 - **`scripts/ai-visibility-checker.py`** — replaced the hardcoded deprecated `claude-sonnet-4-5-20250929` and stale `gpt-4o-mini` defaults with curator-resolved `latest-balanced-anthropic` and `latest-balanced-openai`. Per-call model now shown in the result `platform` field (e.g. `Anthropic claude-sonnet-4-6`).
 - **Gmail / Calendar / Drive MCP endpoints** — replaced the dead `*.mcp.claude.com` URLs (all returning HTTP 404 as of May 2026) with the Google-hosted equivalents in `.mcp.json.connectors-reference`, `scripts/connector-status.py`, and `TESTING-GUIDE.md`. New endpoints respond with HTTP 405 to GET probes (alive; POST-only as expected for MCP).
-- **Slash-command refs in Python error messages** — swept 51 shorthand `/dm:X` references and rewrote to the canonical `/digital-marketing-pro:X` namespace. Claude Code's auto-namespacing does NOT accept the short form, so the previous error messages pointed users at slash commands that wouldn't actually invoke.
+- **Slash-command refs in Python error messages** — swept 51 shorthand `/dm:X` references and rewrote to the canonical `/omni-growth-engine:X` namespace. Claude Code's auto-namespacing does NOT accept the short form, so the previous error messages pointed users at slash commands that wouldn't actually invoke.
 - **`skills/context-engine/compliance-rules.md` § 1.11 India — DPDPA** — replaced the stale "rules pending finalization as of early 2025" line. Section now reflects the **Digital Personal Data Protection Rules 2025** (notified by MeitY 3 Jan 2025; phased commencement through 2025-2026), the live Consent Manager framework under Rule 4, the children's targeted-advertising ban, and the Significant Data Fiduciary obligations.
 - **`docs/c2pa-production-cert-guide.md`** — replaced the broken `contentauthenticity.org/community/cr-cli` URL with the working `opensource.contentauthenticity.org/docs/c2patool/` and corrected the framing (open-source `c2patool` CLI, not an Adobe-only program).
 - **`skills/status/SKILL.md`** — removed hardcoded `/Users/indra/.claude-marketing` example, replaced with `~/.claude-marketing` and a note about `$CLAUDE_PLUGIN_DATA`.
 - **`skills/influencer-brief/SKILL.md`** — added Sora deprecation note (consumer Sora app discontinued 26 Apr 2026; Sora API ends 24 Sep 2026) to the AI-tool clauses, with Veo 3.1 / Kling v3.0 Pro / Runway Gen-4 as the recommended set.
-- **`agents/seo-specialist.md` + CHANGELOG entries + `skills/page-seo-analysis/SKILL.md` + `skills/sitemap-manager/SKILL.md`** — fixed broken slash refs `/digital-marketing-pro:page-analysis` (skill is named `page-seo-analysis`) and `/digital-marketing-pro:sitemap` (skill is named `sitemap-manager`).
-- **`skills/context-engine/agency-operations-guide.md`** — replaced references to non-existent `/digital-marketing-pro:campaign-audit` and `/digital-marketing-pro:validate-profile` with concrete chains of existing skills (`competitor-analysis` + `performance-check`; `check` + `status`).
+- **`agents/seo-specialist.md` + CHANGELOG entries + `skills/page-seo-analysis/SKILL.md` + `skills/sitemap-manager/SKILL.md`** — fixed broken slash refs `/omni-growth-engine:page-analysis` (skill is named `page-seo-analysis`) and `/omni-growth-engine:sitemap` (skill is named `sitemap-manager`).
+- **`skills/context-engine/agency-operations-guide.md`** — replaced references to non-existent `/omni-growth-engine:campaign-audit` and `/omni-growth-engine:validate-profile` with concrete chains of existing skills (`competitor-analysis` + `performance-check`; `check` + `status`).
 - **`skills/context-engine/crm-integration-guide.md`** — `launch-campaign` → `launch-ad-campaign` (the actual skill name).
 
 ### Quality
@@ -1691,8 +1691,8 @@ GitHub computes a "Community Standards" score under the repo's Insights tab. Rep
 #### README rewrite for organic GitHub + AI-engine discoverability
 
 - **Hero section rewritten** — leads with a tweet-worthy one-liner positioning DM Pro as "the most comprehensive open-source AI marketing plugin" and the only one installable on 5 coding-agent surfaces. Adds GitHub stars / forks / issues / last-commit badges (live counts from shields.io), Cowork-compatible badge, EU AI Act Article 50 badge, and a "5 platforms" badge. Install command moved to the top of the document.
-- **New "Why Digital Marketing Pro" section** — explicit differentiator vs ad-hoc prompts. Six-row comparison table covering canonical 12-Part Flow, Two-Views Model, Decision Matrix, Living Project Instruction File, EU AI Act readiness, 6-platform AEO/GEO audit.
-- **New "What you get in 60 minutes" section** — outcome-focused list of the ~50–60 canonical files produced by `/digital-marketing-pro:engagement` with explicit API-spend range ($15–40 on Opus 4.7) and time estimate.
+- **New "Why OmniGrowth Engine" section** — explicit differentiator vs ad-hoc prompts. Six-row comparison table covering canonical 12-Part Flow, Two-Views Model, Decision Matrix, Living Project Instruction File, EU AI Act readiness, 6-platform AEO/GEO audit.
+- **New "What you get in 60 minutes" section** — outcome-focused list of the ~50–60 canonical files produced by `/omni-growth-engine:engagement` with explicit API-spend range ($15–40 on Opus 4.7) and time estimate.
 - **New "Installs on 5 coding-agent surfaces" matrix** — install commands per platform (Claude Code, Codex, Cursor, Copilot CLI, Antigravity) with status per platform and a one-sentence "why this works without code duplication" (Agent Skills became an open standard in Dec 2025).
 - **Compliance section restructured** — adds flag emojis per jurisdiction for visual scannability, hoists EU AI Act Article 50 readiness as a sub-section with explicit C2PA + pre-publish-gate + production-cert-guide references.
 - **AEO/GEO section restructured** — "6-platform audit standard" called out (was 5 before AI Mode added in v3.5). Lists exact platforms (ChatGPT, Perplexity, Google AI Mode, Google AI Overviews, Gemini, Microsoft Copilot).
@@ -1738,7 +1738,7 @@ Added: `marketing-automation`, `marketing-plugin`, `ai-marketing`, `ai-mode`, `a
 
 ### Added
 
-- **GitHub Copilot CLI compatibility — no new manifest needed.** Copilot CLI's plugin discovery explicitly checks `.claude-plugin/plugin.json` as one of its accepted manifest paths (alongside `.plugin/plugin.json`, `plugin.json`, and `.github/plugin/plugin.json`). DM Pro's existing Claude Code manifest is therefore directly readable by Copilot CLI. Install: `copilot plugin install indranilbanerjee/digital-marketing-pro`. The MCP catalog (`.mcp.json`), hooks (`hooks/hooks.json`), and SKILL.md auto-discovery all work natively.
+- **GitHub Copilot CLI compatibility — no new manifest needed.** Copilot CLI's plugin discovery explicitly checks `.claude-plugin/plugin.json` as one of its accepted manifest paths (alongside `.plugin/plugin.json`, `plugin.json`, and `.github/plugin/plugin.json`). DM Pro's existing Claude Code manifest is therefore directly readable by Copilot CLI. Install: `copilot plugin install swastik-agnihotri/omni-growth-engine`. The MCP catalog (`.mcp.json`), hooks (`hooks/hooks.json`), and SKILL.md auto-discovery all work natively.
 - **`.antigravity/plugin.json`** — Experimental manifest for Google Antigravity 2.0 CLI (launched 19 May 2026 at Google I/O, replacing Gemini CLI). Mirrors the Gemini-CLI-extensions format that Antigravity's `agy plugin import gemini` converter accepts. Includes a `_status` field flagging the experimental nature. Will be updated against the v2-native plugin spec when Google publishes it.
 - **`docs/cross-platform-install.md` — expanded** to cover all 5 platforms with: install commands, what works natively per platform, the Antigravity caveat (spec not yet public — Gemini-extensions importer is the most reliable current path), `agy plugin import gemini` workflow, update commands per platform, and where to file platform-specific bugs.
 
@@ -1761,7 +1761,7 @@ Antigravity CLI (announced 19 May 2026) preserves Gemini CLI's plugin concepts b
 
 ## [3.6.0] — 2026-05-24
 
-**Cross-platform compatibility pack.** Digital Marketing Pro now installs cleanly on three coding-agent surfaces from a single source repository — Claude Code (canonical), OpenAI Codex, and Cursor — by adding platform-native manifest files alongside the existing Claude Code manifest. No skill duplication: all three platforms read the same `skills/` directory, the same `scripts/`, the same `.mcp.json`, and the same `hooks/hooks.json`.
+**Cross-platform compatibility pack.** OmniGrowth Engine now installs cleanly on three coding-agent surfaces from a single source repository — Claude Code (canonical), OpenAI Codex, and Cursor — by adding platform-native manifest files alongside the existing Claude Code manifest. No skill duplication: all three platforms read the same `skills/` directory, the same `scripts/`, the same `.mcp.json`, and the same `hooks/hooks.json`.
 
 ### Added
 
@@ -1901,7 +1901,7 @@ User explicitly asked whether the v3.4 work had been audited. Answer: no. Ran a 
 
 #### (1) C2PA script — actually works now
 
-**Problem:** v3.4.0 `scripts/embed-c2pa.py` called `c2pa.create_signer(...)` and `c2pa.sign_file(...)` as top-level module functions. Neither exists in c2pa-python 0.32.6 (the current library). Script would have failed at runtime the first time a user invoked `/digital-marketing-pro:c2pa-metadata`.
+**Problem:** v3.4.0 `scripts/embed-c2pa.py` called `c2pa.create_signer(...)` and `c2pa.sign_file(...)` as top-level module functions. Neither exists in c2pa-python 0.32.6 (the current library). Script would have failed at runtime the first time a user invoked `/omni-growth-engine:c2pa-metadata`.
 
 **Fix:**
 - Rewrote against the real API: `c2pa.Signer.from_info(C2paSignerInfo(...))` → `c2pa.Builder(manifest_json)` → `builder.sign_file(source, dest, signer)`.
@@ -1911,7 +1911,7 @@ User explicitly asked whether the v3.4 work had been audited. Answer: no. Ran a 
 - Fixed the self-signed dev cert to include the certificate extensions C2PA requires: BasicConstraints(ca=false, critical), KeyUsage(digital_signature=true, critical), ExtendedKeyUsage(EMAIL_PROTECTION), SubjectKeyIdentifier, AuthorityKeyIdentifier. Without these the C2PA library rejects with "the certificate is invalid".
 - Fixed the read-back verification to use `c2pa.Reader(format, stream)` context manager — the prior `Reader.from_file` API doesn't exist either.
 
-**Verified end-to-end:** 75-byte test PNG → 42,818-byte signed PNG. Read-back confirms `active_manifest` ID, title, signer ("Digital Marketing Pro"), cert algorithm "Es256", assertions `["c2pa.actions.v2", "stds.schema-org.CreativeWork"]`, action `c2pa.created (Test Generator)`, CreativeWork.author `[{"@type": "Organization", "name": "Test Brand"}]`. `manifest_embedded_and_verified: true`. Validation state shows "Invalid" only because self-signed certs aren't in C2PA's trust list — production CAI-issued certs validate as "Valid".
+**Verified end-to-end:** 75-byte test PNG → 42,818-byte signed PNG. Read-back confirms `active_manifest` ID, title, signer ("OmniGrowth Engine"), cert algorithm "Es256", assertions `["c2pa.actions.v2", "stds.schema-org.CreativeWork"]`, action `c2pa.created (Test Generator)`, CreativeWork.author `[{"@type": "Organization", "name": "Test Brand"}]`. `manifest_embedded_and_verified: true`. Validation state shows "Invalid" only because self-signed certs aren't in C2PA's trust list — production CAI-issued certs validate as "Valid".
 
 #### (2) Unified ads MCP entries — corrected endpoints + coverage
 
@@ -1954,8 +1954,8 @@ User asked why these were deferred. Answer: sequencing — content/regulatory dr
 #### 1. C2PA content provenance (EU AI Act Article 50 compliance)
 
 - **New script** `scripts/embed-c2pa.py` (~250 lines) wrapping `c2pa-python>=0.5.0`. Embeds machine-readable provenance manifests into AI-generated images / video / audio / PDF. Supports `.png .jpg .jpeg .webp .gif .tiff .mp4 .mov .webm .mp3 .wav .pdf`.
-- **New skill** `/digital-marketing-pro:c2pa-metadata` at `skills/c2pa-metadata/SKILL.md`. Full doc with usage examples, IPTC digital-source-type vocabulary mapping (ai-generated-content / ai-assisted-edits / ai-no-substantive-changes), signing-certificate guidance (CAI-recognized authority for prod; auto-generated 90-day self-signed cert for dev).
-- **Pre-publish gate integration** — `/digital-marketing-pro:check` now treats missing/invalid C2PA manifest on AI-flagged assets in EU-targeted campaigns as a CRITICAL issue (BLOCKED decision). Wired through `commands/check.md`.
+- **New skill** `/omni-growth-engine:c2pa-metadata` at `skills/c2pa-metadata/SKILL.md`. Full doc with usage examples, IPTC digital-source-type vocabulary mapping (ai-generated-content / ai-assisted-edits / ai-no-substantive-changes), signing-certificate guidance (CAI-recognized authority for prod; auto-generated 90-day self-signed cert for dev).
+- **Pre-publish gate integration** — `/omni-growth-engine:check` now treats missing/invalid C2PA manifest on AI-flagged assets in EU-targeted campaigns as a CRITICAL issue (BLOCKED decision). Wired through `commands/check.md`.
 - **Compliance rule binding** — new `Section 1.1b EU/EEA — AI Act Article 50 (Generative AI Disclosure)` in `skills/context-engine/compliance-rules.md` documents the regulatory basis, applicability date (2 Aug 2026), penalty (€15M or 3% global turnover), and how the c2pa-metadata skill satisfies the marking requirement.
 - **requirements.txt updated** with optional `c2pa-python>=0.5.0` and `cryptography>=42.0` (commented; install only when needed).
 - Output is verifiable at https://contentcredentials.org/verify and any C2PA-aware viewer (Photoshop, Lightroom, Truepic).
@@ -2027,12 +2027,12 @@ Comprehensive refresh against current marketing/regulatory/AI-search reality. **
 - Google AI Overviews now appear on ~55% of all Google searches. Organic CTR on AI Overview queries dropped ~61%. ~58% of searches are zero-click.
 - Citation-tracking guidance updated for ChatGPT, Perplexity, Google AI Overviews, Claude, Bing Copilot, Gemini.
 - For ongoing measurement, integrate with **Profound / Otterly / Conductor AgentStack** via the connectors layer.
-- **Share of AI Voice** as a first-class metric in `/digital-marketing-pro:performance-report`.
+- **Share of AI Voice** as a first-class metric in `/omni-growth-engine:performance-report`.
 
 #### README + Top Commands fixes
 
 - **README fully restructured** to ContentForge v3.9.5 pattern: Quick Start at top with install + auto-update toggle as steps 1-2; "Where your files go" section showing the 12-part engagement directory layout; version histories collapsed at the bottom.
-- **Top Commands table corrected** — was using bare `/brand-setup` form that conflicts with other plugins. Now uses canonical `/digital-marketing-pro:brand-setup`.
+- **Top Commands table corrected** — was using bare `/brand-setup` form that conflicts with other plugins. Now uses canonical `/omni-growth-engine:brand-setup`.
 - **Duplicate "Option C" install heading fixed** (was Option C twice instead of A/B/C/D).
 - **Top version badge bumped** from 3.2.0 → 3.3.0 (was two patches stale).
 - **Auto-update guidance** — explicit two-option flow (toggle vs manual uninstall+reinstall) since third-party marketplaces have auto-update OFF by default.
@@ -2050,7 +2050,7 @@ Marketing tech moves quarterly. A plugin that documents WhatsApp's per-conversat
 
 ### Fixed — Slash Command Namespace Consistency
 
-All `/dm:` references in docs and runtime files swept to the canonical `/digital-marketing-pro:` form that Claude Code auto-namespacing actually produces. The `/dm:` shorthand was used in ~600 places across README, getting-started, TESTING-GUIDE, engagement-methodology, multi-brand-guide, brand-guidelines, architecture, v3.2-opt-ins, all agent files, all 149 skill SKILL.md files, command files, and the CHANGELOG. Users can now copy-paste any command from any doc and have it work.
+All `/dm:` references in docs and runtime files swept to the canonical `/omni-growth-engine:` form that Claude Code auto-namespacing actually produces. The `/dm:` shorthand was used in ~600 places across README, getting-started, TESTING-GUIDE, engagement-methodology, multi-brand-guide, brand-guidelines, architecture, v3.2-opt-ins, all agent files, all 149 skill SKILL.md files, command files, and the CHANGELOG. Users can now copy-paste any command from any doc and have it work.
 
 The replacements include agent files (content-creator, email-specialist, social-media-manager, pr-outreach, quality-assurance, seo-specialist) which emit slash command recommendations during execution. Before this release, agents may have been emitting commands that didn't match the documented namespace.
 
@@ -2064,11 +2064,11 @@ No behavioral changes. If `/dm:` shortcuts work in your environment they'll cont
 
 ### Fixed — Plugin Manifest Install Format (CRITICAL)
 
-The plugin manifest format that v3.0 inherited (and v3.1.1 / v3.2.0 carried forward) used two fields that Claude Code's plugin schema does not accept, causing `claude plugins install digital-marketing-pro` to fail with "the manifest's `repository` field is an object when Claude Code expects a string." This release fixes both issues so install works.
+The plugin manifest format that v3.0 inherited (and v3.1.1 / v3.2.0 carried forward) used two fields that Claude Code's plugin schema does not accept, causing `claude plugins install omni-growth-engine` to fail with "the manifest's `repository` field is an object when Claude Code expects a string." This release fixes both issues so install works.
 
 #### Changes
 
-- **`repository` field**: converted from npm-shorthand object form (`{type: "git", url: "..."}`) to the string URL form Claude Code's plugin schema requires. New value: `"https://github.com/indranilbanerjee/digital-marketing-pro.git"`.
+- **`repository` field**: converted from npm-shorthand object form (`{type: "git", url: "..."}`) to the string URL form Claude Code's plugin schema requires. New value: `"https://github.com/swastik-agnihotri/omni-growth-engine.git"`.
 - **`$schema` field removed**: Claude Code's plugin schema parser rejects this top-level key. Editor validation benefit isn't worth a broken install.
 
 Same fixes shipped same-day to ContentForge v3.9.2, SocialForge v1.5.2, and marketplace v2.8.0.
@@ -2085,27 +2085,27 @@ Pure manifest fix. No behavioral changes; the v3.2 12-Part Methodology + opt-in 
 
 v3.1 removed all four global hooks for multi-plugin coexistence (the `PreToolUse mcp_.*` matcher in particular was intercepting every MCP call from every installed plugin). That fix was correct, but it left real gaps — most notably, the loss of automatic hallucination detection on every Write/Edit operation. v3.2 closes those gaps with explicit on-demand replacements, agent-embedded safety, and opt-in ambient capture — without bringing back the global-scoping problem.
 
-#### New: `/digital-marketing-pro:check` — explicit pre-publish quality gate
+#### New: `/omni-growth-engine:check` — explicit pre-publish quality gate
 
 Replaces the `PreToolUse Write|Edit` global hook. Wraps `scripts/eval-runner.py` (the master eval orchestrator) and produces a single PASS / WARN / BLOCKED decision with actionable issues. Three modes:
 
-- `/digital-marketing-pro:check <file>` → quick eval (~2s, no external deps): hallucination + content quality + readability
-- `/digital-marketing-pro:check <file> --full --brand <slug>` → full 6-dimension eval including brand voice + claims + structure
-- `/digital-marketing-pro:check <file> --compliance --brand <slug> --evidence <facts.json> --schema <name>` → compliance-focused for regulated industries
+- `/omni-growth-engine:check <file>` → quick eval (~2s, no external deps): hallucination + content quality + readability
+- `/omni-growth-engine:check <file> --full --brand <slug>` → full 6-dimension eval including brand voice + claims + structure
+- `/omni-growth-engine:check <file> --compliance --brand <slug> --evidence <facts.json> --schema <name>` → compliance-focused for regulated industries
 
 New files:
 - `commands/check.md`
 - `skills/check/SKILL.md`
 
-#### New: `/digital-marketing-pro:status` — unified on-demand brand snapshot
+#### New: `/omni-growth-engine:status` — unified on-demand brand snapshot
 
 Replaces the `SessionStart` global hook (which printed a brand summary banner at every Claude Code launch in every project). Richer than the old banner: brand profile, all engagements with current part + days-since-update + pending decisions + versioned doc count, recent insights with last-save age, recent compliance violations, Python dependency mode. Five subcommand modes:
 
-- `/digital-marketing-pro:status` → full snapshot for active brand
-- `/digital-marketing-pro:status --quiet` → one-line compact summary
-- `/digital-marketing-pro:status --json` → machine-readable JSON for downstream skills
-- `/digital-marketing-pro:status --brand <slug>` → snapshot for a specific brand
-- `/digital-marketing-pro:status --section <brand|engagements|insights|compliance|deps>` → single section
+- `/omni-growth-engine:status` → full snapshot for active brand
+- `/omni-growth-engine:status --quiet` → one-line compact summary
+- `/omni-growth-engine:status --json` → machine-readable JSON for downstream skills
+- `/omni-growth-engine:status --brand <slug>` → snapshot for a specific brand
+- `/omni-growth-engine:status --section <brand|engagements|insights|compliance|deps>` → single section
 
 New files:
 - `commands/status.md`
@@ -2152,7 +2152,7 @@ Documents:
 - How to re-enable any hook at the user-level (`~/.claude/settings.json`) or project-level (`.claude/settings.local.json`) — this gives users the v3.0 ambient experience without forcing it on the entire plugin user base
 - Why the `PreToolUse mcp_.*` matcher should NOT be re-enabled (it intercepts every MCP call from every plugin)
 - How `auto_save_insights` works and when to enable it
-- How `/digital-marketing-pro:status` and `/digital-marketing-pro:check` map to the removed hooks
+- How `/omni-growth-engine:status` and `/omni-growth-engine:check` map to the removed hooks
 - How the embedded agent check is stronger than the v3.0 hook
 - Recommended workflow for minimum / opt-in / power-user / project-scoped configurations
 
@@ -2173,10 +2173,10 @@ No migration needed. To start using the new compensations:
 
 ```
 # On-demand status snapshot
-/digital-marketing-pro:status
+/omni-growth-engine:status
 
 # Pre-publish quality gate
-/digital-marketing-pro:check drafts/your-content.md --brand <your-slug>
+/omni-growth-engine:check drafts/your-content.md --brand <your-slug>
 
 # Enable ambient insight capture (opt-in per brand)
 # Edit ~/.claude-marketing/brands/<your-slug>/profile.json:
@@ -2296,7 +2296,7 @@ Major release introducing a sequential engagement workflow that transforms the p
 
 #### New Command
 
-- `/digital-marketing-pro:engagement` — entry point with subcommands: `start`, `status`, `next`, `validate`, `re-run-decision`, `update-back`, `lif-show`, `file-tree`, `list-engagements`, `four-core`, `growth-plan`, `yearly-planner`, `loop`
+- `/omni-growth-engine:engagement` — entry point with subcommands: `start`, `status`, `next`, `validate`, `re-run-decision`, `update-back`, `lif-show`, `file-tree`, `list-engagements`, `four-core`, `growth-plan`, `yearly-planner`, `loop`
 
 #### New Persistence Script
 
@@ -2323,7 +2323,7 @@ With a canonical 12-part directory tree, v1/v2 split for Parts 3 and 4, persiste
 
 - **All existing v2.7.0 skills, agents, scripts, hooks remain functional and unchanged.** v3.0 is purely additive at the methodology layer.
 - The 12-Part workflow uses existing skills as Part-specific producers (e.g., Part 4 uses existing `competitor-analysis`, `audience-intelligence`, `market-intelligence`).
-- Engagements are an opt-in workflow. Single-skill invocations (e.g., `/digital-marketing-pro:content-engine` for a one-off blog post) continue to work without an engagement context.
+- Engagements are an opt-in workflow. Single-skill invocations (e.g., `/omni-growth-engine:content-engine` for a one-off blog post) continue to work without an engagement context.
 
 ### Migration
 
@@ -2331,7 +2331,7 @@ No migration needed. Existing brand profiles at `~/.claude-marketing/brands/{slu
 
 To start using the new methodology:
 ```
-/digital-marketing-pro:engagement start <your-brand-slug> <your-engagement-id>
+/omni-growth-engine:engagement start <your-brand-slug> <your-engagement-id>
 ```
 
 ---
@@ -2371,12 +2371,12 @@ Closes the gap with dedicated SEO tools by adding 6 new SEO sub-skills, expanded
 
 #### New Skills (6)
 
-- **`/digital-marketing-pro:programmatic-seo`** — Programmatic SEO at scale: data source assessment, template engine planning, URL pattern strategy, internal linking automation, thin content safeguards with quality gates (WARNING at 100 pages, HARD STOP at 500), index bloat prevention, and Google's Scaled Content Abuse policy enforcement (June 2025 / August 2025 escalation context)
-- **`/digital-marketing-pro:competitor-pages`** — SEO-optimized competitor comparison page generator: "X vs Y" pages, "alternatives to X" pages, "best tools" roundup pages, feature matrix tables. Includes Product/SoftwareApplication/ItemList schema markup, conversion-optimized CTA layouts, keyword targeting formulas, fairness guidelines, and social proof integration
-- **`/digital-marketing-pro:image-seo-audit`** — Dedicated image optimization audit: alt text quality, tiered file size thresholds (thumbnail/content/hero), format analysis (WebP/AVIF/JPEG XL status), responsive images (`srcset`/`sizes`), lazy loading validation (flags `loading="lazy"` on LCP images), `fetchpriority="high"` checks, `decoding="async"`, CLS prevention via dimensions, file naming, CDN usage
-- **`/digital-marketing-pro:page-seo-analysis`** — Deep single-page SEO analysis: all ranking dimensions for one URL (title, meta, headings, content depth, E-E-A-T, schema detection with deprecation tracking, images, internal links, technical signals, AI search readiness). More granular than site-wide `/digital-marketing-pro:seo-audit`. Use for landing page optimization, content refresh prioritization, or pre-publish quality checks
-- **`/digital-marketing-pro:sitemap-manager`** — XML sitemap analysis and generation: parse existing sitemaps for issues (stale lastmod, 404s, noindex conflicts, missing URLs, protocol limit violations), or generate new sitemaps with industry-specific templates (SaaS, ecommerce, local, publisher, agency). Includes sitemap index strategy, robots.txt registration, and compression recommendations
-- **`/digital-marketing-pro:seo-plan`** — Comprehensive SEO strategy planning with industry-specific templates: discovery, competitive analysis, architecture design, content strategy, technical foundation, and 4-phase implementation roadmap (Foundation → Expansion → Scale → Authority). Templates for SaaS, ecommerce, local service, publisher/media, and agency business models
+- **`/omni-growth-engine:programmatic-seo`** — Programmatic SEO at scale: data source assessment, template engine planning, URL pattern strategy, internal linking automation, thin content safeguards with quality gates (WARNING at 100 pages, HARD STOP at 500), index bloat prevention, and Google's Scaled Content Abuse policy enforcement (June 2025 / August 2025 escalation context)
+- **`/omni-growth-engine:competitor-pages`** — SEO-optimized competitor comparison page generator: "X vs Y" pages, "alternatives to X" pages, "best tools" roundup pages, feature matrix tables. Includes Product/SoftwareApplication/ItemList schema markup, conversion-optimized CTA layouts, keyword targeting formulas, fairness guidelines, and social proof integration
+- **`/omni-growth-engine:image-seo-audit`** — Dedicated image optimization audit: alt text quality, tiered file size thresholds (thumbnail/content/hero), format analysis (WebP/AVIF/JPEG XL status), responsive images (`srcset`/`sizes`), lazy loading validation (flags `loading="lazy"` on LCP images), `fetchpriority="high"` checks, `decoding="async"`, CLS prevention via dimensions, file naming, CDN usage
+- **`/omni-growth-engine:page-seo-analysis`** — Deep single-page SEO analysis: all ranking dimensions for one URL (title, meta, headings, content depth, E-E-A-T, schema detection with deprecation tracking, images, internal links, technical signals, AI search readiness). More granular than site-wide `/omni-growth-engine:seo-audit`. Use for landing page optimization, content refresh prioritization, or pre-publish quality checks
+- **`/omni-growth-engine:sitemap-manager`** — XML sitemap analysis and generation: parse existing sitemaps for issues (stale lastmod, 404s, noindex conflicts, missing URLs, protocol limit violations), or generate new sitemaps with industry-specific templates (SaaS, ecommerce, local, publisher, agency). Includes sitemap index strategy, robots.txt registration, and compression recommendations
+- **`/omni-growth-engine:seo-plan`** — Comprehensive SEO strategy planning with industry-specific templates: discovery, competitive analysis, architecture design, content strategy, technical foundation, and 4-phase implementation roadmap (Foundation → Expansion → Scale → Authority). Templates for SaaS, ecommerce, local service, publisher/media, and agency business models
 
 #### New Reference Files (2)
 
@@ -2415,15 +2415,15 @@ Closes the gap with dedicated SEO tools by adding 6 new SEO sub-skills, expanded
 ### Added — Skill Platform Enhancements
 
 - **`argument-hint`** added to all 55 user-invocable skills — provides autocomplete hints in the Skills UI (e.g., `[URL]`, `[brand-name --full]`, `[competitor1, competitor2, ...]`)
-- **`disable-model-invocation: true`** added to 17 execution skills — prevents Claude from auto-triggering skills that write to external platforms (publish, send, launch, import, export). Users must explicitly invoke these via `/digital-marketing-pro:skill-name`
+- **`disable-model-invocation: true`** added to 17 execution skills — prevents Claude from auto-triggering skills that write to external platforms (publish, send, launch, import, export). Users must explicitly invoke these via `/omni-growth-engine:skill-name`
 - **`evals/evals.json`** added to 3 key skills (campaign-plan, seo-audit, content-engine) — structured test cases with prompts, expected outputs, and quantitative/qualitative assertions for quality benchmarking
-- **Fixed** `/digital-marketing-pro:help` skill — added missing `name: help` field in frontmatter (required by Agent Skills spec for skill registration)
+- **Fixed** `/omni-growth-engine:help` skill — added missing `name: help` field in frontmatter (required by Agent Skills spec for skill registration)
 
 ### How it works
 
-**Argument hints** appear as placeholder text when a user types `/digital-marketing-pro:` in the Skills UI, showing what arguments each skill accepts. For example, `/digital-marketing-pro:seo-audit` shows `[URL]` and `/digital-marketing-pro:campaign-plan` shows `[product/service description --budget=N]`.
+**Argument hints** appear as placeholder text when a user types `/omni-growth-engine:` in the Skills UI, showing what arguments each skill accepts. For example, `/omni-growth-engine:seo-audit` shows `[URL]` and `/omni-growth-engine:campaign-plan` shows `[product/service description --budget=N]`.
 
-**Execution safety** ensures that skills which write to external platforms (like `/digital-marketing-pro:publish-blog`, `/digital-marketing-pro:send-email-campaign`, `/digital-marketing-pro:launch-ad-campaign`) cannot be triggered by Claude autonomously — the user must explicitly type the slash command. This is a critical safety layer on top of the existing MCP write approval hook.
+**Execution safety** ensures that skills which write to external platforms (like `/omni-growth-engine:publish-blog`, `/omni-growth-engine:send-email-campaign`, `/omni-growth-engine:launch-ad-campaign`) cannot be triggered by Claude autonomously — the user must explicitly type the slash command. This is a critical safety layer on top of the existing MCP write approval hook.
 
 **Evals** provide reproducible test cases for key skills. Each eval includes a realistic prompt, expected output description, and assertions that can be verified programmatically. Located at `skills/{skill-name}/evals/evals.json`.
 
@@ -2441,7 +2441,7 @@ Closes the gap with dedicated SEO tools by adding 6 new SEO sub-skills, expanded
   - `performance-report` — Generate marketing performance reports with KPI tracking and anomaly detection
   - `competitor-analysis` — Multi-dimensional competitive analysis across content, SEO, ads, social, and AI visibility
   - `email-sequence` — Design complete email sequences with subject lines, timing, and deliverability guidance
-- **New `/digital-marketing-pro:help` skill** — Quick reference with all commands, examples, and troubleshooting
+- **New `/omni-growth-engine:help` skill** — Quick reference with all commands, examples, and troubleshooting
 
 ### Fixed
 
@@ -2453,17 +2453,17 @@ Closes the gap with dedicated SEO tools by adding 6 new SEO sub-skills, expanded
 
 ### Added — Connector Discovery & Onboarding
 
-- **New `/digital-marketing-pro:integrations` skill** — Status dashboard showing all connected vs available MCP connectors, grouped by category (CRM, SEO, advertising, email, social, etc.), with which skills each connector unlocks and quick-win recommendations
-- **New `/digital-marketing-pro:connect` skill** — Guided setup for connecting specific services (e.g., `/digital-marketing-pro:connect google-ads`). Provides platform-specific credential instructions, `.mcp.json` configuration, and post-setup verification. Handles HTTP (OAuth) vs npx (API key) connectors differently
+- **New `/omni-growth-engine:integrations` skill** — Status dashboard showing all connected vs available MCP connectors, grouped by category (CRM, SEO, advertising, email, social, etc.), with which skills each connector unlocks and quick-win recommendations
+- **New `/omni-growth-engine:connect` skill** — Guided setup for connecting specific services (e.g., `/omni-growth-engine:connect google-ads`). Provides platform-specific credential instructions, `.mcp.json` configuration, and post-setup verification. Handles HTTP (OAuth) vs npx (API key) connectors differently
 - **New `connector-status.py` script** — Backend for connector discovery. Maintains a registry of 45+ connectors across 17 categories, checks `.mcp.json` and environment variables to report connection status, and generates setup guides
-- **Updated `CONNECTORS.md`** — Added "Managing connectors" section linking to `/digital-marketing-pro:integrations`, `/digital-marketing-pro:connect`, `/digital-marketing-pro:add-integration`, and `/digital-marketing-pro:credential-switch` skills
+- **Updated `CONNECTORS.md`** — Added "Managing connectors" section linking to `/omni-growth-engine:integrations`, `/omni-growth-engine:connect`, `/omni-growth-engine:add-integration`, and `/omni-growth-engine:credential-switch` skills
 
 ### How it works
 
 Users can now discover and manage integrations interactively:
-- `/digital-marketing-pro:integrations` — "What's connected? What can I add?"
-- `/digital-marketing-pro:connect salesforce` — "Walk me through connecting Salesforce"
-- `/digital-marketing-pro:add-integration` — "I have a custom MCP server to add"
+- `/omni-growth-engine:integrations` — "What's connected? What can I add?"
+- `/omni-growth-engine:connect salesforce` — "Walk me through connecting Salesforce"
+- `/omni-growth-engine:add-integration` — "I have a custom MCP server to add"
 
 All 14 HTTP connectors auto-load on install (Slack, Canva, Figma, HubSpot, etc.) and authenticate via OAuth on first use. The 45+ npx connectors are discoverable through these skills and require API keys.
 
@@ -2656,13 +2656,13 @@ This release rebuilds the MCP integration layer to follow Anthropic's official p
 
 ### Added — Execution Layer
 - **26 new slash commands** bringing the total from 42 to 68 — adding a complete execution layer:
-  - **Publishing (5)**: `/digital-marketing-pro:publish-blog`, `/digital-marketing-pro:send-email-campaign`, `/digital-marketing-pro:launch-ad-campaign`, `/digital-marketing-pro:schedule-social`, `/digital-marketing-pro:send-report`
-  - **CRM & Data (5)**: `/digital-marketing-pro:crm-sync`, `/digital-marketing-pro:lead-import`, `/digital-marketing-pro:pipeline-update`, `/digital-marketing-pro:segment-audience`, `/digital-marketing-pro:data-export`
-  - **Monitoring (4)**: `/digital-marketing-pro:performance-check`, `/digital-marketing-pro:campaign-status`, `/digital-marketing-pro:anomaly-scan`, `/digital-marketing-pro:budget-tracker`
-  - **Memory & Knowledge (3)**: `/digital-marketing-pro:save-knowledge`, `/digital-marketing-pro:search-knowledge`, `/digital-marketing-pro:sync-memory`
-  - **Communication (2)**: `/digital-marketing-pro:send-sms`, `/digital-marketing-pro:send-notification`
-  - **Agency Operations (4)**: `/digital-marketing-pro:agency-dashboard`, `/digital-marketing-pro:client-report`, `/digital-marketing-pro:sop-library`, `/digital-marketing-pro:credential-switch`
-  - **Brand Team (3)**: `/digital-marketing-pro:team-assign`, `/digital-marketing-pro:region-config`, `/digital-marketing-pro:exec-summary`
+  - **Publishing (5)**: `/omni-growth-engine:publish-blog`, `/omni-growth-engine:send-email-campaign`, `/omni-growth-engine:launch-ad-campaign`, `/omni-growth-engine:schedule-social`, `/omni-growth-engine:send-report`
+  - **CRM & Data (5)**: `/omni-growth-engine:crm-sync`, `/omni-growth-engine:lead-import`, `/omni-growth-engine:pipeline-update`, `/omni-growth-engine:segment-audience`, `/omni-growth-engine:data-export`
+  - **Monitoring (4)**: `/omni-growth-engine:performance-check`, `/omni-growth-engine:campaign-status`, `/omni-growth-engine:anomaly-scan`, `/omni-growth-engine:budget-tracker`
+  - **Memory & Knowledge (3)**: `/omni-growth-engine:save-knowledge`, `/omni-growth-engine:search-knowledge`, `/omni-growth-engine:sync-memory`
+  - **Communication (2)**: `/omni-growth-engine:send-sms`, `/omni-growth-engine:send-notification`
+  - **Agency Operations (4)**: `/omni-growth-engine:agency-dashboard`, `/omni-growth-engine:client-report`, `/omni-growth-engine:sop-library`, `/omni-growth-engine:credential-switch`
+  - **Brand Team (3)**: `/omni-growth-engine:team-assign`, `/omni-growth-engine:region-config`, `/omni-growth-engine:exec-summary`
 - **5 new specialist agents** bringing the total from 13 to 18:
   - `execution-coordinator` — bridges planning and execution with approval workflow
   - `performance-monitor-agent` — live data monitoring, anomaly detection, campaign health
@@ -2703,14 +2703,14 @@ This release rebuilds the MCP integration layer to follow Anthropic's official p
 
 ### Added
 - **8 new slash commands** bringing the total from 34 to 42 — closing the agency operations gap:
-  - `/digital-marketing-pro:client-onboarding` (`skills/client-onboarding/SKILL.md`) — post-sale onboarding workflow with kickoff meeting agenda, discovery questionnaire, stakeholder mapping, access checklist, 30-60-90 day expectations setting
-  - `/digital-marketing-pro:qbr-plan` (`skills/qbr-plan/SKILL.md`) — Quarterly Business Review preparation with performance retrospective, strategic recommendations, upsell opportunities, next quarter roadmap
-  - `/digital-marketing-pro:media-plan` (`skills/media-plan/SKILL.md`) — holistic paid media planning across channels with flight dates, budget waves, creative rotation, channel allocation, contingency reserves
-  - `/digital-marketing-pro:video-script` (`skills/video-script/SKILL.md`) — video marketing script writing for YouTube, TikTok, Instagram Reels, LinkedIn with hook variants, timestamps, visual direction, accessibility
-  - `/digital-marketing-pro:executive-dashboard` (`skills/executive-dashboard/SKILL.md`) — C-suite dashboard design with business-outcome north-star metrics, visualization recommendations, alert thresholds, narrative guidance
-  - `/digital-marketing-pro:case-study-plan` (`skills/case-study-plan/SKILL.md`) — structured case study creation workflow with CSR framework, interview questions, format variations (PDF/web/slide/video), distribution strategy
-  - `/digital-marketing-pro:attribution-model` (`skills/attribution-model/SKILL.md`) — multi-touch attribution setup with model selection (last-touch/first-touch/linear/time-decay/position-based/data-driven/MMM), credit distribution rules, platform implementation guides
-  - `/digital-marketing-pro:creative-testing-framework` (`skills/creative-testing-framework/SKILL.md`) — systematic creative testing strategy with testing matrix, holdout controls, sample size per variant, significance thresholds, iteration cadence
+  - `/omni-growth-engine:client-onboarding` (`skills/client-onboarding/SKILL.md`) — post-sale onboarding workflow with kickoff meeting agenda, discovery questionnaire, stakeholder mapping, access checklist, 30-60-90 day expectations setting
+  - `/omni-growth-engine:qbr-plan` (`skills/qbr-plan/SKILL.md`) — Quarterly Business Review preparation with performance retrospective, strategic recommendations, upsell opportunities, next quarter roadmap
+  - `/omni-growth-engine:media-plan` (`skills/media-plan/SKILL.md`) — holistic paid media planning across channels with flight dates, budget waves, creative rotation, channel allocation, contingency reserves
+  - `/omni-growth-engine:video-script` (`skills/video-script/SKILL.md`) — video marketing script writing for YouTube, TikTok, Instagram Reels, LinkedIn with hook variants, timestamps, visual direction, accessibility
+  - `/omni-growth-engine:executive-dashboard` (`skills/executive-dashboard/SKILL.md`) — C-suite dashboard design with business-outcome north-star metrics, visualization recommendations, alert thresholds, narrative guidance
+  - `/omni-growth-engine:case-study-plan` (`skills/case-study-plan/SKILL.md`) — structured case study creation workflow with CSR framework, interview questions, format variations (PDF/web/slide/video), distribution strategy
+  - `/omni-growth-engine:attribution-model` (`skills/attribution-model/SKILL.md`) — multi-touch attribution setup with model selection (last-touch/first-touch/linear/time-decay/position-based/data-driven/MMM), credit distribution rules, platform implementation guides
+  - `/omni-growth-engine:creative-testing-framework` (`skills/creative-testing-framework/SKILL.md`) — systematic creative testing strategy with testing matrix, holdout controls, sample size per variant, significance thresholds, iteration cadence
 - **2 new reference knowledge files** bringing the total from 115 to 117:
   - `skills/paid-advertising/media-planning.md` — media planning framework, channel allocation methodology, flighting strategies (continuous/pulsing/fighting), budget waves, creative rotation cadence, cross-channel synergy
   - `skills/content-engine/video-scripting.md` — platform-specific video formats (YouTube/TikTok/Reels/Shorts/LinkedIn), script structures (AIDA/PAS), 12 hook formulas, timestamp annotation, visual direction, accessibility, CTA placement
@@ -2772,16 +2772,16 @@ This release rebuilds the MCP integration layer to follow Anthropic's official p
 
 ### Added
 - **10 new slash commands** bringing the total from 24 to 34:
-  - `/digital-marketing-pro:keyword-research` (`skills/keyword-research/SKILL.md`) — guided keyword research with clustering, intent mapping, and content gap analysis
-  - `/digital-marketing-pro:roi-calculator` (`skills/roi-calculator/SKILL.md`) — campaign ROI calculation with 5 attribution models and budget efficiency ranking
-  - `/digital-marketing-pro:ab-test-plan` (`skills/ab-test-plan/SKILL.md`) — A/B test planning with hypothesis framework, sample size calculation, and test duration estimation
-  - `/digital-marketing-pro:content-repurpose` (`skills/content-repurpose/SKILL.md`) — content repurposing strategy with derivative format matrix, effort estimates, and publishing calendar
-  - `/digital-marketing-pro:retargeting-strategy` (`skills/retargeting-strategy/SKILL.md`) — retargeting campaign architecture with audience segmentation, frequency capping, and creative sequencing
-  - `/digital-marketing-pro:martech-audit` (`skills/martech-audit/SKILL.md`) — marketing technology stack audit across 11 functions with overlap detection and gap analysis
-  - `/digital-marketing-pro:budget-optimizer` (`skills/budget-optimizer/SKILL.md`) — data-driven budget reallocation with diminishing returns modeling and efficiency ranking
-  - `/digital-marketing-pro:client-proposal` (`skills/client-proposal/SKILL.md`) — agency client proposal generation with situation analysis, strategy, scope, timeline, and pricing
-  - `/digital-marketing-pro:review-response` (`skills/review-response/SKILL.md`) — brand-aligned review response drafting with tone templates, escalation detection, and multi-variant output
-  - `/digital-marketing-pro:webinar-plan` (`skills/webinar-plan/SKILL.md`) — end-to-end webinar planning with promotion timeline, email sequences, and post-event nurture strategy
+  - `/omni-growth-engine:keyword-research` (`skills/keyword-research/SKILL.md`) — guided keyword research with clustering, intent mapping, and content gap analysis
+  - `/omni-growth-engine:roi-calculator` (`skills/roi-calculator/SKILL.md`) — campaign ROI calculation with 5 attribution models and budget efficiency ranking
+  - `/omni-growth-engine:ab-test-plan` (`skills/ab-test-plan/SKILL.md`) — A/B test planning with hypothesis framework, sample size calculation, and test duration estimation
+  - `/omni-growth-engine:content-repurpose` (`skills/content-repurpose/SKILL.md`) — content repurposing strategy with derivative format matrix, effort estimates, and publishing calendar
+  - `/omni-growth-engine:retargeting-strategy` (`skills/retargeting-strategy/SKILL.md`) — retargeting campaign architecture with audience segmentation, frequency capping, and creative sequencing
+  - `/omni-growth-engine:martech-audit` (`skills/martech-audit/SKILL.md`) — marketing technology stack audit across 11 functions with overlap detection and gap analysis
+  - `/omni-growth-engine:budget-optimizer` (`skills/budget-optimizer/SKILL.md`) — data-driven budget reallocation with diminishing returns modeling and efficiency ranking
+  - `/omni-growth-engine:client-proposal` (`skills/client-proposal/SKILL.md`) — agency client proposal generation with situation analysis, strategy, scope, timeline, and pricing
+  - `/omni-growth-engine:review-response` (`skills/review-response/SKILL.md`) — brand-aligned review response drafting with tone templates, escalation detection, and multi-variant output
+  - `/omni-growth-engine:webinar-plan` (`skills/webinar-plan/SKILL.md`) — end-to-end webinar planning with promotion timeline, email sequences, and post-event nurture strategy
 - **8 new Python scripts** (all zero-dependency, stdlib-only), bringing the total from 26 to 34:
   - `scripts/roi-calculator.py` — campaign ROI with 5 attribution models (last_touch, first_touch, linear, time_decay, position_based), LTV:CAC ratio, budget efficiency ranking
   - `scripts/budget-optimizer.py` — budget reallocation using diminishing returns model (square-root scaling), efficiency-proportional allocation, minimum spend thresholds
@@ -2821,8 +2821,8 @@ This release rebuilds the MCP integration layer to follow Anthropic's official p
   - `skills/local-seo/local-content.md` — local keyword research, location pages, city pages, "near me" optimization, voice search, seasonal content
   - `skills/local-seo/multi-location.md` — multi-location GBP management, store locators, franchise SEO, location opening/closing checklists, hierarchy
 - **2 new slash commands**:
-  - `/digital-marketing-pro:tech-seo-audit` (`skills/tech-seo-audit/SKILL.md`) — comprehensive technical SEO audit with Core Web Vitals scorecard, crawlability, indexation, site architecture, security, and prioritized fixes
-  - `/digital-marketing-pro:local-seo-audit` (`skills/local-seo-audit/SKILL.md`) — local SEO audit with GBP scorecard, NAP consistency report, citation audit, review analysis, and 90-day action plan
+  - `/omni-growth-engine:tech-seo-audit` (`skills/tech-seo-audit/SKILL.md`) — comprehensive technical SEO audit with Core Web Vitals scorecard, crawlability, indexation, site architecture, security, and prioritized fixes
+  - `/omni-growth-engine:local-seo-audit` (`skills/local-seo-audit/SKILL.md`) — local SEO audit with GBP scorecard, NAP consistency report, citation audit, review analysis, and 90-day action plan
 - **2 new Python scripts** (both zero-dependency, stdlib-only):
   - `scripts/tech-seo-auditor.py` — URL-level technical SEO checks using `urllib.request`: HTTP status codes, redirect chain detection, meta tag parsing (title, description, canonical, viewport, robots), security headers (HTTPS, HSTS), TTFB measurement, compression detection, scoring (0-100)
   - `scripts/local-seo-checker.py` — NAP consistency analysis with address normalization (18 abbreviation expansions) and GBP profile completeness scoring across 16 weighted fields with industry-specific recommendations
@@ -2905,9 +2905,9 @@ This release rebuilds the MCP integration layer to follow Anthropic's official p
 - **Guideline Violation Tracking** — `campaign-tracker.py` now tracks guideline violations with severity, category, and suggestions for pattern analysis
 - `scripts/guidelines-manager.py` — new CLI script for guidelines, templates, and SOP CRUD operations (stdlib-only, no new dependencies)
 - `skills/context-engine/guidelines-framework.md` — reference file for structuring and applying brand guidelines
-- `/digital-marketing-pro:import-guidelines` command — interactive import of brand guidelines, restrictions, and channel styles
-- `/digital-marketing-pro:import-sop` command — import agency SOPs and workflow definitions
-- `/digital-marketing-pro:import-template` command — import deliverable templates for custom output formats
+- `/omni-growth-engine:import-guidelines` command — interactive import of brand guidelines, restrictions, and channel styles
+- `/omni-growth-engine:import-sop` command — import agency SOPs and workflow definitions
+- `/omni-growth-engine:import-template` command — import deliverable templates for custom output formats
 - `docs/brand-guidelines.md` — comprehensive guide for guidelines, templates, and SOPs with worked examples
 - Brand Context point 9 in all 13 module SKILL.md files — automatic guideline checking and enforcement
 - Guidelines summary line in SessionStart brand output (rule counts, restriction counts, template counts)
@@ -2971,8 +2971,8 @@ This release rebuilds the MCP integration layer to follow Anthropic's official p
 - `campaign-tracker.py` — persistent campaign memory with save/retrieve for campaigns, performance snapshots, and insights (200-entry rolling buffer)
 - `adaptive-scorer.py` — brand-context-aware content scoring with industry, business model, and goal-based weight adjustments
 - `intelligence-layer.md` — documentation of the adaptive learning system architecture
-- `/digital-marketing-pro:switch-brand` command for multi-client brand switching
-- Quick setup mode in `/digital-marketing-pro:brand-setup` (5 essential questions vs. 17 full questions)
+- `/omni-growth-engine:switch-brand` command for multi-client brand switching
+- Quick setup mode in `/omni-growth-engine:brand-setup` (5 essential questions vs. 17 full questions)
 - 12 MCP server integrations (GA4, Google Search Console, Google Ads, Meta, HubSpot, Mailchimp, LinkedIn, SEMrush, Ahrefs, Stripe, Google Sheets, Slack)
 - Threads and Bluesky platform support in `social-post-formatter.py`
 - Cross-platform SessionStart hook (works on Windows, macOS, Linux)
@@ -2993,7 +2993,7 @@ This release rebuilds the MCP integration layer to follow Anthropic's official p
 ### Added
 - Initial release
 - 13 marketing modules: Content Engine, Campaign Orchestrator, Paid Advertising, Analytics & Insights, AEO/GEO Intelligence, Audience Intelligence, CRO, Digital PR, Funnel Architect, Growth Engineering, Influencer & Creator, Reputation Management, Emerging Channels
-- 19 slash commands (`/digital-marketing-pro:campaign-plan`, `/digital-marketing-pro:ad-creative`, `/digital-marketing-pro:seo-audit`, etc.)
+- 19 slash commands (`/omni-growth-engine:campaign-plan`, `/omni-growth-engine:ad-creative`, `/omni-growth-engine:seo-audit`, etc.)
 - 10 specialist agents (Marketing Strategist, Content Creator, SEO Specialist, Analytics Analyst, Brand Guardian, Media Buyer, Growth Engineer, Influencer Manager, Competitive Intel, PR Outreach)
 - 14 Python execution scripts (setup, scoring, formatting, analysis, generation)
 - Context engine with 5 reference files: industry profiles (22 industries), compliance rules (16 jurisdictions), platform specs (20+ platforms), scoring rubrics (7 frameworks), intelligence layer

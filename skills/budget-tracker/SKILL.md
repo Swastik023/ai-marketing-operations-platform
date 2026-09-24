@@ -1,9 +1,9 @@
 ---
 name: budget-tracker
-description: "Track advertising spend pacing in real time across connected ad platforms (Google Ads, Meta, LinkedIn, TikTok) — produces a budget dashboard with daily burn rates, end-of-period projections, overspend/underspend alerts, and dollar-specific reallocation recommendations backed by CPA/ROAS context. Monitors and recommends only; it never edits platform budgets. Triggers on \"/digital-marketing-pro:budget-tracker\", \"are we overspending this month\", \"how is our ad budget pacing\", \"track spend across platforms\", \"will we blow through the budget cap\". Reads budget targets from the brand profile, runs scripts/ad-budget-pacer.py, and saves snapshots for trend history; pairs with /digital-marketing-pro:budget-optimizer."
+description: "Track advertising spend pacing in real time across connected ad platforms (Google Ads, Meta, LinkedIn, TikTok) — produces a budget dashboard with daily burn rates, end-of-period projections, overspend/underspend alerts, and dollar-specific reallocation recommendations backed by CPA/ROAS context. Monitors and recommends only; it never edits platform budgets. Triggers on \"/omni-growth-engine:budget-tracker\", \"are we overspending this month\", \"how is our ad budget pacing\", \"track spend across platforms\", \"will we blow through the budget cap\". Reads budget targets from the brand profile, runs scripts/ad-budget-pacer.py, and saves snapshots for trend history; pairs with /omni-growth-engine:budget-optimizer."
 ---
 
-# /digital-marketing-pro:budget-tracker
+# /omni-growth-engine:budget-tracker
 
 ## Purpose
 
@@ -28,7 +28,7 @@ The user must provide (or will be prompted for):
 
 ## Process
 
-1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/digital-marketing-pro:brand-setup)?" — or proceed with defaults.
+1. **Load brand context**: Read `~/.claude-marketing/brands/_active-brand.json` for the active slug, then load `~/.claude-marketing/brands/{slug}/profile.json`. Apply brand voice, compliance rules for target markets (`skills/context-engine/compliance-rules.md`), and industry context. Also check for guidelines at `~/.claude-marketing/brands/{slug}/guidelines/_manifest.json` — if present, load restrictions. Check for agency SOPs at `~/.claude-marketing/sops/`. If no brand exists, ask: "Set up a brand first (/omni-growth-engine:brand-setup)?" — or proceed with defaults.
 2. **Extract budget targets**: Pull `budget_range` from `profile.json` and any saved per-platform allocations from
    previous budget-optimizer or media-plan runs. If user provided explicit targets, use those as overrides.
    Calculate the target daily spend rate for each platform (budget / days in period).
