@@ -23,7 +23,9 @@ Open-source AI marketing plugin — **163 skills, 24 specialist agents, EU AI Ac
 > <sub>Previously — **v3.15.0 (July 7, 2026):** The **Reliability & Truth** release — a full-repo audit fixed ~200 findings in one pass. Connectors are honestly opt-in (the shipped `.mcp.json` is empty; fictional npm packages purged), all 18 execution skills carry a uniform typed-approval gate (closes issue #6), the Tessl review workflow moved to the `tessl review` CLI (closes issue #8), agents consolidated 25 → 24, C2PA gained the Article 50 `--ai-disclosure` assertion, and a new doc-vs-argparse contract linter + state-layer tests grew the suite from 123 to 207 passing. [Read what's new →](#whats-new) · [Full changelog →](CHANGELOG.md)</sub>
 
 ```bash
-# OmniGrowth Engine — Multi-Channel AI Marketing Operating System
+# AI-Powered Digital Marketing Operations Platform
+
+> A multi-channel AI marketing operating system orchestrating SEO, paid media, CRM, and conversion funnels.
 
 > An enterprise-grade AI marketing OS orchestrating SEO, AEO/GEO, paid media attribution, programmatic content generation, and CRM lifecycle automation.
 
